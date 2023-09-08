@@ -4,8 +4,8 @@ NSD Term Project
 
 This is the directory for the term project proposal.  To turn it in, you need
 **a PR** and **an E3 entry for the PR URL**.  See
-https://yyc.solvcon.net/en/latest/nsd/schedule/23au_nycu/schedule.html for what
-should be included in the proposal and project.
+https://yyc.solvcon.net/en/latest/nsd/schedule/23au_nycu/schedule23au.html for
+what should be included in the proposal and project.
 
 The proposal accounts for 8 points out of the 40 points allocated to the term
 project.  Like homework, you will need to create a PR against the ``project``

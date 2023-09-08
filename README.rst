@@ -1,6 +1,6 @@
 This repository is for homework assignments for `Numerical Software Development
 (NYCU 2023 autumn)
-<https://yyc.solvcon.net/en/latest/nsd/schedule/23au_nycu/schedule.html>`__.
+<https://yyc.solvcon.net/en/latest/nsd/schedule/23au_nycu/schedule23au.html>`__.
 
 To turn in your submission, you need to clone this repository, and create a
 `pull request (PR) <https://github.com/yungyuc/nsdhw_23au/pulls>`__.  Your
