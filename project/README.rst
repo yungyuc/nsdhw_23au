@@ -65,22 +65,3 @@ Follow the format to add your project in lexicographical order:
 1. `github_account_name <https://github.com/github_account_name>`__ for
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
-
-Time Table Session A
-++++++++++++++++++++
-
-.. The meeting room for this session (A) is EC114, the same room we use for
-.. lectures.
-
-.. list-table:: 7:00-9:30 (TBD)
-  :header-rows: 1
-
-  * - ID
-    - Time
-    - Presenter
-    - Project
-  * - A1
-    - 07:00 - 07:xx
-    - `account name <https://github.com/account_name>`__
-    - `Project name <relative_path>`__:
-      `repo <https://github.com/account_name/project_name>`__
