@@ -1,4 +1,4 @@
-#!/usr/bin/env -S ${PYTHON_BIN}g
+#!/usr/bin/env -S ${PYTHON_BIN}
 import sys
 import os.path
 
