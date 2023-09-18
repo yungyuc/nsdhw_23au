@@ -1,18 +1,30 @@
 #!/usr/bin/env python3
 
 import sys
-import os.path
+from pathlib import Path
 
 
-if len(sys.argv) < 2:
-    sys.stdout.write("missing file name\n")
-elif len(sys.argv) > 2:
-    sys.stdout.write("only one argument is allowed\n")
-else:
-    fname = sys.argv[1]
-    if os.path.exists(fname):
-        with open(fname) as fobj:
-            lines = fobj.readlines()
-        sys.stdout.write("{} lines in {}\n".format(len(lines), fname))
-    else:
-        sys.stdout.write("{} not found\n".format(fname))
+def count_line(filename: str):
+    path = Path(filename)
+    if not path.exists():
+        sys.stdout.write(f"{filename} not found\n")
+        return
+
+    with path.open() as fobj:
+        lines = fobj.readlines()
+
+    sys.stdout.write(f"{len(lines)} lines in {filename}\n")
+
+
+def main(argv: list[str] = sys.argv):
+    match argv:
+        case [_]:
+            sys.stdout.write("missing file name\n")
+        case [_, fname]:
+            count_line(fname)
+        case _:
+            sys.stdout.write("only one argument is allowed\n")
+
+
+if __name__ == "__main__":
+    main()
