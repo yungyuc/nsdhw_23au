@@ -1,5 +1,4 @@
 #!/bin/bash
-
 "exec" "$PYTHON_BIN" "$0" "$@"
 
 import sys
