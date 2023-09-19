@@ -1,6 +1,6 @@
 #!/bin/bash
 
-"exec" "$PYTHON_BIN" "$0" "$@"
+"$PYTHON_BIN" "$0" "$@"
 
 import sys
 import os.path
