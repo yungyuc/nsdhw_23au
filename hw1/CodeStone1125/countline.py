@@ -1,5 +1,5 @@
 #!/bin/bash
-"exec" "${PYTHON_BIN}" "$0" "$@"
+"exec" "${PYTHON_BIN}" "countline.py" "$@"
 
 import sys
 import os.path
