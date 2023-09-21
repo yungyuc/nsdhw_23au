@@ -1,8 +1,14 @@
-#!/usr/bin/env python3
+#! /bin/bash
+if [ $PYTHON_BIN == "python2" ] || [ $PYTHON_BIN == "python3" ]; then
+    tail -n +9 $0 | $PYTHON_BIN - $@
+    exit 0
+else
+    echo "exec: $PYTHON_BIN: not found"
+    exit 1
+fi
 
 import sys
 import os.path
-
 
 if len(sys.argv) < 2:
     sys.stdout.write('missing file name\n')
