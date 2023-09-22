@@ -1,9 +1,9 @@
 #!/bin/bash
 
-"$PYTHON_BIN" "$0" "$@"
+"exec" "$PYTHON_BIN" "$0" "$@"
 
 import sys
-import os.path
+import os
 
 
 if len(sys.argv) < 2:
