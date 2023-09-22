@@ -4,7 +4,7 @@
 
 import sys
 import os
-
+import os.path
 
 if len(sys.argv) < 2:
     sys.stdout.write('missing file name\n')
