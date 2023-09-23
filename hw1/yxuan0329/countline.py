@@ -16,6 +16,5 @@ else:
         with open(fname) as fobj:
             lines = fobj.readlines()
         sys.stdout.write('{} lines in {}\n'.format(len(lines), fname))
-        print(type)
     else:
         sys.stdout.write('{} not found\n'.format(fname))
