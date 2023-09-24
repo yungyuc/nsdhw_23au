@@ -1,5 +1,5 @@
 =================
-Sample Transfomation from AoS to SoA
+Simple Transfomation from AoS to SoA
 =================
 
 This Proposal shows the work flow and plans for the 2023 Autumn NYCU NSD term project
@@ -22,21 +22,15 @@ in order to transform the data from Aos to SoA.
 possible usage:
 
 1. Feature Extraction in Data Mining
-2. Provide a better ccche locality
-
-Prospective Users
-=================
-
-Describe the users of your software and how they will use it.  It is OK to
-combine this section with the previous one (`Problem to solve`_).
+2. Provide a better cache locality
 
 System Architecture
 ===================
 
-Analyze how your system takes input, produces results, provide interface, and
-performs any other operations.  Describe the system's work flow.  You may
-consider to use a flow chart but it is not required.  Specify the constraints
-assumed in your system.  Describe the modularization of the system.
+Users are enabled to simply feed a csv file(in the form of AoS), 
+and the system will generate another csv file, which is in the form of SoA.
+
+.. image:: term project work flow.png
 
 API Description
 ===============
