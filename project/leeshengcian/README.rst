@@ -9,6 +9,29 @@ Basic Information
 
 GitHub Link : https://github.com/leeshengcian/nsdhw_23au/tree/master/project/leeshengcian
 
+There are generally two ways to implement arrays of composite types. 
+One is to pack the composite data and use an array for them, i.e., the so-called array of struct (AoS):
+
+.. code-block:: C
+    struct Data
+    {
+        int m_field1;
+        double m_field2;
+    };
+    
+    SimpleArray<Data> data_array;
+
+The other is to organize arrays of fundamental types, i.e., the so-called struct of arrays (SoA) or the columnar arrays:
+
+.. code-block:: C
+    struct StructOfArray
+    {
+        SimpleArray<int32_t> m_field1;
+        SimpleArray<double> m_field2;
+    };
+
+The columnar array (SoA) may provide better cache locality than AoS, especially when there are many fields.
+
 Problem to Solve
 ================
 
