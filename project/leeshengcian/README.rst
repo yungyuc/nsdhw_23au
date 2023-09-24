@@ -12,7 +12,7 @@ GitHub Link : https://github.com/leeshengcian/nsdhw_23au/tree/master/project/lee
 There are generally two ways to implement arrays of composite types. 
 One is to pack the composite data and use an array for them, i.e., the so-called array of struct (AoS):
 
-.. code-block:: c
+.. code-block::C
     struct Data
     {
         int m_field1;
@@ -23,7 +23,7 @@ One is to pack the composite data and use an array for them, i.e., the so-called
 
 The other is to organize arrays of fundamental types, i.e., the so-called struct of arrays (SoA) or the columnar arrays:
 
-.. code-block:: c
+.. code-block::C
     struct StructOfArray
     {
         SimpleArray<int32_t> m_field1;
