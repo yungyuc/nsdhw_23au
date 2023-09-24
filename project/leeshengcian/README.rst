@@ -30,7 +30,7 @@ System Architecture
 Users are enabled to simply feed a csv file(in the form of AoS), 
 and the system will generate another csv file, which is in the form of SoA.
 
-.. image:: term project work flow.png
+.. image:: term_project_work_flow.png
 
 API Description
 ===============
