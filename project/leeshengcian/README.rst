@@ -12,7 +12,8 @@ GitHub Link : https://github.com/leeshengcian/nsdhw_23au/tree/master/project/lee
 There are generally two ways to implement arrays of composite types. 
 One is to pack the composite data and use an array for them, i.e., the so-called array of struct (AoS):
 
-.. code::C
+.. code-block:: cpp
+
     struct Data
     {
         int m_field1;
@@ -23,7 +24,8 @@ One is to pack the composite data and use an array for them, i.e., the so-called
 
 The other is to organize arrays of fundamental types, i.e., the so-called struct of arrays (SoA) or the columnar arrays:
 
-.. code::C
+.. code-block:: cpp
+    
     struct StructOfArray
     {
         SimpleArray<int32_t> m_field1;
@@ -58,9 +60,9 @@ and the system will generate another csv file, which is in the form of SoA.
 API Description
 ===============
 
-Show how your system can be programmed.  You are supposed to implement the
-system using both C++ and Python.  Describe how a user writes a script in the
-system.
+1. User will drag the file in the file section, and press **start**
+2. 
+
 
 Engineering Infrastructure
 ==========================
