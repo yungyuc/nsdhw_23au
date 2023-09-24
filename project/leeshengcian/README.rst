@@ -25,7 +25,7 @@ One is to pack the composite data and use an array for them, i.e., the so-called
 The other is to organize arrays of fundamental types, i.e., the so-called struct of arrays (SoA) or the columnar arrays:
 
 .. code-block:: cpp
-    
+
     struct StructOfArray
     {
         SimpleArray<int32_t> m_field1;
@@ -60,8 +60,11 @@ and the system will generate another csv file, which is in the form of SoA.
 API Description
 ===============
 
-1. User will drag the file in the file section, and press **start**
-2. 
+1. User will drag the file in the file section, and press **Start**
+2. The **Start** botton will trigger the **Transform.cpp** , which start the transfomation of file
+3. During the process, the input file will be decomposed, and store in another data structure
+4. According to the data structure, **Transform.cpp** will reconstruct the file, save it in SoA form
+5. Write the SoA form data in a new csv file, which is the **output.csv**
 
 
 Engineering Infrastructure
