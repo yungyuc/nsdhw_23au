@@ -1,5 +1,5 @@
 =================
-Term Project Proposal
+Sample Transfomation from AoS to SoA
 =================
 
 This Proposal shows the work flow and plans for the 2023 Autumn NYCU NSD term project
@@ -7,20 +7,22 @@ This Proposal shows the work flow and plans for the 2023 Autumn NYCU NSD term pr
 Basic Information
 =================
 
-**GitHub Link: **https://github.com/leeshengcian/nsdhw_23au/tree/master/project
+GitHub Link : https://github.com/leeshengcian/nsdhw_23au/tree/master/project/leeshengcian
 
 Problem to Solve
 ================
 
-Describe the problem or the set of problems you want to solve.  Include
-necessary background information without making it lengthy.
+.. 在平常的情況下，資料通常是以AoS儲存，本專案的目的即是將資料作轉換，轉製為SoA的形式
+Most of the time, data were stored in the form of AoS. However, 
+sometimes we focus on the relationship between fields, which demands 
+the data to be stored in SoA form.
+In this work, we managed to do a simple transformation on the input data, 
+in order to transform the data from Aos to SoA.
 
-Some points may help you organize the problem description:
+possible usage:
 
-1. The field or industry of the problem.
-2. The physics and/or the mathematics behind the problem.
-3. The algorithm or numerical method that should be applied for solving the
-   problem.
+1. Feature Extraction in Data Mining
+2. Provide a better ccche locality
 
 Prospective Users
 =================
