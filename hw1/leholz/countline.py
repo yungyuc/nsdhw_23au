@@ -8,8 +8,11 @@ python_bin_env_val = os.getenv(PYTHON_BIN_ENV)
 
 # Test ENV variable, return with error, if variable is not set.
 if python_bin_env_val is None:
-    print(f'Environment variable {PYTHON_BIN_ENV} is not set.')
+    print('Environment variable ' + PYTHON_BIN_ENV + ' is not set.')
     quit(1)
+
+cli_cmd = ' '.join(sys.argv)
+print('Executed with: ' + cli_cmd)
 
 if len(sys.argv) < 2:
     sys.stdout.write('missing file name\n')
