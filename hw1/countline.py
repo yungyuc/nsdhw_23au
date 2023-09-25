@@ -2,6 +2,13 @@
 
 import sys
 import os.path
+import os
+
+bin = os.environ["PYTHON_BIN"]
+if bin not in ["python2","python3"]:
+    sys.stdout.write("exec: "+ bin +': not found\n')
+    exit(1)
+
 
 
 if len(sys.argv) < 2:
