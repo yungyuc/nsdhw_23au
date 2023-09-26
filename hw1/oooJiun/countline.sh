@@ -13,3 +13,4 @@ else
         echo "$fname not found"
     fi
 fi
+# 'wc -l filename' undercounts by one line; adding a blank line at the end of the file helps avoid this situation.
