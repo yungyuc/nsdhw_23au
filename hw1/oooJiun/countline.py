@@ -16,3 +16,4 @@ else:
         sys.stdout.write('{} lines in {}\n'.format(len(lines), fname))
     else:
         sys.stdout.write('{} not found\n'.format(fname))
+# 'wc -l filename' undercounts by one line; adding a blank line at the end of the file helps avoid this situation.
