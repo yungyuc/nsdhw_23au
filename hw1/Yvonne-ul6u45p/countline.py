@@ -19,4 +19,4 @@ elif(os.environ['PYTHON_BIN'] == "python2") or (os.environ['PYTHON_BIN'] == "pyt
                 lines = fobj.readlines()
             sys.stdout.write('{} lines in {}\n'.format(len(lines), fname))
         else:
-            sys.stdout.write('{} not found\n'.format(fname)
+            sys.stdout.write('{} not found\n'.format(fname))
