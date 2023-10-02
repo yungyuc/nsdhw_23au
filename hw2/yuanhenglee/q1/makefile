@@ -1,10 +1,10 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall -Wextra -Werror -pedantic -O3
 
-SRCS = q1.cpp
+SRCS = main.cpp Line.cpp
 OBJS = $(SRCS:.cpp=.o)
 
-TARGET = q1
+TARGET = main
 
 .PHONY: all clean run check
 
