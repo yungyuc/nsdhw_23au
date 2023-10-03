@@ -3,6 +3,6 @@
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(angle_cal, m) {
+PYBIND11_MODULE(_vector, m) {
     m.def("calculateAngle", &AngleCalculator::calculateAngle, "A function which calculates the angle between two vectors");
 }

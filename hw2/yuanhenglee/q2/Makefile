@@ -1,15 +1,14 @@
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Wextra -Werror -O3 -arch x86_64
+CXXFLAGS = -std=c++11 -Wall -Wextra -Werror -O3 -fPIC
 LDFLAGS = -shared -fPIC
 PYBINDFLAGS = $(shell python3 -m pybind11 --includes)
 
 SRC_DIR = src
 BUILD_DIR = build
-LIB_DIR = $(BUILD_DIR)/lib
 
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
 OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRCS))
-LIBS = $(LIB_DIR)/angle_cal$(shell python3-config --extension-suffix)
+LIBS = ./_vector$(shell python3-config --extension-suffix)
 
 TEST_DIR = tests
 
@@ -30,7 +29,7 @@ $(LIB_DIR):
 	mkdir -p $@
 
 test: $(LIBS)
-	pytest
+	python -m pytest -v
 
 clean:
-	rm -rf $(BUILD_DIR) $(TEST_DIR)/__pycache__
+	rm -rf $(BUILD_DIR) $(TEST_DIR)/__pycache__ *.so
