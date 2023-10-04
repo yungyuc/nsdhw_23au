@@ -18,4 +18,4 @@ clean:
 	rm -f *.o $(TARGET)
 
 test:
-	python3 -m pytest -v ./test.py
+	python3 -m pytest -v
