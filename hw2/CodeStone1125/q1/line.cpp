@@ -20,14 +20,11 @@ Line::Line(Line &&other) {
 
 Line & Line::operator=(const Line &other) {
     if (this != &other) {
-        // 复制另一个 Line 对象的大小
         size_t otherSize = other.size();
 
-        // 调整此 Line 的大小以匹配另一个 Line 的大小
         m_X.resize(otherSize);
         m_Y.resize(otherSize);
 
-        // 复制另一个 Line 的数据
         for (size_t i = 0; i < otherSize; ++i) {
             m_X[i] = other.m_X[i];
             m_Y[i] = other.m_Y[i];
@@ -38,7 +35,6 @@ Line & Line::operator=(const Line &other) {
 
 Line & Line::operator=(Line &&other) {
     if (this != &other) {
-        // 移动另一个 Line 对象的数据和大小
         m_X = std::move(other.m_X);
         m_Y = std::move(other.m_Y);
     }
