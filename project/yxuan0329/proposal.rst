@@ -130,14 +130,14 @@ Schedule
 .. development of the project takes 8 weeks:
 
 * Planning phase (6 weeks from mm/dd to mm/dd):
-* Week 1 (mm/dd):
-* Week 2 (mm/dd):
-* Week 3 (mm/dd):
-* Week 4 (mm/dd):
-* Week 5 (mm/dd):
-* Week 6 (mm/dd):
-* Week 7 (mm/dd):
-* Week 8 (mm/dd):
+* Week 1 (10/30): Survey some reference about R-tree implementation
+* Week 2 (11/06): Create database with about 50-100 data
+* Week 3 (11/13): Implement R-tree with C++
+* Week 4 (11/20): Implement R-tree with C++
+* Week 5 (11/27): Implement front-end of the search engine
+* Week 6 (12/04): Improve the R-tree structure with temporal feature
+* Week 7 (12/11): Testing, finish up the project and the documentation
+* Week 8 (12/18): Make slides and prepare for the presentation
 
 References
 ==========
