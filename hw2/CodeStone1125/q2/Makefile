@@ -1,17 +1,14 @@
 CC = g++
-CFLAGS = -O3 -Wall -shared -std=c++11 -fPIC
-
-PYTHON_INCLUDE = $(shell python3 -m pybind11 --includes)
-PYTHON_EXTENSION_SUFFIX = $(shell python3-config --extension-suffix)
+CFLAGS = -std=c++11 -O3 -Wall -shared -fPIC `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
 
 source_file := _vector.cpp
-execute_file = _vector$(PYTHON_EXTENSION_SUFFIX)
+execute_file = _vector
 
 all: $(execute_file)
 
 $(execute_file): $(source_file)
 	
-	$(CC) $(CFLAGS) $(PYTHON_INCLUDE) $(source_file) -o $(execute_file)
+	$(CC) $(CFLAGS) $(source_file) -o $(execute_file)
 
 test:
 	python3 ./test.py
