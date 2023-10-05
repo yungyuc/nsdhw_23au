@@ -32,7 +32,7 @@ double angle(const Vector2D& vector1, const Vector2D& vector2) {
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(vectors_module, m) {
+PYBIND11_MODULE(_vector, m) {
     m.def("angle", &angle, "Calculate the angle between two vectors");
     py::class_<Vector2D>(m, "Vector2D")
         .def(py::init<double, double>(), py::arg("x"), py::arg("y"))
