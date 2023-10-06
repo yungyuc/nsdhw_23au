@@ -15,6 +15,6 @@ double CalculateRadian(double x1, double y1, double x2, double y2) {
     }
 }
 
-PYBIND11_MODULE(calculate_radian, m) {
+PYBIND11_MODULE(_vector, m) {
     m.def("calculate_radian", &CalculateRadian, "A function that calculate the radians of two vectors");
 }
