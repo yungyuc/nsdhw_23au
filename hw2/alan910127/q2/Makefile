@@ -32,3 +32,7 @@ $(BUILD_DIR)/%.o: %.cpp
 .PHONY: clean
 clean:
 	@rm -rf $(BUILD_DIR) $(SO_FILE)
+
+.PHONY: test
+test: $(SO_FILE)
+	python3 -m pytest -v
