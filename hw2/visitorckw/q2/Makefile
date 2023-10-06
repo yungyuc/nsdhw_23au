@@ -1,26 +1,18 @@
-CC = g++
-CFLAGS = -std=c++11 -O2
+CXX = g++
+CXXFLAGS = -Wall -shared -std=c++11 -fPIC `python3 -m pybind11 --includes`
+LIBS = ./_vector$(shell python3-config --extension-suffix)
 
-all: main
+all: $(LIBS)
 
-mainOBJS := main.o Line.o
+$(LIBS): main.cpp
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
-deps := $(OBJS:%.o=.%.o.d)
-
-main: $(mainOBJS)
-	$(CC) -o $@ $(LDFLAGS) $^
-
-%.o: %.cpp
-	$(CC) -o $@ $(CFLAGS) -c -MMD -MF .$@.d $<
-
-run: main
-	@./main
-
-check: main
-	@./main > result.txt
+test: $(LIBS)
+	python3 -m pytest -v
 
 clean:
-	rm -f $(mainOBJS) $(deps) *~ main
-	rm -rf *.dSYM
-
--include $(deps)
+	rm -f _vector
+	rm -f *.so
+	rm -rf __pycache__
+	rm -rf .hypothesis
+	rm -rf .pytest_cache
