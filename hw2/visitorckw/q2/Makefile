@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -Wall -shared -std=c++11 -fPIC `python3 -m pybind11 --includes`
+CXXFLAGS = -Wall -shared -std=c++11 -fPIC `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
 LIBS = ./_vector$(shell python3-config --extension-suffix)
 
 all: $(LIBS)
