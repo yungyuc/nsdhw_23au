@@ -1,12 +1,18 @@
+CXX = g++
+CXXFLAGS = -O3 -Wall --shared -std=c++17 -fPIC `python3 -m pybind11 --includes` `python3-config --includes`
+CXXLDFLAGS = `python3-config --ldflags`
+TARGET = angle
+TEST_FILE = test
+
 .PHONY: all test clean
 
-all: angle_calculation.so
+all: %.so $(TEST_FILE).py
 
-angle_calculation.so: angle.cpp
-	g++ -Wall -03 angle.cpp -o angle_calculation.so -shared -std=c++17 -fPIC -I/usr/include/python3.11 -I/usr/include/pybind11 -lpython3.11 `python3 -m pybind11 --includes`
+%.so: $(TARGET).cpp
+	$(CXX) $(CXXFLAGS) $^ -o $(TARGET)`python3-config --extension-suffix`
 
-test: all
+test: %.so $(TEST_FILE).py
 	python3 -m pytest -v
 
 clean:
-	@rm -rf *.o *.so .pytest_cache/ __pycache__/
+	rm -rf *.so __pycache__ .pytest*
