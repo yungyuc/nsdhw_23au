@@ -14,7 +14,7 @@ $(execute_file): $(source_file)
 	$(CC) $(CFLAGS) $(PYTHON_INCLUDE) $(source_file) -o $(execute_file)
 
 test:
-	python3 ./test.py
+	python3 -m  pytest -v
 
 
 clean:
