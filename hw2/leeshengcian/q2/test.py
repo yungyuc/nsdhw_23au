@@ -1,6 +1,6 @@
 import pytest
 import math
-from angle_calculation import angle_py
+from _vector import angle_py
 
 def test_zero_len():
     assert math.isnan(angle_py((0, 0), (0, 0)))

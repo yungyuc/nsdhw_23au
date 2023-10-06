@@ -9,7 +9,7 @@ double angle_cal(std::pair<double, double> p1, std::pair<double, double> p2){
     return acos(inn_prod / length);
 }
 
-PYBIND11_MODULE(angle_calculation, m){
+PYBIND11_MODULE(_vector, m){
     m.doc() = "pybind11 module example";
     m.def("angle_py", &angle_cal, "A Program that calculates the angle (in radians) between two vectors in the 2-dimensional Cartesian coordinate system");
 }

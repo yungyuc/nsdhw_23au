@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -O3 -Wall --shared -std=c++17 -fPIC `python3 -m pybind11 --includes` `python3-config --includes`
 CXXLDFLAGS = `python3-config --ldflags`
-TARGET = angle
+TARGET = _vector
 TEST_FILE = test
 
 .PHONY: all test clean
