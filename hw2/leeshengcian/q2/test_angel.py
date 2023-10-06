@@ -5,7 +5,7 @@ def test_zero_len():
     assert math.isnan(angle_py((0, 0), (0, 0)))
 
 def test_zero_angle():
-    assert angle_py((1, 1), (2, 2)) == 0
+    assert math.isclose(angle_py((1, 1), (2, 2)), 0)
 
 def test_right_angle():
     assert angle_py((1, 0), (0, 1)) == math.pi / 2
