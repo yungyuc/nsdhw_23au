@@ -11,7 +11,6 @@ LIB := $(BUILD_DIR)/$(SO_FILE)
 SRCS := $(wildcard src/*.cpp)
 
 OBJS := $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
-DEPS := $(OBJS:.o=.d)
 
 .PHONY: all
 all: $(SO_FILE)
@@ -24,11 +23,9 @@ $(LIB): $(OBJS)
 	@mkdir -p $(@D)
 	$(CXX) $(LDFLAGS) $^ -o $@ $(INCLUDES)
 
--include $(DEPS)
-
 $(BUILD_DIR)/%.o: %.cpp
 	@mkdir -p $(@D)
-	$(CXX) $(CXXFLAGS) -MMD -c $< -o $@ $(INCLUDES)
+	$(CXX) $(CXXFLAGS) -c $< -o $@ $(INCLUDES)
 
 .PHONY: clean
 clean:
