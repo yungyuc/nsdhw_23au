@@ -3,11 +3,11 @@ CFLAGS = -std=c++11 -O2
 
 all: main
 
-mainOBJS := main.o Line.o
+OBJS := main.o Line.o
 
 deps := $(OBJS:%.o=.%.o.d)
 
-main: $(mainOBJS)
+main: $(OBJS)
 	$(CC) -o $@ $(LDFLAGS) $^
 
 %.o: %.cpp
@@ -20,9 +20,8 @@ check: main
 	@./main > result.txt
 
 clean:
-	rm -f $(mainOBJS) $(deps) *~ main
+	rm -f $(OBJS) $(deps) *~ main
 	rm -rf *.dSYM
-	rm -rf .*.o.d
 	rm -rf *.txt
 
 -include $(deps)
