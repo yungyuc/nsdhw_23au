@@ -5,7 +5,7 @@ PYINCLUDE = $(shell python3 -m pybind11 --includes)
 PYESUFFIX = $(shell python3-config --extension-suffix)
 TARGET=_vector$(PYESUFFIX)
 
-$(TARGET): vecLib.cpp
+$(TARGET): _vector.cpp
 	$(CC) $(CFLAGS) $(PYINCLUDE) $(PYLDFLAGS) $< -o $(TARGET)
 
 .PHONY: clean test
