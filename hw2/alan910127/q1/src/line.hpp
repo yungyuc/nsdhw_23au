@@ -5,16 +5,16 @@
 
 class Line {
 public:
-    Line();
+    Line() = default;
     Line(std::size_t size) : coord(size * 2) {}
 
-    Line(const Line& line);
-    Line& operator=(const Line& line);
+    Line(const Line& line) = default;
+    Line& operator=(const Line& line) = default;
 
-    Line(Line&& line);
-    Line& operator=(Line&& line);
+    Line(Line&& line) = default;
+    Line& operator=(Line&& line) = default;
 
-    ~Line();
+    ~Line() = default;
 
     std::size_t size() const;
 
