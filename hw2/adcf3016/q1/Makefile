@@ -3,13 +3,12 @@ CPPFLAGS := -g -Wall -std=c++11
 
 TARGET := main
 EXE := ./main
-OBJ := main.o line.o
-SRC := main.cpp line.cpp line.hpp
+OBJS := main.o line.o
 DES := result.txt
 
 all: $(TARGET)
 
-$(TARGET): $(OBJ)
+$(TARGET): $(OBJS)
 	$(CXX) $^ -o $@ $(CPPFLAGS)
 
 main.o: main.cpp line.hpp
@@ -25,7 +24,7 @@ check:
 	$(EXE) > $(DES)
 
 clean:
-	rm -rf $(TARGET) $(DES)
+	rm -rf $(TARGET) $(DES) $(OBJS)
 
 
 .PHONY : all clean run check
