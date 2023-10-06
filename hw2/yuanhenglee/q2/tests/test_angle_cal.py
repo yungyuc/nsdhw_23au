@@ -34,7 +34,7 @@ def test_arbitrary_angle():
     if answer < 0:
         answer += 2*math.pi
     if answer > math.pi:
-        answer -= 2*math.pi
+        answer = 2*math.pi - answer
 
     assert math.isclose(angle, answer, rel_tol=rel_tol)
 

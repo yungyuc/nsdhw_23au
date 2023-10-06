@@ -1,7 +1,6 @@
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Wextra -Werror -O3 -fPIC
+CXXFLAGS = -std=c++11 -Wall -Wextra -Werror -O3 -fPIC `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
 LDFLAGS = -shared -fPIC
-PYBINDFLAGS = $(shell python3 -m pybind11 --includes)
 
 SRC_DIR = src
 BUILD_DIR = build
