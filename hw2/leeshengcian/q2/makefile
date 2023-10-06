@@ -1,18 +1,17 @@
 CXX = g++
-CXXFLAGS = -O3 -Wall --shared -std=c++17 -fPIC `python3 -m pybind11 --includes` `python3-config --includes`
-CXXLDFLAGS = `python3-config --ldflags`
-TARGET = _vector
+CXXFLAGS = -O3 -Wall --shared -std=c++17 -fPIC `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
+#CXXLDFLAGS = `python3-config --ldflags`
+TARGET = _vector.so
 TEST_FILE = test
 
 .PHONY: all test clean
 
-all: %.so $(TEST_FILE).py
+all: $(TARGET)
+$(TARGET): _vector.cpp
+	$(CXX) -o $@ $(CXXFLAGS) $<
 
-%.so: $(TARGET).cpp
-	$(CXX) $(CXXFLAGS) $^ -o $(TARGET)`python3-config --extension-suffix`
-
-test: %.so $(TEST_FILE).py
+test: all
 	python3 -m pytest -v
 
 clean:
-	rm -rf *.so __pycache__ .pytest*
+	rm -rf *.o *.so __pycache__ .pytest_cache/
