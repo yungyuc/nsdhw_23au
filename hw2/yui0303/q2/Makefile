@@ -10,9 +10,8 @@ $(TARGET): _vector.cpp
 .PHONY: clean test
 
 test:
-	pytest -v
+	python -m pytest -v
 clean:
 	rm -rf $(TARGET) .[a-z]* __pycache__
-
 
 # Some compile format refer to https://pybind11.readthedocs.io/en/stable/basics.html
