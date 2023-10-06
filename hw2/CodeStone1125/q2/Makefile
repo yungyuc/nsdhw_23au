@@ -19,5 +19,7 @@ test:
 
 clean:
 	rm -f $(execute_file) result.txt
+	cd tests && rm -rf __pycache__
+
 
 .PHONY: all test clean
