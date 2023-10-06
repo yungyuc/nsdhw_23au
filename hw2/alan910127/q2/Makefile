@@ -1,6 +1,8 @@
 CXX := g++
 CXXFLAGS := -std=c++17 -Wall -Wextra -Werror -Wpedantic -fPIC
 LDFLAGS := -shared
+PY_LDFLAGS := $(shell python3-config --ldflags)
+LDFLAGS += $(PY_LDFLAGS)
 INCLUDES := $(shell python3 -m pybind11 --includes)
 SO_EXT := $(shell python3-config --extension-suffix)
 
@@ -25,7 +27,7 @@ $(LIB): $(OBJS)
 
 $(BUILD_DIR)/%.o: %.cpp
 	@mkdir -p $(@D)
-	$(CXX) $(CXXFLAGS) -c $< -o $@ $(INCLUDES)
+	$(CXX) $(CXXFLAGS) -c $< -o $@ $(INCLUDES) $(PY_LDFLAGS)
 
 .PHONY: clean
 clean:
