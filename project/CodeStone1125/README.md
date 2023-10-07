@@ -9,7 +9,7 @@ Simulate how different type of shape collide in a 2D map.
 
 ## Problem to Solve
 
-The problem this system wants to solve is to calculate situation for the most common shapes in 2D map like retangle, circle and Convex Polygon.
+The problem this system wants to solve is to calculate situation for the most common shapes in 2D map like retangle, circle and Polygon.
 
 There are some algorithms can be implemented for solving this problem. Before we dive into the topic deeper, let's first talk about the the "Axis-Aligned Bounding Box" (AABB) algorithm. While it's not a single algorithm but a framework for collision detection, it forms the basis for many collision detection systems in 2D graphics and game development due to its simplicity and efficiency.
 
@@ -103,22 +103,19 @@ The delauney sweepline triangulation algorithm provides a triangulation with the
 
 ## System Architecture
 
-The system should provide a graphical user interface allow users to design a 2D map, place walls and move a light source to play around. Additionally, when the user is interacting with any objects on the map, the system needs to highlight the area reachable from the light source on the map in real time.
 
-| ![among-us](./assets/system_arch.jpg) |
+
+| ![](./pictures/Mario.png) |
 |:-----------------------------------:|
 | **System flow chart** |
 
 ## API Description
 
 * Python API:
-  * `addWall(start, end)`: create a wall on the map and return its id
-  * `rmWall(wall_id)`: remove the wall by its id
-  * `moveLightSource(dest)`: move light source to the destination coordinate
-  * `lightArea(walls, light_source)`: call the c++ api and show the lit area on the map
+  * `example(var1, var2)`: explain
 
 * C++ API:
-  * `lightArea(walls, light_source)`: calculate all the areas where lights from a given single light source can reach on a 2D map and return the coordinates of the lit places and its area.
+  * `example(var1, var2)`: explain
 
 ## Engineering Infrastructure
 
@@ -129,25 +126,24 @@ The system should provide a graphical user interface allow users to design a 2D 
 
 ## Schedule
 
-Planning phase (6 weeks from 9/19 to 10/31): Setup the environment and get familiar with the algorithm
+Planning phase (6 weeks from 9/19 to 10/31): 
 
-Week 1 (10/31): Implement the algorithm with C++
+Week 1 (10/31): 
 
-Week 2 (11/7): Make python wrappers for C++ with `pybind`
+Week 2 (11/7): 
 
-Week 3 (11/14): Finish C++, and start creating the interactive map in python
+Week 3 (11/14): 
 
-Week 4 (11/21): Implement features of the interactive map
+Week 4 (11/21): 
 
-Week 5 (11/28): Test all features with `pytest`
+Week 5 (11/28): 
 
-Week 6 (12/5): Finish up, debug, and write the documentation
+Week 6 (12/5): 
 
-Week 7 (12/12): Buffer time for further testing and debugging
+Week 7 (12/12): 
 
-Week 8 (12/19): Make slides and prepare for the presentation
+Week 8 (12/19): 
 
 ## References
 
-* [red blob games](https://www.redblobgames.com/articles/visibility/)
-* [sight and light](https://ncase.me/sight-and-light/)
+* [2D collision detection]([https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection])
