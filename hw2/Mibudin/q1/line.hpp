@@ -20,14 +20,14 @@ public:
     Line(Line&&) = default;
     Line& operator=(Line const&) = default;
     Line& operator=(Line&&) = default;
-    Line(size_t size);
+    Line(std::size_t size);
     ~Line() = default;
 
-    size_t size() const;
-    float const& x(size_t it) const;
-    float& x(size_t it);
-    float const& y(size_t it) const;
-    float& y(size_t it);
+    std::size_t size() const;
+    float const& x(std::size_t it) const;
+    float& x(std::size_t it);
+    float const& y(std::size_t it) const;
+    float& y(std::size_t it);
 
 private:
     // Memory buffer for the points

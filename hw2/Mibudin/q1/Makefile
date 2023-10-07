@@ -20,7 +20,7 @@ OUT_DIR	:= .
 
 CXX	?= g++
 CXX_STD	:= c++17
-CXX_INCS	:= $(addprefix -I,${INC_DIR}) $(python3 -m pybind --include)
+CXX_INCS	:= $(addprefix -I,${INC_DIR})
 CXX_LIBS	:= $(addprefix -L,${LIB_DIR})
 CXX_FLAGS	:= -O2 -Wall
 ifdef CXX_STD
