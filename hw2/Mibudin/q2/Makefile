@@ -19,7 +19,8 @@ BIN_DIR	:= .
 CXX	?= g++
 CXX_STD	:= c++17
 CXX_INCS	:= $(addprefix -I,${INC_DIR}) \
-				$(shell python3 -m pybind11 --include)
+				$(shell python3 -m pybind11 --includes) \
+				$(shell python3-config --includes)
 CXX_LIBS	:= $(addprefix -L,${LIB_DIR}) \
 				$(shell python3-config --ldflags)
 CXX_FLAGS	:= -O2 -Wall -shared -fPIC
