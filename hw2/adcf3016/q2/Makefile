@@ -9,7 +9,7 @@ $(TARGET): $(SRC)
 	$(CXX) $(CPPFLAGS) $(SRC) -o $(TARGET)
 
 test: $(TARGET)
-	python3 -m pytest
+	python3 -m pytest -v
 
 clean:
 	rm -rf *.o *.so __pycache__
