@@ -15,7 +15,7 @@ There are some algorithms can be implemented for solving this problem. Before we
 
 * Bounding Boxes: Each object in a 2D scene is enclosed by a rectangle (a bounding box) that is aligned with the axes of the coordinate system. These rectangles are often referred to as "AABBs" because they are aligned with the axes.
 
-However, 2D map doesn't only contain rectangle and circle, but many different Polygons. To solve the problem, objects be divided two types that's Convex Polygon and concave polygons. And Delauney Triangulation and Hertel-Mehlhorn algorithm are used respectively to improve its efficiency.
+  However, 2D map doesn't only contain rectangle and circle, but many different Polygons. To solve the problem, objects be divided two types that's Convex Polygon and concave polygons. And Delauney Triangulation and Hertel-Mehlhorn algorithm are used respectively to improve its efficiency.
 
 * Delauney Triangulation:
 The delauney sweepline triangulation algorithm provides a triangulation with the maximum minimum internal angle. Put more simply it produces a triangulation with fewer thin strips, while the technique is readily searchable.Implementing Delaunay triangulation from scratch is quite complex, and it typically involves advanced algorithms like the Bowyer-Watson algorithm or incremental algorithms. Here's a simplified pseudocode for an incremental Delaunay triangulation algorithm:Here is the pseudo code in `python`:
