@@ -146,4 +146,4 @@ Week 8 (12/19):
 
 ## References
 
-* [2D collision detection]([https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection])
+* [2D collision detection](https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection)
