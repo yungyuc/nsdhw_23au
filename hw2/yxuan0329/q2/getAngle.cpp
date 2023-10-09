@@ -16,6 +16,6 @@ double getAngle(const vector<double>& v1, const vector<double>& v2){
 }
 
 PYBIND11_MODULE(_vector, m){
-    m.doc = "getAngle function";
+    m.doc() = "getAngle function";
     m.def("getAngle", &getAngle, "A function return radian of two 2d vectors");
 }
