@@ -62,7 +62,7 @@ print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
   
   Complex shapes may require additional techniques for accurate collision detection. So if the progress is acceptable, I'd like to delve deeper to achieve more precise collision detection.
   
-  To solve the problem, objects be divided two types that's Convex Polygon and concave polygons. And Delauney Triangulation and Hertel-Mehlhorn algorithm are used respectively to improve its efficiency.
+  To solve the problem, objects be divided two types that's Convex Polygon and concave polygons. And Hertel-Mehlhorn algorithm as well as Delauney Triangulation are used respectively to improve its efficiency.
 
   
 
