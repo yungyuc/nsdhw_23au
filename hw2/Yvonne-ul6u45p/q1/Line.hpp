@@ -14,8 +14,7 @@ class Line {
             _x(line._x), _y(line._y){}
 
         Line(Line       && line):
-            _x(move(line._x)),
-            _y(move(line._y)){}
+            _x(move(line._x)), _y(move(line._y)){}
         
         Line & operator = (Line const &  line) {
             _x = line._x;
@@ -29,37 +28,28 @@ class Line {
             return *this;
         }
 
-        // Parameterized Constructor 
-        // Line(size_t size);
+        // Parameterized Constructor
         Line(size_t size): _x(size),_y(size){}
 
-        // ~Line();
         ~Line(){}
         
-        // size_t size() const;
         size_t size() const {
             return _x.size();
         }
 
-        // float const & x(size_t it) const;
-        float const & x(size_t it) const
-        {
+        float const & x(size_t it) const {
             return _x.at(it);
         }
 
-        // float & x(size_t it);
-        float & x(size_t it)
-        {
+        float & x(size_t it) {
             return _x.at(it);
         }
 
-        float const & y(size_t it) const
-        {
+        float const & y(size_t it) const {
             return _y.at(it);
         }
 
-        float & y(size_t it)
-        {
+        float & y(size_t it) {
             return _y.at(it);
         }
         
