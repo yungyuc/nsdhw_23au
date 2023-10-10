@@ -13,3 +13,6 @@ check:
 clean:
 	rm -rf result.txt
 	rm -rf Line
+	rm Line.cpp
+	rm Line.hpp
+	rm Makefile
