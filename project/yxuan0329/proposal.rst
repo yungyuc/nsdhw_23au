@@ -60,8 +60,8 @@ searching multi-dimensional data, it plays a pivotal role in various
 applications, particularly in spatial information systems such as maps. 
 However, beyond spatial information, data in map system should also take 
 temporal feature in considerations for better searching performance. When 
-searching nearest location on map system, users should be able to see different
- sorting results depending on their specified searching time. In other words, 
+searching nearest location on map system, users should be able to see different 
+sorting results depending on their specified searching time. In other words, 
 the users should be able to receive different searching results for the same 
 query at different days and times.
 
@@ -103,8 +103,8 @@ enter query for searching, and one text block list for showing the searching
 results.
 
 2. Datasets:
-Generate the database with about 50 map data entry by myself for validating the
- R-tree algorithm can works correctly. 
+Generate the database with about 50 map data entry by myself for validating the 
+R-tree algorithm can works correctly. 
 
 
 API Description
@@ -165,7 +165,7 @@ Schedule
 References
 ==========
 .. List the external references for the information provided in the proposal.
-- (https://en.wikipedia.org/wiki/R-tree)
-- (https://timecenter.cs.aau.dk/wp-content/uploads/2022/12/TR-45.pdf)
-- (https://link.springer.com/referenceworkentry/10.1007/978-3-319-23519-6_1151-2)
+- https://en.wikipedia.org/wiki/R-tree
+- https://timecenter.cs.aau.dk/wp-content/uploads/2022/12/TR-45.pdf
+- https://link.springer.com/referenceworkentry/10.1007/978-3-319-23519-6_1151-2
 
