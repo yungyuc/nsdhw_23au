@@ -9,106 +9,67 @@ Simulate how different type of shape collide in a 2D map.
 
 ## Problem to Solve
 
-The problem this system wants to solve is to calculate situation for the most common shapes in 2D map like retangle, circle and Polygon.
+The objective of this system is to calculate scenarios for the most common shapes in a 2D map, such as rectangles, circles, and polygons.
 
-There are some algorithms can be implemented for solving this problem. Before we dive into the topic deeper, let's first talk about the the "Axis-Aligned Bounding Box" (AABB) algorithm. 
+Before we dive into the topic deeper, let's first talk about the the "Axis-Aligned Bounding Box" (AABB) algorithm. 
 
 While it's not a single algorithm but a framework for collision detection, it forms the basis for many collision detection systems in 2D graphics and game development due to its simplicity and efficiency.
 
-* Bounding Boxes: Each object in a 2D scene is enclosed by a rectangle (a bounding box) that is aligned with the axes of the coordinate system.
-  These rectangles are often referred to as "AABBs" because they are aligned with the axes.
+Moreover, in the 2D world, AABB can effectively handle approximate collisiondetection for most cases.
 
-  However, 2D map doesn't only contain rectangle and circle, but many different Polygons.
+Consequently, the implementation ofthe AABB algorithm will be the focal point of this project. 
+
+* Bounding Boxes: Each object in a 2D scene is enclosed by a rectangle (a bounding box) that is aligned with the axes of the coordinate system.
+  These rectangles are often referred to as "AABBs" because they are aligned with the axes.Here is the pseudo code in `python`:
+  
+  ```python
+  def calculate_aabb(points):
+    if len(points) == 0:
+        return None
+
+    # Initialize min and max values with the first point
+    min_x, min_y = points[0]
+    max_x, max_y = points[0]
+
+    # Iterate through the points to find the AABB
+    for x, y in points:
+        if x < min_x:
+            min_x = x
+        elif x > max_x:
+            max_x = x
+
+        if y < min_y:
+            min_y = y
+        elif y > max_y:
+            max_y = y
+
+    # Return the AABB as a tuple of (min_x, min_y, max_x, max_y)
+    return (min_x, min_y, max_x, max_y)
+  ```
+# Example usage:
+points = [(1, 2), (3, 4), (-1, 0), (5, 6)]
+aabb = calculate_aabb(points)
+print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
+
+
+  Even thought AABB works well for most 2D shapes but may have limitations with irregular polygons, circles, and very long or short shapes. 
+  
+  Complex shapes may require additional techniques for accurate collision detection. So if the progress is acceptable, I'd like to delve deeper to achieve more precise collision detection.
+  
   To solve the problem, objects be divided two types that's Convex Polygon and concave polygons. And Delauney Triangulation and Hertel-Mehlhorn algorithm are used respectively to improve its efficiency.
 
-* Delauney Triangulation:
-The delauney sweepline triangulation algorithm provides a triangulation with the maximum minimum internal angle.Put more simply it produces a triangulation with fewer thin strips, while the technique is readily searchable.
-Implementing Delaunay triangulation from scratch is quite complex, and it typically involves advanced algorithms like the Bowyer-Watson algorithm or incremental algorithms.
-Here's a simplified pseudocode for an incremental Delaunay triangulation algorithm:Here is the pseudo code in `python`:
-
-  ```python
-    def delaunay_triangulation(points):
-        triangulation = []  # List to store triangles
-    
-    # Create a supertriangle that contains all input points
-    supertriangle = create_supertriangle(points)
-    triangulation.append(supertriangle)
-    
-    for point in points:
-        bad_triangles = []
-        
-        # Find triangles that are no longer Delaunay with the new point
-        for triangle in triangulation:
-            if point_inside_circumcircle(point, triangle):
-                bad_triangles.append(triangle)
-        
-        polygon = []
-        
-        # Remove bad triangles from the triangulation and store their edges
-        for triangle in bad_triangles:
-            for edge in triangle.edges:
-                if edge not in polygon:
-                    polygon.append(edge)
-            triangulation.remove(triangle)
-        
-        # Create new triangles using the edges of the polygon and the new point
-        for edge in polygon:
-            new_triangle = create_triangle(edge, point)
-            triangulation.append(new_triangle)
-    
-    # Remove triangles that share vertices with the supertriangle
-    return [triangle for triangle in triangulation if not triangle_shares_vertex_with_supertriangle(triangle)]
-
-  ```
-
-* Hertel-Mehlhorn: The simplest approach to this is the Hertel-Mehlhorn algorithm which promises to produce no more than 4 times the number of polygons of the optimal solution.
-  In practice for simple concave polygons this algorithm often produces the optimal solution.
-
-  The algorithm is very simple; iterate over the internal edges "diagonals" created by triangulation and remove non-essential diagonals.
-  A non-essential diagonal is found when at either end of the diagonal the points linked would be convex.
-  This is determined by testing the orientation of the points. Here is the pseudo code in `python`:
-
-  ```python
-  def hertel_mehlhorn(polygon):
-    convex_polygons = []  # List to store resulting convex polygons
-    
-    while len(polygon) > 3:  # Continue until only a triangle remains
-        ear_vertex = find_convex_ear_vertex(polygon)
-        if ear_vertex is None:
-            # Unable to find an ear vertex, the polygon is invalid
-            break
-        
-        # Create a new convex polygon with the ear vertex and its neighbors
-        new_convex_polygon = [ear_vertex.prev, ear_vertex, ear_vertex.next]
-        convex_polygons.append(new_convex_polygon)
-        
-        # Remove the ear vertex from the polygon
-        ear_vertex.prev.next = ear_vertex.next
-        ear_vertex.next.prev = ear_vertex.prev
-        polygon.remove(ear_vertex)
-    
-    # Add the remaining triangle to the list of convex polygons
-    convex_polygons.append(polygon)
-    
-    return convex_polygons
-
-    def find_convex_ear_vertex(polygon):
-        # Find and return an ear vertex from the polygon if one exists
-        # Implement the logic to check if a vertex is convex and has an "ear"
-        # This involves checking the orientation of the vertices.
-        # Return None if no ear vertex is found.
-
-  ```
+  
 
 ## Prospective users
 
-* Game Developer: Determine whether something in a game world is attach by a character is very common in game developing. There are even games making this as one of their main features, like [Super Mario]() and [Pac-Man]()
+* Game Developer: Determine whether something in a game world is attach by a character is very common in game developing. There are even games making this as one of their main features, like [Super Mario]() and [Pokemon]()
 
-| ![Super Mario](./pictures/Mario.png) | ![Pac-Man](./pictures/pacman.png) |
+| ![Super Mario](./pictures/Mario.png) | ![Pokemon](./pictures/pokemon.png) |
 |:-----------------------------------:|:-----------------------------------:|
 | **Super Mario** |**Pac-Man**|
 
 * Collision Prevention for Automation Equipment: Robots and automation devices used in industrial automation need to ensure that they do not collide or interfere with each other while performing tasks.
+
   2D collision detection can monitor the positions of individual machine components to prevent unnecessary collisions, enhance production efficiency, and safeguard equipment.
 
 ## System Architecture
