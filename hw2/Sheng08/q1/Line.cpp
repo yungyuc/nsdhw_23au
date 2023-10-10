@@ -1,5 +1,7 @@
 #include "Line.hpp"
 
+using namespace std;
+
 Line::Line() {}
 
 Line::Line(size_t size) : x_coords(size), y_coords(size) {}

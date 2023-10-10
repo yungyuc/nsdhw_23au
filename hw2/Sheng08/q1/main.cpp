@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Line.hpp"
 
+using namespace std;
+
 int main(int, char **)
 {
     Line line(3);
