@@ -25,11 +25,15 @@ Basic Information
 .. GitHub repository has an 'About' field, in which you are encouraged to write a
 .. simple statement (preferably one sentence) to introduce the project.
 
-R-tree is a tree structure designed for efficient spatial access, it has been widely used in geographic 
-searching. However, when searching for data in map system, it is crucial to consider temporal features to enhance searching performance.
-The R-Tree Spatio-Temporal Search Engine aims to provide a search engine for users to query multi-dimensional data with both 
-spatial and temporal information. In this project, we will provide a demonstration of the R-tree search engine, enabling users to enter 
-queries and receive a set of results that include the nearest distance and the best time-matched entities.
+R-tree is a tree structure designed for efficient spatial access, it has been 
+widely used in geographic searching. However, when searching for data in map 
+system, it is crucial to consider temporal features to enhance searching performance.
+
+The R-Tree Spatio-Temporal Search Engine aims to provide a search engine for users to 
+query multi-dimensional data with both spatial and temporal information. In this project, 
+we will provide a demonstration of the R-tree search engine, enabling users to enter 
+queries and receive a set of results that include the nearest distance and the best 
+time-matched entities.
 
 
 Problem to Solve
@@ -45,18 +49,22 @@ Problem to Solve
 .. 3. The algorithm or numerical method that should be applied for solving the
 ..    problem.
 
-R-tree is a data structure renowned for its exceptional performance in searching multi-dimensional data, 
-it plays a pivotal role in various applications, particularly in spatial information systems 
-such as maps. However, beyond spatial information, data in map system should also take temporal 
-feature in considerations for better searching performance. When searching nearest location on map system,
-users should be able to see different sorting results depending on their specified searching time. 
-In other words, the users should be able to receive different searching results for the same query at different days and times.
+R-tree is a data structure renowned for its exceptional performance in searching 
+multi-dimensional data, it plays a pivotal role in various applications, particularly 
+in spatial information systems such as maps. However, beyond spatial information, data 
+in map system should also take temporal feature in considerations for better searching 
+performance. When searching nearest location on map system, users should be able to see 
+different sorting results depending on their specified searching time. In other words, 
+the users should be able to receive different searching results for the same query at 
+different days and times.
 
 The goal of this project is to integrate temporal data into the indexing process, 
-effectively creating a new temporal dimension within the R-tree structure. We aspire to enable users to not only search 
-by spatial attributes but also to incorporate temporal considerations into their queries. Furthermore, this project seeks 
-to refine the organization of data within the R-tree, prioritizing results based on temporal relevance, thereby delivering 
-a more comprehensive and responsive mapping experience.
+effectively creating a new temporal dimension within the R-tree structure. We aspire 
+to enable users to not only search by spatial attributes but also to incorporate 
+temporal considerations into their queries. Furthermore, this project seeks to 
+refine the organization of data within the R-tree, prioritizing results based 
+on temporal relevance, thereby delivering a more comprehensive and responsive 
+mapping experience.
 
 
 
@@ -66,7 +74,8 @@ Prospective Users
 .. Describe the users of your software and how they will use it.  It is OK to
 .. combine this section with the previous one (`Problem to solve`_).
 
-This project aims to provide to users that want to search multidimensional data including spatial and temporal features.
+This project aims to provide to users that want to search multidimensional data 
+including spatial and temporal features.
 
 System Architecture
 ===================
@@ -80,11 +89,12 @@ Implementation Plan
 ===================
 
 1. Frontend design:
-The search engine will provide a simple UI with one text block for users to enter query for searching, 
-and one text block list for showing the searching results.
+The search engine will provide a simple UI with one text block for users to enter 
+query for searching, and one text block list for showing the searching results.
 
 2. Datasets:
-Generate the database with about 50 map data entry by myself for validating the R-tree algorithm can works correctly. 
+Generate the database with about 50 map data entry by myself for validating the 
+R-tree algorithm can works correctly. 
 
 
 API Description
