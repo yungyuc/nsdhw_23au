@@ -23,7 +23,8 @@ While it's not a single algorithm but a framework for collision detection, it fo
 
 * Delauney Triangulation:
 The delauney sweepline triangulation algorithm provides a triangulation with the maximum minimum internal angle.Put more simply it produces a triangulation with fewer thin strips, while the technique is readily searchable.
-Implementing Delaunay triangulation from scratch is quite complex, and it typically involves advanced algorithms like the Bowyer-Watson algorithm or incremental algorithms.Here's a simplified pseudocode for an incremental Delaunay triangulation algorithm:Here is the pseudo code in `python`:
+Implementing Delaunay triangulation from scratch is quite complex, and it typically involves advanced algorithms like the Bowyer-Watson algorithm or incremental algorithms.
+Here's a simplified pseudocode for an incremental Delaunay triangulation algorithm:Here is the pseudo code in `python`:
 
   ```python
     def delaunay_triangulation(points):
