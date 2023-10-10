@@ -68,7 +68,7 @@ print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
 
 ## Prospective users
 
-* Game Developer: Determine whether something in a game world is attach by a character is very common in game developing. There are even games making this as one of their main features, like [Super Mario]() and [Pokemon]()
+* Game Developer: Determine whether something in a game world is attach by a character is very common in game developing. There are even games making this as one of their main features, like [Super Mario](https://zh.wikipedia.org/zh-tw/%E8%B6%85%E7%BA%A7%E9%A9%AC%E5%8A%9B%E6%AC%A7%E7%B3%BB%E5%88%97) and [Pokemon](https://zh.wikipedia.org/wiki/%E5%AE%9D%E5%8F%AF%E6%A2%A6%E7%B3%BB%E5%88%97#%E9%81%8A%E6%88%B2)
 
 | ![Super Mario](./pictures/Mario.png) | ![Pokemon](./pictures/pokemon.png) |
 |:-----------------------------------:|:-----------------------------------:|
