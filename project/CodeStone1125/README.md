@@ -97,23 +97,23 @@ print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
 
 ## Schedule
 
-Planning phase (6 weeks from 9/19 to 10/31): 
+Planning phase (6 weeks from 9/19 to 10/31): Setup the environment and get familiar with the algorithm
 
-Week 1 (10/31): 
+Week 1 (10/30): Implement the algorithm with C++
 
-Week 2 (11/7): 
+Week 2 (11/6): Make python wrappers for C++ with pybind
 
-Week 3 (11/14): 
+Week 3 (11/13): Finish C++, and start creating the interactive map in python
 
-Week 4 (11/21): 
+Week 4 (11/20): Implement features of the interactive map
 
-Week 5 (11/28): 
+Week 5 (11/27): Test all features with pytest
 
-Week 6 (12/5): 
+Week 6 (12/4): Finish up, debug, and write the documentation
 
-Week 7 (12/12): 
+Week 7 (12/11): Buffer time for further testing and debugging
 
-Week 8 (12/19): 
+Week 8 (12/18): Make slides and prepare for the presentation
 
 ## References
 
