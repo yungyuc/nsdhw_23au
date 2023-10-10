@@ -64,7 +64,8 @@ Implementing Delaunay triangulation from scratch is quite complex, and it typica
   In practice for simple concave polygons this algorithm often produces the optimal solution.
 
   The algorithm is very simple; iterate over the internal edges "diagonals" created by triangulation and remove non-essential diagonals.
-  A non-essential diagonal is found when at either end of the diagonal the points linked would be convex. This is determined by testing the orientation of the points. Here is the pseudo code in `python`:
+  A non-essential diagonal is found when at either end of the diagonal the points linked would be convex.
+  This is determined by testing the orientation of the points. Here is the pseudo code in `python`:
 
   ```python
   def hertel_mehlhorn(polygon):
