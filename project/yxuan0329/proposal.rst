@@ -84,6 +84,8 @@ System Architecture
 .. performs any other operations.  Describe the system's work flow.  You may
 .. consider to use a flow chart but it is not required.  Specify the constraints
 .. assumed in your system.  Describe the modularization of the system.
+(Will be finished after discussion)
+
 
 Implementation Plan
 ===================
@@ -103,6 +105,9 @@ API Description
 .. Show how your system can be programmed.  You are supposed to implement the
 .. system using both C++ and Python.  Describe how a user writes a script in the
 .. system.
+(Will be finished after discussion)
+
+
 
 Engineering Infrastructure
 ==========================
@@ -152,7 +157,7 @@ Schedule
 References
 ==========
 .. List the external references for the information provided in the proposal.
-- [R-tree definition on wikipedia](https://en.wikipedia.org/wiki/R-tree)
-- [R-tree Based Indexing of General Spatio-Temporal Data](https://timecenter.cs.aau.dk/wp-content/uploads/2022/12/TR-45.pdf)
-- [R-Trees: A Dynamic Index Structure for Spatial Searching](https://link.springer.com/referenceworkentry/10.1007/978-3-319-23519-6_1151-2)
+- (https://en.wikipedia.org/wiki/R-tree)
+- (https://timecenter.cs.aau.dk/wp-content/uploads/2022/12/TR-45.pdf)
+- (https://link.springer.com/referenceworkentry/10.1007/978-3-319-23519-6_1151-2)
 
