@@ -19,6 +19,7 @@ Moreover, in the 2D world, AABB can effectively handle approximate collisiondete
 
 Consequently, the implementation ofthe AABB algorithm will be the focal point of this project. 
 
+### AABB's Pseudo code
 * Bounding Boxes: Each object in a 2D scene is enclosed by a rectangle (a bounding box) that is aligned with the axes of the coordinate system.
 
   These rectangles are often referred to as "AABBs" because they are aligned with the axes. Here is the pseudo code in `python`:
