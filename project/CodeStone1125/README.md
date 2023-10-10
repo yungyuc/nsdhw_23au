@@ -82,7 +82,7 @@ print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
 
 
 
-| ![](./pictures/Mario.png) |
+| ![](./pictures/system_architechture.png) |
 |:-----------------------------------:|
 | **System flow chart** |
 
