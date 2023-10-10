@@ -66,7 +66,7 @@ print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
 
 | ![Super Mario](./pictures/Mario.png) | ![Pokemon](./pictures/pokemon.png) |
 |:-----------------------------------:|:-----------------------------------:|
-| **Super Mario** |**Pac-Man**|
+| **Super Mario** |**Pokemon**|
 
 * Collision Prevention for Automation Equipment: Robots and automation devices used in industrial automation need to ensure that they do not collide or interfere with each other while performing tasks.
 
