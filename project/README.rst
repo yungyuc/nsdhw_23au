@@ -67,5 +67,5 @@ Follow the format to add your project in lexicographical order:
    https://github.com/github_account_name/project_name
 
 2. `CodeStone1125 <https://github.com/CodeStone1125>`__ for
-   `Project subject <CodeStone1125/README.rst>`__:
+   `Project subject <CodeStone1125/README.md>`__:
    https://github.com/CodeStone1125/2DCollisionDetector
