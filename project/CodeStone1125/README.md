@@ -89,10 +89,13 @@ print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
 ## API Description
 
 * Python API:
-  * `example(var1, var2)`: explain
+  * `addItem(start, end, varItem)`: create a Item on the map and return its id
+  * `rmItem(item_id)`: remove the wall by its id
+  * `moveItem(dest)`: move item to the destination coordinate
+  * `collideObj(items)`: call the c++ api and show the events result by the items collision
 
 * C++ API:
-  * `example(var1, var2)`: explain
+  * `collideObj(items)`: calculate all the items that collide on 2D map and return item id and events result by the items collision
 
 ## Engineering Infrastructure
 
