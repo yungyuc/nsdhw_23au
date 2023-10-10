@@ -8,21 +8,15 @@ using namespace std;
 float calculateAngle(const vector<float> &v1, const vector<float> &v2) {
     if (v1.size() != 2 || v2.size() != 2)
 	    throw invalid_argument("Input vector should be 2-dimensional.");
+
     float dot_product = v1[0]*v2[0] + v1[1]*v2[1];
     float length = sqrt(v1[0]*v1[0] + v1[1]*v1[1]) * sqrt(v2[0]*v2[0] + v2[1]*v2[1]);
     if (length == 0)
         throw domain_error("Length of Input vector cannot be zero!");
-    cout << dot_product << length << endl;
+    
     float angle_rad = acos(dot_product/length);
+    
     return angle_rad;
-
-    // if (v1.size() != 2 || v2.size() != 2) {
-	// throw std::invalid_argument("Invalid. Vector should be 2-dimensional.");
-    // }
-    // double p1, p2;
-    // p1 = sqrt(v1[0] * v1[0] + v1[1] * v1[1]);
-    // p2 = sqrt(v2[0] * v2[0] + v2[1] * v2[1]);
-    // return acos((v1[0] * v2[0] + v1[1] * v2[1]) / (p1 * p2));
 }
 
 // for Check
@@ -33,7 +27,7 @@ int main() {
     cout << angle_rad << endl;
 
     if (angle_rad == 0)
-        cout << "Is 0" << endl;
+        cout << "Is 0." << endl;
     
     return 0;
 }
