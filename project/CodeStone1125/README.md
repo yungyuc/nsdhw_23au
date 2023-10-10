@@ -97,7 +97,7 @@ print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
 
 ## Schedule
 
-Planning phase (6 weeks from 9/19 to 10/31): Setup the environment and get familiar with the algorithm
+Planning phase (6 weeks from 9/18 to 10/30): Setup the environment and get familiar with the algorithm
 
 Week 1 (10/30): Implement the algorithm with C++
 
