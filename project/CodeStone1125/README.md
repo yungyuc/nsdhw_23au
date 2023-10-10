@@ -48,8 +48,11 @@ Consequently, the implementation ofthe AABB algorithm will be the focal point of
     return (min_x, min_y, max_x, max_y)
   ```
 # Example usage:
+
 points = [(1, 2), (3, 4), (-1, 0), (5, 6)]
+
 aabb = calculate_aabb(points)
+
 print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
 
 
