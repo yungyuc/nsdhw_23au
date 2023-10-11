@@ -65,8 +65,7 @@ Plot3D uses structured mesh as input, while SU2 uses unstructured mesh for solvi
 The goal of this project is to create a file format converter that can translate Plot3D mesh data 
 into a format compatible with SU2. This converter will function as a standalone executable, facilitating 
 data exchange between different programs(codes). Also, the converter will be integrated to [modmesh](https://github.com/solvcon/modmesh)
-Schedule to 
-serve as a useful plugged-in library for easier automation.
+to serve as a useful plugged-in library for easier automation.
 
 Prospective Users
 =================
