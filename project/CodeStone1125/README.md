@@ -80,12 +80,9 @@ print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
 | **Super Mario** |**Pokemon**|
 
 * Collision Prevention for Automation Equipment: Robots and automation devices used in industrial
-
    automation need to ensure that they do not collide or interfere with each other while
-
    performing tasks.2D collision detection can monitor the positions of individual machine
-
-  components to prevent unnecessary collisions, enhance production efficiency, and safeguard equipment.
+   components to prevent unnecessary collisions, enhance production efficiency, and safeguard equipment.
 
 ## System Architecture
 
