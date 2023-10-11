@@ -103,9 +103,10 @@ print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
 
 ### Further research
 
-  Even thought AABB works well for most 2D shapes but may have limitations with irregular
-  polygons, circles, and very long or short shapes. Complex shapes may require additional
-   techniques for accurate collision detection. So if the progress is acceptable, I'd like
+  Even thought AABB + SAT combination works well for most 2D shapes but may have 
+  limitations with irregularpolygons, circles, and very long or short shapes.
+  Complex shapes may require additional techniques for accurate collision detection.
+  So if the progress is acceptable, I'd like
   to delve deeper to achieve more precise collision detection. To solve the problem, 
   objects be divided two types that's Convex Polygon and concave polygons. And 
   Hertel-Mehlhorn algorithm as well as Delauney Triangulation are used respectively
