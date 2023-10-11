@@ -90,9 +90,9 @@ print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
        return max1 >= min2 and max2 >= min1
    
    def sat_collision(shape1, shape2):
-    for axis in shape1.axes + shape2.axes:
-        min1, max1 = project(shape1, axis)
-        min2, max2 = project(shape2, axis)
+     for axis in shape1.axes + shape2.axes:
+         min1, max1 = project(shape1, axis)
+         min2, max2 = project(shape2, axis)
         
      if not overlap(min1, max1, min2, max2):
          # Shapes do not overlap on this axis, so they are not colliding.
