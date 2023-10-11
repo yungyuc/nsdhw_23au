@@ -15,10 +15,12 @@ topic, let's first discuss the "Axis-Aligned Bounding Box" (AABB) algorithm. Whi
 it's not a single algorithm but a framework for collision detection, it forms the basis
 for many collision detection systems in 2D graphics and game development due to its 
 simplicity and efficiency. Moreover, in the 2D world, AABB can effectively handle 
-approximate collision detection for most cases. However, for more complex polygons, we 
-need to introduce another algorithm called the Separating Axis Theorem (SAT). SAT is 
-more precise but also more resource-intensive. For most cases in the 2D world, we can
-handle collision detection through the following steps:
+approximate collision detection for most cases.
+
+However, for more complex polygons, we need to introduce another algorithm called the
+Separating Axis Theorem (SAT). SAT is more precise but also more resource-intensive.
+For most cases in the 2D world, we canhandle collision detection through the following
+steps:
 
 1. Preliminary screening of collision objects using AABB.
 2. Further checking with SAT.
