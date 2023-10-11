@@ -9,14 +9,20 @@ Simulate how different type of shape collide in a 2D map.
 
 ## Problem to Solve
 
-The objective of this system is to calculate scenarios for the most common shapes in 
-a 2D map, such as rectangles, circles, and polygons.Before we dive into the topic 
-deeper, let's first talk about the the "Axis-AlignedBounding Box" (AABB) algorithm. 
-While it's not a single algorithm but a framework for collision detection, it forms
-the basis for many collision detection systems in 2D graphics and game development
-due to its simplicity and efficiency.Moreover, in the 2D world, AABB can effectively 
-handle approximate collisiondetection for most cases. Consequently, the implementation
-ofthe AABB algorithm will be the focal point of this project. 
+The objective of this system is to calculate scenarios for the most common shapes in
+a 2D map, such as rectangles, circles, and polygons. Before we dive deeper into the 
+topic, let's first discuss the "Axis-Aligned Bounding Box" (AABB) algorithm. While 
+it's not a single algorithm but a framework for collision detection, it forms the basis
+for many collision detection systems in 2D graphics and game development due to its 
+simplicity and efficiency. Moreover, in the 2D world, AABB can effectively handle 
+approximate collision detection for most cases. However, for more complex polygons, we 
+need to introduce another algorithm called the Separating Axis Theorem (SAT). SAT is 
+more precise but also more resource-intensive. For most cases in the 2D world, we can
+handle collision detection through the following steps:
+
+1. Preliminary screening of collision objects using AABB.
+2. Further checking with SAT.
+
 
 ### AABB's Pseudo code
 * Bounding Boxes: Each object in a 2D scene is enclosed by a rectangle (a bounding box)
@@ -55,6 +61,42 @@ points = [(1, 2), (3, 4), (-1, 0), (5, 6)]
 aabb = calculate_aabb(points)
 
 print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
+### SAT's Pseudo code
+* Separating Axis Theorem: The Separating Axis Theorem (SAT) is a collision detection
+  method for 2D shapes. It checks if there's an axis where two shapes can be separated
+  , indicating no collision. If no separating axis is found, the shapes are colliding.
+   SAT is used for efficient and accurate collision detection in games and simulations.
+  ```
+   def project(shape, axis):
+       # Project shape vertices onto the given axis and return the range [min, max].
+       min_proj = float('inf')
+       max_proj = float('-inf')
+    
+    for vertex in shape.vertices:
+        projection = dot_product(vertex, axis)
+        if projection < min_proj:
+            min_proj = projection
+        if projection > max_proj:
+            max_proj = projection
+            
+    return min_proj, max_proj
+
+   def overlap(min1, max1, min2, max2):
+       # Check if two ranges [min1, max1] and [min2, max2] overlap.
+       return max1 >= min2 and max2 >= min1
+   
+   def sat_collision(shape1, shape2):
+       for axis in shape1.axes + shape2.axes:
+           min1, max1 = project(shape1, axis)
+           min2, max2 = project(shape2, axis)
+           
+        if not overlap(min1, max1, min2, max2):
+            # Shapes do not overlap on this axis, so they are not colliding.
+            return False
+    
+    # If there is no axis along which the shapes do not overlap, they are colliding.
+    return True
+  ```
 
 ### Further research
 
