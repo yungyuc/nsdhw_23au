@@ -15,7 +15,7 @@ deeper, let's first talk about the the "Axis-AlignedBounding Box" (AABB) algorit
 While it's not a single algorithm but a framework for collision detection, it forms
 the basis for many collision detection systems in 2D graphics and game development
 due to its simplicity and efficiency.Moreover, in the 2D world, AABB can effectively 
-handle approximate collisiondetection for most cases.Consequently, the implementation
+handle approximate collisiondetection for most cases. Consequently, the implementation
 ofthe AABB algorithm will be the focal point of this project. 
 
 ### AABB's Pseudo code
