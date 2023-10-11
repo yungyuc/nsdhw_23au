@@ -64,10 +64,10 @@ aabb = calculate_aabb(points)
 
 print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
 ### SAT's Pseudo code
-* Separating Axis Theorem: The Separating Axis Theorem (SAT) is a collision detection
-  method for 2D shapes. It checks if there's an axis where two shapes can be separated
-  , indicating no collision. If no separating axis is found, the shapes are colliding.
-   SAT is used for efficient and accurate collision detection in games and simulations.
+* Separating Axis Theorem:  A collision detection method for 2D shapes. It checks if
+  there's an axis where two shapes can be separated, indicating no collision.
+  If no separating axis is found, the shapes are colliding.  SAT is used for accurate
+  collision detection in games and simulations.
   Here is the pseudo code in `python`:
   
   ```
