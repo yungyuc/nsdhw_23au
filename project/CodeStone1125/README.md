@@ -9,20 +9,30 @@ Simulate how different type of shape collide in a 2D map.
 
 ## Problem to Solve
 
-The objective of this system is to calculate scenarios for the most common shapes in a 2D map, such as rectangles, circles, and polygons.
+The objective of this system is to calculate scenarios for the most common shapes in 
 
-Before we dive into the topic deeper, let's first talk about the the "Axis-Aligned Bounding Box" (AABB) algorithm. 
+a 2D map, such as rectangles, circles, and polygons.Before we dive into the topic 
 
-While it's not a single algorithm but a framework for collision detection, it forms the basis for many collision detection systems in 2D graphics and game development due to its simplicity and efficiency.
+deeper, let's first talk about the the "Axis-AlignedBounding Box" (AABB) algorithm. 
 
-Moreover, in the 2D world, AABB can effectively handle approximate collisiondetection for most cases.
+While it's not a single algorithm but a framework for collision detection, it forms
 
-Consequently, the implementation ofthe AABB algorithm will be the focal point of this project. 
+the basis for many collision detection systems in 2D graphics and game development
+
+due to its simplicity and efficiency.Moreover, in the 2D world, AABB can effectively 
+
+handle approximate collisiondetection for most cases.Consequently, the implementation
+
+ofthe AABB algorithm will be the focal point of this project. 
 
 ### AABB's Pseudo code
-* Bounding Boxes: Each object in a 2D scene is enclosed by a rectangle (a bounding box) that is aligned with the axes of the coordinate system.
+* Bounding Boxes: Each object in a 2D scene is enclosed by a rectangle (a bounding box)
 
-  These rectangles are often referred to as "AABBs" because they are aligned with the axes. Here is the pseudo code in `python`:
+   that is aligned with the axes of the coordinate system.These rectangles are often
+
+  referred to as "AABBs" because they are aligned with the axes.
+
+  Here is the pseudo code in `python`:
   
   ```python
   def calculate_aabb(points):
@@ -58,25 +68,40 @@ print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
 
 ### Further research
 
-  Even thought AABB works well for most 2D shapes but may have limitations with irregular polygons, circles, and very long or short shapes. 
+  Even thought AABB works well for most 2D shapes but may have limitations with irregular
   
-  Complex shapes may require additional techniques for accurate collision detection. So if the progress is acceptable, I'd like to delve deeper to achieve more precise collision detection.
+  polygons, circles, and very long or short shapes. Complex shapes may require additional
   
-  To solve the problem, objects be divided two types that's Convex Polygon and concave polygons. And Hertel-Mehlhorn algorithm as well as Delauney Triangulation are used respectively to improve its efficiency.
+  techniques for accurate collision detection. So if the progress is acceptable, I'd like
+  
+  to delve deeper to achieve more precise collision detection. To solve the problem, 
+  
+  objects be divided two types that's Convex Polygon and concave polygons. And 
+  
+  Hertel-Mehlhorn algorithm as well as Delauney Triangulation are used respectively
+  
+  to improve its efficiency.
 
   
 
 ## Prospective users
 
-* Game Developer: Determine whether something in a game world is attach by a character is very common in game developing. There are even games making this as one of their main features, like [Super Mario](https://zh.wikipedia.org/zh-tw/%E8%B6%85%E7%BA%A7%E9%A9%AC%E5%8A%9B%E6%AC%A7%E7%B3%BB%E5%88%97) and [Pokemon](https://zh.wikipedia.org/wiki/%E5%AE%9D%E5%8F%AF%E6%A2%A6%E7%B3%BB%E5%88%97#%E9%81%8A%E6%88%B2)
+* Game Developer: Determine whether something in a game world is attach by a character is very
+  common in game developing. There are even games making this as one of their main features, like
+  [Super Mario](https://zh.wikipedia.org/zh-tw/%E8%B6%85%E7%BA%A7%E9%A9%AC%E5%8A%9B%E6%AC%A7%E7%B3%BB%E5%88%97)
+  and [Pokemon](https://zh.wikipedia.org/wiki/%E5%AE%9D%E5%8F%AF%E6%A2%A6%E7%B3%BB%E5%88%97#%E9%81%8A%E6%88%B2)
 
 | ![Super Mario](./pictures/Mario.png) | ![Pokemon](./pictures/pokemon.png) |
 |:-----------------------------------:|:-----------------------------------:|
 | **Super Mario** |**Pokemon**|
 
-* Collision Prevention for Automation Equipment: Robots and automation devices used in industrial automation need to ensure that they do not collide or interfere with each other while performing tasks.
+* Collision Prevention for Automation Equipment: Robots and automation devices used in industrial
 
-  2D collision detection can monitor the positions of individual machine components to prevent unnecessary collisions, enhance production efficiency, and safeguard equipment.
+   automation need to ensure that they do not collide or interfere with each other while
+
+   performing tasks.2D collision detection can monitor the positions of individual machine
+
+  components to prevent unnecessary collisions, enhance production efficiency, and safeguard equipment.
 
 ## System Architecture
 
@@ -95,7 +120,8 @@ print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
   * `collideObj(items)`: call the c++ api and show the events result by the items collision
 
 * C++ API:
-  * `collideObj(items)`: calculate all the items that collide on 2D map and return item id and events result by the items collision
+  * `collideObj(items)`: calculate all the items that collide on 2D map and return item id
+     and events result by the items collision
 
 ## Engineering Infrastructure
 
