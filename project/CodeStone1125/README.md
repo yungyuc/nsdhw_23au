@@ -70,7 +70,7 @@ print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
   collision detection in games and simulations.
   Here is the pseudo code in `python`:
   
-  ```
+  ```python
    def project(shape, axis):
        # Project shape vertices onto the given axis and return the range [min, max].
        min_proj = float('inf')
