@@ -10,29 +10,19 @@ Simulate how different type of shape collide in a 2D map.
 ## Problem to Solve
 
 The objective of this system is to calculate scenarios for the most common shapes in 
-
 a 2D map, such as rectangles, circles, and polygons.Before we dive into the topic 
-
 deeper, let's first talk about the the "Axis-AlignedBounding Box" (AABB) algorithm. 
-
 While it's not a single algorithm but a framework for collision detection, it forms
-
 the basis for many collision detection systems in 2D graphics and game development
-
 due to its simplicity and efficiency.Moreover, in the 2D world, AABB can effectively 
-
 handle approximate collisiondetection for most cases.Consequently, the implementation
-
 ofthe AABB algorithm will be the focal point of this project. 
 
 ### AABB's Pseudo code
 * Bounding Boxes: Each object in a 2D scene is enclosed by a rectangle (a bounding box)
-
    that is aligned with the axes of the coordinate system.These rectangles are often
-
-  referred to as "AABBs" because they are aligned with the axes.
-
-  Here is the pseudo code in `python`:
+   referred to as "AABBs" because they are aligned with the axes.
+   Here is the pseudo code in `python`:
   
   ```python
   def calculate_aabb(points):
@@ -69,17 +59,11 @@ print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
 ### Further research
 
   Even thought AABB works well for most 2D shapes but may have limitations with irregular
-  
   polygons, circles, and very long or short shapes. Complex shapes may require additional
-  
-  techniques for accurate collision detection. So if the progress is acceptable, I'd like
-  
+   techniques for accurate collision detection. So if the progress is acceptable, I'd like
   to delve deeper to achieve more precise collision detection. To solve the problem, 
-  
   objects be divided two types that's Convex Polygon and concave polygons. And 
-  
   Hertel-Mehlhorn algorithm as well as Delauney Triangulation are used respectively
-  
   to improve its efficiency.
 
   
