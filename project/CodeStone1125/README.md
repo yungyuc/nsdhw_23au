@@ -76,30 +76,29 @@ print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
        min_proj = float('inf')
        max_proj = float('-inf')
     
-    for vertex in shape.vertices:
-        projection = dot_product(vertex, axis)
-        if projection < min_proj:
-            min_proj = projection
-        if projection > max_proj:
-            max_proj = projection
-            
-    return min_proj, max_proj
+       for vertex in shape.vertices:
+           projection = dot_product(vertex, axis)
+           if projection < min_proj:
+               min_proj = projection
+           if projection > max_proj:
+               max_proj = projection
+               
+       return min_proj, max_proj
 
    def overlap(min1, max1, min2, max2):
        # Check if two ranges [min1, max1] and [min2, max2] overlap.
        return max1 >= min2 and max2 >= min1
    
    def sat_collision(shape1, shape2):
-       for axis in shape1.axes + shape2.axes:
-           min1, max1 = project(shape1, axis)
-           min2, max2 = project(shape2, axis)
-           
-        if not overlap(min1, max1, min2, max2):
-            # Shapes do not overlap on this axis, so they are not colliding.
-            return False
-    
-    # If there is no axis along which the shapes do not overlap, they are colliding.
-    return True
+    for axis in shape1.axes + shape2.axes:
+        min1, max1 = project(shape1, axis)
+        min2, max2 = project(shape2, axis)
+        
+     if not overlap(min1, max1, min2, max2):
+         # Shapes do not overlap on this axis, so they are not colliding.
+         return False
+       # If there is no axis along which the shapes do not overlap, they are colliding.
+        return True
   ```
 
 ### Further research
