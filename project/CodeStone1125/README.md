@@ -97,8 +97,8 @@ print(aabb)  # Output will be the AABB: (-1, 0, 5, 6)
      if not overlap(min1, max1, min2, max2):
          # Shapes do not overlap on this axis, so they are not colliding.
          return False
-       # If there is no axis along which the shapes do not overlap, they are colliding.
-        return True
+    # If there is no axis along which the shapes do not overlap, they are colliding.
+     return True
   ```
 
 ### Further research
