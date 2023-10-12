@@ -1,0 +1,4 @@
+main
+result.txt
+.pytest_cache
+__pycache__
