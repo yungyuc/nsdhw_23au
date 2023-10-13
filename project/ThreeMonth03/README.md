@@ -38,16 +38,18 @@ $$
 
 And the algorithm is:
 
+
+
 $$\begin{aligned}
 & Input : Point_{initial}=x_{0} , Iteration = n,Coefficient = H, b  
-\\& Initialize : s_{-1}= 0, \beta_{-1} = 1, g_{0} = g(x_{0}) = Hx_{0} + b, i = 0  
-\\& While((i<n) \ and \ (x_{i} \neq x_{i-1})):  
-\\& \quad \quad \quad \quad s_{i} = -g_{i} + \beta_{i-1}s_{i-1}  
-\\& \quad \quad \quad \quad a_{i} = \frac{g_{i}^{T}s_{i}}{s_{i}^{T}Hs_{i}}  
-\\& \quad \quad \quad \quad x_{i+1} = x_{i} + a_{i}s_{i}  
-\\& \quad \quad \quad \quad g_{i+1} = g(x_{i}) = Hx_{i} + b  
-\\& \quad \quad \quad \quad b_{i} = \frac{\lVert g_{i+1} \rVert^{2}}{\lVert g_{i} \rVert^{2}}  
-\\& \quad \quad \quad \quad i = i+1  
+\\\\& Initialize : s_{-1}= 0, \beta_{-1} = 1, g_{0} = g(x_{0}) = Hx_{0} + b, i = 0  
+\\\\& While((i<n) \ and \ (x_{i} \neq x_{i-1})):  
+\\\\& \quad \quad \quad \quad s_{i} = -g_{i} + \beta_{i-1}s_{i-1}  
+\\\\& \quad \quad \quad \quad a_{i} = \frac{g_{i}^{T}s_{i}}{s_{i}^{T}Hs_{i}}  
+\\\\& \quad \quad \quad \quad x_{i+1} = x_{i} + a_{i}s_{i}  
+\\\\& \quad \quad \quad \quad g_{i+1} = g(x_{i}) = Hx_{i} + b  
+\\\\& \quad \quad \quad \quad b_{i} = \frac{\lVert g_{i+1} \rVert^{2}}{\lVert g_{i} \rVert^{2}}  
+\\\\& \quad \quad \quad \quad i = i+1  
 \end{aligned}  
 $$
 
