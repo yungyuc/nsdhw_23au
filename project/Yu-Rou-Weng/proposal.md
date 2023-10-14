@@ -47,7 +47,7 @@ for their simulations.
 
 ## System Architecture
 
-![image](https://github.com/Yu-Rou-Weng/nsdhw_23au//tree/master/project/Yu-Rou-Weng/image/ConceptFlowChart.png)
+![image](https://github.com/Yu-Rou-Weng/nsdhw_23au/blob/Yu-Rou-Weng-Proposal-Submission/project/Yu-Rou-Weng/image/ConceptFlowChart.png)
 
 ## API Description
 
