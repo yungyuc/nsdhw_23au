@@ -36,7 +36,13 @@ into a format compatible with SU2. This converter will function as a standalone 
 
 ## Prospective Users
 
-1. Modmesh: (Will add more explanation after discussions)
+1. [modmesh](https://github.com/solvcon/modmesh):  
+     - modmesh is a toolkit for solving Partial Differential Equations (PDE)  
+     - Fluid flow problems in Computational Fluid Dynamics (CFD) are often   
+     described by PDE
+     - modmesh converts geometric information into computer-readable formats like Plot3D.
+     This converter facilitates seamless integration between modmesh and SU2, enabling 
+     accurate and efficient computational fluid dynamics simulations
 
 2. Fluid dynamics professionals or researchers who need to exchange mesh data between Plot3D and SU2 when using different simulation software.
 
@@ -55,7 +61,7 @@ for their simulations.
    - Use Python to read input and write output data
    - Use C++ to implement the `Data Conversion` library
 
-2. Use Pybind11 to wrap C++ functions for Python.
+2. Use Pybind11 to wrap C++ functions for Python
 
 ## Engineering Infrastructure
 
@@ -70,7 +76,7 @@ for their simulations.
      - Study domain knwoledges and meanwhile write corresponding prototypes
      - Prepare a presentaion skeleton  
 * Week 2 (11/6):  
-     - Search and gather suitable Plot3D mesh data format and comprehend structures and characteristic of both Plot3D and SU2.  
+     - Search and gather suitable Plot3D mesh data format and comprehend structures and characteristic of both Plot3D and SU2  
      - Start to design the conversion in C++ if 1. is done in advance
 * Week 3 (11/13):  
      - Implement conversion in C++ & write pybind11 wrapper
@@ -80,8 +86,8 @@ for their simulations.
      - Implement a CMake file for a draft  
      - Add some works and adjust the presentation draft
 * Week 6 (12/4):  
-     - Write unit tests and refactor codes.  
-     - Check whether if my presentation draft follow the grading criteria.  
+     - Write unit tests and refactor codes  
+     - Check whether if my presentation draft follow the grading criteria  
      - Integrate to modmesh (depends on remaining time)
 * Week 7 (12/11):  
      - Buffer time for debugging and and documentation
