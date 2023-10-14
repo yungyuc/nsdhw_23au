@@ -51,8 +51,6 @@ for their simulations.
 
 ## API Description
 
-(Still in progress, will finish after discussion with yy teacher)
-
 1. Fuctions in c++ will include ReadPlot3DData, WriteSU2Data, ConvertPlot3DToSU2
    - Use Python to read input and write output data
    - Use C++ to implement the `Data Conversion` library
@@ -69,15 +67,15 @@ for their simulations.
 ## Schedule
 
 * Week 1 (10/30):  
-     - Study domain knwoledges  
+     - Study domain knwoledges and meanwhile write corresponding prototypes
      - Prepare a presentaion skeleton  
 * Week 2 (11/6):  
      - Search and gather suitable Plot3D mesh data format and comprehend structures and characteristic of both Plot3D and SU2.  
      - Start to design the conversion in C++ if 1. is done in advance
 * Week 3 (11/13):  
-     - Implement conversion in C++
+     - Implement conversion in C++ & write pybind11 wrapper
 * Week 4 (11/20):  
-     - Implement conversion in C++ and bind to python
+     - Implement conversion in C++ & write pybind11 wrapper
 * Week 5 (11/27):  
      - Implement a CMake file for a draft  
      - Add some works and adjust the presentation draft
