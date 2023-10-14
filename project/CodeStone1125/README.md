@@ -23,16 +23,13 @@ by dividing the space into quadrants. It facilitates quick collision checks by c
 on potential collision areas, significantly improving performance and reducing unnecessary
 calculations. Additionally, the Quadtree can adapt to various scenarios, ensuring high efficiency.
 
-In summary, the Quadtree plays a vital role in enhancing performance, resulting in a 
-smoother gaming experience. It also provides developers with the flexibility and control
-needed to handle different types of collisions and interactions effectively.
-
-
-
-
 | ![image](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/75069f10-594b-40b4-8407-5b047b39980c) | ![image](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/74d93574-06db-40ad-88f3-a2e1fdcbcd5b) |
 |:-----------------------------------:|:-----------------------------------:|
 | **Quadtree Simpson** |**Quadtree rabbit**|
+
+In summary, the Quadtree plays a vital role in enhancing performance, resulting in a 
+smoother gaming experience. It also provides developers with the flexibility and control
+needed to handle different types of collisions and interactions effectively.
 
 Therefore, in this project, my focus will be on efficiently managing a large number of 
 collision detections using Quadtree optimization.
