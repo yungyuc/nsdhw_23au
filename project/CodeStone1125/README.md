@@ -41,9 +41,10 @@ collision detections using Quadtree optimization.
   [Super Mario](https://zh.wikipedia.org/zh-tw/%E8%B6%85%E7%BA%A7%E9%A9%AC%E5%8A%9B%E6%AC%A7%E7%B3%BB%E5%88%97)
   and [Pokemon](https://zh.wikipedia.org/wiki/%E5%AE%9D%E5%8F%AF%E6%A2%A6%E7%B3%BB%E5%88%97#%E9%81%8A%E6%88%B2)
 
-| ![Super Mario](./pictures/Mario.png) | ![pokemon](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/4b122746-9e38-4540-8df4-942cec57d56d) |
+| ![Mario](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/6cc86227-9b61-4cf0-9512-57dde95d2282) | ![pokemon](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/4b122746-9e38-4540-8df4-942cec57d56d) |
 |:-----------------------------------:|:-----------------------------------:|
 | **Super Mario** |**Pokemon**|
+
 
 
 * Collision Prevention for Automation Equipment: Robots and automation devices used in industrial
