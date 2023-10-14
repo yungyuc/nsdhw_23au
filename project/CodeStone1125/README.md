@@ -56,7 +56,8 @@ collision detections using Quadtree optimization.
 
 
 
-| ![](./pictures/system_architechture.png) |
+
+| ![system_architechture](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/a1b2b43a-7a16-47a2-9ca2-afd4858d5c79) |
 |:-----------------------------------:|
 | **System flow chart** |
 
