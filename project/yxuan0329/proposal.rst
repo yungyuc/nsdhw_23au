@@ -1,12 +1,7 @@
 =================
-R-Tree Spatio-Temporal Search Engine
+R-Tree Spatial Search Engine
 =================
 
-.. This is a template to specify what your project is and the execution plan.  You
-.. will find it is difficult to plan for things that you are not sure about.  Do
-.. your best.
-
-.. note::
 
 ..   You are encouraged to use this plain-text `reStructuredText
 ..   <https://docutils.sourceforge.io/rst.html>`__ format.  :download:`Download
@@ -25,21 +20,10 @@ Basic Information
 .. GitHub repository has an 'About' field, in which you are encouraged to write a
 .. simple statement (preferably one sentence) to introduce the project.
 
-R-tree is a tree structure designed for efficient spatial access, it has been 
-widely used in geographic searching. However, when searching for data in map 
-system, it is crucial to consider temporal features to enhance searching 
-performance. For instance, when searching for "food" in the morning, users 
-would probably expect to receive the breakfast places that are open at that 
-time, rather than the closed breakfast places or some other unrelated lunch 
-restaurants or bars. Therefore, a search engine that can box the nearest 
-distance data and arrange the results based on the temporal information may be
-useful for the users.
-
-The R-Tree Spatio-Temporal Search Engine aims to provide a search engine for 
-users to query multi-dimensional data with both spatial and temporal 
-information. In this project, we will provide a demonstration of the R-tree 
-search engine, enabling users to enter queries and receive a set of results 
-that include the nearest distance and the best time-matched entities.
+R-tree is a tree structure designed for efficient spatial data access. It has 
+been widely used in real-world geographic searching because of its exceptional 
+searching performance. In this project, we aim to serve a R-tree library to 
+provide an efficient search for end-users. 
 
 
 Problem to Solve
@@ -55,24 +39,15 @@ Problem to Solve
 .. 3. The algorithm or numerical method that should be applied for solving the
 ..    problem.
 
-R-tree is a data structure renowned for its exceptional performance in 
-searching multi-dimensional data, it plays a pivotal role in various 
-applications, particularly in spatial information systems such as maps. 
-However, beyond spatial information, data in map system should also take 
-temporal feature in considerations for better searching performance. When 
-searching nearest location on map system, users should be able to see different 
-sorting results depending on their specified searching time. In other words, 
-the users should be able to receive different searching results for the same 
-query at different days and times.
+In geographic searching application, the users would expect to swiftly receive 
+a set of searching results upon entering the query. In real-world application, 
+rapid access to geospatial information is crucial for the users, as delays can 
+result in inconveniences and increased costs.  
 
-The goal of this project is to integrate temporal data into the indexing 
-process, effectively creating a new temporal dimension within the R-tree 
-structure. We aspire to enable users to not only search by spatial attributes 
-but also to incorporate temporal considerations into their queries. 
-Furthermore, this project seeks to refine the organization of data within the 
-R-tree, prioritizing results based on temporal relevance, thereby delivering a 
-more comprehensive and responsive mapping experience.
-
+The fundamental concept behind the R-tree is to encapsulate nearby objects 
+related to the searching target within a minimum bounding rectangle. Our goal 
+is to develop an efficient R-tree library for spatial data retrieval that can 
+address large-scale spatial data searches. 
 
 
 Prospective Users
@@ -81,8 +56,9 @@ Prospective Users
 .. Describe the users of your software and how they will use it.  It is OK to
 .. combine this section with the previous one (`Problem to solve`_).
 
-This project aims to provide to users that want to search multidimensional data 
-including spatial and temporal features.
+This project aims to provide to users who seek to build an efficient 
+multi-dimensional searching service.
+
 
 System Architecture
 ===================
@@ -91,19 +67,17 @@ System Architecture
 .. performs any other operations.  Describe the system's work flow.  You may
 .. consider to use a flow chart but it is not required.  Specify the constraints
 .. assumed in your system.  Describe the modularization of the system.
-(Will be finished soon after discussion)
+### Architecture 
 
+The library would include:
+- `build_tree`: build a r-tree
+- `search`: search for the available results in r-tree
+- `insert`: insert a node in r-tree
+- `delete`: delete a node in r-tree
 
-Implementation Plan
-===================
+### Datasets
 
-1. Frontend design:
-The search engine will provide a simple UI with one text block for users to 
-enter query for searching, and one text block list for showing the searching 
-results.
-
-2. Datasets:
-Generate the database with about 50 map data entry by myself for validating the 
+Randomly generate about 50-100 map data entry by Python for validating the 
 R-tree algorithm can works correctly. 
 
 
@@ -113,7 +87,17 @@ API Description
 .. Show how your system can be programmed.  You are supposed to implement the
 .. system using both C++ and Python.  Describe how a user writes a script in the
 .. system.
-(Will be finished soon after discussion)
+
+The users can include the library by linking in their project. 
+The C++ users can simply link by adding include file.
+```
+#include "r-tree-library.hpp"
+```
+
+The Python users can import the library by adding the script.
+```
+import r-tree-library
+```
 
 
 
@@ -153,14 +137,27 @@ Schedule
 .. development of the project takes 8 weeks:
 
 * Planning phase (6 weeks from mm/dd to mm/dd):
-* Week 1 (10/30): Survey some reference about R-tree implementation
-* Week 2 (11/06): Create database with about 50-100 data
-* Week 3 (11/13): Implement R-tree with C++
-* Week 4 (11/20): Implement R-tree with C++
-* Week 5 (11/27): Implement front-end of the search engine
-* Week 6 (12/04): Improve the R-tree structure with temporal feature
-* Week 7 (12/11): Testing, finish up the project and the documentation
-* Week 8 (12/18): Make slides and prepare for the presentation
+### Week 1 (10/30): 
+- Survey some reference about the data structure and implementation
+- Survey some existing R-tree libraries and run
+- Create a few testing dataset for testing the existing libraries
+### Week 2 (11/06): 
+- Create about 50-100 testing datasets for future use
+- Design the C++ classes architecture
+### Week 3 (11/13): 
+- Implement R-tree with C++: `build_tree`, `search`
+### Week 4 (11/20): 
+- Implement R-tree with C++: `insert`, `delete`
+### Week 5 (11/27):
+- Implement R-tree with C++
+- Refactor the code if needed 
+### Week 6 (12/04): 
+- Testing the features with pytest
+### Week 7 (12/11): 
+- Finish up the project and the documentation
+- Prepare for the slides
+### Week 8 (12/18): 
+- Prepare for the presentation
 
 References
 ==========
