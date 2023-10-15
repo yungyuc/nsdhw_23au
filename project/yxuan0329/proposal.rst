@@ -67,15 +67,18 @@ System Architecture
 .. performs any other operations.  Describe the system's work flow.  You may
 .. consider to use a flow chart but it is not required.  Specify the constraints
 .. assumed in your system.  Describe the modularization of the system.
-### Architecture 
+Architecture
+---------
 
 The library would include:
-- `build_tree`: build a r-tree
-- `search`: search for the available results in r-tree
-- `insert`: insert a node in r-tree
-- `delete`: delete a node in r-tree
 
-### Datasets
+- ``build_tree``: build a r-tree
+- ``search``: search for the available results in r-tree
+- ``insert``: insert a node in r-tree
+- ``delete``: delete a node in r-tree
+
+Datasets
+---------
 
 Randomly generate about 50-100 map data entry by Python for validating the 
 R-tree algorithm can works correctly. 
@@ -90,15 +93,12 @@ API Description
 
 The users can include the library by linking in their project. 
 The C++ users can simply link by adding include file.
-```
-#include "r-tree-library.hpp"
-```
+
+``#include "r-tree-library.hpp"``
 
 The Python users can import the library by adding the script.
-```
-import r-tree-library
-```
 
+``import r-tree-library``
 
 
 Engineering Infrastructure
@@ -137,26 +137,40 @@ Schedule
 .. development of the project takes 8 weeks:
 
 * Planning phase (6 weeks from mm/dd to mm/dd):
-### Week 1 (10/30): 
+Week 1 (10/30)
+---------
 - Survey some reference about the data structure and implementation
 - Survey some existing R-tree libraries and run
 - Create a few testing dataset for testing the existing libraries
-### Week 2 (11/06): 
+
+Week 2 (11/06)
+---------
 - Create about 50-100 testing datasets for future use
 - Design the C++ classes architecture
-### Week 3 (11/13): 
-- Implement R-tree with C++: `build_tree`, `search`
-### Week 4 (11/20): 
-- Implement R-tree with C++: `insert`, `delete`
-### Week 5 (11/27):
+
+Week 3 (11/13)
+---------
+- Implement R-tree with C++: ``build_tree``, ``search``
+
+Week 4 (11/20)
+---------
+- Implement R-tree with C++: ``insert``, ``delete``
+
+Week 5 (11/27)
+---------
 - Implement R-tree with C++
 - Refactor the code if needed 
-### Week 6 (12/04): 
+
+Week 6 (12/04)
+---------
 - Testing the features with pytest
-### Week 7 (12/11): 
+
+Week 7 (12/11)
+---------
 - Finish up the project and the documentation
 - Prepare for the slides
-### Week 8 (12/18): 
+Week 8 (12/18)
+---------
 - Prepare for the presentation
 
 References
@@ -165,4 +179,3 @@ References
 - https://en.wikipedia.org/wiki/R-tree
 - https://timecenter.cs.aau.dk/wp-content/uploads/2022/12/TR-45.pdf
 - https://link.springer.com/referenceworkentry/10.1007/978-3-319-23519-6_1151-2
-
