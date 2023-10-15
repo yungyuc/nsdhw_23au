@@ -122,6 +122,11 @@ Engineering Infrastructure
 3. Testing framework: Pytest
 4. Documentation: README.rst
 
+  Testing data source: random-generated testing datasets including location and the 
+  name of the place. 
+
+  The testing mesurement includes correctness and time performance.
+
 Schedule
 ========
 
