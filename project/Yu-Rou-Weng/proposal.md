@@ -90,7 +90,7 @@ for their simulations.
      - Check whether if my presentation draft follow the grading criteria  
      - Integrate to modmesh (depends on remaining time)
 * Week 7 (12/11):  
-     - Buffer time for debugging and and documentation
+     - Buffer time for debugging and documentation
 * Week 8 (12/18):  
      - Refine and finish the final project, prepare for the presentation
 
