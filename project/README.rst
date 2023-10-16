@@ -65,3 +65,7 @@ Follow the format to add your project in lexicographical order:
 1. `github_account_name <https://github.com/github_account_name>`__ for
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
+
+2. `yuanhenglee <https://github.com/yuanhenglee>`__ for
+   `BasiCPP Pitch: A C++ implementation for AMT(Automatic Music Transcription) <yuanhenglee/README.rst>`__:
+   https://github.com/yuanhenglee/basicpp-pitch
