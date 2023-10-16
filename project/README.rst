@@ -66,5 +66,5 @@ Follow the format to add your project in lexicographical order:
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
 2. `Yu-Rou-Weng <https://github.com/Yu-Rou-Weng>`__ for
-   `Project subject <Yu-Rou-Weng/README.rst>`__:
+   `Project subject <Yu-Rou-Weng/README.md>`__:
    https://github.com/Yu-Rou-Weng/Mesh-Data-Converter
