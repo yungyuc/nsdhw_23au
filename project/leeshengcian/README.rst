@@ -86,7 +86,5 @@ Schedule
 References
 ==========
 
-'Dijkstra's Algorithm
-<https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm>'__.
-'NetworkX
-<https://networkx.org/>'__.
+`Dijkstra's Algorithm <https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm>`__
+`NetworkX <https://networkx.org/>`__
