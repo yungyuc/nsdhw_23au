@@ -29,13 +29,13 @@ possible usage:
 1. Finding the shortest path of two intersections on a city map
 2. Calculating Least-cost paths for instance to establish tracks of electricity lines or oil pipelines
 
-.. image:: DijkstraDemo.gif
+.. image:: https://github.com/leeshengcian/Visualization-of-Dijkstra-Algorithm/blob/main/image/DijkstraDemo.gif
 
 
 System Architecture
 ===================
 
-.. image:: term_project_work_flow.png
+.. image:: https://github.com/leeshengcian/Visualization-of-Dijkstra-Algorithm/blob/main/image/term_project_work_flow.png
 
 API Description
 ===============
@@ -86,5 +86,7 @@ Schedule
 References
 ==========
 
-'Dijkstra's Algorithm<https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm>'_
-'NetworkX<https://networkx.org/>'_
+'Dijkstra's Algorithm
+<https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm>'__.
+'NetworkX
+<https://networkx.org/>'__.
