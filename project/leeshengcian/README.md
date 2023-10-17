@@ -16,6 +16,8 @@ that node and every other. It can also be used for finding the shortest paths fr
 a single node to a single destination node by stopping the algorithm 
 once the shortest path to the destination node has been determined.
 
+Note: The length of edge will be represented as multiples of "unit length"
+
 possible usage:
 
 1. Finding the shortest path of two intersections on a city map
