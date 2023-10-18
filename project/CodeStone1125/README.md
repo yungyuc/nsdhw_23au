@@ -1,38 +1,74 @@
-# 2D Collision Detector
-
-
+# Quadtreebased image compressior 
 ## Basic Information
 
-Simulate how different type of shape collide in a 2D map.
+A quadtree-based image compressor can reduce image sizes by 50% to 98%, and you can
+adjust the compression level according to your preferences.
 
-* github repository: [https://github.com/CodeStone1125/2DCollisionDetector](https://github.com/CodeStone1125/2DCollisionDetector)
+* github repository: [https://github.com/CodeStone1125/QuadraCompress](https://github.com/CodeStone1125/QuadraCompress)
 
 ## Problem to Solve
 
-The objective of this system is to calculate scenarios for the most common shapes in
-a 2D map, such as rectangles, circles, and polygons. Before we dive deeper into the 
-topic, let's first discuss the "Axis-Aligned Bounding Box" (AABB) algorithm. It forms
-the basisfor many collision detection systems in 2D graphics and game development due
-to its simplicity and efficiency. Moreover, in the 2D world, AABB can effectively handle 
-approximate collision detection.
+The primary objective of this system is to achieve a reduction in the
+dimensions of images, rendering them suitable for diverse applications,
+notably in the realm of image preprocessing essential for machine
+learning model training. In comparative terms with other prevalent image
+compression algorithms such as LZW and DCT, it is noteworthy that while
+Quadtree may not stand out as the most robust solution, it unquestionably
+distinguishes itself as the most adaptable and versatile choice.
 
-However, in many cases, we not only need to deal with hundreds but thousands of collisions
-simultaneously. Iterating through every object can be time-consuming, so we introduce the 
-concept of a 'Quadtree.' This data structure enables efficient space separation and management
-by dividing the space into quadrants. It facilitates quick collision checks by concentrating 
-on potential collision areas, significantly improving performance and reducing unnecessary
-calculations. Additionally, the Quadtree can adapt to various scenarios, ensuring high efficiency.
+### Why Quadtree
+Also, Based on this [paper](https://dl.acm.org/doi/abs/10.1145/3596711.3596757?casa_token=o3_5H2E-d54AAAAA:5bq5xqCI0KOk7pc1DSMh0CkpyNuXtkO6h9HUTdQpnDCodGOtd1h1EF8NAUJIQtfKZUP84FTbNeEjgA)
+Quadtree have sevral advantage on image process.
+1. Scene Simplification: Quadtree allows for the partitioning of images
+ into smaller blocks or regions, reducing the image's resolution levels.
+  This simplification is particularly beneficial for image compression
+   and analysis tasks.
 
+2. Efficiency: Quadtree technology provides a hierarchical representation
+  of image data. This enables selective processing of specific regions
+   of interest within an image. The result is significantly improved
+    processing efficiency, which is especially valuable for applications
+ requiring the rapid processing of large images or video streams.
+
+3. Automatic Correspondence: Quadtree decomposition can automatically
+ establish correspondence between images, a critical factor in various
+  image processing and matching tasks. This reduces the need for manual
+   intervention and streamlines the processing workflow.
+
+4. Adaptability: Quadtree decomposition divides images based on their unique
+    characteristics.This adaptability allows different regions of an image
+   to be processed at varying resolutions, making image processing more
+   intelligent and resource-efficient.
+
+5. Resource Management: Quadtree technology plays a vital role in efficient
+    resource management for image data. This includes optimizing storage and
+    transmission, which is particularly advantageous for mobile applications
+    and environments with limited resources.
+
+In summary, quadtree technology simplifies image organization, enhances processing 
+efficiency, automates correspondence tasks, adapts to various image characteristics,
+and efficiently manages image resources in the field of image processing.
 | ![image](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/75069f10-594b-40b4-8407-5b047b39980c) | ![image](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/74d93574-06db-40ad-88f3-a2e1fdcbcd5b) |
 |:-----------------------------------:|:-----------------------------------:|
 | **Quadtree Simpson** |**Quadtree rabbit**|
 
-In summary, the Quadtree plays a vital role in enhancing performance, resulting in a 
-smoother gaming experience. It also provides developers with the flexibility and control
-needed to handle different types of collisions and interactions effectively.
+### Why C++
+The rationale behind implementing this project in C++ is primarily driven by 
+the substantial computational demands.
 
-Therefore, in this project, my focus will be on efficiently managing a large number of 
-collision detections using Quadtree optimization.
+As the number of iterations increases, the growth in the number of blocks within the
+Quadtree follows an exponential pattern. Additionally, I aspire for my compressor to
+have the capability to dynamically adjust compression levels in real-time to cater to
+specific needs, which itself constitutes a computational challenge.
+
+Furthermore, within this project, it is evident that if one seeks an image compression
+that remains imperceptible to the human eye but reduces the file size significantly,
+it necessitates approximately 80,000 iterations, taking roughly 25 seconds for each
+image. I am confident that by implementing it in C++, I can enhance the acceleration
+of this process.
+| Original             | 80,000 Iterations          |
+| -------------------- | -------------------------- |
+| ![image](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/0ca3fa48-ad67-4084-87db-f5c820720f32)| ![image](https://github.com/Inspiaaa/QuadTreeImageCompression/blob/master/docs/sunset_80000.jpg) |
 
 ## Prospective users
 
