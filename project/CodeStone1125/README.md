@@ -1,8 +1,8 @@
-# Quadtreebased image compressior 
+# Quadtreebased image compressor 
 ## Basic Information
 
-A quadtree-based image compressor can reduce image sizes by 50% to 98%, and you can
-adjust the compression level according to your preferences.
+A quadtree-based image compressor can reduce image sizes by 50% to 98%,
+and you can adjust the compression level according to your preferences.
 
 * github repository: [https://github.com/CodeStone1125/QuadraCompress](https://github.com/CodeStone1125/QuadraCompress)
 
@@ -73,26 +73,12 @@ of this process.
 
 ## Prospective users
 
-* Game Developer: Determine whether something in a game world is attach by a character is very
-  common in game developing. There are even games making this as one of their main features, like
-  [Super Mario](https://zh.wikipedia.org/zh-tw/%E8%B6%85%E7%BA%A7%E9%A9%AC%E5%8A%9B%E6%AC%A7%E7%B3%BB%E5%88%97)
-  and [Pokemon](https://zh.wikipedia.org/wiki/%E5%AE%9D%E5%8F%AF%E6%A2%A6%E7%B3%BB%E5%88%97#%E9%81%8A%E6%88%B2)
-
-| ![Mario](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/6cc86227-9b61-4cf0-9512-57dde95d2282) | ![pokemon](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/4b122746-9e38-4540-8df4-942cec57d56d) |
-|:-----------------------------------:|:-----------------------------------:|
-| **Super Mario** |**Pokemon**|
-
-
-
-* Collision Prevention for Automation Equipment: Robots and automation devices used in industrial
-   automation need to ensure that they do not collide or interfere with each other while
-   performing tasks.2D collision detection can monitor the positions of individual machine
-   components to prevent unnecessary collisions, enhance production efficiency, and safeguard equipment.
+* Machine Learning developer: image compressor is an important step for image preprocess,
+   It will accelerate the process of training model. And Quadtreebased image compressor
+    can decide the degree of compression dynamiclly. Especially suitable for the device
+  which need to strike ballence between speed and compution resources.
 
 ## System Architecture
-
-
-
 
 | ![system_architechture](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/a1b2b43a-7a16-47a2-9ca2-afd4858d5c79) |
 |:-----------------------------------:|
