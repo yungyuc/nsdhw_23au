@@ -1,40 +1,40 @@
 # rtreelib: A C++ R-tree Library
 
-This is a R-tree library which implemented with C++ to achieve the performance. If you don't know what's R-tree, you can refer to [wiki](https://en.wikipedia.org/wiki/R-tree) or [original paper](https://dl.acm.org/doi/pdf/10.1145/971697.602266).
+This is an R-tree library which implemented with C++ to achieve the performance. If you don't know what's R-tree, you can refer to [wiki](https://en.wikipedia.org/wiki/R-tree) or [original paper](https://dl.acm.org/doi/pdf/10.1145/971697.602266).
 
 ## Basic Information
 
 Source code of rtreelib hosted on [GitHub](https://github.com/ShangHungWan/rtreelib).
 
-This library can help user to establish a R-tree easily and do the other operations like: insert, search, delete.
+This library can help users to establish an R-tree easily and do other operations like: insert, search, and delete.
 
-The implementation follows the original paper as possible.
+The implementation follows the original paper as much as possible.
 
 ## Problem to Solve
 
-According to the paper, R-tree is a dynamic index structure for spatial searching. Therefore, it can help users to search something like "what's the nearest restaurant?", "Find all gas stations within 1km of my location".
+According to the paper, R-tree is a dynamic index structure for spatial searching. Therefore, it can help users to search for something like "What's the nearest restaurant?", "Find all gas stations within 1km of my location".
 
-In contrary, if there is no R-tree, we may need to traverse all restaurants' positions and calculate all the distance between it and user's current location. It will be an impossible task for extremely large geographical applications like Google Maps.
+On the contrary, if there is no R-tree, we may need to traverse all restaurants' positions and calculate the distance between them and the user's current location. It will be an impossible task for extremely large geographical applications like Google Maps.
 
-R-tree has similar structure with B-tree.(image 1)
+R-tree has a similar structure with B-tree. (image 1)
 
 ![image 1: R-tree structure](rtree-1.png)
 
-However, it's in the higher dimension. It will draws rectangles and find the intersections to decide which sub-tree need to been traversed.(image 2)
+However, it's in the higher dimension. It will draw rectangles and find the intersections to decide which sub-tree needs to be traversed. (image 2)
 
 ![image 2: rectangles of R-tree](rtree-2.png)
 
 ## Prospective Users
 
-Those who want to develop an application that need to store/search two-dimension geographical data.
+Those who want to develop an application that needs to store/search two-dimensioned geographical data.
 
-They can use both C++ or Python to include this library. C++ can directly include the library. In the other hands, this library also provide APIs for Python.
+They can use both C++ and Python to include this library. C++ can directly include the library. On the other hand, this library also provides APIs for Python.
 
 ## System Architecture
 
 ### Interfaces
 
-This library will provides C++ interfaces:
+This library will provide C++ interfaces:
 
 - RTRect RTRect::RTRect(double top, double right, double bottom, double left)
 - RTree RTree::RTree()
