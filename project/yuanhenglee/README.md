@@ -49,7 +49,7 @@ students can use it for ear training and composition exercises.
 
 ### Input
 
-The system takes an audio file that needs to be transcribed. as input.
+The system takes an audio file that needs to be transcribed as input.
 The file can be in a standard format, such as WAV or MP3. 
 
 ### Harmonic stacking using constant-Q transform. 
