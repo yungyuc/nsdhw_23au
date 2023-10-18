@@ -61,9 +61,10 @@ Quadtree follows an exponential pattern. Additionally, I aspire for my compresso
 have the capability to dynamically adjust compression levels in real-time to cater to
 specific needs, which itself constitutes a computational challenge.
 
-Furthermore, within this project, it is evident that if one seeks an image compression
+Furthermore, within this [project](https://github.com/Inspiaaa/QuadTreeImageCompression#readme),
+it is evident that if one seeks an image compression
 that remains imperceptible to the human eye but reduces the file size significantly,
-it necessitates approximately 80,000 iterations, taking roughly 25 seconds for each
+it necessitates approximately 80,000 iterations, taking roughly 21 seconds for each
 image. I am confident that by implementing it in C++, I can enhance the acceleration
 of this process.
 | Original             | 80,000 Iterations          |
