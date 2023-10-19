@@ -78,6 +78,16 @@ of this process.
     can decide the degree of compression dynamiclly. Especially suitable for the device
   which need to strike ballence between speed and compution resources.
 
+* videographer: For 3D animation creators, it is necessary to reduce precision in less
+  critical areas, such as the background. This allows the animation to allocate computational
+  resources to more important elements. Additionally, the quadtree's recursive image
+  division characteristic imparts a distinct style, enabling artists to create unique
+   works using quadtree image compression.
+|![image](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/eb9abc20-d698-44a8-b7ae-dc0983a2a656)
+|:-----------------------------------:|
+| **Quadtree art** |
+  
+
 ## System Architecture
 
 | ![system_architechture](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/a1b2b43a-7a16-47a2-9ca2-afd4858d5c79) |
