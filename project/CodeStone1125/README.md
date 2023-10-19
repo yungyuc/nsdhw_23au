@@ -83,7 +83,7 @@ of this process.
   resources to more important elements. Additionally, the quadtree's recursive image
   division characteristic imparts a distinct style, enabling artists to create unique
    works using quadtree image compression.
-|![image](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/eb9abc20-d698-44a8-b7ae-dc0983a2a656)
+| ![image](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/eb9abc20-d698-44a8-b7ae-dc0983a2a656) |
 |:-----------------------------------:|
 | **Quadtree art** |
   
