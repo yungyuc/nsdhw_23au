@@ -125,5 +125,5 @@ Week 8 (12/18): Make slides and prepare for the presentation
 
 ## References
 
-* [2D collision detection](https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection)
-* [Quadtree collision detection optimization](https://davidhsu666.com/archives/quadtree_in_2d/#7-%E7%B8%BD%E7%B5%90)
+* [QuadTreeImageCompression](https://github.com/Inspiaaa/QuadTreeImageCompression)
+* [Probabilistic Approach Versus Machine Learning for One-Shot Quad-Tree Prediction in an Intra HEVC Encoder](https://link.springer.com/article/10.1007/s11265-018-1426-z)
