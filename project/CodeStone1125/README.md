@@ -61,6 +61,36 @@ Quadtree follows an exponential pattern. Additionally, I aspire for my compresso
 have the capability to dynamically adjust compression levels in real-time to cater to
 specific needs, which itself constitutes a computational challenge.
 
+This is the psuedocode for image compression with quadtree:
+```plaintext
+function compressImage(image):
+    if image is entirely the same color:
+        return a single node with that color
+    else:
+        divide the image into 4 equal quadrants (top-left, top-right, bottom-left, bottom-right)
+        topLeft = compressImage(top-left quadrant of image)
+        topRight = compressImage(top-right quadrant of image)
+        bottomLeft = compressImage(bottom-left quadrant of image)
+        bottomRight = compressImage(bottom-right quadrant of image)
+        return a new node representing the four children (topLeft, topRight, bottomLeft, bottomRight)
+
+function decompressImage(node):
+    if node is a leaf node:
+        return a square or rectangle filled with the color of the leaf node
+    else:
+        reconstruct the image by combining the decompressed children:
+        topLeftImage = decompressImage(node.topLeft)
+        topRightImage = decompressImage(node.topRight)
+        bottomLeftImage = decompressImage(node.bottomLeft)
+        bottomRightImage = decompressImage(node.bottomRight)
+        combine and return the four images to form the original image
+
+# Example usage
+originalImage = loadOriginalImage()
+compressedImage = compressImage(originalImage)
+reconstructedImage = decompressImage(compressedImage)
+```
+
 Furthermore, within this [project](https://github.com/Inspiaaa/QuadTreeImageCompression#readme),
 it is evident that if one seeks an image compression
 that remains imperceptible to the human eye but reduces the file size significantly,
@@ -83,31 +113,43 @@ of this process.
   resources to more important elements. Additionally, the quadtree's recursive image
   division characteristic imparts a distinct style, enabling artists to create unique
    works using quadtree image compression.
-| ![image](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/eb9abc20-d698-44a8-b7ae-dc0983a2a656) |
+  
+| ![image](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/bf6fb00a-38ab-4a33-b07a-215f85d6484e)|
 |:-----------------------------------:|
 | **Quadtree art** |
   
 
 ## System Architecture
 
-| ![system_architechture](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/a1b2b43a-7a16-47a2-9ca2-afd4858d5c79) |
+|![SA2 drawio](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/b235b4d8-bfef-4f4d-9e9b-7225d1536116)|
 |:-----------------------------------:|
 | **System flow chart** |
 
 ## API Description
 
-* Python API:
-  * `addItem(start, end, varItem)`: create a Item on the map and return its id
-  * `rmItem(item_id)`: remove the wall by its id
-  * `moveItem(dest)`: move item to the destination coordinate
-  * `collideObj(items)`: call the c++ api and show the events result by the items collision
+Python API:
+* `imageLoader(input_image)`: Load user input image into quadtree
+* `imageCompression(quadtree_data, style, depth)`: Compress the image using a specific style,
+such as skeleton or cycle. Show the image compression process, and allow you to pause it 
+as needed.
+* `mouseRestoreImage(quadtree_data)`: Restore a specific part of the image compression by
+left-clicking with the mouse.
+* `mouseCompressImage(quadtree_data)`: Further compress a specific part of the image by 
+right-clicking with the mouse.
+* `exportImage(quadtree_data)`: Export the compressed image.
+* `imageBenchmark()`: Display benchmark results to compare the size reduction and time 
+consumption for the last compression.
 
-* C++ API:
-  * `collideObj(items)`: calculate all the items that collide on 2D map and return item id
-     and events result by the items collision
+C++ API:
+* `imageCompression(quadtree_data, depth)`: Calculate image compression using a quadtree to
+store image data.
+* `restoreImage(quadtree_data, restorationLevel, algorithm)`: Restore image compression.
+* `quadtree(input_image)`: Implementation of the quadtree data structure.
+  *  `__init__(self, position, size, subdivided_flags, colors) `
+  *  `_create_child_node(self, position, size) `
+
 
 ## Engineering Infrastructure
-
 * Automatic build system: `cmake`
 * Version control: `git`
 * Testing framework: `pytest`
@@ -115,15 +157,16 @@ of this process.
 
 ## Schedule
 
-Planning phase (6 weeks from 9/18 to 10/30): Setup the environment and get familiar with the algorithm
+Planning phase (6 weeks from 9/18 to 10/30): Think up presentation, then set up the environment
+and get familiar with the algorithm
 
-Week 1 (10/30): Implement the algorithm with C++
+Week 1 (10/30): Write pytest, make file and implement the algorithm with C++ 
 
-Week 2 (11/6): Make python wrappers for C++ with pybind
+Week 2 (11/6): continously implement the algorithm with C++ and make python wrappers for C++ with pybind
 
-Week 3 (11/13): Finish C++, and start creating the interactive map in python
+Week 3 (11/13): Finish C++, and start creating the interactive GUI in python
 
-Week 4 (11/20): Implement features of the interactive map
+Week 4 (11/20): Implement features of the interactive GUI
 
 Week 5 (11/27): Test all features with pytest
 
@@ -131,7 +174,7 @@ Week 6 (12/4): Finish up, debug, and write the documentation
 
 Week 7 (12/11): Buffer time for further testing and debugging
 
-Week 8 (12/18): Make slides and prepare for the presentation
+Week 8 (12/18): Make slides for the presentation
 
 ## References
 
