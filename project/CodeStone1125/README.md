@@ -53,22 +53,24 @@ beneficial for speeding up edge detection. When performing edge detection
 on an image represented in a quadtree, we need to examine its leaf nodes and 
 their parents.
 
-Moreover, quadtrees can dynamically adjust image compression precision, 
-finding a balance between detail and computational resource consumption. 
-This adaptability is especially valuable for resource-considered application
-Like IOT or Machine learning[1]. By increasing the threshold for the quadtree, 
-we can produce images with less detail on less important parts, conserving 
-computing resources. Hence, quadtrees are highly valuable for image compression.
+Furthermore, quadtrees possess the unique ability to dynamically fine-tune 
+image compression precision, delicately balancing the level of detail with
+the consumption of computational resources. This adaptability is of paramount
+importance, especially in resource-constrained domains such as IoT and machine
+learning[1]. By elevating the threshold of the quadtree, we can craft images 
+with reduced intricacy in less critical areas, thus conserving valuable computing
+resources. Consequently, quadtrees emerge as invaluable assets in the realm of 
+image compression.
 
 ### Why C++
 The rationale behind implementing this project in C++ is primarily driven by 
 the substantial computational demands.
 
-As the number of iterations increases, the growth in the number of leaf node within the
-Quadtree follows an exponential pattern. For each leaf node, we need to caculate `node.error`
-with this formula:
+As the number of iterations increases, the growth in the number of leaf nodes
+within the Quadtree follows an exponential pattern. For each leaf node, we need
+to calculate `node.error` using the following formula:
 
-$`MSE = Σ[(Ri - R_avg)^2 + (Gi - G_avg)^2 + (Bi - B_avg)^2] / N`$
+$$MSE = Σ[(Ri - R_avg)^2 + (Gi - G_avg)^2 + (Bi - B_avg)^2] / N$$
 
 Furthermore, within this [project](https://github.com/Inspiaaa/QuadTreeImageCompression#readme),
 it is evident that if one seeks an image compression
