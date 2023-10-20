@@ -56,7 +56,7 @@ their parents.
 Moreover, quadtrees can dynamically adjust image compression precision, 
 finding a balance between detail and computational resource consumption. 
 This adaptability is especially valuable for resource-considered application
-Like IOT or Machine learning. By increasing the threshold for the quadtree, 
+Like IOT or Machine learning[1]. By increasing the threshold for the quadtree, 
 we can produce images with less detail on less important parts, conserving 
 computing resources. Hence, quadtrees are highly valuable for image compression.
 
@@ -64,10 +64,11 @@ computing resources. Hence, quadtrees are highly valuable for image compression.
 The rationale behind implementing this project in C++ is primarily driven by 
 the substantial computational demands.
 
-As the number of iterations increases, the growth in the number of blocks within the
-Quadtree follows an exponential pattern. Additionally, I aspire for my compressor to
-have the capability to dynamically adjust compression levels in real-time to cater to
-specific needs, which itself constitutes a computational challenge.
+As the number of iterations increases, the growth in the number of leaf node within the
+Quadtree follows an exponential pattern. For each leaf node, we need to caculate `node.error`
+with this formula:
+
+$`MSE = Σ[(Ri - R_avg)^2 + (Gi - G_avg)^2 + (Bi - B_avg)^2] / N`$
 
 Furthermore, within this [project](https://github.com/Inspiaaa/QuadTreeImageCompression#readme),
 it is evident that if one seeks an image compression
@@ -107,9 +108,9 @@ of this process.
 
 Python API:
 * `imageLoader(input_image)`: Load user input image into quadtree
-* `imageCompression(quadtree_data, style, depth)`: Compress the image using a specific style,
-such as skeleton or cycle. Show the image compression process, and allow you to pause it 
-as needed.
+* `imageCompression(quadtree_data, style, threshold, depth)`: Compress the image with give
+   a specific style, such as skeleton or cycle. Show the image compression process, and
+  allow you to pause it as needed.
 * `mouseRestoreImage(quadtree_data)`: Restore a specific part of the image compression by
 left-clicking with the mouse.
 * `mouseCompressImage(quadtree_data)`: Further compress a specific part of the image by 
@@ -119,8 +120,8 @@ right-clicking with the mouse.
 consumption for the last compression.
 
 C++ API:
-* `imageCompression(quadtree_data, depth)`: Calculate image compression using a quadtree to
-store image data.
+* `imageCompression(quadtree_data, threshold , depth)`: Calculate image compression with given threshold
+   and using a quadtree to store image information.
 * `restoreImage(quadtree_data, restorationLevel, algorithm)`: Restore image compression.
 * `quadtree(input_image)`: Implementation of the quadtree data structure.
   *  `__init__(self, position, size, subdivided_flags, colors) `
