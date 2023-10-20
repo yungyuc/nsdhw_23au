@@ -16,15 +16,49 @@ compression algorithms such as LZW and DCT, it is noteworthy that while
 Quadtree may not stand out as the most robust solution, it unquestionably
 distinguishes itself as the most adaptable and versatile choice.
 
-### Why Quadtree
-Quadtree technology simplifies image organization, enhances processing 
-efficiency, automates correspondence tasks, adapts to various image characteristics,
-and efficiently manages image resources in the field of image processing.[1]
+### Quadtree
+#### How do they work for image compression
+First, let's briefly talk about how do Quadtrees work for image
+compression. The algorithm for quadtree image compression involves producing
+a new representation of an image based on the given image, a specified 
+threshold, and the color information stored in the tree nodes. 
+The key steps of the algorithm typically include: 
+1. Start with the entire image as the root node of the quadtree.
+2. Calculate the average color (usually RGB values) for the pixels within
+    the current node.
+3. Calculate the error or difference between the pixel colors and the
+   average color within the node.
+4. Compare the error with a predefined threshold. If the error is below the
+   threshold, the node is considered a leaf node and does not get further subdivided.
+5. If the error is above the threshold, the node is subdivided into four child
+    nodes, and the process is recursively applied to each child node.
+6. Continue the process until all leaf nodes are below the error threshold,
+    effectively representing regions of the image where the colors are similar.
+
+#### Why Quadtrees for image compression
+Putting images into a tree data-structure is quite useful for many reasons. 
+To start, they allow reducing the size of an image without necessarily 
+reducing quality, as stated above in bold. This works best for images where 
+similar colors take up a large portion of space like in the top left of the
+image bellow where despite being many large subregions, they are hard to see.
 
 
-| ![image](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/75069f10-594b-40b4-8407-5b047b39980c) | ![image](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/74d93574-06db-40ad-88f3-a2e1fdcbcd5b) |
-|:-----------------------------------:|:-----------------------------------:|
-| **Quadtree Simpson** |**Quadtree rabbit**|
+| ![image](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/b66ec4a2-0195-419f-b051-3b451d1347cc) | 
+|:-----------------------------------:|
+| **Quadtree sakura** |
+
+Trees, including quadtrees, are known for expediting processes. Quadtrees 
+specialize in focusing on the detailed sections of an image, particularly 
+beneficial for speeding up edge detection. When performing edge detection 
+on an image represented in a quadtree, we need to examine its leaf nodes and 
+their parents.
+
+Moreover, quadtrees can dynamically adjust image compression precision, 
+finding a balance between detail and computational resource consumption. 
+This adaptability is especially valuable for resource-considered application
+Like IOT or Machine learning. By increasing the threshold for the quadtree, 
+we can produce images with less detail on less important parts, conserving 
+computing resources. Hence, quadtrees are highly valuable for image compression.
 
 ### Why C++
 The rationale behind implementing this project in C++ is primarily driven by 
@@ -34,36 +68,6 @@ As the number of iterations increases, the growth in the number of blocks within
 Quadtree follows an exponential pattern. Additionally, I aspire for my compressor to
 have the capability to dynamically adjust compression levels in real-time to cater to
 specific needs, which itself constitutes a computational challenge.
-
-This is the psuedocode for image compression with quadtree:
-```plaintext
-function compressImage(image):
-    if image is entirely the same color:
-        return a single node with that color
-    else:
-        divide the image into 4 equal quadrants (top-left, top-right, bottom-left, bottom-right)
-        topLeft = compressImage(top-left quadrant of image)
-        topRight = compressImage(top-right quadrant of image)
-        bottomLeft = compressImage(bottom-left quadrant of image)
-        bottomRight = compressImage(bottom-right quadrant of image)
-        return a new node representing the four children (topLeft, topRight, bottomLeft, bottomRight)
-
-function decompressImage(node):
-    if node is a leaf node:
-        return a square or rectangle filled with the color of the leaf node
-    else:
-        reconstruct the image by combining the decompressed children:
-        topLeftImage = decompressImage(node.topLeft)
-        topRightImage = decompressImage(node.topRight)
-        bottomLeftImage = decompressImage(node.bottomLeft)
-        bottomRightImage = decompressImage(node.bottomRight)
-        combine and return the four images to form the original image
-
-# Example usage
-originalImage = loadOriginalImage()
-compressedImage = compressImage(originalImage)
-reconstructedImage = decompressImage(compressedImage)
-```
 
 Furthermore, within this [project](https://github.com/Inspiaaa/QuadTreeImageCompression#readme),
 it is evident that if one seeks an image compression
