@@ -17,37 +17,11 @@ Quadtree may not stand out as the most robust solution, it unquestionably
 distinguishes itself as the most adaptable and versatile choice.
 
 ### Why Quadtree
-Also, Based on this [paper](https://dl.acm.org/doi/abs/10.1145/3596711.3596757?casa_token=o3_5H2E-d54AAAAA:5bq5xqCI0KOk7pc1DSMh0CkpyNuXtkO6h9HUTdQpnDCodGOtd1h1EF8NAUJIQtfKZUP84FTbNeEjgA)
-Quadtree have sevral advantage on image process.
-1. Scene Simplification: Quadtree allows for the partitioning of images
- into smaller blocks or regions, reducing the image's resolution levels.
-  This simplification is particularly beneficial for image compression
-   and analysis tasks.
-
-2. Efficiency: Quadtree technology provides a hierarchical representation
-  of image data. This enables selective processing of specific regions
-   of interest within an image. The result is significantly improved
-    processing efficiency, which is especially valuable for applications
- requiring the rapid processing of large images or video streams.
-
-3. Automatic Correspondence: Quadtree decomposition can automatically
- establish correspondence between images, a critical factor in various
-  image processing and matching tasks. This reduces the need for manual
-   intervention and streamlines the processing workflow.
-
-4. Adaptability: Quadtree decomposition divides images based on their unique
-    characteristics.This adaptability allows different regions of an image
-   to be processed at varying resolutions, making image processing more
-   intelligent and resource-efficient.
-
-5. Resource Management: Quadtree technology plays a vital role in efficient
-    resource management for image data. This includes optimizing storage and
-    transmission, which is particularly advantageous for mobile applications
-    and environments with limited resources.
-
-In summary, quadtree technology simplifies image organization, enhances processing 
+Quadtree technology simplifies image organization, enhances processing 
 efficiency, automates correspondence tasks, adapts to various image characteristics,
-and efficiently manages image resources in the field of image processing.
+and efficiently manages image resources in the field of image processing.[1]
+
+
 | ![image](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/75069f10-594b-40b4-8407-5b047b39980c) | ![image](https://github.com/CodeStone1125/nsdhw_23au/assets/72511296/74d93574-06db-40ad-88f3-a2e1fdcbcd5b) |
 |:-----------------------------------:|:-----------------------------------:|
 | **Quadtree Simpson** |**Quadtree rabbit**|
@@ -180,3 +154,6 @@ Week 8 (12/18): Make slides for the presentation
 
 * [QuadTreeImageCompression](https://github.com/Inspiaaa/QuadTreeImageCompression)
 * [Probabilistic Approach Versus Machine Learning for One-Shot Quad-Tree Prediction in an Intra HEVC Encoder](https://link.springer.com/article/10.1007/s11265-018-1426-z)
+
+[1]
+Shenchang Eric Chen and Lance Williams. 2023. View Interpolation for Image Synthesis. Seminal Graphics Papers: Pushing the Boundaries, Volume 2 2, 45 (August 2023), 423-432. DOI:https://doi.org/10.1145/3596711.3596757
