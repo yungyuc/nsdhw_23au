@@ -85,8 +85,12 @@ Schedule
 References
 ==========
 
-`Sutherland–Hodgman algorithm <https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm>`__ 
-`Sutherland–Hodgman algorithm Implementation <hhttps://www.geeksforgeeks.org/polygon-clipping-sutherland-hodgman-algorithm/>`__ 
-`Greiner–Hormann clipping algorithm <https://en.wikipedia.org/wiki/Greiner%E2%80%93Hormann_clipping_algorithm>`__ 
-`Vatti clipping algorithm <https://en.wikipedia.org/wiki/Vatti_clipping_algorithm>`__ 
+`Sutherland–Hodgman algorithm <https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm>`__ \
+
+`Sutherland–Hodgman algorithm Implementation <hhttps://www.geeksforgeeks.org/polygon-clipping-sutherland-hodgman-algorithm/>`__
+
+`Greiner–Hormann clipping algorithm <https://en.wikipedia.org/wiki/Greiner%E2%80%93Hormann_clipping_algorithm>`__
+
+`Vatti clipping algorithm <https://en.wikipedia.org/wiki/Vatti_clipping_algorithm>`__
+
 `Weiler–Atherton clipping algorithm <https://en.wikipedia.org/wiki/Weiler%E2%80%93Atherton_clipping_algorithm>`__
