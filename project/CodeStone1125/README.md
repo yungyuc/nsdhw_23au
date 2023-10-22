@@ -70,7 +70,7 @@ As the number of iterations increases, the growth in the number of leaf nodes
 within the Quadtree follows an exponential pattern. For each leaf node, we need
 to calculate `node.error` using the following formula:
 
-$$MSE = {Σ[(Ri - R {avg})^2 + (Gi - G_{avg})^2 + (Bi - B {avg} )^2] \over N}$$
+$$MSE = Σ{(Ri - R_{avg})^2 + (Gi - G_{avg})^2 + (Bi - B_{avg} )^2 \over N}$$
 
 Furthermore, within this [project](https://github.com/Inspiaaa/QuadTreeImageCompression#readme),
 it is evident that if one seeks an image compression
