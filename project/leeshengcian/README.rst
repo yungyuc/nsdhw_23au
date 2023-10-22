@@ -46,8 +46,6 @@ to be planned...
 Engineering Infrastructure
 ==========================
 
-Describe how you plan to put together the engineering system:
-
 1. Automatic build system: `CMake`
 2. Version control: `git`
 3. Testing framework: `pytest`
@@ -58,12 +56,12 @@ Schedule
 
 * Week 1 (10/30):
     - Study domain Knowledge for Polygon Clipping Algorithm
-    - Implement Sutherland–Hodgman algorithm
+    - Implement **Sutherland–Hodgman algorithm**
 * Week 2 (11/6):
-    - Study Weiler-Atherton algorithm and Greiner-Hormann algorithm
+    - Study **Weiler-Atherton algorithm** and **Greiner-Hormann algorithm**
     - Redesign Sutherland–Hodgman algorithm based on its drawbacks
 * Week 3 (11/13):
-    - Study Vatti clipping algorithm
+    - Study **Vatti clipping algorithm**
     - Compare redesigned Sutherland–Hodgman algorithm with other three
 * Week 4 (11/20):
     - Finish Sutherland–Hodgman Algorithm in c++ and write pybind11 wrapper
@@ -85,12 +83,12 @@ Schedule
 References
 ==========
 
-`Sutherland–Hodgman algorithm <https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm>`__ 
+`Sutherland–Hodgman algorithm <https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm>`_
 
-`Sutherland–Hodgman algorithm Implementation <https://www.geeksforgeeks.org/polygon-clipping-sutherland-hodgman-algorithm/>`__
+`Sutherland–Hodgman algorithm Implementation <https://www.geeksforgeeks.org/polygon-clipping-sutherland-hodgman-algorithm/>`_
 
-`Greiner–Hormann clipping algorithm <https://en.wikipedia.org/wiki/Greiner%E2%80%93Hormann_clipping_algorithm>`__
+`Greiner–Hormann clipping algorithm <https://en.wikipedia.org/wiki/Greiner%E2%80%93Hormann_clipping_algorithm>`_
 
-`Vatti clipping algorithm <https://en.wikipedia.org/wiki/Vatti_clipping_algorithm>`__
+`Vatti clipping algorithm <https://en.wikipedia.org/wiki/Vatti_clipping_algorithm>`_
 
-`Weiler–Atherton clipping algorithm <https://en.wikipedia.org/wiki/Weiler%E2%80%93Atherton_clipping_algorithm>`__
+`Weiler–Atherton clipping algorithm <https://en.wikipedia.org/wiki/Weiler%E2%80%93Atherton_clipping_algorithm>`_
