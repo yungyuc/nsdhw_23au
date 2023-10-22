@@ -8,7 +8,7 @@ This Proposal shows the work flow and plans for the 2023 Autumn NYCU NSD term pr
 Basic Information
 =================
 
-GitHub Link : [https://github.com/leeshengcian/nsdhw_23au/blob/leeshengcian-Proposal-Submission/project/leeshengcian/README.rst]
+GitHub Link : `repo <https://github.com/leeshengcian/Polygon-Clipping>`_
 
 Polygon clipping are important operations in algorithm design, especially for computer graphics, computer vision, and computational geometry.
 
