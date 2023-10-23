@@ -2,6 +2,7 @@
 #include <cstddef>
 
 #include "multiply.hpp"
+
 class Matrix {
  private:
   size_t rows;
@@ -13,6 +14,7 @@ class Matrix {
   Matrix(size_t rows, size_t cols);
   ~Matrix() = default;
   double& operator()(size_t, size_t) const;
+  double* get_data() const;
   const size_t get_rows() const;
   const size_t get_cols() const;
   friend Multiply::Matrix Multiply::multiply_naive(const Multiply::Matrix&,

@@ -1,12 +1,18 @@
+
 #include "multiply.hpp"
 
 #include <mkl/mkl.h>
 #include <mkl/mkl_lapack.h>
 #include <mkl/mkl_lapacke.h>
 
+// #include <mkl.h>
+// #include <mkl_lapack.h>
+// #include <mkl_lapacke.h>
+
 #include <stdexcept>
 
-Matrix Multiply::multiply_naive(const Matrix& A, const Matrix& B) {
+#include "Matrix.hpp"
+Matrix multiply_naive(const Matrix& A, const Matrix& B) {
   if (A.get_cols() != B.get_rows()) {
     throw std::invalid_argument("Matrix dimensions do not match");
   }
@@ -21,8 +27,7 @@ Matrix Multiply::multiply_naive(const Matrix& A, const Matrix& B) {
   return C;
 }
 
-Matrix Multiply::multiply_tile(const Matrix& A, const Matrix& B,
-                               size_t tile_size) {
+Matrix multiply_tile(const Matrix& A, const Matrix& B, size_t tile_size) {
   if (A.get_cols() != B.get_rows()) {
     throw std::invalid_argument("Matrix dimensions do not match");
   }
@@ -45,13 +50,13 @@ Matrix Multiply::multiply_tile(const Matrix& A, const Matrix& B,
   return C;
 }
 
-Matrix Multiply::multiply_mkl(const Matrix& A, const Matrix& B) {
+Matrix multiply_mkl(const Matrix& A, const Matrix& B) {
   if (A.get_cols() != B.get_rows()) {
     throw std::invalid_argument("Matrix dimensions do not match");
   }
   Matrix C(A.get_rows(), B.get_cols());
   cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, A.get_rows(),
-              B.get_cols(), A.get_cols(), 1, A.data, A.get_cols(), B.data,
-              B.get_cols(), 0, C.data, C.get_cols());
+              B.get_cols(), A.get_cols(), 1, A.get_data(), A.get_cols(),
+              B.get_data(), B.get_cols(), 0, C.get_data(), C.get_cols());
   return C;
 }
