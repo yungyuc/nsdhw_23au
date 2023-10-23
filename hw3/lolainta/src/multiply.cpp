@@ -51,7 +51,7 @@ Matrix Multiply::multiply_mkl(const Matrix& A, const Matrix& B) {
   }
   Matrix C(A.get_rows(), B.get_cols());
   cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, A.get_rows(),
-              B.get_cols(), A.get_cols(), 1, A.data[0], A.get_cols(), B.data[0],
-              B.get_cols(), 0, C.data[0], C.get_cols());
+              B.get_cols(), A.get_cols(), 1, A.data, A.get_cols(), B.data,
+              B.get_cols(), 0, C.data, C.get_cols());
   return C;
 }
