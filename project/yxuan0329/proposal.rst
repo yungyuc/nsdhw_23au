@@ -73,15 +73,19 @@ Architecture
 The library would include:
 
 - ``build_tree``: build a r-tree
-- ``search``: search for the available results in r-tree
 - ``insert``: insert a node in r-tree
 - ``delete``: delete a node in r-tree
+- ``search``: search for the available results in r-tree
 
 Datasets
 ---------
 
 Randomly generate about 50-100 map data entry by Python for validating the 
 R-tree algorithm can works correctly. 
+For the initial testing, the dimension of each data is 3 (latitude, longitude, 
+altitude). After that, I intend to expand the dimensionality of the generated 
+data to 4 or 5 dimensions, or maybe n-dimension if the users create their own 
+datasets in the future. 
 
 
 API Description
@@ -92,9 +96,9 @@ API Description
 .. system.
 
 The users can include the library by linking in their project. 
-The C++ users can simply link by adding include file.
+The C++ users can include when compiling.
 
-``#include "r-tree-library.hpp"``
+``g++ main.cpp -o -lr-tree-library``
 
 The Python users can import the library by adding the script.
 
@@ -142,39 +146,40 @@ Schedule
 .. development of the project takes 8 weeks:
 
 * Planning phase (6 weeks from mm/dd to mm/dd):
-Week 1 (10/30)
+Week 1 (10/30-11/055)
 ---------
 - Survey some reference about the data structure and implementation
-- Survey some existing R-tree libraries and run
+- Survey some existing R-tree paper
 - Create a few testing dataset for testing the existing libraries
 
-Week 2 (11/06)
+Week 2 (11/06-11/12)
 ---------
 - Create about 50-100 testing datasets for future use
 - Design the C++ classes architecture
 
-Week 3 (11/13)
+Week 3 (11/13-11/19)
 ---------
-- Implement R-tree with C++: ``build_tree``, ``search``
+- Implement R-tree with C++: ``build_tree``, ``insert``, ``delete``
 
-Week 4 (11/20)
+Week 4 (11/20-11/28)
 ---------
-- Implement R-tree with C++: ``insert``, ``delete``
+- Implement R-tree with C++: ``search``
 
-Week 5 (11/27)
+Week 5 (11/27/12/03)
 ---------
-- Implement R-tree with C++
+- Implement R-tree with C++: allow to search in user-defined dimension
 - Refactor the code if needed 
 
-Week 6 (12/04)
+Week 6 (12/04-12/10)
 ---------
 - Testing the features with pytest
 
-Week 7 (12/11)
+Week 7 (12/11-12/17)
 ---------
 - Finish up the project and the documentation
 - Prepare for the slides
-Week 8 (12/18)
+  
+Week 8 (12/18-12/24)
 ---------
 - Prepare for the presentation
 
