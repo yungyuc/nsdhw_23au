@@ -1,14 +1,16 @@
 
 #include "multiply.hpp"
 
-// #include <mkl/mkl.h>
-// #include <mkl/mkl_lapack.h>
-// #include <mkl/mkl_lapacke.h>
-
+#ifdef UBUNTU
+#include <mkl/mkl.h>
+#include <mkl/mkl_lapack.h>
+#include <mkl/mkl_lapacke.h>
+#endif
+#ifdef ARCHLINUX
 #include <mkl.h>
 #include <mkl_lapack.h>
 #include <mkl_lapacke.h>
-
+#endif
 #include <stdexcept>
 
 #include "Matrix.hpp"
