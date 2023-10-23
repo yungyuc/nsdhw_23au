@@ -1,4 +1,3 @@
-
 OS := $(shell cat /etc/os-release | grep -oP '(?<=^ID=).+' | tr -d '"')
 ifeq (${OS},ubuntu)
 	SYSFLAG := UBUNTU
@@ -18,7 +17,7 @@ else ifeq (${OS},ubuntu)
 	LDFLAGS += -lblas
 endif
 
-INCLUDES := -Iextern/pybind11/include $(shell python3-config --includes) -Iinclude 
+INCLUDES := -Iextern/pybind11/include $(shell python3-config --includes) -Iinclude
 ifeq (${OS},arch)
 	INCLUDES += -I/opt/intel/mkl/include
 endif
@@ -31,10 +30,9 @@ TARGET := _matrix$(shell python3-config --extension-suffix)
 .PHONY: all clean test
 
 all: $(TARGET)
-	
 
 $(TARGET): $(OBJS)
-	$(CXX) $(LDFLAGS) $^ -o $@
+	$(CXX) $^ -o $@ $(LDFLAGS)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
