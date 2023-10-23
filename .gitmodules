@@ -1,0 +1,4 @@
+[submodule "hw3/lolainta/extern/pybind11"]
+	path = hw3/lolainta/extern/pybind11
+	url = git@github.com:pybind/pybind11.git
+	branch = stable
