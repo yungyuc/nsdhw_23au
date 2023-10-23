@@ -8,7 +8,7 @@ else
 endif
 
 CXX := g++
-CXXFLAGS := -std=gnu++17 -O3 -Wall -fPIC -D$(SYSFLAG)
+CXXFLAGS := -std=gnu++17 -Ofast -Wall -fPIC -D$(SYSFLAG)
 
 LDFLAGS := -shared
 ifeq (${OS},arch)
