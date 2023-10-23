@@ -1,6 +1,6 @@
 CXX := g++
-CXXFLAGS := -std=gnu++17 -O3 -Wall -fPIC
-LDFLAGS := -shared
+CXXFLAGS := -std=gnu++17 -O3 -Wall -fPIC 
+LDFLAGS := -shared -lmkl_rt -L/opt/intel/oneapi/mkl/2023.2.0/lib/intel64
 INCLUDES := -Iextern/pybind11/include $(shell python3-config --includes) -Iinclude -I/opt/intel/oneapi/mkl/2023.2.0/include
 TARGET := _matrix$(shell python3-config --extension-suffix)
 
@@ -20,5 +20,5 @@ $(TARGET): $(OBJS)
 clean:
 	rm -f $(OBJS) $(TARGET)
 
-test: $(TARGET) 
+test: $(TARGET)
 	python3 -m pytest -v 
