@@ -7,12 +7,12 @@ def test_construct():
     row = randint(1, 100)
     col = randint(1, 100)
     m = Matrix(row, col)
-    assert m.rows == row
-    assert m.cols == col
+    assert m.nrow == row
+    assert m.ncol == col
 
     m, r, c = generate_matrix(randint(1, 100), randint(1, 100))
-    assert m.rows == r
-    assert m.cols == c
+    assert m.nrow == r
+    assert m.ncol == c
 
 
 def test_empty_matrix():

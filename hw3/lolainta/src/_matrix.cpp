@@ -5,12 +5,11 @@
 #include "multiply.hpp"
 namespace py = pybind11;
 
-// Bind the Matrix class
 void bind_Matrix(py::module &m) {
   py::class_<Matrix>(m, "Matrix")
       .def(py::init<int, int>())
-      .def_property_readonly("rows", &Matrix::get_rows)
-      .def_property_readonly("cols", &Matrix::get_cols)
+      .def_property_readonly("nrow", &Matrix::get_rows)
+      .def_property_readonly("ncol", &Matrix::get_cols)
       .def("__setitem__",
            [](Matrix &mat, std::pair<size_t, size_t> idx, double value) {
              auto [u, v] = idx;
@@ -22,7 +21,6 @@ void bind_Matrix(py::module &m) {
       });
 }
 
-// Bind the multiply namespace functions
 void bind_multiply(py::module &m) {
   m.def("multiply_naive", &multiply_naive);
   m.def("multiply_tile", &multiply_tile);
