@@ -66,6 +66,6 @@ Follow the format to add your project in lexicographical order:
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
 
-1. `ShangHungWan <https://github.com/ShangHungWan>`__ for
+2. `ShangHungWan <https://github.com/ShangHungWan>`__ for
    `rtreelib <ShangHungWan/README.md>`__:
    https://github.com/ShangHungWan/rtreelib
