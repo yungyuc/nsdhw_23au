@@ -1,6 +1,6 @@
 # rtreelib: A C++ R-tree Library
 
-This is an R-tree library which implemented with C++ to achieve the performance. If you don't know what's R-tree, you can refer to [wiki](https://en.wikipedia.org/wiki/R-tree) or [original paper](https://dl.acm.org/doi/pdf/10.1145/971697.602266).
+This is an R-tree library which implemented with C++ to achieve the performance. If you don't know what's R-tree, you can refer to [wiki](https://en.wikipedia.org/wiki/R-tree) or original paper (Antonin Guttman. 1984. R-trees: a dynamic index structure for spatial searching. SIGMOD Rec. 14, 2 (June 1984), 47–57. <https://doi.org/10.1145/971697.602266>).
 
 ## Basic Information
 
@@ -16,13 +16,15 @@ According to the paper, R-tree is a dynamic index structure for spatial searchin
 
 On the contrary, if there is no R-tree, we may need to traverse all restaurants' positions and calculate the distance between them and the user's current location. It will be an impossible task for extremely large geographical applications like Google Maps.
 
-R-tree has a similar structure with B-tree. (image 1)
+R-tree has a similar structure with B-tree. (See image 1)
 
 ![image 1: R-tree structure](rtree-1.png)
+> image 1. Antonin Guttman. 1984. R-trees: a dynamic index structure for spatial searching. SIGMOD Rec. 14, 2 (June 1984), 47–57. <https://doi.org/10.1145/971697.602266>
 
-However, it's in the higher dimension. It will draw rectangles and find the intersections to decide which sub-tree needs to be traversed. (image 2)
+However, it's in the higher dimension. It will draw rectangles and find the intersections to decide which sub-tree needs to be traversed. (See image 2)
 
 ![image 2: rectangles of R-tree](rtree-2.png)
+> image 2. Antonin Guttman. 1984. R-trees: a dynamic index structure for spatial searching. SIGMOD Rec. 14, 2 (June 1984), 47–57. <https://doi.org/10.1145/971697.602266>
 
 ## Prospective Users
 
@@ -106,5 +108,5 @@ About interfaces, please refer to [Interfaces](#interfaces).
 
 ## References
 
-- [R-trees: a dynamic index structure for spatial searching](https://dl.acm.org/doi/pdf/10.1145/971697.602266)
-- [Wikipedia: R-tree](https://en.wikipedia.org/wiki/R-tree)
+- [1] Antonin Guttman. 1984. R-trees: a dynamic index structure for spatial searching. In Proceedings of the 1984 ACM SIGMOD international conference on Management of data (SIGMOD '84). Association for Computing Machinery, New York, NY, USA, 47–57. <https://doi.org/10.1145/602259.602266>
+- [2] R-tree - Wikipedia. Retrieved from [https://en.wikipedia.org/wiki/R-tree](https://en.wikipedia.org/wiki/R-tree).
