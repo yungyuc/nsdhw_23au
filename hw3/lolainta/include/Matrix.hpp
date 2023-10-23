@@ -17,11 +17,7 @@ class Matrix {
   double* get_data() const;
   const size_t get_rows() const;
   const size_t get_cols() const;
-  friend Multiply::Matrix Multiply::multiply_naive(const Multiply::Matrix&,
-                                                   const Multiply::Matrix&);
-  friend Multiply::Matrix Multiply::multiply_tile(const Multiply::Matrix&,
-                                                  const Multiply::Matrix&,
-                                                  size_t);
-  friend Multiply::Matrix Multiply::multiply_mkl(const Multiply::Matrix&,
-                                                 const Multiply::Matrix&);
+  friend Matrix multiply_naive(const Matrix&, const Matrix&);
+  friend Matrix multiply_tile(const Matrix&, const Matrix&, size_t);
+  friend Matrix multiply_mkl(const Matrix&, const Matrix&);
 };
