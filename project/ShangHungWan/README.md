@@ -1,6 +1,6 @@
 # rtreelib: A C++ R-tree Library
 
-This is an R-tree library which implemented with C++ to achieve the performance. If you don't know what's R-tree, you can refer to [wiki](https://en.wikipedia.org/wiki/R-tree) or original paper (Antonin Guttman. 1984. R-trees: a dynamic index structure for spatial searching. SIGMOD Rec. 14, 2 (June 1984), 47–57. <https://doi.org/10.1145/971697.602266>).
+This is an R-tree library which implemented with C++ to achieve the performance. If you don't know what's R-tree, you can refer to [wiki](https://en.wikipedia.org/wiki/R-tree) [2] or original paper (Antonin Guttman. 1984. R-trees: a dynamic index structure for spatial searching. SIGMOD Rec. 14, 2 (June 1984), 47–57. <https://doi.org/10.1145/971697.602266>).
 
 ## Basic Information
 
@@ -25,6 +25,8 @@ However, it was designed for higher dimensions. Ideally, this library try to sol
 
 ![image 2: rectangles of R-tree](rtree-2.png)
 > image 2. Antonin Guttman. 1984. R-trees: a dynamic index structure for spatial searching. SIGMOD Rec. 14, 2 (June 1984), 47–57. <https://doi.org/10.1145/971697.602266>
+
+To handle round-off errors in the library. It will use epsilon. For example, it will allow a small tolerance threshold when it need to check overlap or compare the floating number.
 
 ## Prospective Users
 
@@ -115,4 +117,5 @@ About interfaces, please refer to [Interfaces](#interfaces).
 ## References
 
 - [1] Antonin Guttman. 1984. R-trees: a dynamic index structure for spatial searching. In Proceedings of the 1984 ACM SIGMOD international conference on Management of data (SIGMOD '84). Association for Computing Machinery, New York, NY, USA, 47–57. <https://doi.org/10.1145/602259.602266>
-- [2] R-tree - Wikipedia. Retrieved from [https://en.wikipedia.org/wiki/R-tree](https://en.wikipedia.org/wiki/R-tree).
+- [2] R-tree - Wikipedia. Retrieved from <https://en.wikipedia.org/wiki/R-tree>
+- [3] Precision of coordinates - OpenStreetMap Wiki. Retrieved from <https://wiki.openstreetmap.org/wiki/Precision_of_coordinates>
