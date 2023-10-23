@@ -33,22 +33,21 @@ Matrix multiply_tile(const Matrix& A, const Matrix& B, size_t tsize) {
   if (A.get_cols() != B.get_rows()) {
     throw std::invalid_argument("Matrix dimensions do not match");
   }
+  auto m = A.get_rows();
+  auto n = B.get_cols();
+  auto k = A.get_cols();
   Matrix C(A.get_rows(), B.get_cols());
-  for (size_t i = 0; i < A.get_rows(); i += tsize) {
-    for (size_t j = 0; j < B.get_cols(); j += tsize) {
-      for (size_t k = 0; k < A.get_cols(); k += tsize) {
-        for (size_t ii = i; ii < std::min(i + tsize, A.get_rows()); ii++) {
-          for (size_t jj = j; jj < std::min(j + tsize, B.get_cols()); jj++) {
+  for (size_t i = 0; i < m; i += tsize)
+    for (size_t j = 0; j < n; j += tsize)
+      for (size_t l = 0; l < k; l += tsize)
+        for (size_t ii = i; ii < std::min(i + tsize, m); ii++)
+          for (size_t jj = j; jj < std::min(j + tsize, n); jj++) {
             double sum = 0;
-            for (size_t kk = k; kk < std::min(k + tsize, A.get_cols()); kk++) {
-              sum += A(ii, kk) * B(kk, jj);
-            }
+            for (size_t ll = l; ll < std::min(l + tsize, k); ll++)
+              sum += A(ii, ll) * B(ll, jj);
             C(ii, jj) += sum;
           }
-        }
-      }
-    }
-  }
+
   return C;
 }
 

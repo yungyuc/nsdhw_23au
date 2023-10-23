@@ -41,4 +41,4 @@ clean:
 	rm -f $(OBJS) $(TARGET)
 
 test: $(TARGET)
-	python3 -m pytest -v 
+	python3 -m pytest -v
