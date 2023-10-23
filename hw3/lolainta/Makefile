@@ -1,7 +1,7 @@
 CXX := g++
 CXXFLAGS := -std=gnu++17 -O3 -Wall -fPIC
 LDFLAGS := -shared
-INCLUDES := -Iextern/pybind11/include $(shell python3-config --includes) -Iinclude
+INCLUDES := -Iextern/pybind11/include $(shell python3-config --includes) -Iinclude -I/opt/intel/mkl
 TARGET := _matrix$(shell python3-config --extension-suffix)
 
 SRCS := $(wildcard src/*.cpp)
