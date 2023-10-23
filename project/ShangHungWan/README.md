@@ -21,14 +21,14 @@ R-tree has a similar structure with B-tree. (See image 1)
 ![image 1: R-tree structure](rtree-1.png)
 > image 1. Antonin Guttman. 1984. R-trees: a dynamic index structure for spatial searching. SIGMOD Rec. 14, 2 (June 1984), 47–57. <https://doi.org/10.1145/971697.602266>
 
-However, it's in the higher dimension. It will draw rectangles and find the intersections to decide which sub-tree needs to be traversed. (See image 2)
+However, it was designed for higher dimensions. Ideally, this library try to solve n-dimension problem. To elaborate the concept of R-tree better, it will draw rectangles and find the intersections to decide which sub-tree needs to be traversed. (See image 2)
 
 ![image 2: rectangles of R-tree](rtree-2.png)
 > image 2. Antonin Guttman. 1984. R-trees: a dynamic index structure for spatial searching. SIGMOD Rec. 14, 2 (June 1984), 47–57. <https://doi.org/10.1145/971697.602266>
 
 ## Prospective Users
 
-Those who want to develop an application that needs to store/search two-dimensioned geographical data.
+Those who want to develop an application that needs to store/search geographical data.
 
 They can use both C++ and Python to include this library. C++ can directly include the library. On the other hand, this library also provides APIs for Python.
 
@@ -53,6 +53,12 @@ And wrap it as Python APIs:
 - int RTree::nearest(RTRect rect)
 - dict[int] RTree::intersection(RTRect rect)
 - void RTree::delete(int uid)
+
+### Testing
+
+This library will use randomly generated geographical dataset as the input to make sure its behavior is the same as expectation.
+
+Moreover, in order to make sure both C++ and Python's implementations are the same as our expectation. This library will contain unittest for both languages.
 
 ## API Description
 
