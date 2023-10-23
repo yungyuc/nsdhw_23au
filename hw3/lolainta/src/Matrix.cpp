@@ -16,3 +16,15 @@ double* Matrix::get_data() const { return data; }
 const size_t Matrix::get_rows() const { return rows; }
 
 const size_t Matrix::get_cols() const { return cols; }
+
+bool Matrix::operator==(const Matrix& other) const {
+  if (rows != other.rows || cols != other.cols) {
+    return false;
+  }
+  for (size_t i = 0; i < rows * cols; i++) {
+    if (data[i] != other.data[i]) {
+      return false;
+    }
+  }
+  return true;
+}

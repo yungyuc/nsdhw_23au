@@ -17,6 +17,7 @@ class Matrix {
   double* get_data() const;
   const size_t get_rows() const;
   const size_t get_cols() const;
+  bool operator==(const Matrix&) const;
   friend Matrix multiply_naive(const Matrix&, const Matrix&);
   friend Matrix multiply_tile(const Matrix&, const Matrix&, size_t);
   friend Matrix multiply_mkl(const Matrix&, const Matrix&);

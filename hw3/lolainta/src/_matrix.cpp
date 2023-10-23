@@ -15,10 +15,12 @@ void bind_Matrix(py::module &m) {
              auto [u, v] = idx;
              mat(u, v) = value;
            })
-      .def("__getitem__", [](Matrix &mat, std::pair<size_t, size_t> idx) {
-        auto [u, v] = idx;
-        return mat(u, v);
-      });
+      .def("__getitem__",
+           [](Matrix &mat, std::pair<size_t, size_t> idx) {
+             auto [u, v] = idx;
+             return mat(u, v);
+           })
+      .def("__eq__", [](const Matrix &A, const Matrix &B) { return A == B; });
 }
 
 void bind_multiply(py::module &m) {
