@@ -65,7 +65,9 @@ Follow the format to add your project in lexicographical order:
 1. `github_account_name <https://github.com/github_account_name>`__ for
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
-
-2. `ShangHungWan <https://github.com/ShangHungWan>`__ for
+2. `CodeStone1125 <https://github.com/CodeStone1125>`__ for
+   `Project subject <CodeStone1125/README.md>`__:
+   https://github.com/CodeStone1125/QuadraCompress
+3. `ShangHungWan <https://github.com/ShangHungWan>`__ for
    `rtreelib <ShangHungWan/README.md>`__:
    https://github.com/ShangHungWan/rtreelib
