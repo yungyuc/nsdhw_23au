@@ -13,12 +13,11 @@ MKL_LIBS = -L/home/williechu1125/intel/compilers_and_libraries_2019.1.144/linux/
 PYBIND11_INCLUDE = -I/usr/local/include
 PYTHON_INCLUDE = -I/usr/include/python3.10 -I/usr/include/python3.10
 
-# Linker flags for Pybind11 and Python
+# Linker flags for Python
 PYTHON_LIBS = $(shell python3-config --ldflags) -lpython3.10
-PYBIND11_LIBS = -lpybind11
 
 $(TARGET): $(SRCS)
-	$(CXX) $(CXXFLAGS) $(MKL_INCLUDE) $(PYBIND11_INCLUDE) $(PYTHON_INCLUDE) -o $(TARGET) $(SRCS) $(MKL_LIBS) $(PYTHON_LIBS) $(PYBIND11_LIBS) -lmkl_rt
+	$(CXX) $(CXXFLAGS) $(MKL_INCLUDE) $(PYBIND11_INCLUDE) $(PYTHON_INCLUDE) -o $(TARGET) $(SRCS) $(MKL_LIBS) $(PYTHON_LIBS) -lmkl_rt
 
 .PHONY: run clean
 
