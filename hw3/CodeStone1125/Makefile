@@ -19,10 +19,14 @@ PYTHON_LIBS = $(shell python3-config --ldflags) -lpython3.10
 $(TARGET): $(SRCS)
 	$(CXX) $(CXXFLAGS) $(MKL_INCLUDE) $(PYBIND11_INCLUDE) $(PYTHON_INCLUDE) -o $(TARGET) $(SRCS) $(MKL_LIBS) $(PYTHON_LIBS) -lmkl_rt
 
-.PHONY: run clean
+.PHONY: run clean test
 
 run: $(TARGET)
 	./$(TARGET)
 
+test: $(TARGET)
+	python3 ./test.py
+
 clean:
 	rm -f $(TARGET)
+
