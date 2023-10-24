@@ -134,6 +134,59 @@ public:
         }
     }
 
+    double getvalue(size_t row, size_t col) const {
+        if (row < m_nrow && col < m_ncol) {
+            return m_buffer[index(row, col)];
+        } else {
+            throw std::out_of_range("Index out of bounds");
+        }
+    }
+
+    void setvalue(size_t row, size_t col, double value) {
+        if (row < m_nrow && col < m_ncol) {
+            m_buffer[index(row, col)] = value;
+        } else {
+            throw std::out_of_range("Index out of bounds");
+        }
+    }
+
+    // 在 Matrix 类中添加一个成员函数来比较两个矩阵
+    bool operator==(const Matrix& other) const {
+        if (m_nrow != other.m_nrow || m_ncol != other.m_ncol) {
+            return false;
+        }
+
+        for (size_t i = 0; i < m_nrow; ++i) {
+            for (size_t j = 0; j < m_ncol; ++j) {
+                if (m_buffer[index(i, j)] != other.m_buffer[other.index(i, j)]) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    // 添加构造函数，接受初始化列表
+    Matrix(const std::initializer_list<std::initializer_list<double>>& data) {
+        // 在这里，您可以根据传入的初始化列表来构建 Matrix 对象
+        if (data.size() > 0) {
+            m_nrow = data.size();
+            m_ncol = data.begin()->size();
+            reset_buffer(m_nrow, m_ncol);
+
+            size_t i = 0, j = 0;
+            for (const auto& row : data) {
+                j = 0;
+                for (const double& val : row) {
+                    (*this)(i, j) = val;
+                    ++j;
+                }
+                ++i;
+            }
+        }
+        // 如果传入空的初始化列表，可以处理为空的情况
+    }
 
 private:
 
@@ -231,7 +284,7 @@ std::ostream & operator << (std::ostream & ostr, Matrix const & mat)
 }
 
 // Function for matrix-matrix multiplication with tiling
-Matrix multiple_tile(const Matrix& mat1, const Matrix& mat2, size_t tileSize) {
+Matrix multiply_tile(const Matrix& mat1, const Matrix& mat2, size_t tileSize) {
     size_t n = mat1.nrow();
     size_t m = mat1.ncol();
     size_t p = mat2.ncol();
@@ -281,7 +334,7 @@ int main(int argc, char ** argv)
     std::cout << "result matrix C (2x2) = AB:" << mat3 << std::endl;
 
     std::cout << ">>> Tiling algo for A(2x3) times B(3x2):" << std::endl;
-    Matrix mat4 = multiple_tile(mat1, mat2, 4);
+    Matrix mat4 = multiply_tile(mat1, mat2, 4);
     std::cout << "result matrix C (2x2) = AB:" << mat4 << std::endl;
 
     std::cout << ">>> DGEMM for A(2x3) times B(3x2):" << std::endl;
@@ -297,13 +350,16 @@ PYBIND11_MODULE(ma03_matrix_matrix, m)
     m.doc() = "Matrix Multiplication funciton unit test.";
 
     pybind11::class_<Matrix>(m, "Matrix")
+        .def(pybind11::init<const std::initializer_list<std::initializer_list<double>>&>())
         .def(pybind11::init<>())
         .def(pybind11::init<size_t, size_t>())
         .def(pybind11::self == pybind11::self)
         .def("__getitem__", &Matrix::getvalue)
         .def("__setitem__", &Matrix::setvalue)
         .def_property_readonly("nrow", &Matrix::nrow)
-        .def_property_readonly("ncol", &Matrix::ncol);
+        .def_property_readonly("ncol", &Matrix::ncol)
+        .def("__eq__", &Matrix::operator==);
+
 
     m.def("multiply_naive", &multiply_naive);
     m.def("multiply_tile", &multiply_tile);
