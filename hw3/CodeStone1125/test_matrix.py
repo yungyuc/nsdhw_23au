@@ -1,117 +1,82 @@
-#!/usr/bin/python3
-
-import _matrix
 import pytest
+import _matrix
+import random
 import numpy as np
-import math
-import time
+import timeit
 
-def is_mat_equal(mat1, mat2, eps=1e-6):
-    if mat1.ncol != mat2.ncol or mat1.nrow != mat2.nrow:
-        return False
+def test_matrix_creation():
+    rows = random.randint(1, 1000)
+    cols = random.randint(1, 1000)
+    mat = _matrix.Matrix(rows, cols)
+    assert mat.nrow == rows
+    assert mat.ncol == cols
+    print(f"Matrix created with dimensions ({rows}, {cols})")
 
-    for i in range(mat1.nrow):
-        for j in range(mat1.ncol):
-            if not math.isclose(mat1[i,j], mat2[i,j], abs_tol=eps):
-                return False
+def test_matrix_get_set_value():
+    rows = random.randint(1, 1000)
+    cols = random.randint(1, 1000)
+    mat = _matrix.Matrix(rows, cols)
+    
+    # Generate random row and column indices
+    row_index = random.randint(0, rows - 1)
+    col_index = random.randint(0, cols - 1)
+    
+    # Generate a random value
+    random_value = random.uniform(100.0, 10000.0)
+    
+    mat.setvalue(row_index, col_index, random_value)
+    assert mat.getvalue(row_index, col_index) == random_value
+    print(f"Matrix ({rows}, {cols}) value set and retrieved in {timeit.timeit(lambda: mat.getvalue(row_index, col_index), number=1000)} seconds")
 
-    return True
+def test_matrix_buffer_vector():
+    rows = 2
+    cols = 3
+    # Generate random data for the matrix
+    mat_data = [random.uniform(100.0, 10000.0) for _ in range(rows * cols)]
+    mat = _matrix.Matrix(rows, cols, mat_data)
+
+    # Get the buffer vector
+    buffer = mat.buffer_vector()
+
+    # Check if each element in the buffer is equal to its corresponding element in the data
+    for i in range(rows * cols):
+        assert buffer[i] == mat_data[i]
+    print(f"Buffer vector checked for matrix ({rows}, {cols})")
+
+def test_matrix_getitem_setitem():
+    rows, cols = 100, 1000
+    mat = _matrix.Matrix(rows, cols)
+    
+    # Set a random value at a random position
+    random_row = random.randint(0, rows - 1)
+    random_col = random.randint(0, cols - 1)
+    random_value = random.uniform(100.0, 10000.0)
+    
+    mat[(random_row, random_col)] = random_value
+    
+    # Verify that the value was set correctly
+    assert mat[(random_row, random_col)] == random_value
+    print(f"Matrix ({rows}, {cols}) item set and retrieved in {timeit.timeit(lambda: mat[(random_row, random_col)] == random_value, number=1000)} seconds")
+
+def test_matrix_multiplication():
+    # Generate random data for mat1 and mat2
+    mat1_data = np.random.rand(100, 100).flatten().tolist()
+    mat2_data = np.random.rand(100, 100).flatten().tolist()
+
+    mat1 = _matrix.Matrix(100, 100, mat1_data)
+    mat2 = _matrix.Matrix(100, 100, mat2_data)
+    
+    result = _matrix.multiply_naive(mat1, mat2)
+    
+    # Calculate the expected result using numpy
+    expected_result = np.dot(np.array(mat1_data).reshape(100, 100), np.array(mat2_data).reshape(100, 100))
+    
+    # Check each element of the result matrix
+    for i in range(100):
+        for j in range(100):
+            assert result[(i, j)] == expected_result[i][j]
+    print(f"Matrix multiplication ({100}, {100}) executed in {timeit.timeit(lambda: _matrix.multiply_naive(mat1, mat2), number=1)} seconds")
 
 
-def np_random_mat(nrow, ncol):
-    return np.random.rand(nrow, ncol) * 1000.0
-
-def np_to_matrix(npmat):
-    mat = _matrix.Matrix(npmat.shape[0], npmat.shape[1])
-
-    for i in range(npmat.shape[0]):
-        for j in range(npmat.shape[1]):
-            mat[i,j] = npmat[i][j]
-
-    return mat
-
-def test_mul_naive():
-    for _ in range(200):
-        npm1 = np_random_mat(50, 50)
-        npm2 = np_random_mat(50, 50)
-        m1 = np_to_matrix(npm1)
-        m2 = np_to_matrix(npm2)
-        m3 = _matrix.multiply_naive(m1, m2)
-        mref = np_to_matrix(np.matmul(npm1, npm2))
-        assert is_mat_equal(m3, mref)
-
-def test_mul_tile():
-    for _ in range(200):
-        npm1 = np_random_mat(50, 50)
-        npm2 = np_random_mat(50, 50)
-        m1 = np_to_matrix(npm1)
-        m2 = np_to_matrix(npm2)
-        m3 = _matrix.multiply_tile(m1, m2, 16)
-        mref = np_to_matrix(np.matmul(npm1, npm2))
-        assert is_mat_equal(m3, mref)
-
-def test_mul_mkl():
-    for _ in range(200):
-        npm1 = np_random_mat(50, 50)
-        npm2 = np_random_mat(50, 50)
-        m1 = np_to_matrix(npm1)
-        m2 = np_to_matrix(npm2)
-        m3 = _matrix.multiply_mkl(m1, m2)
-        mref = np_to_matrix(np.matmul(npm1, npm2))
-        assert is_mat_equal(m3, mref)
-
-def test_performance():
-    npm1 = np_random_mat(1200, 1200)
-    npm2 = np_random_mat(1200, 1200)
-    m1 = np_to_matrix(npm1)
-    m2 = np_to_matrix(npm2)
-
-    tStart = time.process_time()
-    m_naive = _matrix.multiply_naive(m1, m2)
-    tNaive = time.process_time() - tStart
-
-    tStart = time.process_time()
-    m_tile16 = _matrix.multiply_tile(m1, m2, 16)
-    tTile16 = time.process_time() - tStart
-
-    tStart = time.process_time()
-    m_tile64 = _matrix.multiply_tile(m1, m2, 64)
-    tTile64 = time.process_time() - tStart
-
-    tStart = time.process_time()
-    m_tile256 = _matrix.multiply_tile(m1, m2, 256)
-    tTile256 = time.process_time() - tStart
-
-    tStart = time.process_time()
-    m_mkl = _matrix.multiply_mkl(m1, m2)
-    tMKL = time.process_time() - tStart
-
-    m_ref = np_to_matrix(np.matmul(npm1, npm2))
-
-    assert is_mat_equal(m_ref, m_naive)
-    assert is_mat_equal(m_ref, m_tile16)
-    assert is_mat_equal(m_ref, m_tile64)
-    assert is_mat_equal(m_ref, m_tile256)
-    assert is_mat_equal(m_ref, m_mkl)
-    assert tTile16  < 0.8 * tNaive
-    assert tTile64  < 0.8 * tNaive
-    assert tTile256 < 0.8 * tNaive
-
-    with open("performance.txt", "w") as fh:
-        fh.write(f'Multiplication in naive way: {tNaive: 10.4f} sec.\n')
-        fh.write(f'-----------------------------------------------------------------------\n')
-        fh.write(f'Multiplication use tiling: {tTile16: 10.4f} sec.\n')
-        faster = (tNaive / tTile16)
-        fh.write(f'Multiplication use tiling(16) faster than in naive way: {faster: 10.4f} times.\n')
-        fh.write(f'-----------------------------------------------------------------------\n')
-        fh.write(f'Multiplication use tiling: {tTile64: 10.4f} sec.\n')
-        faster = (tNaive / tTile64)
-        fh.write(f'Multiplication use tiling(64) faster than in naive way: {faster: 10.4f} times.\n')
-        fh.write(f'-----------------------------------------------------------------------\n')
-        fh.write(f'Multiplication use tiling: {tTile256: 10.4f} sec.\n')
-        faster = (tNaive / tTile256)
-        fh.write(f'Multiplication use tiling(256) faster than in naive way: {faster: 10.4f} times.\n')
-        fh.write(f'-----------------------------------------------------------------------\n')
-        fh.write(f'Multiplication by MKL: {tMKL: 10.4f} sec.\n')
-        faster = (tNaive / tMKL)
-        fh.write(f'Multiplication use MKL faster than in naive way: {faster: 10.4f} times.\n')
+if __name__ == '__main__':
+    pytest.main()

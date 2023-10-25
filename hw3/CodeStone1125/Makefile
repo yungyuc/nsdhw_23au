@@ -26,4 +26,4 @@ test: $(SRC)
 
 # 清理生成的文件
 clean:
-	rm -rf $(TARGET)$(PYTHON_EXTENSION_SUFFIX) __pycache__ .pytest* *.txt *.o
+	rm -rf $(TARGET)$(PYTHON_EXTENSION_SUFFIX) __pycache__ .pytest* *.txt *.o matrixMat*.bin

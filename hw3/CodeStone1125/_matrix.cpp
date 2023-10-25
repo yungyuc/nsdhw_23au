@@ -1,5 +1,7 @@
 
 #include <iostream>
+#include <fstream>
+
 #include <pybind11/pybind11.h> 
 #include <pybind11/operators.h>
 #include <pybind11/stl.h>
@@ -35,6 +37,25 @@ public:
                 (*this)(i, j) = other(i, j);
             }
         }
+    }
+
+    Matrix(const std::initializer_list<std::initializer_list<double>>& data) {
+        if (data.size() > 0) {
+            m_nrow = data.size();
+            m_ncol = data.begin()->size();
+            reset_buffer(m_nrow, m_ncol);
+
+            size_t i = 0, j = 0;
+            for (const auto& row : data) {
+                j = 0;
+                for (const double& val : row) {
+                    (*this)(i, j) = val;
+                    ++j;
+                }
+                ++i;
+            }
+        }
+
     }
 
     Matrix& operator=(const Matrix& other)
@@ -80,7 +101,10 @@ public:
         std::swap(m_buffer, other.m_buffer);
     }
 
-    double *val_addr() {return &(this->m_buffer[0]);}
+    double *val_addr() const {
+        return &(this->m_buffer[0]);
+    }
+
     
     Matrix & operator=(Matrix && other)
     {
@@ -97,38 +121,34 @@ public:
         reset_buffer(0, 0);
     }
 
-    double   operator() (size_t row, size_t col) const
-    {
-        return m_buffer[index(row, col)];
-    }
-    double & operator() (size_t row, size_t col)
-    {
-        return m_buffer[index(row, col)];
-    }
 
     size_t nrow() const { return m_nrow; }
     size_t ncol() const { return m_ncol; }
 
     size_t size() const { return m_nrow * m_ncol; }
-    // 返回缓冲区中指定索引位置的元素
+
     double buffer(size_t i) const {
         if (i < m_nrow * m_ncol) {
             return m_buffer[i];
         } else {
-            // 检查索引是否越界，如果越界则返回默认值（根据需要更改）
             return 0.0;
         }
     }
-
+    
     std::vector<double> buffer_vector() const
     {
-        if (m_buffer) {
-            return std::vector<double>(m_buffer, m_buffer + size());
-        } else {
-            // 返回空向量，因为没有有效数据
-            return std::vector<double>();
+        std::vector<double> buffer;
+        buffer.reserve(m_nrow * m_ncol);
+
+        for (size_t i = 0; i < m_nrow; ++i) {
+            for (size_t j = 0; j < m_ncol; ++j) {
+                buffer.push_back(m_buffer[index(i, j)]);
+            }
         }
+
+        return buffer;
     }
+
 
     double getvalue(size_t row, size_t col) const {
         if (row < m_nrow && col < m_ncol) {
@@ -145,8 +165,15 @@ public:
             throw std::out_of_range("Index out of bounds");
         }
     }
+     //operator overloading
 
-    // 在 Matrix 类中添加一个成员函数来比较两个矩阵
+    double & operator()(size_t row, size_t col)       { return m_buffer[index(row,col)]; }
+    double   operator()(size_t row, size_t col) const { return m_buffer[index(row,col)]; }
+
+    double & operator[](size_t idx)                   { return m_buffer[idx]; }
+    double   operator[](size_t idx) const             { return m_buffer[idx]; }
+
+    // Matrix compare 
     bool operator==(const Matrix& other) const {
         if (m_nrow != other.m_nrow || m_ncol != other.m_ncol) {
             return false;
@@ -163,26 +190,6 @@ public:
         return true;
     }
 
-    // 添加构造函数，接受初始化列表
-    Matrix(const std::initializer_list<std::initializer_list<double>>& data) {
-        // 在这里，您可以根据传入的初始化列表来构建 Matrix 对象
-        if (data.size() > 0) {
-            m_nrow = data.size();
-            m_ncol = data.begin()->size();
-            reset_buffer(m_nrow, m_ncol);
-
-            size_t i = 0, j = 0;
-            for (const auto& row : data) {
-                j = 0;
-                for (const double& val : row) {
-                    (*this)(i, j) = val;
-                    ++j;
-                }
-                ++i;
-            }
-        }
-        // 如果传入空的初始化列表，可以处理为空的情况
-    }
 
 private:
 
@@ -281,11 +288,31 @@ std::ostream & operator << (std::ostream & ostr, Matrix const & mat)
 
 // Function for matrix-matrix multiplication with tiling
 Matrix multiply_tile(const Matrix& mat1, const Matrix& mat2, size_t tileSize) {
-    size_t n = mat1.nrow();
-    size_t m = mat1.ncol();
-    size_t p = mat2.ncol();
+    // store mat1 and mat2 to binary file
+    std::ofstream mat1File("matrixMat1.bin", std::ios::out | std::ios::binary);
+    mat1File.write((char*)mat1.val_addr(), mat1.nrow() * mat1.ncol() * sizeof(double));
+    mat1File.close();
 
-    if (m != mat2.nrow()) {
+    std::ofstream mat2File("matrixMat2.bin", std::ios::out | std::ios::binary);
+    mat2File.write((char*)mat2.val_addr(), mat2.nrow() * mat2.ncol() * sizeof(double));
+    mat2File.close();
+
+    // Load matrix mat1 and mat2
+    Matrix loadedMat1(mat1.nrow(), mat1.ncol());
+    std::ifstream mat1Infile("matrixMat1.bin", std::ios::in | std::ios::binary);
+    mat1Infile.read((char*)loadedMat1.val_addr(), loadedMat1.nrow() * loadedMat1.ncol() * sizeof(double));
+    mat1Infile.close();
+
+    Matrix loadedMat2(mat2.nrow(), mat2.ncol());
+    std::ifstream mat2Infile("matrixMat2.bin", std::ios::in | std::ios::binary);
+    mat2Infile.read((char*)loadedMat2.val_addr(), loadedMat2.nrow() * loadedMat2.ncol() * sizeof(double));
+    mat2Infile.close();
+
+    size_t n = loadedMat1.nrow();
+    size_t m = loadedMat1.ncol();
+    size_t p = loadedMat2.ncol();
+
+    if (m != loadedMat2.nrow()) {
         throw std::invalid_argument("Matrix dimensions are not compatible for multiplication.");
     }
 
@@ -298,7 +325,7 @@ Matrix multiply_tile(const Matrix& mat1, const Matrix& mat2, size_t tileSize) {
                     for (size_t j = j0; j < std::min(j0 + tileSize, p); ++j) {
                         double v = 0;
                         for (size_t k = k0; k < std::min(k0 + tileSize, m); ++k) {
-                            v += mat1(i, k) * mat2(k, j);
+                            v += loadedMat1(i, k) * loadedMat2(k, j);
                         }
                         result(i, j) += v;
                     }
@@ -310,12 +337,38 @@ Matrix multiply_tile(const Matrix& mat1, const Matrix& mat2, size_t tileSize) {
     return result;
 }
 
-Matrix multiply_mkl(Matrix & mat1, Matrix & mat2)
+
+Matrix multiply_mkl(const Matrix& mat1, const Matrix& mat2)
 {
-    //check_multibility(mat1, mat2);
-    Matrix res(mat1.nrow(), mat2.ncol());
-    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, mat1.nrow(), mat2.ncol(), mat1.ncol(), 1, mat1.val_addr(), mat1.ncol(), mat2.val_addr(), mat2.ncol(), 0, res.val_addr(), res.ncol());
-    return res;
+    // store mat1 and mat2 to binary file
+    std::ofstream mat1File("matrixMat1.bin", std::ios::out | std::ios::binary);
+    mat1File.write((char*)mat1.val_addr(), mat1.nrow() * mat1.ncol() * sizeof(double));
+    mat1File.close();
+
+    std::ofstream mat2File("matrixMat2.bin", std::ios::out | std::ios::binary);
+    mat2File.write((char*)mat2.val_addr(), mat2.nrow() * mat2.ncol() * sizeof(double));
+    mat2File.close();
+
+    // Load matrix mat1 and mat2
+    Matrix loadedMat1(mat1.nrow(), mat1.ncol());
+    std::ifstream mat1Infile("matrixMat1.bin", std::ios::in | std::ios::binary);
+    mat1Infile.read((char*)loadedMat1.val_addr(), loadedMat1.nrow() * loadedMat1.ncol() * sizeof(double));
+    mat1Infile.close();
+
+    Matrix loadedMat2(mat2.nrow(), mat2.ncol());
+    std::ifstream mat2Infile("matrixMat2.bin", std::ios::in | std::ios::binary);
+    mat2Infile.read((char*)loadedMat2.val_addr(), loadedMat2.nrow() * loadedMat2.ncol() * sizeof(double));
+    mat2Infile.close();
+
+    double alpha = 1.0; 
+    double beta = 0.0;
+    Matrix ret(loadedMat1.nrow(), loadedMat2.ncol());
+    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, 
+                loadedMat1.nrow(), loadedMat2.ncol(), loadedMat1.ncol(), alpha, 
+                loadedMat1.val_addr(), loadedMat1.ncol(), loadedMat2.val_addr(), loadedMat2.ncol(), 
+                beta, ret.val_addr(), loadedMat2.ncol());
+
+    return ret;
 }
 
 
@@ -340,15 +393,25 @@ int main(int argc, char ** argv)
     return 0;
 }
 
-PYBIND11_MODULE(_matrix, m) {
-    m.doc() = "Matrix Multiplication funciton unit test.";
 
-    pybind11::class_<Matrix>(m, "Matrix")
-        .def(pybind11::init<>())
-        .def(pybind11::init<size_t, size_t>())
-        .def(pybind11::init<size_t, size_t, std::vector<double>>())
-        .def("__getitem__", &Matrix::getvalue)
-        .def("__setitem__", &Matrix::setvalue)
+namespace py = pybind11;
+
+PYBIND11_MODULE(_matrix, m) {
+    m.doc() = "Matrix Multiplication function unit test.";
+
+    py::class_<Matrix>(m, "Matrix")
+        .def(py::init<>())
+        .def(py::init<size_t, size_t>())
+        .def(py::init<size_t, size_t, std::vector<double>>())
+        .def("buffer_vector", &Matrix::buffer_vector)
+        .def("getvalue", &Matrix::getvalue, py::arg("row"), py::arg("col"))
+        .def("setvalue", &Matrix::setvalue, py::arg("row"), py::arg("col"), py::arg("value"))
+        .def("__getitem__", [](const Matrix &m_matrix, std::pair<size_t, size_t> index) {
+            return m_matrix(index.first, index.second);
+        })
+        .def("__setitem__", [](Matrix &m_matrix, std::pair<size_t, size_t> index, double value) {
+            m_matrix(index.first, index.second) = value;
+        })
         .def_property_readonly("nrow", &Matrix::nrow)
         .def_property_readonly("ncol", &Matrix::ncol)
         .def("__eq__", &Matrix::operator==);
@@ -357,5 +420,7 @@ PYBIND11_MODULE(_matrix, m) {
     m.def("multiply_tile", &multiply_tile);
     m.def("multiply_mkl", &multiply_mkl);
 }
+
+
 
 
