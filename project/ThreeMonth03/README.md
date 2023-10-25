@@ -130,20 +130,7 @@ class NonLinearConjugateGradient: public Algorithm{
 
 class ConjugateGradient: public LinearConjugateGradient,
     public NonLinearConjugateGradient{
-    public:
-        vector<double> const & prev_point(vector<double> const & prev_point)
-        const;
-        vector<double> & prev_point(vector<double> & prev_point);
-        vector<double> const & prev_grad(vector<double> const & prev_grad)
-        const;
-        vector<double> & prev_grad(vector<double> & prev_grad);
-        vector<double> next_point(const double&& cur_point, const double&&
-        cur_grad);
-    private:
-        vector<double> prev_point;
-        vector<double> prev_grad;
-        int b; //the hyperparameter of step length
-        //....
+    ///...
 };
 ```
 
