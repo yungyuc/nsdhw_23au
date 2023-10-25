@@ -96,7 +96,7 @@ For example, people could check whether $H$ is positive-definite by
 The estimated API is below:
 ### c++
 ```c++
-class LinearConjugateGradient: Algorithm{
+class LinearConjugateGradient: public Algorithm{
     public:
         vector<double> const & H(vector<double> const & H) const;
         vector<double> & H(vector<double> & H);
@@ -111,7 +111,7 @@ class LinearConjugateGradient: Algorithm{
 };
 
 
-class NonLinearConjugateGradient: Algorithm{
+class NonLinearConjugateGradient: public Algorithm{
     public:
         vector<double> const & prev_point(vector<double> const & prev_point)
         const;
@@ -124,7 +124,25 @@ class NonLinearConjugateGradient: Algorithm{
     private:
         vector<double> prev_point;
         vector<double> prev_grad;
-        int epoch;
+        int b; //the hyperparameter of step length
+        //....
+};
+
+class ConjugateGradient: public LinearConjugateGradient,
+    public NonLinearConjugateGradient{
+    public:
+        vector<double> const & prev_point(vector<double> const & prev_point)
+        const;
+        vector<double> & prev_point(vector<double> & prev_point);
+        vector<double> const & prev_grad(vector<double> const & prev_grad)
+        const;
+        vector<double> & prev_grad(vector<double> & prev_grad);
+        vector<double> next_point(const double&& cur_point, const double&&
+        cur_grad);
+    private:
+        vector<double> prev_point;
+        vector<double> prev_grad;
+        int b; //the hyperparameter of step length
         //....
 };
 ```
