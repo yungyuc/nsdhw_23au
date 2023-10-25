@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <pybind11/pybind11.h> 
 #include <pybind11/operators.h>
@@ -6,23 +7,48 @@
 #include <iomanip>
 #include <vector>
 #include <stdexcept>
-#include <mkl.h>
+#include <cblas.h>
+//modify C/C++包含路徑
+// #include <mkl.h>
 
 class Matrix {
 
 public:
 
-    Matrix(size_t nrow, size_t ncol)
-      : m_nrow(nrow), m_ncol(ncol)
+    // 單一構造函數處理不同情況
+    Matrix(size_t nrow, size_t ncol, std::vector<double> const & vec = {})
+        : m_nrow(nrow), m_ncol(ncol)
     {
         reset_buffer(nrow, ncol);
+        if (!vec.empty()) {
+            (*this) = vec;
+        }
     }
 
-    Matrix(size_t nrow, size_t ncol, std::vector<double> const & vec)
-      : m_nrow(nrow), m_ncol(ncol)
+    // 處理構造函數和賦值運算符
+    Matrix(const Matrix& other)
+        : m_nrow(other.m_nrow), m_ncol(other.m_ncol)
     {
-        reset_buffer(nrow, ncol);
-        (*this) = vec;
+        reset_buffer(m_nrow, m_ncol);
+        for (size_t i = 0; i < m_nrow; ++i) {
+            for (size_t j = 0; j < m_ncol; ++j) {
+                (*this)(i, j) = other(i, j);
+            }
+        }
+    }
+
+    Matrix& operator=(const Matrix& other)
+    {
+        if (this == &other) { return *this; }
+        if (m_nrow != other.m_nrow || m_ncol != other.m_ncol) {
+            reset_buffer(other.m_nrow, other.m_ncol);
+        }
+        for (size_t i = 0; i < m_nrow; ++i) {
+            for (size_t j = 0; j < m_ncol; ++j) {
+                (*this)(i, j) = other(i, j);
+            }
+        }
+        return *this;
     }
 
     Matrix & operator=(std::vector<double> const & vec)
@@ -42,36 +68,6 @@ public:
             }
         }
 
-        return *this;
-    }
-
-    Matrix(Matrix const & other)
-      : m_nrow(other.m_nrow), m_ncol(other.m_ncol)
-    {
-        reset_buffer(other.m_nrow, other.m_ncol);
-        for (size_t i=0; i<m_nrow; ++i)
-        {
-            for (size_t j=0; j<m_ncol; ++j)
-            {
-                (*this)(i,j) = other(i,j);
-            }
-        }
-    }
-
-    Matrix & operator=(Matrix const & other)
-    {
-        if (this == &other) { return *this; }
-        if (m_nrow != other.m_nrow || m_ncol != other.m_ncol)
-        {
-            reset_buffer(other.m_nrow, other.m_ncol);
-        }
-        for (size_t i=0; i<m_nrow; ++i)
-        {
-            for (size_t j=0; j<m_ncol; ++j)
-            {
-                (*this)(i,j) = other(i,j);
-            }
-        }
         return *this;
     }
 
@@ -326,8 +322,8 @@ Matrix multiply_mkl(Matrix & mat1, Matrix & mat2)
 int main(int argc, char ** argv)
 {
     std::cout << ">>> Naive algo for A(2x3) times B(3x2):" << std::endl;
-    Matrix mat1(2, 3, std::vector<double>{1, 2, 3, 4, 5, 6});
-    Matrix mat2(3, 2, std::vector<double>{1, 2, 3, 4, 5, 6});
+    Matrix mat1(2, 3, std::vector<double>{1.0, 2.0, 3.0, 4.0, 5.0, 6.0});
+    Matrix mat2(3, 2, std::vector<double>{1.0, 2.0, 3.0, 4.0, 5.0, 6.0});
     std::cout << "matrix A (2x3):" << mat1 << std::endl;
     std::cout << "matrix B (3x2):" << mat2 << std::endl;
     Matrix mat3 = multiply_naive(mat1, mat2);
@@ -344,24 +340,22 @@ int main(int argc, char ** argv)
     return 0;
 }
 
-//pybind
-PYBIND11_MODULE(ma03_matrix_matrix, m)
-{
+PYBIND11_MODULE(_matrix, m) {
     m.doc() = "Matrix Multiplication funciton unit test.";
 
     pybind11::class_<Matrix>(m, "Matrix")
-        .def(pybind11::init<const std::initializer_list<std::initializer_list<double>>&>())
         .def(pybind11::init<>())
         .def(pybind11::init<size_t, size_t>())
-        .def(pybind11::self == pybind11::self)
+        .def(pybind11::init<size_t, size_t, std::vector<double>>())
         .def("__getitem__", &Matrix::getvalue)
         .def("__setitem__", &Matrix::setvalue)
         .def_property_readonly("nrow", &Matrix::nrow)
         .def_property_readonly("ncol", &Matrix::ncol)
         .def("__eq__", &Matrix::operator==);
 
-
     m.def("multiply_naive", &multiply_naive);
     m.def("multiply_tile", &multiply_tile);
     m.def("multiply_mkl", &multiply_mkl);
 }
+
+

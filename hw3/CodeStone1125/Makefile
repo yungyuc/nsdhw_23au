@@ -1,32 +1,29 @@
-CXX = g++
-CXXFLAGS = -std=c++17 -O3 -g -m64
-TARGET = ma03_matrix_matrix
-SRCS = ma03_matrix_matrix.cpp
+CXX = g++  # 使用g++編譯器
+CXXFLAGS = -O3 -Wall -shared -std=c++11 -fPIC
+TARGET = _matrix
+SRC = _matrix.cpp
+# 使用python3-config和pybind11工具查找所需的編譯參數
+PYTHON_INCLUDES = $(shell python3 -m pybind11 --includes)
+PYTHON_EXTENSION_SUFFIX = $(shell python3-config --extension-suffix)
 
 # Include directories for MKL (modify the path as needed)
 MKL_INCLUDE = -I/home/williechu1125/intel/compilers_and_libraries_2019.1.144/linux/mkl/include
-
 # Linker flags for MKL (modify the path as needed)
-MKL_LIBS = -L/home/williechu1125/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64_lin
+MKL_LIB_DIR = -L/home/williechu1125/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64_lin
+MKL_LIBS = -lmkl_rt -lmkl_intel_lp64 -lmkl_sequential -lmkl_core
 
-# Include directories for Pybind11 and Python (modify the path as needed)
-PYBIND11_INCLUDE = -I/usr/local/include
-PYTHON_INCLUDE = -I/usr/include/python3.10 -I/usr/include/python3.10
+# Define CBLAS_INDEX explicitly
+CXXFLAGS += -DCBLAS_INDEX=size_t
 
-# Linker flags for Python
-PYTHON_LIBS = $(shell python3-config --ldflags) -lpython3.10
+# 目標：編譯 _matrix.cpp 並生成共享庫
+$(TARGET)$(PYTHON_EXTENSION_SUFFIX): $(SRC)
+	$(CXX) $(CXXFLAGS) $(MKL_INCLUDE) $(PYTHON_INCLUDES) $< -o $@ $(MKL_LIB_DIR) $(MKL_LIBS)
 
-$(TARGET): $(SRCS)
-	$(CXX) $(CXXFLAGS) $(MKL_INCLUDE) $(PYBIND11_INCLUDE) $(PYTHON_INCLUDE) -o $(TARGET) $(SRCS) $(MKL_LIBS) $(PYTHON_LIBS) -lmkl_rt
 
-.PHONY: run clean test
+test: $(SRC)
+	$(CXX) $(CXXFLAGS) $(MKL_INCLUDE) $(PYTHON_INCLUDES) $(SRC) -o $(TARGET)$(PYTHON_EXTENSION_SUFFIX) $(MKL_LIB_DIR) $(MKL_LIBS)
+	python3 -m pytest
 
-run: $(TARGET)
-	./$(TARGET)
-
-test: $(TARGET)
-	python3 ./test.py
-
+# 清理生成的文件
 clean:
-	rm -f $(TARGET)
-
+	rm -rf $(TARGET)$(PYTHON_EXTENSION_SUFFIX) __pycache__ .pytest* *.txt *.o
