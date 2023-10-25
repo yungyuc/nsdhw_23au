@@ -3,8 +3,8 @@ CXXFLAGS = -O3 -Wall -shared -std=c++11 -fPIC
 TARGET = _matrix
 SRC = _matrix.cpp
 # 使用python3-config和pybind11工具查找所需的編譯參數
-PYTHON_INCLUDES = $(shell python3 -m pybind11 --includes)
-PYTHON_EXTENSION_SUFFIX = $(shell python3-config --extension-suffix)
+PYTHON_INCLUDES = -I/usr/include/python3.10 #$(shell python3-config --cflags)
+PYTHON_EXTENSION_SUFFIX = #$(shell python3-config --extension-suffix)
 
 # Include directories for MKL (modify the path as needed)
 MKL_INCLUDE = -I/home/williechu1125/intel/compilers_and_libraries_2019.1.144/linux/mkl/include
@@ -23,6 +23,10 @@ $(TARGET)$(PYTHON_EXTENSION_SUFFIX): $(SRC)
 test: $(SRC)
 	$(CXX) $(CXXFLAGS) $(MKL_INCLUDE) $(PYTHON_INCLUDES) $(SRC) -o $(TARGET)$(PYTHON_EXTENSION_SUFFIX) $(MKL_LIB_DIR) $(MKL_LIBS)
 	python3 -m pytest
+
+try: $(SRC)
+	$(CXX) -O3 -Wall -shared -std=c++11 -fPIC -DCBLAS_INDEX=size_t -I/home/williechu1125/intel/compilers_and_libraries_2019.1.144/linux/mkl/include _matrix.cpp -o _matrix.cpython-310-x86_64-linux-gnu.so -L/home/williechu1125/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64_lin -lmkl_rt -lmkl_intel_lp64 -lmkl_sequential -lmkl_core
+
 
 # 清理生成的文件
 clean:
