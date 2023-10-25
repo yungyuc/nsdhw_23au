@@ -163,5 +163,5 @@ Week 8 (12/19): Flextime.
 
 1. Applied Numerical Analysis 7th, Curtis F. Gerald, Patrick O. Wheatley  
 
-5. [Introduction to Mathematical Optimization](
+2. [Introduction to Mathematical Optimization](
     https://indrag49.github.io/Numerical-Optimization/)
