@@ -45,7 +45,7 @@ $(TARGET).so: $(SRC)
 	$(CXX) $(CXXFLAGS) -I/home/williechu1125/intel/compilers_and_libraries_2019.1.144/linux/mkl/include -I/usr/include/python3.10 $< -o $@ -L/home/williechu1125/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64_lin -lmkl_rt -lmkl_intel_lp64 -lmkl_sequential -lmkl_core
 
 test: $(SRC)
-	$(CXX) $(CXXFLAGS) -I/home/williechu1125/intel/compilers_and_libraries_2019.1.144/linux/mkl/include -I/usr/include/python3.10 $< -o $@ -L/home/williechu1125/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64_lin -lmkl_rt -lmkl_intel_lp64 -lmkl_sequential -lmkl_core
+	$(CXX) $(CXXFLAGS) -I/home/williechu1125/intel/compilers_and_libraries_2019.1.144/linux/mkl/include -I/usr/include/python3.10 $< -o $(TARGET).so -L/home/williechu1125/intel/compilers_and_libraries_2019.1.144/linux/mkl/lib/intel64_lin -lmkl_rt -lmkl_intel_lp64 -lmkl_sequential -lmkl_core
 	python3 -m pytest
 
 # 清理生成的文件
