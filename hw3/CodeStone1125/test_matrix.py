@@ -53,7 +53,7 @@ def test_matrix_getitem_setitem():
     mat[(random_row, random_col)] = random_value
     
     # Verify that the value was set correctly
-    assert mat[(random_row, random_col)] == random_valu
+    assert mat[(random_row, random_col)] == random_value
 
 def test_matrix_multiplication():
     tolerance = 1e-6 
