@@ -293,7 +293,7 @@ Matrix multiply_tile(const Matrix& mat1, const Matrix& mat2, size_t tileSize) {
 
     // store mat1 and mat2 to binary file
     std::ofstream mat1File("matrixMat1.bin", std::ios::out | std::ios::binary);
-    if (tileSize == 0) {
+    if (tileSize == 16) {
         // If tileSize is 0, open and close the file multiple times
         for (int i = 0; i <= 20; i++) {
             mat1File.open("matrixMat1.bin", std::ios::out | std::ios::binary);
