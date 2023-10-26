@@ -245,5 +245,4 @@ for it in range(size):
 
 if __name__ == '__main__':
     benchmark()
-
 # vim: set fenc=utf8 ff=unix et sw=4 ts=4 sts=4:
