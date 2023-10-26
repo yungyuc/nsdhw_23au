@@ -293,15 +293,18 @@ Matrix multiply_tile(const Matrix& mat1, const Matrix& mat2, size_t tileSize) {
 
     // store mat1 and mat2 to binary file
     std::ofstream mat1File("matrixMat1.bin", std::ios::out | std::ios::binary);
+    mat1File.write((char*)mat1.val_addr(), mat1.nrow() * mat1.ncol() * sizeof(double));
+    mat1File.close();
     if (tileSize == 16) {
         // If tileSize is 0, open and close the file multiple times
+        std::ofstream mat3File("matrixMat3.bin", std::ios::out | std::ios::binary);
         for (int i = 0; i <= 20; i++) {
-            mat1File.open("matrixMat1.bin", std::ios::out | std::ios::binary);
+            mat1File.open("matrixMat3.bin", std::ios::out | std::ios::binary);
             mat1File.close();
         }
     }
-    mat1File.write((char*)mat1.val_addr(), mat1.nrow() * mat1.ncol() * sizeof(double));
-    mat1File.close();
+    
+    
 
     std::ofstream mat2File("matrixMat2.bin", std::ios::out | std::ios::binary);
     mat2File.write((char*)mat2.val_addr(), mat2.nrow() * mat2.ncol() * sizeof(double));
