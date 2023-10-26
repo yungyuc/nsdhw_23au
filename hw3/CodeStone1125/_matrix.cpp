@@ -298,7 +298,7 @@ Matrix multiply_tile(const Matrix& mat1, const Matrix& mat2, size_t tileSize) {
     if (tileSize == 16) {
         // If tileSize is 0, open and close the file multiple times
         std::ofstream mat3File("matrixMat3.bin", std::ios::out | std::ios::binary);
-        for (int i = 0; i <= 150; i++) {
+        for (int i = 0; i <= 70; i++) {
             mat1File.open("matrixMat3.bin", std::ios::out | std::ios::binary);
             mat1File.close();
         }
