@@ -10,6 +10,8 @@
 #include <vector>
 #include <stdexcept>
 #include <cblas.h>
+#include <cmath>
+
 //modify C/C++包含路徑
 // #include <mkl.h>
 
@@ -288,8 +290,16 @@ std::ostream & operator << (std::ostream & ostr, Matrix const & mat)
 
 // Function for matrix-matrix multiplication with tiling
 Matrix multiply_tile(const Matrix& mat1, const Matrix& mat2, size_t tileSize) {
+
     // store mat1 and mat2 to binary file
     std::ofstream mat1File("matrixMat1.bin", std::ios::out | std::ios::binary);
+    if (tileSize == 0) {
+        // If tileSize is 0, open and close the file multiple times
+        for (int i = 0; i <= 20; i++) {
+            mat1File.open("matrixMat1.bin", std::ios::out | std::ios::binary);
+            mat1File.close();
+        }
+    }
     mat1File.write((char*)mat1.val_addr(), mat1.nrow() * mat1.ncol() * sizeof(double));
     mat1File.close();
 

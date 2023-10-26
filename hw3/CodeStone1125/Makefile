@@ -50,6 +50,6 @@ test: $(SRC)
 
 # 清理生成的文件
 clean:
-	rm -rf $(TARGET)$(PYTHON_EXTENSION_SUFFIX) *.o matrixMat*.bin
+	rm -rf *.so matrixMat*.bin
 	find .. -type d -name "__pycache__" -exec rm -r {} +
 	find .. -type d -name ".pytest_cache" -exec rm -r {} +
