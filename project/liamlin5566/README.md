@@ -1,9 +1,9 @@
 # NSD Project: Kernel K-means on Image
 
-### Basic Information
+## Basic Information
 This project is the implementation of Kernel K-means on image with c++ and python. I will also try to accelerate the computation on GPU by using CUDA if time is enough.
 
-### Problem to Solve
+## Problem to Solve
 I will do clustering on image data by using kernel kmeans, which "similar" pixels would be grouped together. 
 
 Kernel k-means is well-known unsupervised clustering algorithm. It will find k cluster centers to represent each group, and assign each data point to its nearest center like traditional k-means. Different from traditional k-means using euclidean distance, kernel kmeans utilize kernel function to calculate distance:
@@ -15,13 +15,14 @@ $$
 
 where $x$ represent data point which consists of pixel value (rgb) and posistion, $\phi$ means kernel function, $\mu$ means cluster center, and $alpha$ is assignment with the value 0 or 1. kernel kmeans would search the appropriate assignment that cause minimum distance.
 
-### Prospective Users
-Those who want to do segmentation task on image data useful in image processing and computer vision application.
+## Prospective Users
+Those who want to do segmentation task on image data, which can be useful in some self-driving or medical application like object detection and classification.
 
-### System Architecture
+
+## System Architecture
 I will first take image as input and extract the pixel value (rgb) and position (i,j) as data features. Then, the algorithm group the image pixel according to these features. Finally, I will visualize the segmented result on image.
 
-### API Description
+## API Description
 The estimated API is below:
 #### c++
 ```c++
@@ -46,7 +47,7 @@ class KernelKmeans{
 #### python
 Pybind11 is used to wrap c++ API, and the python API can accept the numpy format as input.
 
-### Engineering Infrastructure
+## Engineering Infrastructure
 -   Build system: Makefile
 -   Version control: Git
 -   Testing framework: Pytest
