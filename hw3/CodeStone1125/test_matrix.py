@@ -1,4 +1,5 @@
 import pytest
+import math
 import _matrix
 import random
 import numpy as np
@@ -10,7 +11,6 @@ def test_matrix_creation():
     mat = _matrix.Matrix(rows, cols)
     assert mat.nrow == rows
     assert mat.ncol == cols
-    print(f"Matrix created with dimensions ({rows}, {cols})")
 
 def test_matrix_get_set_value():
     rows = random.randint(1, 1000)
@@ -26,7 +26,6 @@ def test_matrix_get_set_value():
     
     mat.setvalue(row_index, col_index, random_value)
     assert mat.getvalue(row_index, col_index) == random_value
-    print(f"Matrix ({rows}, {cols}) value set and retrieved in {timeit.timeit(lambda: mat.getvalue(row_index, col_index), number=1000)} seconds")
 
 def test_matrix_buffer_vector():
     rows = 2
@@ -41,7 +40,6 @@ def test_matrix_buffer_vector():
     # Check if each element in the buffer is equal to its corresponding element in the data
     for i in range(rows * cols):
         assert buffer[i] == mat_data[i]
-    print(f"Buffer vector checked for matrix ({rows}, {cols})")
 
 def test_matrix_getitem_setitem():
     rows, cols = 100, 1000
@@ -55,10 +53,10 @@ def test_matrix_getitem_setitem():
     mat[(random_row, random_col)] = random_value
     
     # Verify that the value was set correctly
-    assert mat[(random_row, random_col)] == random_value
-    print(f"Matrix ({rows}, {cols}) item set and retrieved in {timeit.timeit(lambda: mat[(random_row, random_col)] == random_value, number=1000)} seconds")
+    assert mat[(random_row, random_col)] == random_valu
 
 def test_matrix_multiplication():
+    tolerance = 1e-6 
     # Generate random data for mat1 and mat2
     mat1_data = np.random.rand(100, 100).flatten().tolist()
     mat2_data = np.random.rand(100, 100).flatten().tolist()
@@ -74,8 +72,7 @@ def test_matrix_multiplication():
     # Check each element of the result matrix
     for i in range(100):
         for j in range(100):
-            assert result[(i, j)] == expected_result[i][j]
-    print(f"Matrix multiplication ({100}, {100}) executed in {timeit.timeit(lambda: _matrix.multiply_naive(mat1, mat2), number=1)} seconds")
+            assert math.isclose(result[(i, j)], expected_result[i][j], rel_tol=tolerance)
 
 
 if __name__ == '__main__':
