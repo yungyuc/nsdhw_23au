@@ -1,9 +1,10 @@
 import pytest
-import math
 import _matrix
 import random
 import numpy as np
 import timeit
+import math
+
 
 def test_matrix_creation():
     rows = random.randint(1, 1000)
