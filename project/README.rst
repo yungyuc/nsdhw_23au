@@ -65,3 +65,8 @@ Follow the format to add your project in lexicographical order:
 1. `github_account_name <https://github.com/github_account_name>`__ for
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
+
+2. `liamlin5566 <https://github.com/liamlin5566>`__ for
+   `Kernel K-means on Image <liamlin5566/README.md>`__:
+   https://github.com/liamlin5566/project_name
+
