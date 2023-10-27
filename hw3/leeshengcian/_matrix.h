@@ -130,6 +130,8 @@ private:
         m_ncol = ncol;
     }
 
+    double *val_addr() { return &m_buffer[0]; }
+
     size_t m_nrow = 0;
     size_t m_ncol = 0;
     double * m_buffer = nullptr;
