@@ -2,8 +2,8 @@ CXX = g++
 
 SRC = _matrix.cc
 EXE = _matrix$(shell python3-config --extension-suffix)
-FLAGS = -O3 -Wall -shared -fPIC
-PYBD11 = -I /usr/include/python3.11 -I /usr/include/pybind11 -lpython3.11 `python3 -m pybind11 --includes`
+FLAGS = -O3 -Wall -shared -std=c++17 -fPIC
+PYBD11 = -I /usr/include/python3.11 -I /usr/include/pybind11 -lpython3.11 `python3 -m pybind11 --includes` --ldflags`
 BLAS = -I /usr/include/mkl/ -L /usr/lib/x86_64-linux-gnu/mkl/ -lblas
 
 all: $(SRC)
