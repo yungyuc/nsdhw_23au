@@ -10,6 +10,7 @@
 
 #include "_matrix.h"
 using namespace std;
+namespace py = pybind11;
 
 Matrix multiply_naive(Matrix const &mat1, Matrix const &mat2){
     if (mat1.ncol() != mat2.nrow())
