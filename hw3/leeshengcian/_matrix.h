@@ -113,6 +113,8 @@ public:
         return std::vector<double>(m_buffer, m_buffer+size());
     }
 
+    double *val_addr() { return &m_buffer[0]; }
+
 private:
 
     size_t index(size_t row, size_t col) const
@@ -129,8 +131,6 @@ private:
         m_nrow = nrow;
         m_ncol = ncol;
     }
-
-    double *val_addr() { return &m_buffer[0]; }
 
     size_t m_nrow = 0;
     size_t m_ncol = 0;
