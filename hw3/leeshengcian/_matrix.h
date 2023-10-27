@@ -3,6 +3,8 @@
 #include <vector>
 #include <stdexcept>
 
+using namespace std; 
+
 class Matrix {
 
 public:
@@ -113,6 +115,8 @@ public:
         return std::vector<double>(m_buffer, m_buffer+size());
     }
 
+    double getvalue(pair<size_t, size_t> index) { return (*this)(index.first, index.second); }
+    void setvalue(pair<size_t, size_t> index, const double value) { (*this)(index.first, index.second) = value; }
     double *val_addr() { return &m_buffer[0]; }
 
 private:

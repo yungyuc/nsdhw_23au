@@ -12,6 +12,23 @@
 using namespace std;
 namespace py = pybind11;
 
+bool operator==(Matrix const &mat1, Matrix const &mat2)
+{
+    if (mat1.ncol() != mat2.ncol() || mat1.nrow() != mat2.ncol())
+        return false;
+
+    for (size_t i = 0; i < mat1.nrow(); i++)
+    {
+        for (size_t j = 0; j < mat1.ncol(); j++)
+        {
+            if (mat1(i, j) != mat2(i, j))
+                return false;
+        }
+    }
+
+    return true;
+}
+
 Matrix multiply_naive(Matrix const &mat1, Matrix const &mat2){
     if (mat1.ncol() != mat2.nrow())
     {
