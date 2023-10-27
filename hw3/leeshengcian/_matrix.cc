@@ -74,7 +74,7 @@ Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2){
     const size_t K = mat1.ncol();
     const double alpha = 1.0, beta = 0.0;
 
-    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, M, N, K, alpha, mat1, M, mat2, N, beta, ret, N);
+    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, M, N, K, alpha, mat1.val_addr(), M, mat2.val_addr(), N, beta, ret.val_addr(), N);
 
     return ret;
 }
