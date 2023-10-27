@@ -9,6 +9,7 @@
 #include <pybind11/operators.h>
 
 #include "_matrix.h"
+using namespace std;
 
 Matrix multiply_naive(Matrix const &mat1, Matrix const &mat2){
     if (mat1.ncol() != mat2.nrow())
@@ -66,7 +67,7 @@ Matrix multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t blocksize)
     return ret;
 }
 
-Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2){
+Matrix multiply_mkl(Matrix &mat1, Matrix &mat2){
     Matrix ret(mat1.nrow(), mat2.ncol());
 
     const size_t M = mat1.nrow();
