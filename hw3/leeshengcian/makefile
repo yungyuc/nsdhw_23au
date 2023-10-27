@@ -1,20 +1,16 @@
 CXX = g++
+CXXFLAGS = -O3 -Wall --shared -std=c++17 -fPIC `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
+TARGET = _matrix.so
+TEST_FILE = test
 
-SRC = _matrix.cc
-EXE = _matrix$(shell python3-config --extension-suffix)
-FLAGS = -O3 -Wall -shared -std=c++17 -fPIC
-PYBD11 = -I /usr/include/python3.11 -I /usr/include/pybind11 -lpython3.11 `python3 -m pybind11 --includes` --ldflags`
-BLAS = -I /usr/include/mkl/ -L /usr/lib/x86_64-linux-gnu/mkl/ -lblas
+.PHONY: all test clean
 
-all: $(SRC)
-	$(CXX) $(FLAGS) $(shell python3 -m pybind11 --includes) $(PYBD11) $(BLAS) $(SRC) -o $(EXE)
+all: $(TARGET)
+$(TARGET): _matrix.cc
+	$(CXX) -o $@ $(CXXFLAGS) $<
 
-run: $(SRC)
-	$(CXX) $(FLAGS) $(shell python3 -m pybind11 --includes) $(PYBD11) $(BLAS) $(SRC) -o $(EXE)
-
-test: $(SRC)
-	$(CXX) $(FLAGS) $(PYBD11) $(SRC) -o $(EXE) $(BLAS)
-	python3 -m pytest
+test: all
+	python3 -m pytest -v
 
 clean:
-	rm -rf $(EXE) __pycache__ .pytest* performance.txt
+	rm -rf *.o *.so __pycache__ .pytest_cache/ performance.txt
