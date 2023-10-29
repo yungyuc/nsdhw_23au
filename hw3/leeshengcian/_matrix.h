@@ -120,6 +120,10 @@ public:
     void setvalue(pair<size_t, size_t> index, const double value) { (*this)(index.first, index.second) = value; }
     double *val_addr() { return &m_buffer[0]; }
 
+    size_t m_nrow = 0;
+    size_t m_ncol = 0;
+    double * m_buffer = nullptr;
+
 private:
 
     size_t index(size_t row, size_t col) const
@@ -145,9 +149,7 @@ private:
         }
     }
 
-    size_t m_nrow = 0;
-    size_t m_ncol = 0;
-    double * m_buffer = nullptr;
+    
 
 };
 
