@@ -1,3 +1,5 @@
-Start multiply_naive (repeat=5), take min = 0.5906955040991306 seconds
-Start multiply_mkl (repeat=5), take min = 0.032756999135017395 seconds
-MKL speed-up over naive: 18.0327 x
+Start multiply_naive (repeat=5), take min = 0.6285215001553297 seconds
+Start multiply_mkl (repeat=5), take min = 0.010521586053073406 seconds
+Start multiply_tile with tsize 16 (repeat=5), take min = 0.37977195903658867 seconds
+Tile 16 speed-up  over naive: 1.655 x
+MKL speed-up over naive: 59.7364 x
