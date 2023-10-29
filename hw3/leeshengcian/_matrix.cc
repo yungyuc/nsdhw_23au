@@ -29,7 +29,9 @@ bool operator==(Matrix const &mat1, Matrix const &mat2)
     return true;
 }
 
-Matrix multiply_naive(Matrix const &mat1, Matrix &mat2){
+
+Matrix multiply_naive(Matrix const &mat1, Matrix &mat2)
+{
     if (mat1.ncol() != mat2.nrow())
     {
         throw std::out_of_range(
@@ -60,26 +62,26 @@ Matrix multiply_naive(Matrix const &mat1, Matrix &mat2){
     return ret;
 }
 
-Matrix multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t blocksize)
+Matrix multiply_tile(const Matrix &a, const Matrix &b, size_t blocksize)
 {
-    Matrix ret(mat1.nrow(), mat2.ncol());
+    Matrix c(a.nrow(), b.ncol());
 
-    for (size_t blocki = 0; blocki < mat1.nrow(); blocki += blocksize)
+    for (size_t blocki = 0; blocki < a.nrow(); blocki += blocksize)
     {
-        size_t i_bound = std::min(blocki + blocksize, mat1.nrow());
-        for (size_t blockj = 0; blockj < mat2.ncol(); blockj += blocksize)
+        size_t i_bound = std::min(blocki + blocksize, a.nrow());
+        for (size_t blockj = 0; blockj < b.ncol(); blockj += blocksize)
         {
-            size_t j_bound = std::min(blockj + blocksize, mat2.ncol());
-            for (size_t blockk = 0; blockk < mat1.ncol(); blockk += blocksize)
+            size_t j_bound = std::min(blockj + blocksize, b.ncol());
+            for (size_t blockk = 0; blockk < a.ncol(); blockk += blocksize)
             {
-                size_t k_bound = std::min(blockk + blocksize, mat1.ncol());
+                size_t k_bound = std::min(blockk + blocksize, a.ncol());
                 for (size_t k = blockk; k < k_bound; k++)
                 {
                     for (size_t i = blocki; i < i_bound; i++)
                     {
                         for (size_t j = blockj; j < j_bound; j++)
                         {
-                            ret(i, j) += mat1(i, k) * mat2(k, j);
+                            c(i, j) += a(i, k) * b(k, j);
                         }
                     }
                 }
@@ -87,7 +89,7 @@ Matrix multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t blocksize)
         }
     }
 
-    return ret;
+    return c;
 }
 
 Matrix multiply_mkl(Matrix &mat1, Matrix &mat2){
