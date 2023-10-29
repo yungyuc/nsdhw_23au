@@ -116,21 +116,6 @@ public:
         return std::vector<double>(m_buffer, m_buffer+size());
     }
 
-    double getvalue(pair<size_t, size_t> index) { return (*this)(index.first, index.second); }
-    void setvalue(pair<size_t, size_t> index, const double value) { (*this)(index.first, index.second) = value; }
-    double *val_addr() { return &m_buffer[0]; }
-
-    size_t m_nrow = 0;
-    size_t m_ncol = 0;
-    double * m_buffer = nullptr;
-
-private:
-
-    size_t index(size_t row, size_t col) const
-    {
-        return row + col * m_nrow;
-    }
-
     void reset_buffer(size_t nrow, size_t ncol)
     {
         if (m_buffer)
@@ -149,8 +134,20 @@ private:
         }
     }
 
-    
+    double getvalue(pair<size_t, size_t> index) { return (*this)(index.first, index.second); }
+    void setvalue(pair<size_t, size_t> index, const double value) { (*this)(index.first, index.second) = value; }
+    double *val_addr() { return &m_buffer[0]; }
 
+    size_t m_nrow = 0;
+    size_t m_ncol = 0;
+    double * m_buffer = nullptr;
+
+private:
+
+    size_t index(size_t row, size_t col) const
+    {
+        return row + col * m_nrow;
+    }
 };
 
 
