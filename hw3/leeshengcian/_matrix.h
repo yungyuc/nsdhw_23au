@@ -108,8 +108,8 @@ public:
 
     size_t nrow() const { return m_nrow; }
     size_t ncol() const { return m_ncol; }
-
     size_t size() const { return m_nrow * m_ncol; }
+    size_t index(size_t row, size_t col) const { return row * m_ncol + col; }
     double buffer(size_t i) const { return m_buffer[i]; }
     std::vector<double> buffer_vector() const
     {
@@ -142,12 +142,6 @@ public:
     size_t m_ncol = 0;
     double * m_buffer = nullptr;
 
-private:
-
-    size_t index(size_t row, size_t col) const
-    {
-        return row + col * m_nrow;
-    }
 };
 
 
