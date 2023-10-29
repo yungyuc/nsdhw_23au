@@ -8,7 +8,8 @@ using namespace std;
 class Matrix {
 
 public:
-
+    Matrix() : m_nrow(0), m_ncol(0){};
+    
     Matrix(size_t nrow, size_t ncol)
       : m_nrow(nrow), m_ncol(ncol)
     {
