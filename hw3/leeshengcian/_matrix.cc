@@ -44,6 +44,7 @@ Matrix multiply_naive(Matrix const &mat1, Matrix const &mat2){
         const size_t base1 = i * mat1.ncol();
         for (size_t k=0; k<ret.ncol(); ++k)
         {
+            double v = 0;
             for (size_t j = 0; j < mat1.ncol(); ++j)
             {
                 v += mat1.m_buffer[base1 + j] * mat2.m_buffer[j * ret.ncol() + k];
