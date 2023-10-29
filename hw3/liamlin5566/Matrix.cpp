@@ -120,64 +120,37 @@ Matrix multiply_naive(Matrix const &mat1, Matrix const &mat2)
 
 
 
-// Matrix multiply_tile(Matrix const &mat1, Matrix const &mat2, std::size_t tsize)
-// {
-//     if (mat1.ncol() != mat2.nrow())
-//         throw std::out_of_range("Mismatch, two matrix cannot be multiplied");
-    
-//     Matrix ret(mat1.nrow(), mat2.ncol());
-
-//     for (std::size_t i = 0; i < mat1.nrow(); i+=tsize)
-//     {
-//         std::size_t it_bound = std::min(i+tsize, mat1.nrow());
-        
-//         for (std::size_t j = 0; j < mat2.ncol(); j+=tsize)
-//         {
-//             std::size_t jt_bound = std::min(j+tsize, mat2.ncol());
-            
-//             for (std::size_t k = 0; k < mat1.ncol(); k+=tsize)
-//             {
-//                 std::size_t kt_bound = std::min(k+tsize, mat1.ncol());
-                
-//                 for (std::size_t it = i; it < it_bound; it++)
-//                 {
-//                     for (std::size_t jt = j; jt < jt_bound ; jt++)
-//                     {
-//                         for (std::size_t kt = k; kt < kt_bound; kt++)
-//                             ret(it, jt) += mat1(it, kt) * mat2(kt, jt);
-//                     }
-//                 }
-//             }       
-//         }
-//     }
-
-//     return ret;
-// }
-
-Matrix multiply_tile(const Matrix &mat1, const Matrix &mat2, size_t blocksize)
+Matrix multiply_tile(Matrix const &mat1, Matrix const &mat2, std::size_t tsize)
 {
+    if (mat1.ncol() != mat2.nrow())
+        throw std::out_of_range("Mismatch, two matrix cannot be multiplied");
+    
     Matrix ret(mat1.nrow(), mat2.ncol());
 
-    for (size_t blocki = 0; blocki < mat1.nrow(); blocki += blocksize)
+    for (std::size_t i = 0; i < mat1.nrow(); i+=tsize)
     {
-        size_t i_bound = std::min(blocki + blocksize, mat1.nrow());
-        for (size_t blockj = 0; blockj < mat2.ncol(); blockj += blocksize)
+        std::size_t it_bound = std::min(i+tsize, mat1.nrow());
+        
+        for (std::size_t j = 0; j < mat2.ncol(); j+=tsize)
         {
-            size_t j_bound = std::min(blockj + blocksize, mat2.ncol());
-            for (size_t blockk = 0; blockk < mat1.ncol(); blockk += blocksize)
+            std::size_t jt_bound = std::min(j+tsize, mat2.ncol());
+            
+            for (std::size_t k = 0; k < mat1.ncol(); k+=tsize)
             {
-                size_t k_bound = std::min(blockk + blocksize, mat1.ncol());
-                for (size_t k = blockk; k < k_bound; k++)
+                std::size_t kt_bound = std::min(k+tsize, mat1.ncol());
+                
+                for (std::size_t it = i; it < it_bound; it++)
                 {
-                    for (size_t i = blocki; i < i_bound; i++)
+                    for (std::size_t jt = j; jt < jt_bound ; jt++)
                     {
-                        for (size_t j = blockj; j < j_bound; j++)
-                        {
-                            ret(i, j) += mat1(i, k) * mat2(k, j);
-                        }
+                        double v = 0;
+                        for (std::size_t kt = k; kt < kt_bound; kt++)
+                            v += mat1(it, kt) * mat2(kt, jt);
+                        ret(it, jt) += v;
                     }
+                    
                 }
-            }
+            }       
         }
     }
 
