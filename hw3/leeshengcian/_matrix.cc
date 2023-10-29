@@ -29,7 +29,7 @@ bool operator==(Matrix const &mat1, Matrix const &mat2)
     return true;
 }
 
-Matrix multiply_naive(Matrix const &mat1, Matrix const &mat2){
+Matrix multiply_naive(Matrix const &mat1, Matrix &mat2){
     if (mat1.ncol() != mat2.nrow())
     {
         throw std::out_of_range(
@@ -39,15 +39,19 @@ Matrix multiply_naive(Matrix const &mat1, Matrix const &mat2){
 
     Matrix ret(mat1.nrow(), mat2.ncol());
 
-    for (size_t i=0; i<ret.nrow(); ++i)
+    const size_t nrow1 = mat1.nrow();
+    const size_t ncol1 = mat1.ncol();
+    const size_t ncol2 = mat2.ncol();
+
+    for (size_t i = 0; i < nrow1; ++i)
     {
-        const size_t base1 = i * mat1.ncol();
-        for (size_t k=0; k<ret.ncol(); ++k)
+        const size_t base1 = i * ncol1;
+        for (size_t k = 0; k < ncol2; ++k)
         {
             double v = 0;
-            for (size_t j = 0; j < mat1.ncol(); ++j)
+            for (size_t j = 0; j < ncol1; ++j)
             {
-                v += mat1.m_buffer[base1 + j] * mat2.m_buffer[j * ret.ncol() + k];
+                v += mat1.m_buffer[base1 + j] * mat2.m_buffer[j * ncol2 + k];
             }
             ret.m_buffer[base1 + k] = v;
         }
