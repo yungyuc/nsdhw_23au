@@ -9,7 +9,7 @@ class Matrix {
 
 public:
     Matrix() : m_nrow(0), m_ncol(0){};
-    
+
     Matrix(size_t nrow, size_t ncol)
       : m_nrow(nrow), m_ncol(ncol)
     {
@@ -129,12 +129,20 @@ private:
 
     void reset_buffer(size_t nrow, size_t ncol)
     {
-        if (m_buffer) { delete[] m_buffer; }
-        const size_t nelement = nrow * ncol;
-        if (nelement) { m_buffer = new double[nelement]; }
-        else          { m_buffer = nullptr; }
+        if (m_buffer)
+        {
+            delete[] m_buffer;
+        }
+
+        size_t nelement = nrow * ncol;
+        m_buffer = nelement ? new double[nelement] : nullptr;
         m_nrow = nrow;
         m_ncol = ncol;
+
+        for (size_t i = 0; i < nelement; i++)
+        {
+            m_buffer[i] = 0;
+        }
     }
 
     size_t m_nrow = 0;
