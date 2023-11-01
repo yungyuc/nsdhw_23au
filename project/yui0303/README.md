@@ -156,6 +156,10 @@ The user interface may base on [Vue](https://vuejs.org/) or [React](https://zh-h
 
 ### Constraints
 
+- Size of input matrix: default any size
+  - The larger the matrix size, the higher the complexity. Thus, there may be a **TIMEOUT** mechanism during the computation.
+  - This mechanism depends on the parameters previously set in the environment building (using makefile or cmakefile).
+- The accerlation of the matrix operation is focus on **dense** matrix opertaion.
 
 ## API Description
 The estimated API is below:
@@ -196,29 +200,28 @@ The python API will call c++ API by pybind11, and the python API can accept the 
 
 - Week 1 (10/31):  
   - Study domain knwoledges and choose the method of calculating eigenvalues.  
-  - Start to coding the function of `CalEigenvalues()`
+  - Start coding the function of `CalEigenvalues()`
 - Week 2 (11/7): 
   - Finish the the function of `CalEigenvalues()`
 - Week 3 (11/14): 
-  - Start to coding the function of `CalEigenvectors()`
-  - Try how to partition the calcuation of eignevalues and eignevectors with multi-threading or other accerlation methods.
-- Week 4 (11/21): 
-  - Keep tring the accerlation of matrix operation.
-- Week 5 (11/28): 
+  - Start coding the function of `CalEigenvectors()`
   - Binding the c++ API with pybind11
-  - Prepare a presentaion skeleton
-  - Implement a cmake file or makefile
-- Week 6 (12/5):
-  - Build the user interface and connect with the kernel function.
   - Wrapping and test for pytest.
+- Week 4 (11/21): 
+  - Build the draft of makefile
+  - Try how to partition the calcuation of eignevalues and eignevectors with multi-threading or other accerlation methods.
+- Week 5 (11/28): 
+  - Keep trying the accerlation of matrix operation.
+  - Implement a complete cmake file or makefile.
+- Week 6 (12/5):
+  - Prepare a presentaion skeleton
+  - Build the user interface and connect with the kernel function.
 - Week 7 (12/12):
-  - Maintain the system
+  - Maintain the system.
   - Keep wrting the draft of final project.
 - Week 8 (12/19): Flextime.  
 
 ## References
-
-
 
 1. [Linear-Algebra-With-Python](https://github.com/weijie-chen/Linear-Algebra-With-Python/blob/master/Chapter%2012%20-%20Eigenvalues%20and%20Eigenvectors.ipynb)
 2. [Computing Eigenvalues and Eigenvectors using QR Decomposition](https://www.andreinc.net/2021/01/25/computing-eigenvalues-and-eigenvectors-using-qr-decomposition)
