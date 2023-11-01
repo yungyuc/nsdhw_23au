@@ -65,6 +65,12 @@ Follow the format to add your project in lexicographical order:
 1. `github_account_name <https://github.com/github_account_name>`__ for
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
-2. `yui0303 <https://github.com/yui0303/Matrix-Diagonalization>`__ for
+2. `CodeStone1125 <https://github.com/CodeStone1125>`__ for
+   `Project subject <CodeStone1125/README.md>`__:
+   https://github.com/CodeStone1125/QuadraCompress
+3. `Yu-Rou-Weng <https://github.com/Yu-Rou-Weng>`__ for
+   `Project subject <Yu-Rou-Weng/README.md>`__:
+   https://github.com/Yu-Rou-Weng/Mesh-Data-Converter
+4. `yui0303 <https://github.com/yui0303/Matrix-Diagonalization>`__ for
    `Project subject <https://github.com/yui0303/nsdhw_23au/blob/yui0303-proposal-submission/project/yui0303/README.md>`__:
    https://github.com/yui0303/Matrix-Diagonalization
