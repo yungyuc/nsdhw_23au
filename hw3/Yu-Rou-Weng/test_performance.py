@@ -2,7 +2,7 @@ import matrix
 import pytest
 import timeit
 
-class Test_Matrix:
+class Test_Matrix():
     @staticmethod
     def matrices(dimension):
         matrix_a = matrix.Matrix(dimension, dimension)
