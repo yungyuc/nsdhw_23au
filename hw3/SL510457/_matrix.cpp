@@ -1,201 +1,100 @@
-#include <iostream>
-#include <iomanip>
-#include <vector>
-#include <stdexcept>
+#include "pybind11/pybind11.h"
 #include <mkl/mkl.h>
-#include <pybind11/pybind11.h>
-#include <pybind11/stl.h>
-#include <pybind11/numpy.h>
-#include <pybind11/operators.h>
+#include <mkl/mkl_cblas.h>
+#include "pybind11/stl.h"
+#include <mkl/mkl_lapack.h>
+#include <bits/stdc++.h>
+#include <mkl/mkl_lapacke.h>
+#include "pybind11/operators.h"
 
-namespace py=pybind11;
 using namespace std;
+namespace py = pybind11;
 
 class Matrix {
 
 public:
 
-    Matrix(size_t nrow, size_t ncol)
-      : m_nrow(nrow), m_ncol(ncol)
-    {
-        reset_buffer(nrow, ncol);
+    Matrix(int rows, int cols) : m_rows(rows), m_cols(cols), m_data(new double[rows*cols]){
+        memset(m_data, 0, sizeof(double)*rows*cols);
     }
-
-    Matrix(size_t nrow, size_t ncol, std::vector<double> const & vec)
-      : m_nrow(nrow), m_ncol(ncol)
-    {
-        reset_buffer(nrow, ncol);
-        (*this) = vec;
-    }
-
-    Matrix & operator=(std::vector<double> const & vec)
-    {
-        if (size() != vec.size())
-        {
-            throw std::out_of_range("number of elements mismatch");
-        }
-
-        size_t k = 0;
-        for (size_t i=0; i<m_nrow; ++i)
-        {
-            for (size_t j=0; j<m_ncol; ++j)
-            {
-                (*this)(i,j) = vec[k];
-                ++k;
-            }
-        }
-
-        return *this;
-    }
-
-    Matrix(Matrix const & other)
-      : m_nrow(other.m_nrow), m_ncol(other.m_ncol)
-    {
-        reset_buffer(other.m_nrow, other.m_ncol);
-        for (size_t i=0; i<m_nrow; ++i)
-        {
-            for (size_t j=0; j<m_ncol; ++j)
-            {
-                (*this)(i,j) = other(i,j);
+    Matrix(const Matrix &m) : m_cols(m.ncol()), m_rows(m.nrow()){
+        m_data = new double[m_rows*m_cols];
+        for (int i = 0; i < m_rows; i++){
+            for (int j = 0; j < m_cols; j++){
+                m_data[i*m_cols+j] = m(i, j);
             }
         }
     }
 
-    Matrix & operator=(Matrix const & other)
-    {
-        if (this == &other) { return *this; }
-        if (m_nrow != other.m_nrow || m_ncol != other.m_ncol)
-        {
-            reset_buffer(other.m_nrow, other.m_ncol);
+    ~Matrix(){
+        delete[] m_data;
+    }
+    double &operator()(int x, int y){
+        return m_data[y*m_cols+x];
+    }
+    double operator()(int x, int y) const{
+        return m_data[y*m_cols+x];
+    }
+    bool operator ==(const Matrix &m) const{
+        if (m_rows != m.nrow() || m_cols != m.ncol()){
+            return false;
         }
-        for (size_t i=0; i<m_nrow; ++i)
-        {
-            for (size_t j=0; j<m_ncol; ++j)
-            {
-                (*this)(i,j) = other(i,j);
+        for (int i = 0; i < m_rows; i++){
+            for (int j = 0; j < m_cols; j++){
+                if ((*this)(i, j) != m(i, j)){
+                    return false;
+                }
             }
         }
-        return *this;
+        return true;
     }
-
-    Matrix(Matrix && other)
-      : m_nrow(other.m_nrow), m_ncol(other.m_ncol)
-    {
-        reset_buffer(0, 0);
-        std::swap(m_nrow, other.m_nrow);
-        std::swap(m_ncol, other.m_ncol);
-        std::swap(m_buffer, other.m_buffer);
+    int nrow() const{ 
+        return m_rows; 
     }
-
-    Matrix & operator=(Matrix && other)
-    {
-        if (this == &other) { return *this; }
-        reset_buffer(0, 0);
-        std::swap(m_nrow, other.m_nrow);
-        std::swap(m_ncol, other.m_ncol);
-        std::swap(m_buffer, other.m_buffer);
-        return *this;
+    int ncol() const{ 
+        return m_cols;
     }
-
-    ~Matrix()
-    {
-        reset_buffer(0, 0);
-    }
-
-    double   operator() (size_t row, size_t col) const
-    {
-        return m_buffer[index(row, col)];
-    }
-    double & operator() (size_t row, size_t col)
-    {
-        return m_buffer[index(row, col)];
-    }
-
-    size_t nrow() const { return m_nrow; }
-    size_t ncol() const { return m_ncol; }
-
-    size_t size() const { return m_nrow * m_ncol; }
-    double buffer(size_t i) const { return m_buffer[i]; }
-    std::vector<double> buffer_vector() const
-    {
-        return std::vector<double>(m_buffer, m_buffer+size());
+    double* data() const{
+        return m_data;
     }
 
 private:
-
-    size_t index(size_t row, size_t col) const
-    {
-        return row + col * m_nrow;
-    }
-
-    void reset_buffer(size_t nrow, size_t ncol)
-    {
-        if (m_buffer) { delete[] m_buffer; }
-        const size_t nelement = nrow * ncol;
-        if (nelement) { m_buffer = new double[nelement]; }
-        else          { m_buffer = nullptr; }
-        m_nrow = nrow;
-        m_ncol = ncol;
-    }
-
-    size_t m_nrow = 0;
-    size_t m_ncol = 0;
-    double * m_buffer = nullptr;
-
+    int m_rows;
+    int m_cols;
+    double *m_data;
 };
 
-/*
- * Naive matrix matrix multiplication.
- */
-Matrix multiply_naive(Matrix const & mat1, Matrix const & mat2)
-{
-    if (mat1.ncol() != mat2.nrow())
-    {
-        throw std::out_of_range(
-            "the number of first matrix column "
-            "differs from that of second matrix row");
-    }
 
-    Matrix ret(mat1.nrow(), mat2.ncol());
-
-    for (size_t i=0; i<ret.nrow(); ++i)
-    {
-        for (size_t k=0; k<ret.ncol(); ++k)
-        {
-            double v = 0;
-            for (size_t j=0; j<mat1.ncol(); ++j)
-            {
-                v += mat1(i,j) * mat2(j,k);
+Matrix multiply_naive(Matrix const &m1, Matrix const &m2){
+    Matrix ret(m1.nrow(), m2.ncol());
+    for (int i = 0; i < m1.nrow(); i++) {
+        for (int j = 0; j < m2.ncol(); j++) {
+            double sum = 0.0;
+            for (int k = 0; k < m1.ncol(); k++) {
+                sum += m1(i, k) * m2(k, j);
             }
-            ret(i,k) = v;
+            ret(i, j) = sum;
         }
     }
-
     return ret;
 }
 
-//new
-Matrix multiply_tile(Matrix const & mat1, Matrix const & mat2, int blockSize) {
-    if (mat1.ncol() != mat2.nrow())
-    {
-        throw std::out_of_range(
-            "the number of first matrix column "
-            "differs from that of second matrix row");
-    }
+Matrix multiply_tile(Matrix const &m1, Matrix const &m2, int const tile_size){
+    int m = m1.nrow();
+    int n = m2.ncol();
+    int k = m1.ncol();
 
-    int n = mat1.nrow();
-    int m = mat1.ncol();
-    int p = mat2.ncol();
-
-    Matrix ret(n, p);
-
-    for (int i = 0; i < n; i += blockSize) {
-        for (int j = 0; j < p; j += blockSize) {
-            for (int k = 0; k < m; k += blockSize) {
-                for (int ii = i; ii < std::min(i + blockSize, n); ++ii) {
-                    for (int jj = j; jj < std::min(j + blockSize, p); ++jj) {
-                        for (int kk = k; kk < std::min(k + blockSize, m); ++kk) {
-                            ret(ii, jj) += mat1(ii, kk) * mat2(kk, jj);
+    Matrix ret(m, n);
+    for (int i0 = 0; i0 < m; i0 += tile_size) {
+        int imax = std::min(i0 + tile_size, m);
+        for (int j0 = 0; j0 < n; j0 += tile_size) {
+            int jmax = std::min(j0 + tile_size, n);
+            for (int k0 = 0; k0 < k; k0 += tile_size) {
+                int kmax = std::min(k0 + tile_size, k);
+                for (int i = i0; i < imax; i++) {
+                    for (int j = j0; j < jmax; j++) {
+                        for (int l = k0; l < kmax; l++) {
+                            ret(i, j) += m1(i, l) * m2(l, j);
                         }
                     }
                 }
@@ -204,7 +103,9 @@ Matrix multiply_tile(Matrix const & mat1, Matrix const & mat2, int blockSize) {
     }
 
     return ret;
+
 }
+
 
 Matrix multiply_mkl(Matrix const &m1, Matrix const &m2){
     mkl_set_num_threads(1);
@@ -216,66 +117,11 @@ Matrix multiply_mkl(Matrix const &m1, Matrix const &m2){
 
 
 
-std::ostream & operator << (std::ostream & ostr, Matrix const & mat)
-{
-    for (size_t i=0; i<mat.nrow(); ++i)
-    {
-        ostr << std::endl << " ";
-        for (size_t j=0; j<mat.ncol(); ++j)
-        {
-            ostr << " " << std::setw(2) << mat(i, j);
-        }
-    }
-
-    return ostr;
-}
-
-// int main(int argc, char ** argv)
-// {
-//     std::cout << ">>> A(2x3) times B(3x2):" << std::endl;
-//     Matrix mat1(2, 3, std::vector<double>{1, 2, 3, 4, 5, 6});
-//     Matrix mat2(3, 2, std::vector<double>{1, 2, 3, 4, 5, 6});
-
-//     Matrix mat3 = multiply_tile(mat1,mat2,2);
-
-//     std::cout << "matrix A (2x3):" << mat1 << std::endl;
-//     std::cout << "matrix B (3x2):" << mat2 << std::endl;
-//     std::cout << "result matrix C (2x2) = AB:" << mat3 << std::endl;
-
-//     std::cout << ">>> B(3x2) times A(2x3):" << std::endl;
-//     Matrix mat4 = multiply_tile(mat2,mat1,2);
-//     std::cout << "matrix B (3x2):" << mat2 << std::endl;
-//     std::cout << "matrix A (2x3):" << mat1 << std::endl;
-//     std::cout << "result matrix D (3x3) = BA:" << mat4 << std::endl;
-
-//     return 0;
-// }
-
-// PYBIND11_MODULE(_matrix, m)
-// {
-//     m.doc() = "Matrix-multiplication function test and performance.";
-//     m.def("multiply_naive", &multiply_naive);
-//     m.def("multiply_tile", &multiply_tile);
-//     m.def("multiply_mkl", &multiply_mkl);
-
-//     py::class_<Matrix>(m, "Matrix")
-//         .def(py::init<>())
-//         .def(py::init<size_t, size_t>())
-//         .def(py::self == py::self)
-//         .def_property_readonly("nrow", &Matrix::nrow)
-//         .def_property_readonly("ncol", &Matrix::ncol)
-//         .def("__getitem__", &Matrix::getvalue)
-//         .def("__setitem__", &Matrix::setvalue);
-// }
-
-
-PYBIND11_MODULE(_matrix, m) {
-
+PYBIND11_MODULE(_matrix, m){
     m.doc() = "matrix-matrix multiplication";
     m.def("multiply_naive", &multiply_naive, "naive");
     m.def("multiply_tile", &multiply_tile, "tile");
     m.def("multiply_mkl", &multiply_mkl, "mkl");
-
     py::class_<Matrix>(m, "Matrix")
         .def(py::init<int, int>())
         .def_property_readonly("nrow", [](const Matrix &mat) { return mat.nrow(); })

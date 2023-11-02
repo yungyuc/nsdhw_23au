@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -O3 -shared -m64
-HEADERS = -I/usr/include/mkl #-I/DATA/lllll/.local/lib/python3.6/site-packages/pybind11/include
+HEADERS = -I/usr/include/mkl
 PIBINDFLAG = -fPIC `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
 PY_OBJ = _matrix.so
 MKL_LIB_DIR=/usr/lib/x86_64-linux-gnu
