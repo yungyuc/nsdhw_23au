@@ -11,8 +11,9 @@ namespace py = pybind11;
 
 class LinearMatrix {
 private:
+    size_t rows_;
+    size_t cols_;
     std::vector<double> data_;
-    size_t rows_, cols_;
 
 public:
     LinearMatrix(size_t rows, size_t cols) : rows_(rows), cols_(cols), data_(rows * cols, 0.0) {}
