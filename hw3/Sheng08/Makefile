@@ -21,7 +21,7 @@ test: $(TARGET)
 	$(PYTHON) -m pytest -v test_matrix.py
 	
 clean:
-	rm -f $(TARGET) $(OBJ)
+	rm -f $(TARGET)
 	find . -name "__pycache__" -type d -exec rm -rf {} +
 	find . -name "*.pyc" -type f -delete
 	find . -name ".pytest_cache" -type d -exec rm -rf {} +
