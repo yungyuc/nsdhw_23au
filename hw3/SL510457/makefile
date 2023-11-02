@@ -10,7 +10,7 @@ MKL_LIBS=$(patsubst %, $(MKL_LIB_DIR)/%, $(MKL_LIB_SO)) \
 
 all: $(PY_OBJ)
 
-$(PY_OBJ): matrix.cpp
+$(PY_OBJ): _matrix.cpp
 	$(CXX) $< -o $@ $(CXXFLAGS) $(HEADERS) $(PIBINDFLAG) ${MKL_LIBS} 
 
 test: $(PY_OBJ)
