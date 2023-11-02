@@ -15,7 +15,7 @@ class Test_Matrix:
 
         return matrix_a, matrix_b
 
-    def test_MatrixMultiply_correct(self):
+    def test_multiply_correct(self):
         dim = 100
         m1, m2 = self.matrices(dim)
 
@@ -26,7 +26,7 @@ class Test_Matrix:
             for j in range(dim):
                 assert result_naive[i, j] == result_mkl[i, j]
 
-    def test_MatrixMultiply_zero(self):
+    def test_multiply_zero(self):
         dim = 100
         m1, m2 = self.matrices(dim)
         m_zero = matrix.Matrix(dim, dim)  
@@ -46,10 +46,10 @@ class Test_Matrix:
         matrix_size = 1000
         m1, m2 = self.matrices(matrix_size)
         base_tile_size = 0 
-        ratio_base= self.tiling_test(m1, m2, base_tile_size)
+        ratio_base, time_base = self.tiling_test(m1, m2, base_tile_size)
 
         for tile_size in [16, 17, 19]:
-            ratio= self.tiling_test(m1, m2, tile_size)
+            ratio, time_tiled = self.tiling_test(m1, m2, tile_size)
             assert ratio < 0.8 * ratio_base, f"Tiling with size {tile_size} should be at least 20% faster."
 
     @staticmethod
