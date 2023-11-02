@@ -9,7 +9,7 @@ PYCONFIG      := $(shell python3-config --extension-suffix)
 SRC        	  := _matrix.cpp
 TARGET 		  := _matrix${PYCONFIG}
 
-.PHONY: all main test clean
+.PHONY: all test clean
 
 all: $(TARGET)
 
