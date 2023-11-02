@@ -5,12 +5,12 @@ MKLFLAGS      := -lblas
 MKL_LIB = -L/usr/lib/x86_64-linux-gnu -lblas -pthread -liomp5 -lm -lmkl_intel_thread -lmkl_intel_lp64 -ldl
 
 INCLUDE = `python3 -m pybind11 --includes`
-PYINCLUDE     := /usr/include/python3.8
+PYINCLUDE     := $(shell python3-config --includes) 
 PYCONFIG      := `python3-config --extension-suffix`
 
 
 main:
-	$(CXX) $(CXXFLAGS) $(INCLUDE) _matrix.cpp -o _matrix$(PYCONFIG) -I$(PYINCLUDE) $(MKL_LIB) -I$(MKLINCLUDE)
+	$(CXX) $(CXXFLAGS) $(INCLUDE) _matrix.cpp -o _matrix$(PYCONFIG) $(PYINCLUDE) $(MKL_LIB) -I$(MKLINCLUDE)
 
 
 test: main
