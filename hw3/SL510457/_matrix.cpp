@@ -80,6 +80,13 @@ Matrix multiply_naive(Matrix const &m1, Matrix const &m2){
 }
 
 Matrix multiply_tile(Matrix const &m1, Matrix const &m2, int const tile_size){
+    if (m1.ncol() != m2.nrow())
+    {
+        throw std::out_of_range(
+            "the number of first matrix column "
+            "differs from that of second matrix row");
+    }
+    
     int m = m1.nrow();
     int n = m2.ncol();
     int k = m1.ncol();
