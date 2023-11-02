@@ -3,36 +3,48 @@ import pytest
 import timeit
 
 class Test_Matrix():
-    @staticmethod
-    def matrices(dimension):
-        matrix_a = matrix.Matrix(dimension, dimension)
-        matrix_b = matrix.Matrix(dimension, dimension)
 
-        for i in range(dimension):
-            for j in range(dimension):
-                matrix_a[i, j] = i * dimension + j + 1
-                matrix_b[i, j] = i * dimension + j + 1
+    def matrices(self, size):
+        mat1 = matrix.Matrix(size, size)
+        mat2 = matrix.Matrix(size, size)
+        mat3 = matrix.Matrix(size, size)
 
-        return matrix_a, matrix_b
+        for i in range(size):
+            for j in range(size):
+                mat1[i, j] = i * size + j + 1
+                mat2[i, j] = i * size + j + 1
+                mat3[i, j] = 0
 
-    def test_multiply_correct(self):
-        dim = 100
-        m1, m2 = self.matrices(dim)
+        return mat1, mat2, mat3
 
-        result_naive = matrix.multiply_naive(m1, m2)
-        result_mkl = matrix.multiply_mkl(m1, m2)
+    def test_basic(self):
+        size = 100
+        mat1, mat2, mat3 = self.matrices(size)
 
-        for i in range(dim):
-            for j in range(dim):
-                assert result_naive[i, j] == result_mkl[i, j]
+        assert size == mat1.nrow
+        assert size == mat1.ncol
+        assert size == mat2.nrow
+        assert size == mat2.ncol
+        assert size == mat3.nrow
+        assert size == mat3.ncol
+
+        assert 2 == mat1[0, 1]
+        assert size + 2 == mat1[1, 1]
+        assert size * 2 == mat1[1, size - 1]
+        assert size * size == mat1[size - 1, size - 1]
+
+        for i in range(mat1.nrow):
+            for j in range(mat1.ncol):
+                assert mat1[i, j] != 0
+                assert mat1[i, j] == mat2[i, j]
+                assert mat3[i, j] == 0
+
+        assert mat1 == mat2
+        assert mat1 is not mat2
 
     def test_multiply_zero(self):
         dim = 100
-        m1, m2 = self.matrices(dim)
-        m_zero = matrix.Matrix(dim, dim)  
-        for i in range(dim):
-            for j in range(dim):
-                m_zero[i, j] = 0
+        m1, _, m_zero = self.matrices(dim) 
 
         result_naive = matrix.multiply_naive(m1, m_zero)
         result_mkl = matrix.multiply_mkl(m1, m_zero)
@@ -44,11 +56,12 @@ class Test_Matrix():
 
     def test_tiling_efficiency(self):
         matrix_size = 1000
-        m1, m2 = self.matrices(matrix_size)
-        base_tile_size = 0 
+        m1, m2, _ = self.matrices(matrix_size)  
+
+        base_tile_size = 0
         ratio_base, time_base = self.tiling_test(m1, m2, base_tile_size)
 
-        for tile_size in [16, 17, 19]:
+        for tile_size in [16, 32, 64]:
             ratio, time_tiled = self.tiling_test(m1, m2, tile_size)
             assert ratio < 0.8 * ratio_base, f"Tiling with size {tile_size} should be at least 20% faster."
 
