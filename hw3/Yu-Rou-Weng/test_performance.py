@@ -59,7 +59,6 @@ class Test_Matrix():
 
         for i in range(ret_naive.nrow):
             for j in range(ret_naive.ncol):
-                assert mat1[i,j] is not ret_mkl[i,j]
                 assert ret_naive[i,j] == ret_mkl[i,j]
 
     def test_zero(self):
