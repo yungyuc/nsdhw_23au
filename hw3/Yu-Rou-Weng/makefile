@@ -8,17 +8,17 @@ MKL_LIBS = $(patsubst %, $(MKL_LIB_DIR)/%, $(MKL_LIB_SO)) \
 SRC = _matrix.cpp
 TARGET = $(patsubst %.cpp, %.so, $(SRC))
 
+.PHONY: all clean
 
 all: $(TARGET)
 .PHONY: all
 
 test: $(TARGET)
-	python3 -m pytest -v
+	python3 -m pytest -v -s
 	python3 performance.py
 
 clean:
 	rm -rf *.o *.out *.so __pycache__/ .pytest_cache/
-.PHONY: clean
 
 %.so: %.cpp
 	$(CC) $(CFLAGS) -I/usr/include/mkl `python3 -m pybind11 --includes` $< -o $@ `python3-config --includes --ldflags` ${MKL_LIBS}

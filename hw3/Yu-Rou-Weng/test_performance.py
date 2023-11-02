@@ -44,6 +44,25 @@ class Test_Matrix():
         assert mat1 == mat2
         assert mat1 is not mat2
 
+    def test_match_naive_mkl(self):
+
+        size = 100
+        mat1, mat2, *_ = self.make_matrices(size)
+
+        ret_naive = _matrix.multiply_naive(mat1, mat2)
+        ret_mkl = _matrix.multiply_mkl(mat1, mat2)
+
+        assert size == ret_naive.nrow
+        assert size == ret_naive.ncol
+        assert size == ret_mkl.nrow
+        assert size == ret_mkl.ncol
+        
+        for i in range(ret_naive.nrow):
+            for j in range(ret_naive.ncol):
+                self.assertNotEqual(mat1[i,j], ret_mkl[i,j])
+                self.assertEqual(ret_naive[i,j], ret_mkl[i,j])
+
+
     def test_zero(self):
         size = 100
         mat1, mat2, mat3, *_ = self.make_matrices(size)
