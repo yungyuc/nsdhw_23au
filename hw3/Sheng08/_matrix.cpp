@@ -10,8 +10,8 @@ using namespace std;
 Matrix multiply_naive(Matrix const& mat1, Matrix const& mat2) {
     Matrix ret(mat1.nrow(), mat2.ncol());
 
-    for (size_t i = 0; i < mat1.nrow(); i++) {
-        for (size_t j = 0; j < mat2.ncol(); j++) {
+    for (size_t i = 0; i < ret.nrow(); i++) {
+        for (size_t j = 0; j < ret.ncol(); j++) {
             for (size_t k = 0; k < mat1.ncol(); k++) {
                 ret(i, j) += mat1(i, k) * mat2(k, j);
             }
