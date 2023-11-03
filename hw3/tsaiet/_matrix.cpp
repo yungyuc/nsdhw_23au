@@ -255,6 +255,7 @@ Matrix multiply_tile(Matrix const & mat1, Matrix const & mat2, size_t const tsiz
     return ret;
 }
 
+
 Matrix multiply_mkl(Matrix const & mat1, Matrix const & mat2)
 {
     validate_multiplication(mat1, mat2);
@@ -265,7 +266,6 @@ Matrix multiply_mkl(Matrix const & mat1, Matrix const & mat2)
 
     return ret;
 }
-
 
 std::ostream & operator << (std::ostream & ostr, Matrix const & mat)
 {
