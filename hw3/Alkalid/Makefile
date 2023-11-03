@@ -1,27 +1,41 @@
-CXX           := g++
-CXXFLAGS      := -O3 -Wall -shared -std=c++11 -fPIC
-MKLINCLUDE    := /usr/include/mkl
-MKLFLAGS      := -lblas
-PYTHON 		  := python3
-PYINCLUDE     := $(shell python3-config --includes) 
-PYBINDINCLUDE := $(shell python3 -m pybind11 --includes)
-PYCONFIG      := $(shell python3-config --extension-suffix)
-SRC        	  := _matrix.cpp
-TARGET 		  := _matrix${PYCONFIG}
+# Makefile to build Python extension using MKL and Pybind11
+
+# Directories and flags for MKL
+MKL_INCLUDE_DIR = /usr/include/mkl
+MKL_LIB_FLAGS   = -lmkl_rt
+
+# Python configuration
+PYTHON_EXEC     = python3
+PYTHON_INC      = $(shell $(PYTHON_EXEC)-config --includes)
+PYBIND11_INC    = $(shell $(PYTHON_EXEC) -m pybind11 --includes)
+PYTHON_EXT_SUFFIX = $(shell $(PYTHON_EXEC)-config --extension-suffix)
+
+# Target module name
+MODULE_NAME     = _matrix
+PYTHON_MODULE_TARGET = $(MODULE_NAME)$(PYTHON_EXT_SUFFIX)
+
+# Compiler and linker flags
+CXX             = g++
+CXXFLAGS        = -O3 -Wall -shared -std=c++11 -fPIC
+INCLUDES        = -I$(MKL_INCLUDE_DIR) $(PYTHON_INC) $(PYBIND11_INC)
+LDFLAGS         = $(MKL_LIB_FLAGS)
+
+# Source files
+SOURCE          = _matrix.cpp
 
 .PHONY: all test clean
 
-all: $(TARGET)
+# Default target
+all: $(PYTHON_MODULE_TARGET)
 
-$(TARGET): $(SRC)
-	$(CXX) $(CXXFLAGS) -I$(MKLINCLUDE) ${PYINCLUDE} ${PYBINDINCLUDE} $^ -o $@ $(MKLFLAGS) 
+$(PYTHON_MODULE_TARGET): $(SOURCE)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $^ -o $@ $(LDFLAGS)
 
-test: $(TARGET)
-	$(PYTHON) test_matrix.py
-	$(PYTHON) -m pytest -v test_matrix.py
+# Test target
+test: $(PYTHON_MODULE_TARGET)
+	$(PYTHON_EXEC) test_matrix.py
+	$(PYTHON_EXEC) -m pytest -v test_matrix.py
 
+# Clean target
 clean:
-	rm -f $(TARGET)
-	find . -name "__pycache__" -type d -exec rm -rf {} +
-	find . -name "*.pyc" -type f -delete
-	find . -name ".pytest_cache" -type d -exec rm -rf {} +
+	rm -rf *.o *.so .pytest_cache __pycache__
