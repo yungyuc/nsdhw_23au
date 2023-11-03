@@ -1,7 +1,7 @@
 #include <pybind11/pybind11.h>
 #include <vector>
 #include <stdexcept>
-#include <mkl_cblas.h>
+#include <mkl/mkl.h>
 
 class Matrix {
 
