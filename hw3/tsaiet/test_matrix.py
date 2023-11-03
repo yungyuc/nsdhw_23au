@@ -13,7 +13,7 @@ def test_multiply():
     
     naive = _matrix.multiply_naive(mat1, mat2)
 	tile = _matrix.multiply_tile(mat1, mat2, 16)
-	#mkl = _matrix.multiply_mkl(mat1, mat2)
+	mkl = _matrix.multiply_mkl(mat1, mat2)
 
 	assert naive == tile
-	#assert naive == mkl
+	assert naive == mkl

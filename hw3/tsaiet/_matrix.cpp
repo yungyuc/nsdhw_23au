@@ -1,7 +1,7 @@
 #include <pybind11/pybind11.h>
 #include <vector>
 #include <stdexcept>
-//#include <mkl_cblas.h>
+#include <mkl_cblas.h>
 
 class Matrix {
 
@@ -228,7 +228,7 @@ Matrix multiply_tile(Matrix const & mat1, Matrix const & mat2, size_t tsize)
 /*
  * Using DGEMM to matrix matrix multiplication.
  */
-/*Matrix multiply_mkl(Matrix const & mat1, Matrix const & mat2)
+Matrix multiply_mkl(Matrix const & mat1, Matrix const & mat2)
 {
     if (mat1.ncol() != mat2.nrow())
     {
@@ -242,7 +242,7 @@ Matrix multiply_tile(Matrix const & mat1, Matrix const & mat2, size_t tsize)
     cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, mat1.nrow(), mat2.ncol(), mat1.ncol(), 1.0, mat1, mat1.ncol(), mat2, mat2.ncol(), 1.0, ret, mat2.ncol());
     
     return ret;
-}*/
+}
 
 PYBIND11_MODULE(_matrix, m){
 	pybind11::class_<Matrix>(m, "Matrix")
@@ -258,6 +258,6 @@ PYBIND11_MODULE(_matrix, m){
         });
     m
     .def("multiply_naive", &multiply_naive, pybind11::arg("mat1"), pybind11::arg("mat2"))
-    .def("multiply_tile", &multiply_tile, pybind11::arg("mat1"), pybind11::arg("mat2"), pybind11::arg("tsize"));
-    //.def("multiply_mkl", &multiply_mkl, pybind11::arg("mat1"), pybind11::arg("mat2"));
+    .def("multiply_tile", &multiply_tile, pybind11::arg("mat1"), pybind11::arg("mat2"), pybind11::arg("tsize"))
+    .def("multiply_mkl", &multiply_mkl, pybind11::arg("mat1"), pybind11::arg("mat2"));
 }

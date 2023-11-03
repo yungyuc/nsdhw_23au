@@ -28,6 +28,7 @@ for it in range(size):
 
     naive = timeit.Timer('_matrix.multiply_naive(mat1, mat2)', setup=setup)
     tile = timeit.Timer('_matrix.multiply_tile(mat1, mat2, 16)', setup=setup)
+    mkl = timeit.Timer('_matrix.multiply_mkl(mat1, mat2)', setup=setup)
 
     repeat = 5
 
@@ -43,8 +44,13 @@ for it in range(size):
         tilesec = minsec = min(tile.repeat(repeat=repeat, number=1))
         w.write(f'{minsec} seconds\n')
 
+        w.write(f'Start multiply_mkl (repeat={repeat}), take min = ')
+        mklsec = minsec = min(mkl.repeat(repeat=repeat, number=1))
+        w.write(f'{minsec} seconds\n')
+
         w.write('Tile 16 speed-up   over naive: %g x\n' % (naivesec/tilesec))
         w.write('Tile 16 time spent over naive: %g x\n' % (tilesec/naivesec))
+        w.write('MKL speed-up over naive: %g x\n' % (naivesec/mklsec))
 
 if __name__ == "__main__":
     benchmark()
