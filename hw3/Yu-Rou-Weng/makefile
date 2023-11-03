@@ -1,31 +1,33 @@
+CXX             = g++
+SRC          = _matrix.cpp
+FLAGS           = -O3 -Wall -shared -std=c++11 -fPIC
+INCLUDES        = -I$(MKL_INCLUDE_DIR) $(PYINC) $(PYBIND11_INC)
+LDFLAGS         = $(MKL_LIB_FLAGS)
 MKL_INCLUDE_DIR = /usr/include/mkl
 MKL_LIB_FLAGS   = -lmkl_rt
 
-PYTHON_EXEC     = python3
-PYTHON_INC      = $(shell $(PYTHON_EXEC)-config --includes)
-PYBIND11_INC    = $(shell $(PYTHON_EXEC) -m pybind11 --includes)
-PYTHON_EXT_SUFFIX = $(shell $(PYTHON_EXEC)-config --extension-suffix)
+PYEXEC     = python3
+PYINC      = $(shell $(PYEXEC)-config --includes)
+PYBIND11_INC    = $(shell $(PYEXEC) -m pybind11 --includes)
+PYSUFFIX = $(shell $(PYEXEC)-config --extension-suffix)
+PYBIND11_MODULE     = _matrix
+PYTAR = $(PYBIND11_MODULE)$(PYSUFFIX)
 
-MODULE_NAME     = _matrix
-PYTHON_MODULE_TARGET = $(MODULE_NAME)$(PYTHON_EXT_SUFFIX)
+all: $(PYTAR)
 
-CXX             = g++
-CXXFLAGS        = -O3 -Wall -shared -std=c++11 -fPIC
-INCLUDES        = -I$(MKL_INCLUDE_DIR) $(PYTHON_INC) $(PYBIND11_INC)
-LDFLAGS         = $(MKL_LIB_FLAGS)
+$(PYTAR): $(SRC)
+	$(CXX) $(FLAGS) $(INCLUDES) $^ -o $@ $(LDFLAGS)
+.PHONY: all
 
-SRC          = _matrix.cpp
+test: $(PYTAR)
+	$(PYEXEC) test_matrix.py
+	$(PYEXEC) -m pytest -v -s test_matrix.py
+.PHONY: test
 
-.PHONY: all test clean
-
-all: $(PYTHON_MODULE_TARGET)
-
-$(PYTHON_MODULE_TARGET): $(SRC)
-	$(CXX) $(CXXFLAGS) $(INCLUDES) $^ -o $@ $(LDFLAGS)
-
-test: $(PYTHON_MODULE_TARGET)
-	$(PYTHON_EXEC) test_matrix.py
-	$(PYTHON_EXEC) -m pytest -v test_matrix.py
+perf: all
+	python3 performance.py
+.PHONY: perf
 
 clean:
 	rm -rf *.o *.out *.so __pycache__/ .pytest_cache/
+.PHONY: clean
