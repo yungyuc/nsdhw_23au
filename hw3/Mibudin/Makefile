@@ -29,6 +29,7 @@ endif
 CXX_COMPILE	:= ${CXX} ${CXX_FLAGS} ${CXX_INCS} ${CXX_LIBS}
 
 # Workaround for cmake + MKL in conda
+export PRELOAD_MKL	:= 1
 MKL_LIB_DIR=/usr/lib/x86_64-linux-gnu
 MKL_LIBS	:= ${MKL_LIB_DIR}/libmkl_def.so$\
 				:${MKL_LIB_DIR}/libmkl_avx2.so$\
@@ -56,6 +57,11 @@ build: ${BIN_DIR}/${TARGET_SO_LIB}
 .PHONY: test
 test: build
 	python3 -m pytest -sv ${SRC_DIR}
+
+# Run the Python script to analyze the the compiled library
+.PHONY: perf
+perf: build
+	python3 "${SRC_DIR}/performance.py"
 
 # Remove all the built and intermediate files
 .PHONY: clean
