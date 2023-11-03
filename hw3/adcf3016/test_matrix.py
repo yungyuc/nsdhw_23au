@@ -1,5 +1,6 @@
 import pytest
 import numpy as np
+import random
 from _matrix import *
 
 def get_np_matrix(n, m, mat):
@@ -13,6 +14,22 @@ def generate_value(mat):
     for i in range(mat.nrow):
         for j in range(mat.ncol):
             mat[i, j] = i * mat.nrow + j
+
+def test_matrix_constructor():
+    row = random.randint(1, 1000)
+    col = random.randint(1, 1000)
+    mat = Matrix(row, col)
+    assert mat.nrow == row
+    assert mat.ncol == col
+
+def test_matrix_setter_getter():
+    row, col = 1000, 1000
+    mat = Matrix(row, col)
+    random_row = random.randint(0, row - 1)
+    random_col = random.randint(0, col - 1)
+    random_value = random.random()
+    mat[(random_row, random_col)] = random_value
+    assert mat[(random_row, random_col)] == random_value
 
 def test_naive():
     row_size = 1000
