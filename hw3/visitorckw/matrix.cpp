@@ -27,6 +27,14 @@ class Matrix {
 	{
 		return &buffer[row * col_num];
 	}
+	size_t nrow() const
+	{
+		return row_num;
+	}
+	size_t ncol() const
+	{
+		return col_num;
+	}
 	double *buffer = NULL;
 	size_t row_num = 0;
 	size_t col_num = 0;
@@ -108,5 +116,7 @@ PYBIND11_MODULE(_matrix, m)
 		.def("__getitem__",
 		     [](Matrix &self, std::pair<size_t, size_t> i) {
 			     return self[i.first][i.second];
-		     });
+		     })
+		.def_property("nrow", &Matrix::nrow, nullptr)
+		.def_property("ncol", &Matrix::ncol, nullptr);
 }

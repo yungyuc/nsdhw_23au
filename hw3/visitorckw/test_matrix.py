@@ -5,6 +5,11 @@ def test_matrix():
     matrix1 = _matrix.Matrix(size, size)
     matrix2 = _matrix.Matrix(size, size)
 
+    assert(matrix1.nrow == size)
+    assert(matrix1.ncol == size)
+    assert(matrix2.nrow == size)
+    assert(matrix2.ncol == size)
+
     matrix_naive = _matrix.multiply_naive(matrix1, matrix2)
     matrix_tile = _matrix.multiply_tile(matrix1, matrix2, 32)
     matrix_mkl = _matrix.multiply_mkl(matrix1, matrix2)
