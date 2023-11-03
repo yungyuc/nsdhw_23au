@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
-#include <mkl.h>
+#include <mkl/mkl.h>
 #include <pybind11/pybind11.h>
-namespace py = pybind11;
 
 class Matrix {
    public:
@@ -26,7 +25,7 @@ class Matrix {
     }
 
     bool operator==(const Matrix& mat) const {
-        if (mat.m_col != this->m_col || mat.m_row == this->m_row) {
+        if (mat.m_col != this->m_col || mat.m_row != this->m_row) {
             return false;
         }
         for (int i = 0; i < this->m_row; i++) {
@@ -72,13 +71,11 @@ Matrix multiply_tile(Matrix const& mat1, Matrix const& mat2, int tile_size) {
     for (int i = 0; i < mat1.nrow(); i += tile_size) {
         for (int j = 0; j < mat2.ncol(); j += tile_size) {
             for (int k = 0; k < mat1.ncol(); k += tile_size) {
-                for (int ii = i; ii < std::min(i + tile_size, mat1.nrow()); ++ii) {
-                    for (int jj = j; jj < std::min(j + tile_size, mat2.ncol()); ++jj) {
-                        double sum = 0.0;
-                        for (int kk = k; kk < std::min(k + tile_size, mat1.ncol()); ++kk) {
-                            sum += mat1(ii, kk) * mat2(kk, jj);
+                for (int ii = i; ii < std::min(i + tile_size, mat1.nrow()); ii++) {
+                    for (int jj = j; jj < std::min(j + tile_size, mat2.ncol()); jj++) {
+                        for (int kk = k; kk < std::min(k + tile_size, mat1.ncol()); kk++) {
+                            output(ii, jj) += mat1(ii, kk) * mat2(kk, jj);
                         }
-                        output(ii, jj) += sum;
                     }
                 }
             }
@@ -100,8 +97,8 @@ PYBIND11_MODULE(_matrix, m) {
     m.def("multiply_naive", &multiply_naive);
     m.def("multiply_tile", &multiply_tile);
     m.def("multiply_mkl", &multiply_mkl);
-    py::class_<Matrix>(m, "Matrix")
-        .def(py::init<int, int>())
+    pybind11::class_<Matrix>(m, "Matrix")
+        .def(pybind11::init<int, int>())
         .def_property_readonly("nrow", [](const Matrix& mat) { return mat.nrow(); })
         .def_property_readonly("ncol", [](const Matrix& mat) { return mat.ncol(); })
         .def("__eq__", [](const Matrix& a, const Matrix& b) { return a == b; })
