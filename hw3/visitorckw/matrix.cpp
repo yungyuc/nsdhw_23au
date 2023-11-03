@@ -89,7 +89,6 @@ Matrix multiply_tile(Matrix const &mat_A, Matrix const &mat_B, size_t tile_size)
 					     j < std::min(mat_B.col_num,
 							  col + tile_size);
 					     ++j) {
-						mat[i][j] = 0;
 						for (size_t k = inner;
 						     k <
 						     std::min(mat_A.col_num,
