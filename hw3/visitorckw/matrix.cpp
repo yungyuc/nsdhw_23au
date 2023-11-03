@@ -40,6 +40,24 @@ class Matrix {
 	size_t col_num = 0;
 };
 
+bool operator==(Matrix const &mat_A, Matrix const &mat_B)
+{
+	if (mat_A.row_num != mat_B.row_num || mat_A.col_num != mat_B.col_num)
+		return false;
+	for (size_t i = 0; i < mat_A.row_num; ++i) {
+		for (size_t j = 0; j < mat_A.col_num; ++j) {
+			if (mat_A[i][j] != mat_B[i][j])
+				return false;
+		}
+	}
+	return true;
+}
+
+bool operator!=(Matrix const &mat_A, Matrix const &mat_B)
+{
+	return !(mat_A == mat_B);
+}
+
 Matrix multiply_naive(Matrix const &mat_A, Matrix const &mat_B)
 {
 	Matrix mat(mat_A.row_num, mat_B.col_num);
@@ -118,5 +136,6 @@ PYBIND11_MODULE(_matrix, m)
 			     return self[i.first][i.second];
 		     })
 		.def_property("nrow", &Matrix::nrow, nullptr)
-		.def_property("ncol", &Matrix::ncol, nullptr);
+		.def_property("ncol", &Matrix::ncol, nullptr)
+		.def("__eq__", &operator==);
 }

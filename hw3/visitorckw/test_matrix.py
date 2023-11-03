@@ -18,3 +18,7 @@ def test_matrix():
         for j in range(size):
             assert (matrix_naive[i,j] == matrix_mkl[i,j])
             assert (matrix_naive[i,j] == matrix_tile[i,j])
+
+    assert(matrix_naive == matrix_mkl)
+    assert(matrix_naive == matrix_tile)
+    assert(matrix_naive == matrix_mkl)
