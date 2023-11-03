@@ -102,7 +102,7 @@ Matrix multiply_naive(Matrix const &mat1, Matrix const &mat2) {
 
 }
 
-Matrix multiply_tile(Matrix const &mat1, Matrix const &mat2, int const tile_size) {
+Matrix multiply_tile(Matrix const &mat1, Matrix const &mat2, int const blockSize) {
 
     if (mat1.ncol() != mat2.nrow())
     {
