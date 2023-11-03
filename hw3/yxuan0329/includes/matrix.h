@@ -25,10 +25,12 @@ public:
     const size_t& n_row() const;
     const size_t& n_col() const;
 
+    double *m_buffers() const {return m_buffer};
+
 private:
     size_t m_row;
     size_t m_col;
-    double * m_buffer;
+    double *m_buffer = nullptr;
 };
 
 #endif

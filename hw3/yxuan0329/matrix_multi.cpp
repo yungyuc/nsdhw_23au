@@ -42,8 +42,8 @@ Matrix multiply_tile(const Matrix& lhs, const  Matrix& rhs, size_t blocksize) {
     // Padding 0 so that the row and col can be divisible by block size
     Matrix fakeLhs, fakeRhs;
 
-    fakeLhs = helper.padMatrix(blocksize, lhs);
-    fakeRhs = helper.padMatrix(blocksize, rhs);
+    fakeLhs = helper.padMat(blocksize, lhs);
+    fakeRhs = helper.padMat(blocksize, rhs);
 
     Matrix result(lhs.n_row(), rhs.n_col()), fakeResult(fakeLhs.n_row(), fakeRhs.n_col());
 
@@ -106,20 +106,18 @@ Matrix multiply_mkl(const Matrix& mat1, const Matrix& mat2)
     Matrix ret(mat1.n_row(), mat2.n_col());
 
     cblas_dgemm(
-        CblasRowMajor
-        , CblasNoTrans
-        , CblasNoTrans
-        , mat1.n_row()
-        , mat2.n_col()
-        , mat1.n_col()
-        , 1.0
-        , mat1.m_buffer
-        , mat1.n_col()
-        , mat2.m_buffer
-        , mat2.n_col()
-        , 0.0
-        , ret.m_buffer
-        , ret.n_col()
+        CblasRowMajor, CblasNoTrans, CblasNoTrans, 
+        mat1.n_row(), 
+        mat2.n_col(), 
+        mat1.n_col(), 
+        1.0, 
+        mat1.m_buffers(), 
+        mat1.n_col(),
+        mat2.m_buffers(), 
+        mat2.n_col(), 
+        0.0, 
+        ret.m_buffers(), 
+        ret.n_col()
     );
 
     return ret;
