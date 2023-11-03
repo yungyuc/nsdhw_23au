@@ -1,22 +1,31 @@
-CXX = g++
-SRC = _matrix.cpp
-EXE = _matrix$(shell python3-config --extension-suffix)
-FLAGS = -O3 -Wall -shared -fPIC
-PYBD11 = -I /usr/include/python3 -I /usr/include/pybind11 `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
+MKL_INCLUDE_DIR = /usr/include/mkl
+MKL_LIB_FLAGS   = -lmkl_rt
 
-BLAS = -I /usr/include/mkl/ -L /usr/lib/x86_64-linux-gnu/mkl/ -lblas
+PYTHON_EXEC     = python3
+PYTHON_INC      = $(shell $(PYTHON_EXEC)-config --includes)
+PYBIND11_INC    = $(shell $(PYTHON_EXEC) -m pybind11 --includes)
+PYTHON_EXT_SUFFIX = $(shell $(PYTHON_EXEC)-config --extension-suffix)
 
-.PHONY: all clean
+MODULE_NAME     = _matrix
+PYTHON_MODULE_TARGET = $(MODULE_NAME)$(PYTHON_EXT_SUFFIX)
 
-all: $(SRC)
-	$(CXX) $(FLAGS) $(shell python3 -m pybind11 --includes) $(PYBD11) $(BLAS) $(SRC) -o $(EXE)
+CXX             = g++
+CXXFLAGS        = -O3 -Wall -shared -std=c++11 -fPIC
+INCLUDES        = -I$(MKL_INCLUDE_DIR) $(PYTHON_INC) $(PYBIND11_INC)
+LDFLAGS         = $(MKL_LIB_FLAGS)
 
-run: $(SRC)
-	$(CXX) $(FLAGS) $(shell python3 -m pybind11 --includes) $(PYBD11) $(BLAS) $(SRC) -o $(EXE)
+SRC          = _matrix.cpp
 
-test: $(SRC)
-	$(CXX) $(FLAGS) $(PYBD11) $(SRC) -o $(EXE) $(BLAS)
-	python3 -m pytest -v -s
+.PHONY: all test clean
+
+all: $(PYTHON_MODULE_TARGET)
+
+$(PYTHON_MODULE_TARGET): $(SRC)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $^ -o $@ $(LDFLAGS)
+
+test: $(PYTHON_MODULE_TARGET)
+	$(PYTHON_EXEC) test_matrix.py
+	$(PYTHON_EXEC) -m pytest -v test_matrix.py
 
 clean:
 	rm -rf *.o *.out *.so __pycache__/ .pytest_cache/
