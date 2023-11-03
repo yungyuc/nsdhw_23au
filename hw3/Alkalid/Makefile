@@ -1,12 +1,20 @@
-LFLAGS = -lblas
+CXX           := g++
+CXXFLAGS      := -O3 -Wall -shared -std=c++11 -fPIC
+MKLINCLUDE    := /usr/include/mkl
+MKLFLAGS      := -lblas
+PYINCLUDE     := /usr/include/python3.8
+PYBINDINCLUDE := `python3 -m pybind11 --includes`
+PYCONFIG      := `python3-config --extension-suffix`
 
-LIB_TARGET = _matrix.so
+main:
+	$(CXX) $(CXXFLAGS) -I$(MKLINCLUDE) -I$(PYINCLUDE) ${PYBINDINCLUDE} _matrix.cpp -o _matrix${PYCONFIG} $(MKLFLAGS)
 
-all:
-	g++ -o $(LIB_TARGET) -O3 -Wall -shared -std=c++11 -fPIC `python3 -m pybind11 --includes` `python3-config --includes --ldflags` _matrix.cpp $(LFLAGS)
-
-test: all
-	python3 -m pytest -v
+test: main
+	python3 -m pytest
 
 clean:
-	rm -rf $(LIB_TARGET) .pytest_cache/ __pycache__/
+	rm -rf *.o *.so .pytest_cache __pycache__
+
+statistic: clean
+	$(CXX) -O3 -Wall -std=c++11 -fPIC statistic.cpp -I$(MKLINCLUDE) -o statistic.out $(MKLFLAGS)
+	./statistic.out | tee performance.txt
