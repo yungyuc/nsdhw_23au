@@ -41,12 +41,12 @@ Matrix multiply_naive(Matrix const &mat1, Matrix const &mat2) {
 }
 
 Matrix multiply_tile(Matrix const &mat1, Matrix const &mat2, int const blockSize) {
-
+    
     if (mat1.ncol() != mat2.nrow())
     {
         throw out_of_range(
             "the number of first matrix column "
-            "differs from that of second matrix row");
+            "differs from that of second matrix row!");
     }
 
     int n = mat1.nrow();
