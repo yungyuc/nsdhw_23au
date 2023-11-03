@@ -5,8 +5,8 @@ LDFLAGS = -lblas
 
 all: _matrix.so
 
-_matrix.so: matrix.cpp TileHeilper.cpp matrix_multi.cpp
-		$(CXX) $^ $(CFLAGS) -I/usr/include/ml -I $(CIMPORTPATH) -o $@ ${LDFLAGS}
+_matrix.so: matrix.cpp TileHelper.cpp matrix_multi.cpp
+		$(CXX) $^ $(CFLAGS) -I/usr/include/mk -I $(CIMPORTPATH) -o $@ ${LDFLAGS}
 
 clean:
 	rm -f *.so
