@@ -33,9 +33,9 @@ Matrix multiply_naive(const Matrix& mat1, const Matrix& mat2)
 
     for(std::size_t i = 0; i < nrow1; ++i)
     {
-        for(std::size_t k = 0; k < ncol2; ++k)
+        for(std::size_t j = 0; j < ncol1; ++j)
         {
-            for(std::size_t j = 0; j < ncol1; ++j)
+            for(std::size_t k = 0; k < ncol2; ++k)
             {
                 ret(i, j) += mat1(i, k) * mat2(k, j);
             }
@@ -56,20 +56,22 @@ Matrix multiply_tile(
     const std::size_t ncol1 = mat1.ncol();
     const std::size_t ncol2 = mat2.ncol();
 
-    // TODO
     for(std::size_t i = 0; i < nrow1; i += tile_size)
     {
         for(std::size_t j = 0; j < ncol2; j += tile_size)
         {
             for(std::size_t k = 0; k < ncol1; k += tile_size)
             {
-                for(std::size_t ii = i; ii < std::min(i + tile_size, nrow1); ii++)
+                for(std::size_t ti = i;
+                    ti < std::min(i + tile_size, nrow1); ++ti)
                 {
-                    for(std::size_t jj = j; jj < std::min(j + tile_size, ncol2); jj++)
+                    for(std::size_t tk = k;
+                        tk < std::min(k + tile_size, ncol1); ++tk)
                     {
-                        for(std::size_t kk = k; kk < std::min(k + tile_size, ncol1); kk++)
+                        for(std::size_t tj = j;
+                            tj < std::min(j + tile_size, ncol2); ++tj)
                         {
-                            ret(ii, jj) += mat1(ii, kk) * mat2(kk, jj);
+                            ret(ti, tj) += mat1(ti, tk) * mat2(tk, tj);
                         }
                     }
                 }
