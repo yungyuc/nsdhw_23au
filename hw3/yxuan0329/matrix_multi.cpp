@@ -135,7 +135,7 @@ PYBIND11_MODULE(_matrix, m) {
     .def_property_readonly("nrow", [](Matrix& m){ return m.n_row(); })
     .def_property_readonly("ncol", [](Matrix& m){ return m.n_col(); })
     .def(py::self == py::self) 
-    .def(py::self != py::self)
+    .def(py::self != py::self) 
     .def("__getitem__", [](Matrix& m, std::pair<size_t, size_t> idx) { return m(idx.first, idx.second); })
     .def("__setitem__", [](Matrix& m, std::pair<size_t, size_t> idx, double val) { m(idx.first, idx.second) = val; });
 }

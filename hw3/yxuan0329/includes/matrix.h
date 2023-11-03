@@ -16,7 +16,7 @@ public:
     Matrix(size_t, size_t);
 
     //double operator() (size_t size_t) const;
-    double& operator() (size_t size_t) const;
+    double& operator() (size_t, size_t) const;
     bool operator == (const Matrix) const;
     bool operator != (const Matrix) const;
 

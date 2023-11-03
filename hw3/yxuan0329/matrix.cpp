@@ -8,88 +8,81 @@
 
 using namespace std;
 
-class Matrix {
-public:
-    Matrix() {
-        this->m_row = 0;
-        this->m_col = 0;
-        this->m_buffer = NULL;
-    }
+Matrix::Matrix() {
+    this->m_row = 0;
+    this->m_col = 0;
+    this->m_buffer = NULL;
+}
     
-    Matrix(size_t row, size_t col, vector<double> const value) {
-        this->m_row = row;
-        this->m_col = col;
-        size_t nelement = row * col;
-        this->m_buffer = new double[nelement];
-        int cnt = 0;
-        // this->m_buffer = (double*)malloc(sizeof(double) * value.size());
-        // memset(this->m_buffer, 0, sizeof(double) * value.size());
+Matrix::Matrix(size_t row, size_t col, vector<double> const value) {
+    this->m_row = row;
+    this->m_col = col;
+    size_t nelement = row * col;
+    this->m_buffer = new double[nelement];
+    int cnt = 0;
+    // this->m_buffer = (double*)malloc(sizeof(double) * value.size());
+    // memset(this->m_buffer, 0, sizeof(double) * value.size());
 
-        for (const double&v : value) {
-            this->m_buffer[cnt++] = v;
+    for (const double&v : value) {
+        this->m_buffer[cnt++] = v;
+    }
+}
+
+
+Matrix::Matrix(size_t row, size_t col) {
+    this->m_row = row;
+    this->m_col = col;
+    size_t nelement = row * col;
+    this->m_buffer = new double[nelement];
+}
+
+Matrix::~Matrix() {
+    this->m_row = 0, this->m_col = 0;
+    delete[] this->m_buffer;
+}
+
+double &Matrix::operator() (size_t row, size_t col) const {
+    return m_buffer[this->m_col * row + col];
+}
+
+Matrix Matrix::transpose() const {
+    int row = this->m_row, col = this->m_col; 
+    Matrix new_mat(col, row);
+
+    for (int i=0; i<col; i++) {
+        for (int j=0; j<row; j++) {
+            size_t id = this->m_col * i + j;
+            new_mat(j, i) = this->m_buffer[id];
         }
     }
+    return new_mat;
+}
 
 
-    Matrix(size_t row, size_t col) {
-        this->m_row = row;
-        this->m_col = col;
-        size_t nelement = row * col;
-        this->m_buffer = new double[nelement];
-    }
+bool Matrix::operator == (const Matrix rhs) const {
+    if (this->m_col != rhs.m_col) return false;
+    if (this->m_row != rhs.m_row) return false;
 
-    ~Matrix() {
-        this->m_row = 0, this->m_col = 0;
-        delete[] this->m_buffer;
-    }
-
-    Matrix transpose() const {
-        int row = this->m_row, col = this->m_col; 
-        Matrix new_mat(col, row);
-
-        for (int i=0; i<col; i++) {
-            for (int j=0; j<row; j++) {
-                size_t id = this->m_col * i + j;
-                new_mat(j, i) = this->m_buffer[id];
+    int row = this->m_row, col = this->m_col;
+    for (int i=0; i<col; i++) {
+        for (int j=0; j<row; j++) {
+            size_t id = this->m_col * i + j;
+            if (abs(this->m_buffer[id] - rhs(i, j)) > 0.0000001) {
+                return false;
             }
         }
-        return new_mat;
     }
+    return true;
+}
 
-    double& operator() (size_t row, size_t col) const {
-        return m_buffer[m_col * row + col];
-    }
+bool Matrix::operator != (const Matrix rhs) const {
+    return !(*this == rhs);
+}
 
-    bool operator == (const Matrix rhs) const {
-        if (this->m_col != rhs.m_col) return false;
-        if (this->m_row != rhs.m_row) return false;
+const size_t& Matrix::n_row() const {
+    return this->m_row;
+}
 
-        int row = this->m_row, col = this->m_col;
-        for (int i=0; i<col; i++) {
-            for (int j=0; j<row; j++) {
-                size_t id = this->m_col * i + j;
-                if (this->m_buffer[id] != rhs(i, j)) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    bool operator != (const Matrix rhs) const {
-        return !(*this == rhs);
-    }
-
-    const size_t& n_row() const {
-        return this->m_row;
-    }
-
-    const size_t& n_col() const {
-        return this->m_col;
-    }
-
-private:
-    size_t m_row, m_col;
-    double* m_buffer;
-};
-
+const size_t& Matrix::n_col() const {
+    return this->m_col;
+}
