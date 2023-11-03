@@ -94,8 +94,6 @@ for it in range(size):
             % (naivesec / tilesec_128))
         w.write("MKL                  speed-up over naive: %g x\n"
             % (naivesec / mklsec))
-        w.write("MKL                  speed-up over naive: %g x\n"
-            % (naivesec / mklsec))
 
 
 if __name__ == "__main__":

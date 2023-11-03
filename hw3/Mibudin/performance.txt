@@ -10,4 +10,3 @@ Tile (tile_size= 32) speed-up over naive: 7.48563 x
 Tile (tile_size= 64) speed-up over naive: 7.42426 x
 Tile (tile_size=128) speed-up over naive: 8.5895 x
 MKL                  speed-up over naive: 40.5034 x
-MKL                  speed-up over naive: 40.5034 x
