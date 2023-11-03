@@ -79,20 +79,16 @@ Matrix multiply_tile(Matrix const &mat_A, Matrix const &mat_B, size_t tile_size)
 
 	for (size_t row = 0; row < mat_A.row_num; row += tile_size) {
 		for (size_t col = 0; col < mat_B.col_num; col += tile_size) {
-			for (size_t inner = 0; inner < mat_A.col_num;
-			     inner += tile_size) {
-				for (size_t i = row;
-				     i <
-				     std::min(mat_A.row_num, row + tile_size);
-				     ++i) {
-					for (size_t j = col;
-					     j < std::min(mat_B.col_num,
-							  col + tile_size);
-					     ++j) {
-						for (size_t k = inner;
-						     k <
-						     std::min(mat_A.col_num,
-							      inner + tile_size);
+			for (size_t m = 0; m < mat_A.col_num; m += tile_size) {
+				size_t i_end = std::min(mat_A.row_num,
+							row + tile_size);
+				size_t j_end = std::min(mat_B.col_num,
+							col + tile_size);
+				size_t k_end =
+					std::min(mat_A.col_num, m + tile_size);
+				for (size_t i = row; i < i_end; ++i) {
+					for (size_t j = col; j < j_end; ++j) {
+						for (size_t k = m; k < k_end;
 						     ++k) {
 							mat[i][j] +=
 								mat_A[i][k] *
