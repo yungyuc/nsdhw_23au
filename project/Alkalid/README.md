@@ -8,7 +8,7 @@ Running deep learning models on edge devices with one-bit quantization greatly b
 
 ## Operation Method
 ![](./img/propose_method.png)
-
+In the diagram above, the general approach to binary operations involves decomposing a value using a scaling factor 'a' along with a binary vector that represents +/-1 to approximate the original numerical value. My proposed method adds multiple sets of scaling factors and vectors of +/-1, allowing for an even closer approximation to the original weight values. As shown in the graphic, this results in a lower loss, indicating a more accurate representation.
 
 
 ## Engineering Infrastructure
