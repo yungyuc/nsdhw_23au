@@ -2,9 +2,16 @@
 
 ## Basic Information
 
-> **Project Overview:** Extracting and Visualizing Oriented Bounding Boxes (OBB) from Triangular Meshes using C++ and Python
+> **Project Overview:** Extracting and Visualizing Oriented Bounding Boxes (OBB)
+> from Triangular Meshes using C++ and Python
 
-Triangular meshes[^1] stand as a cornerstone in computer graphics, essential in the portrayal and animation of 3D objects. A critical aspect of processing these meshes involves extracting **Oriented Bounding Boxes (OBB)**[^2]. _++OrientMesh Toolkit++_ presents an optimal solution to this task, fusing efficient algorithms with an interactive visual interface. This combination not only simplifies OBB extraction but also enhances user comprehension through vivid visual representations.
+Triangular meshes[^1] stand as a cornerstone in computer graphics, essential in
+the portrayal and animation of 3D objects. A critical aspect of processing
+these meshes involves extracting **Oriented Bounding Boxes (OBB)**[^2].
+_**OrientMesh Toolkit**_ presents an optimal solution to this task, fusing
+efficient algorithms with an interactive visual interface. This combination
+not only simplifies OBB extraction but also enhances user comprehension
+through vivid visual representations.
 
 - 📂 **GitHub Repository**: [https://github.com/Sheng08/OrientMesh-Toolkit](https://github.com/Sheng08/OrientMesh-Toolkit)
 - 💻 **Implemented In**:
@@ -22,27 +29,59 @@ Triangular meshes, due to their intricate detailing, can sometimes be complex an
 
 ## Prospective Users
 
-_++OrientMesh Toolkit++_ targets game developers, computer science students, researchers, and professionals working with 3D models, especially in areas requiring accurate bounding boxes like game development, simulation, and augmented reality.
+Triangular meshes, particularly when it comes to intricate surface detailing,
+can be both complex and computationally intensive. Operations on these meshes
+often demand significant resources. Having a precise oriented bounding box aids
+in simplifying many computational geometry problems related to surface meshes,
+like collision detection, mesh simplification, and many more. However,
+generating an optimal OBB for surface meshes is a non-trivial task. OrientMesh
+aims to offer a reliable, optimized, and easily-integrable solution for this
+challenge.
 
 ## System Architecture
 
-_++OrientMesh Toolkit++_ utilizes C++ for its core computational tasks, ensuring performance optimization. Moreover, Python is employed for its bindings, making it seamlessly usable for a wider audience and also aiding in GUI development and design.
+_**OrientMesh Toolkit**_ utilizes C++ for its core computational tasks,
+ensuring performance optimization. Moreover, Python is employed for its
+bindings, making it seamlessly usable for a wider audience and also aiding
+in GUI development and design.
 
 **Components**:
 
-- **Triangular Mesh Data Structures (C++)**: This component serves as the foundation, hosting the mesh structures essential for subsequent operations.
-- **Algorithm for Optimal OBB Extraction (C++)**: A dedicated component that undertakes the crucial task of extracting the Oriented Bounding Boxes from the meshes.
-- **API (C++ and Python)**: Interface that facilitates seamless communication between different modules and allows extensibility for future needs.
-- **Python Bindings Using `pybind11`**: This bridges the gap between C++ computations and Python's versatility, opening up the toolkit for a wider user base.
-- **Interactive GUI (Python `PyQt`)**: A visual platform enabling users to visualize the mesh and extracted OBB interactively.
+- **Triangular Mesh Data Structures (C++)**: This component serves as the
+  foundation, hosting the mesh structures essential for subsequent operations.
+- **Algorithm for Optimal OBB Extraction (C++)**: A dedicated component that
+  undertakes the crucial task of extracting the Oriented Bounding Boxes from
+  the meshes.
+- **API (C++ and Python)**: Interface that facilitates seamless communication
+  between different modules and allows extensibility for future needs.
+- **Python Bindings Using `pybind11`**: This bridges the gap between C++
+  computations and Python's versatility, opening up the toolkit for a wider
+  user base.
+- **Interactive GUI (Python `PyQt`)**: A visual platform enabling users to
+  visualize the mesh and extracted OBB interactively.
 
 **System Flow Description**:
 
-In the OrientMesh workflow, everything begins with the user providing 3D object data in the form of a `.obj` file, which encapsulates information about vertices, edges, and faces. Initially, this data is ingested and stored by the `MeshDataHandler` class into specialized C++ data structures. Throughout this process, we leverage both the `glm` library (OpenGL Mathematics[^3]) for efficient handling of 3D data, and the `Eigen` library[^4] for advanced linear algebra operations, ensuring both robustness and efficiency.
+In the OrientMesh workflow, everything begins with the user providing 3D object
+data in the form of a `.obj` file, which encapsulates information about vertices,
+edges, and faces. Initially, this data is ingested and stored by the
+`MeshDataHandler` class into specialized C++ data structures. Throughout this
+process, we leverage both the `glm` library (OpenGL Mathematics[^3]) for
+efficient handling of 3D data, and the `Eigen` library[^4] for advanced linear
+algebra operations, ensuring both robustness and efficiency.
 
-After that, the parsed data from the `MeshDataHandler` class is passed onto the `OBBExtractor` class. Here, utilizing methodologies such as Principal Component Analysis (PCA)[^5] with SIMD optimizations, the OBB is computed from the provided mesh data more efficiently. The `OBBExtractor` assesses the eigen vectors of the object's distribution to determine a 3D box that minimally encapsulates the object.
+After that, the parsed data from the `MeshDataHandler` class is passed onto the
+`OBBExtractor` class. Here, utilizing methodologies such as Principal Component
+Analysis (PCA)[^5] with SIMD optimizations, the OBB is computed from the
+provided mesh data more efficiently. The `OBBExtractor` assesses the eigen
+vectors of the object's distribution to determine a 3D box that minimally
+encapsulates the object.
 
-Upon completion of the OBB extraction, all data is amalgamated through the `OOBInterface` class. Harnessing the power of pybind11 and PyQt, marrying the efficiency of C++ with the flexibility of Python, this interface acts as a bridge between C++ and Python, facilitating users to conveniently access and utilize OBB data and its associated operations.
+Upon completion of the OBB extraction, all data is amalgamated through the
+`OOBInterface` class. Harnessing the power of pybind11 and PyQt, marrying the
+efficiency of C++ with the flexibility of Python, this interface acts as a
+bridge between C++ and Python, facilitating users to conveniently access and
+utilize OBB data and its associated operations.
 
 <p align="center">
     <img src="./doc/pic/system_flow.png" alt="" width="400"/>
@@ -73,7 +112,8 @@ Upon completion of the OBB extraction, all data is amalgamated through the `OOBI
   \mathbf{C} \mathbf{v}_j = \lambda_j \mathbf{v}_j
   ```
   <p align="center">
-    where $\mathbf{v}_j$ are the eigenvectors (principal directions) and $lambda_j$ are the eigenvalues of $\mathbf{C}$.
+    where $\mathbf{v}_j$ are the eigenvectors (principal directions) and
+    $lambda_j$ are the eigenvalues of $\mathbf{C}$.
   </p>
 
 6. **Project vertices onto the principal directions to get the dimensions of the OBB**:
@@ -98,7 +138,8 @@ Upon completion of the OBB extraction, all data is amalgamated through the `OOBI
 
 ### Detail Description
 
-For `C++` users, refer to the descriptions below. For `Python` users, most of the `Python` type APIs are provided with the same name.
+For `C++` users, refer to the descriptions below. For `Python` users, most of
+the `Python` type APIs are provided with the same name.
 
 - **`MeshDataHandler`** class
     ```cpp=
@@ -187,14 +228,17 @@ For `C++` users, refer to the descriptions below. For `Python` users, most of th
 Import `_meshdatahandler`, `_obb_extractor` and `_obb_interface` for `Python` APIs.
 
 * `MeshDataHandler` class:
-    - `mesh_data = MeshDataHandler(obj_file_path)`: Initializes MeshData by reading `.obj` files.
+    - `mesh_data = MeshDataHandler(obj_file_path)`: Initializes MeshData by
+      reading `.obj` files.
     - `mesh_data.getVertices()`: Returns a list of vertices.
     - `mesh_data.getEdges()`: Returns a list of edges.
     - `mesh_data.getFaces()`: Returns a list of faces.
 
 * `OBBExtractor` class:
-    - `obb_extractor = OBBExtractor(mesh_data)`: Uses MeshDataHandler class to extract Oriented Bounding Boxes (OBB).
-    - `obb_extractor.computeOBB()`: Computes the OBB using Principal Component Analysis (PCA) and returns 8 corner vertices of OBB.
+    - `obb_extractor = OBBExtractor(mesh_data)`: Uses MeshDataHandler class to
+      extract Oriented Bounding Boxes (OBB).
+    - `obb_extractor.computeOBB()`: Computes the OBB using Principal Component
+      Analysis (PCA) and returns 8 corner vertices of OBB.
     - `obb_extractor.getMinimumVolume()`: Returns the volume of the OBB.
     - `obb_extractor.getOptimalDirection()`: Returns the optimal direction vector.
     - `obb_extractor.getOrientation()`: Returns the orientation of the OBB.
@@ -202,8 +246,11 @@ Import `_meshdatahandler`, `_obb_extractor` and `_obb_interface` for `Python` AP
 * `OOBInterface` class:
     - `oob_interface = OOBInterface()`: Initializes the interface.
     - `oob_interface.loadMeshData(obj_file_path)`: Loads the mesh data into the interface.
-    - `oob_interface.extractOBB()`: Extracts the oriented bounding box for the provided mesh data and returns 8 corner vertices of OBB.
-    - `oob_interface.displayInteractiveView(show_original_mesh=True, display_obb=True)`: Visualizes and interacts with the mesh and OBB. The user can specify whether to show the original mesh and/or the OBB.
+    - `oob_interface.extractOBB()`: Extracts the oriented bounding box for the
+      provided mesh data and returns 8 corner vertices of OBB.
+    - `oob_interface.displayInteractiveView(show_original_mesh=True, display_obb=True)`:
+      Visualizes and interacts with the mesh and OBB. The user can specify whether
+      toshow the original mesh and/or the OBB.
 
 ## Engineering Infrastructure
 
