@@ -75,3 +75,6 @@ Follow the format to add your project in lexicographical order:
 4. `ThreeMonth03 <https://github.com/ThreeMonth03>`__ for
    `Project subject <ThreeMonth03/README.md>`__:
    https://github.com/ThreeMonth03/Conjugate-Gradient-Method-library
+5. `Sheng08 <https://github.com/Sheng08>`__ for
+   `Project subject <Sheng08/README.md>`__:
+   https://github.com/Sheng08/OrientMesh-Toolkit
