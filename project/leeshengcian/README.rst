@@ -36,12 +36,19 @@ and also decrease the numerical errors.
 System Architecture
 ===================
 
-to be planned...
+.. image:: https://github.com/leeshengcian/Polygon-Clipping/blob/main/image/term-project-work-flow.png
 
 API Description
 ===============
 
-to be planned...
+1. Function in c++ file:
+    - `Sutherland–Hodgman`: Implement original Sutherland–Hodgman algorithm on polygon clipping
+    - `improved-Sutherland–Hodgman`: Implement redesigned Sutherland–Hodgman algorithm
+2. Function in python file:
+    - `Test-two-algo`: Test if two algorithms generate same result and write result in polygon format into Result.txt
+    - `Visualize`: Visualize clipped result and write into Result.png
+    - `Benchmark`: Measure each algorithms' performance and write time consumption into performance.txt
+3. Use Pybind11 to wrap C++ functions for Python
 
 Engineering Infrastructure
 ==========================
