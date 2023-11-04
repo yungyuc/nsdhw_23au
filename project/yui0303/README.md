@@ -13,7 +13,7 @@ Project URL: [https://github.com/yui0303/Matrix-Diagonalization](https://github.
 
 ## Problem to Solve
 
-There a serverl steps to do to diagonalize a square matrix.  
+There are several steps to do to diagonalize a square matrix.  
 1. Calcualete the eigenvalues of the matrix.
 2. Find the corresponding eigenvectors of eigenvalues.
 3. Check whether a matrix is diagonalizable.
