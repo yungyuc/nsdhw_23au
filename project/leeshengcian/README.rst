@@ -41,22 +41,22 @@ System Architecture
 API Description
 ===============
 
-1. Function in c++ file:
-    - `Sutherland–Hodgman`: Implement original Sutherland–Hodgman algorithm on polygon clipping
-    - `improved-Sutherland–Hodgman`: Implement redesigned Sutherland–Hodgman algorithm
-2. Function in python file:
-    - `Test-two-algo`: Test if two algorithms generate same result and write result in polygon format into Result.txt
-    - `Visualize`: Visualize clipped result and write into Result.png
-    - `Benchmark`: Measure each algorithms' performance and write time consumption into performance.txt
+1. **Function in c++ file**:
+    - ``Sutherland–Hodgman``: Implement original Sutherland–Hodgman algorithm on polygon clipping
+    - ``improved-Sutherland–Hodgman``: Implement redesigned Sutherland–Hodgman algorithm
+2. **Function in python file**:
+    - ``Test-two-algo``: Test if two algorithms generate same result and write result in polygon format into Result.txt
+    - ``Visualize``: Visualize clipped result and write into Result.png
+    - ``Benchmark``: Measure each algorithms' performance and write time consumption into performance.txt
 3. Use Pybind11 to wrap C++ functions for Python
 
 Engineering Infrastructure
 ==========================
 
-1. Automatic build system: `CMake`
-2. Version control: `git`
-3. Testing framework: `pytest`
-4. Documentation: `README.md`
+1. Automatic build system: ``CMake``
+2. Version control: ``git``
+3. Testing framework: ``pytest``
+4. Documentation: ``README.md``
 
 Schedule
 ========
