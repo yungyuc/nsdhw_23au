@@ -20,15 +20,6 @@ through vivid visual representations.
 
 ## Problem to Solve
 
-Triangular meshes, due to their intricate detailing, can sometimes be complex and computationally heavy for operations. Having a precise oriented bounding box aids in simplifying many computational geometry problems, like collision detection, mesh simplification, and many more. However, generating an optimal OBB is a non-trivial task. OrientMesh aims to offer a reliable, optimized, and easily-integrable solution for this challenge.
-
-<p align="center">
-    <img src="./doc/pic/OOB_mesh_sample1.png" alt="" height="250"style="margin-right: 15px;"/>
-    <img src="./doc/pic/OOB_mesh_sample2.png" alt="" height="250"/>
-</p>
-
-## Prospective Users
-
 Triangular meshes, particularly when it comes to intricate surface detailing,
 can be both complex and computationally intensive. Operations on these meshes
 often demand significant resources. Having a precise oriented bounding box aids
@@ -37,6 +28,18 @@ like collision detection, mesh simplification, and many more. However,
 generating an optimal OBB for surface meshes is a non-trivial task. OrientMesh
 aims to offer a reliable, optimized, and easily-integrable solution for this
 challenge.
+
+<p align="center">
+    <img src="./doc/pic/OOB_mesh_sample1.png" alt="" height="250"style="margin-right: 15px;"/>
+    <img src="./doc/pic/OOB_mesh_sample2.png" alt="" height="250"/>
+</p>
+
+## Prospective Users
+
+_**OrientMesh Toolkit**_ targets game developers, computer science students,
+researchers, and professionals working with 3D models, especially in areas
+requiring accurate bounding boxes like game development, simulation, and
+augmented reality.
 
 ## System Architecture
 
