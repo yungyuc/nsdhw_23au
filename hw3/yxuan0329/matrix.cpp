@@ -3,6 +3,13 @@
 #include <cstring>
 #include <cmath>
 #include <cstddef>
+#include <mkl/mkl.h>
+#include <mkl/mkl_lapack.h>
+#include <mkl/mkl_lapacke.h>
+
+#include <pybind11/pybind11.h>
+#include <pybind11/operators.h>
+#include <pybind11/stl.h>
 
 #include "matrix.h"
 
@@ -28,7 +35,6 @@ Matrix::Matrix(size_t row, size_t col, vector<double> const value) {
     }
 }
 
-
 Matrix::Matrix(size_t row, size_t col) {
     this->m_row = row;
     this->m_col = col;
@@ -38,11 +44,11 @@ Matrix::Matrix(size_t row, size_t col) {
 
 Matrix::~Matrix() {
     this->m_row = 0, this->m_col = 0;
-    delete[] this->m_buffer;
+    // delete[] this->m_buffer; // will cause double-free()
 }
 
-double &Matrix::operator() (size_t row, size_t col) const {
-    return m_buffer[this->m_col * row + col];
+double& Matrix::operator() (size_t row, size_t col) const {
+    return this->m_buffer[this->m_col * row + col];
 }
 
 Matrix Matrix::transpose() const {
@@ -59,15 +65,15 @@ Matrix Matrix::transpose() const {
 }
 
 
-bool Matrix::operator == (const Matrix rhs) const {
-    if (this->m_col != rhs.m_col) return false;
-    if (this->m_row != rhs.m_row) return false;
-
+bool Matrix::operator==(const Matrix& mat2) const {
+    if (this->n_col() != mat2.m_col || this->n_row() != mat2.m_row) 
+        return false;
+    
     int row = this->m_row, col = this->m_col;
-    for (int i=0; i<col; i++) {
-        for (int j=0; j<row; j++) {
+    for (int i=0; i<row; i++) {
+        for (int j=0; j<col; j++) {
             size_t id = this->m_col * i + j;
-            if (abs(this->m_buffer[id] - rhs(i, j)) > 0.0000001) {
+            if (this->m_buffer[id] != mat2(i, j)) {
                 return false;
             }
         }
@@ -75,8 +81,8 @@ bool Matrix::operator == (const Matrix rhs) const {
     return true;
 }
 
-bool Matrix::operator != (const Matrix rhs) const {
-    return !(*this == rhs);
+bool Matrix::operator != (const Matrix& mat2) const {
+    return !(*this == mat2);
 }
 
 const size_t& Matrix::n_row() const {
@@ -85,4 +91,104 @@ const size_t& Matrix::n_row() const {
 
 const size_t& Matrix::n_col() const {
     return this->m_col;
+}
+
+// multiply naive 
+Matrix multiply_naive(const Matrix& mat1, const Matrix& mat2) {
+    if (mat1.n_col() != mat2.n_row()) {
+        throw invalid_argument("Invalid shape size, mat1 col != mat2 row.");
+    }
+
+    Matrix new_mat(mat1.n_row(), mat2.n_col());
+    new_mat(0, 0) = 1;
+    size_t row = mat1.n_row(), col = mat2.n_col(), mat1_col = mat1.n_col();
+    for (size_t i=0; i<row; i++) {
+        for (size_t j=0; j<col; j++) {
+            new_mat(i, j) = 0;
+            for (size_t k=0; k<mat1_col; k++) {
+                new_mat(i, j) += mat1(i, k) * mat2(k, j);
+            }
+            // cout << new_mat(i, j) << " ";
+        }
+        // cout << endl;
+    }
+    return new_mat;
+}
+
+// multiply tile 
+void fillIn(Matrix& new_mat, Matrix mat1, Matrix mat2, size_t row_size, size_t col_size, size_t k_size) {
+    for (size_t i=0; i<row_size; i++){
+        for (size_t j=0; j<col_size; j++) {
+            double k_sum = 0;
+            for (size_t k=0; k<k_size; k++) {
+                k_sum += mat1(i, k) * mat2(k, j);
+            }
+            new_mat(i, j) += k_sum;
+        }
+    }
+}
+
+Matrix multiply_tile(const Matrix& mat1, const Matrix& mat2, size_t tile_size) {
+    if (mat1.n_col() != mat2.n_row()) {
+        throw invalid_argument("Invalid shape size, mat1 col != mat2 row.");
+    }
+
+    Matrix new_mat(mat1.n_row(), mat2.n_col());
+
+    for (size_t row_offset=0; row_offset < mat1.n_row(); row_offset += tile_size) {
+        size_t row_size = min(mat1.n_row(), row_offset+tile_size);
+        for (size_t col_offset=0; col_offset < mat2.n_col(); col_offset += tile_size) {
+            size_t col_size = min(mat2.n_col(), col_offset+tile_size);
+            for (size_t k=0; k < mat1.n_col(); k += tile_size) {
+                size_t k_size = min(mat1.n_col(), k+tile_size);
+                fillIn(new_mat, mat1, mat2, row_size, col_size, k_size);
+            }
+        }
+    }
+    return new_mat;
+}
+
+// multiply mkl
+Matrix multiply_mkl(const Matrix& mat1, const Matrix& mat2) {
+    if (mat1.n_col() != mat2.n_row()) {
+        throw invalid_argument("Invalid shape size, mat1 col != mat2 row.");
+    }
+
+    Matrix new_mat(mat1.n_row(), mat2.n_col());
+
+    cblas_dgemm(
+        CblasRowMajor, CblasNoTrans, CblasNoTrans, 
+        mat1.n_row(), 
+        mat2.n_col(), 
+        mat1.n_col(), 
+        1.0, 
+        mat1.m_buffers(), 
+        mat1.n_col(),
+        mat2.m_buffers(), 
+        mat2.n_col(), 
+        0.0, 
+        new_mat.m_buffers(), 
+        new_mat.n_col()
+    );
+
+    return new_mat;
+}
+
+
+// pybind11
+namespace py = pybind11;
+
+PYBIND11_MODULE(_matrix, m) {
+  m.doc() = "Matrix multiplication function implementation";      // module doc string
+  m.def("multiply_naive", &multiply_naive);
+  m.def("multiply_tile", &multiply_tile);
+  m.def("multiply_mkl", &multiply_mkl);
+  py::class_<Matrix>(m, "Matrix")
+    .def(py::init<size_t, size_t>())
+    .def_property_readonly("nrow", [](Matrix& m){ return m.n_row(); })
+    .def_property_readonly("ncol", [](Matrix& m){ return m.n_col(); })
+    .def(py::self == py::self) 
+    .def(py::self != py::self) 
+    .def("__getitem__", [](Matrix& m, std::pair<size_t, size_t> idx) { return m(idx.first, idx.second); })
+    .def("__setitem__", [](Matrix& m, std::pair<size_t, size_t> idx, double val) { m(idx.first, idx.second) = val; });
 }

@@ -1,0 +1,12 @@
+multiply_naive (repeat=5), 
+min = 3.899003786500543e-06 seconds
+
+multiply_tile (repeat=5), tile size=16, 
+min = 3.3199976314790547e-06 seconds
+
+multiply_mkl (repeat=5), 
+min = 1.23800418805331e-06 seconds
+
+
+Tile size=16 speed-up over naive: 0.8514989503149055x
+MKL speed-up over naive: 0.31751807790996034x

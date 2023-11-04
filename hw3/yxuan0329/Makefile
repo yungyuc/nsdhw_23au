@@ -5,14 +5,14 @@ LDFLAGS = -lblas
 
 all: _matrix.so
 
-_matrix.so: matrix.cpp TileHelper.cpp matrix_multi.cpp
+_matrix.so: matrix.cpp
 		$(CXX) $^ $(CFLAGS) -I/usr/include/mk -I $(CIMPORTPATH) -o $@ ${LDFLAGS}
 
 clean:
 	rm -f *.so
 
 test: _matrix.so
-		python3 -m pytest test_matrix_multi.py -v
+		python3 -m pytest -s test_matrix_multi.py -v
 
 performance: _matrix.so
 		python3 performance.py
