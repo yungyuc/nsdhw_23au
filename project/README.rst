@@ -72,5 +72,5 @@ Follow the format to add your project in lexicographical order:
    `Project subject <Yu-Rou-Weng/README.md>`__:
    https://github.com/Yu-Rou-Weng/Mesh-Data-Converter
 4. `Mibudin <https://github.com/Mibudin>`__ for
-   `Wave Function Collapse <Mibudin/README.md>`__:
-   https://github.com/Mibudin/nycu_nsd_wfc
+   `WFCpp <Mibudin/README.md>`__:
+   https://github.com/Mibudin/wfcpp
