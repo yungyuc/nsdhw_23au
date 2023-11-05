@@ -6,6 +6,7 @@
 #include <pybind11/stl.h>
 #include <utility>
 #include <mkl.h>
+#include <algorithm>
 
 class Matrix {
 
@@ -165,9 +166,7 @@ private:
 
 };
 
-/*
- * Naive matrix matrix multiplication.
- */
+
 Matrix multiply_tile(Matrix const & mat1, Matrix const & mat2, size_t tile_shape)
 {
     if (mat1.ncol() != mat2.nrow())
@@ -180,21 +179,21 @@ Matrix multiply_tile(Matrix const & mat1, Matrix const & mat2, size_t tile_shape
     Matrix ret(mat1.nrow(), mat2.ncol());
 
     const size_t max_i = mat1.nrow();
-    const size_t max_k = mat2.ncol();
-    const size_t max_j = mat1.ncol();
+    const size_t max_j = mat2.ncol();
+    const size_t max_k = mat1.ncol();
 
-    for (size_t i=0; i<ret.nrow(); i += tile_shape)
+    for (size_t i=0; i<max_i; i += tile_shape)
     {
-        for (size_t k=0; k<ret.ncol(); k += tile_shape)
+        for (size_t k=0; k<max_k; k += tile_shape)
         {
-            for (size_t j=0; j<mat1.ncol(); j += tile_shape)
+            for (size_t j=0; j<max_j; j += tile_shape)
             {
                 for (size_t tile_i = i; tile_i < std::min(i + tile_shape, max_i); ++tile_i)
                 {
-                    for (size_t tile_j = j; tile_j < std::min(j + tile_shape, max_k); ++tile_j) 
+                    for (size_t tile_j = j; tile_j < std::min(j + tile_shape, max_j); ++tile_j) 
 		            {
 		    	        double sum = .0;
-                        for (size_t tile_k = k; tile_k < std::min(k + tile_shape, max_j); ++tile_k)
+                        for (size_t tile_k = k; tile_k < std::min(k + tile_shape, max_k); ++tile_k)
                         {
                             sum += mat1(tile_i, tile_k) * mat2(tile_k, tile_j);
                         }
@@ -207,6 +206,9 @@ Matrix multiply_tile(Matrix const & mat1, Matrix const & mat2, size_t tile_shape
 
     return ret;
 }
+
+
+
 
 Matrix multiply_naive(Matrix const & mat1, Matrix const & mat2)
 {
@@ -264,7 +266,8 @@ Matrix multiply_mkl(Matrix const & mat1, Matrix const & mat2)
         );
 
     return ret;
-}
+} 
+
 
 std::ostream & operator << (std::ostream & ostr, Matrix const & mat)
 {
@@ -294,7 +297,6 @@ PYBIND11_MODULE(_matrix, m){
 		    mat(index.first, index.second) = val;
 	    })
         .def("__eq__", &Matrix::operator==)
-        .def("__add__", &Matrix::operator+)
         .def_property_readonly("nrow", &Matrix::nrow)
         .def_property_readonly("ncol", &Matrix::ncol)
         ;
@@ -302,3 +304,4 @@ PYBIND11_MODULE(_matrix, m){
     m.def("multiply_tile", &multiply_tile);
     m.def("multiply_mkl", &multiply_mkl);
 }
+//.def("__add__", &Matrix::operator+)

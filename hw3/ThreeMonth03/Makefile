@@ -1,19 +1,28 @@
-CXX = g++
-FLAGS = -O3 -g -m64 -Wall -shared -std=c++11 -fPIC `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
-MKLINCLUDE = -I/usr/include/mkl
-LIB_TARGET = _matrix.so
-LBLS = -lblas
+CC = g++
+CFLAGS = -O3 -Wall -shared -std=c++11 -fPIC
+MKLINCLUDE = -I/usr/include/mkl 
+PYINCLUDE = $(shell python3-config --includes)  $(shell python3 -m pybind11 --includes)
+PYESUFFIX = $(shell python3-config --extension-suffix)
+PYTHON = python3
+TARGET=_matrix$(PYESUFFIX)
+LIBS = -lblas
 
-all: $(LIB_TARGET)
-$(LIB_TARGET): _matrix.cpp
-	$(CXX) $(MKLINCLUDE) $(FLAGS) $< -o $@ $(LBLS)
+all: $(TARGET)
 
-.PHONY: run test clean
+$(TARGET): _matrix.o
+	$(CC) $(CFLAGS) -o $(TARGET) $^ $(LIBS)
 
-test:
-	python3 -m pytest -v test_matrix.py
-	rm -f performance.txt
-	python3 test_matrix.py | tee performance.txt
+_matrix.o: _matrix.cpp
+	$(CC) $(CFLAGS) -c _matrix.cpp $(MKLINCLUDE) $(PYINCLUDE)
 
+.PHONY: test
+test: $(TARGET)
+	$(PYTHON) -m pytest -v test_matrix.py
+	rm performance.txt
+	$(PYTHON) test_matrix.py | tee performance.txt
+	echo "==================== environment ====================" >> performance.txt
+	lscpu >> performance.txt
+
+.PHONY: clean
 clean:
 	rm -rf _matrix *.o *.so __pycache__ .pytest_cache
