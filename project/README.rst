@@ -86,6 +86,10 @@ Follow the format to add your project in lexicographical order:
 8. `adcf3016 <https://github.com/adcf3016>`__ for
    `Project subject <adcf3016/README.md>`__:
    https://github.com/adcf3016/kdtree
-9. `Sheng08 <https://github.com/Sheng08>`__ for
-   `Project subject <Sheng08/README.md>`__:
-   https://github.com/Sheng08/OrientMesh-Toolkit
+9. `Mibudin <https://github.com/Mibudin>`__ for
+   `WFCpp <Mibudin/README.md>`__:
+   https://github.com/Mibudin/wfcpp
+10. `Sheng08 <https://github.com/Sheng08>`__ for
+    `Project subject <Sheng08/README.md>`__:
+    https://github.com/Sheng08/OrientMesh-Toolkit
+    
