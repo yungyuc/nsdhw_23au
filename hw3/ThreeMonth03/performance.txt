@@ -1,3 +1,8 @@
-Start multiply_naive (repeat=5), take min = 3.2882731540012173 seconds
-Start multiply_mkl (repeat=5), take min = 0.07087887300076545 seconds
-MKL speed-up over naive: 46.3929 x
+naive_multiplex  for epoch  0  :  4.8782474 s
+tile_multiplex  for epoch  0  :  1.73927635 s
+mkl_multiplex  for epoch  0  :  0.1329381989999998 s
+Average time for naive_multiplex with matrix size 1024 * 1024 :  4.8782474 s
+Average time for tile_multiplex with matrix size 1024 * 1024 :  1.73927635 s
+Average time for mkl_multiplex with matrix size 1024 * 1024 :  0.1329381989999998 s
+Tile is  2.8047569323874266  times faster than naive.
+Mkl is  36.69560319528631  times faster than naive.
