@@ -6,7 +6,7 @@ OptiRoute focuses on solving the Traveling Salesman Problem (TSP), a fundamental
 
 In this project, we aim to develop a user-friendly system that allows users to input latitude and longitude coordinates for multiple destinations and, in turn, generates the optimal travel route, addressing various real-world applications, such as logistics, tour planning, and resource optimization.
 
-GitHub Link : [ https://github.com/SL510457/TourTracer-Christofides-TSP-Visualizer ]
+GitHub Link : [ https://github.com/SL510457/OptiRoute-Intelligent-Travel-Route-Planner ]
 
 ### Traveling Salesman Problem (TSP)
 TSP is a NP hard problem. Given a set of cities and the distance between every pair of cities, the problem is to find the shortest possible route that visits each city exactly once and returns back to the original city. 
