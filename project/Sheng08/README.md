@@ -63,6 +63,34 @@ in GUI development and design.
 - **Interactive GUI (Python `PyQt`)**: A visual platform enabling users to
   visualize the mesh and extracted OBB interactively.
 
+**Mesh data structure**:
+```cpp
+struct Vertex {
+    glm::vec3 coordinates;
+    glm::vec3 normal;       // Optional
+};
+
+struct Edge {
+    Vertex* start;
+    Vertex* end;
+    std::vector<Face*> faces;
+};
+
+struct Face {
+    Vertex* vertices[3];
+    Edge* edges[3];
+    glm::vec3 normal;       // This will facilitate operations that require face normals.
+};
+
+class MeshData {
+    std::vector<Vertex> vertices;
+    std::vector<Edge> edges;
+    std::vector<Face> faces;
+
+    // Additional functions for manipulating and querying the mesh
+};
+```
+
 **System Flow Description**:
 
 In the OrientMesh workflow, everything begins with the user providing 3D object
