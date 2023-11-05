@@ -83,3 +83,6 @@ Follow the format to add your project in lexicographical order:
 7. `yxuan0329 <https://github.com/yxuan0329>`__ for
    `R-Tree Spatial Search Engine <yxuan0329/README.rst>`__:
    https://github.com/yxuan0329/R-tree-Search-Engine
+8. `adcf3016 <https://github.com/adcf3016>`__ for
+   `Project subject <adcf3016/README.md>`__:
+   https://github.com/adcf3016/kdtree
