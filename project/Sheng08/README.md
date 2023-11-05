@@ -304,17 +304,66 @@ Import `_meshdatahandler`, `_obb_extractor` and `_obb_interface` for `Python` AP
 
 ## Schedule
 
-| Week                                                             | Schedule                                                                                                                                                                                                                                                                                                                              |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Week 1 (11/6)**<br>Initial Setup and Environment Configuration | 1. Define project scope for OrientMesh Toolkit.<br>2. Set up GitHub repository and version control with Git.<br>3. Install the required environment (C++, Python, `pybind11`, `.obj` file parser library, etc.).                                                                                                                      |
-| **Week 2 (11/13)**<br>Mesh Data Handling                         | 1. Design and implement `MeshDataHandler` class in C++.<br>2. Create initial test cases for MeshDataHandler using `Google Test` for C++.<br>3. Test the class with various `.obj` files to ensure proper parsing and representation.<br>4. Start documentation on the class functions using Markdown.                                   |
-| **Week 3 (11/20)**<br>OBB Extraction                             | 1. Research and decide on the optimal algorithm for OBB extraction.<br>2. Begin implementation of the `OBBExtractor` class in C++.<br>3. Create and expand test cases for OBB extraction.<br>4. Test the OBB extraction on sample 3D models and refine the algorithm.<br>4. Document the methods and results.                         |
-| **Week 4 (11/27)**<br>Python Binding & Interface                 | 1. Explore and set up `pybind11` for creating Python bindings for C++ code.<br>2. Implement the `OOBInterface` class and Python bindings.<br>3. Create test cases for Python bindings using `pytest`.<br>4. Test the integration of C++ and Python code and ensure seamless function call transitions.                                  |
-| **Week 5 (12/4)**<br>Interactive GUI Development                 | 1. Design the GUI layout and functionalities.<br>2. Start the implementation of GUI using `PyQt` in Python.<br>3. Integrate the GUI with the core library and ensure real-time visualization of OBB and meshes.<br>4. Conduct initial GUI user tests and gather feedback.                                                             |
-| **Week 6 (12/11)**<br>Testing & Debugging                        | 1. Expand and finalize test cases for all components<br>2. Create test cases using `Google Test` for C++ and `pytest` for Python.<br>3. Identify bugs or inefficiencies in the code and refine them.<br>4. Optimize the performance of the extraction algorithm and GUI interactions.<br>4. Update documentation with the recent changes. |
-| **Week 7 (12/18)**<br>System Documentation & Build Workflow      | 1. Finalize documentation using Markdown<br>2. Set up an automatic build system using GNU make, CMake, and Docker.<br>3. Ensure smooth build processes and fix any arising issues.<br>4. Prepare tutorials or user guides for the toolkit.                                                                                            |
-| **Week 8 (12/25)**<br>Final Review & Presentation                | 1. Review the entire project to ensure all requirements are met.<br>2. Gather feedback from beta test.<br>3. Make final adjustments based on feedback.<br>4. Prepare a presentation, focusing on key features, benefits, and potential use cases of the OrientMesh Toolkit.                                                           |
+Week 1 (11/6):
+- Initial Setup and Environment Configuration
+  - Define project scope for OrientMesh Toolkit.
+  - Set up GitHub repository and version control with Git.
+  - Install the required environment (C++, Python, `pybind11`, `.obj` file 
+    parser library, etc.).
 
+Week 2 (11/13):
+- Mesh Data Handling
+  - Design and implement `MeshDataHandler` class in C++.
+  - Create initial test cases for MeshDataHandler using `Google Test` for C++.
+  - Test the class with various `.obj` files to ensure proper parsing and representation.
+  - Start documentation on the class functions using Markdown.
+
+Week 3 (11/20):
+- OBB Extraction
+  - Research and decide on the optimal algorithm for OBB extraction.
+  - Begin implementation of the `OBBExtractor` class in C++.
+  - Create and expand test cases for OBB extraction.
+  - Test the OBB extraction on sample 3D models and refine the algorithm.
+  - Document the methods and results.
+
+Week 4 (11/27):
+- Python Binding & Interface
+  - Explore and set up `pybind11` for creating Python bindings for C++ code.
+  - Implement the `OOBInterface` class and Python bindings.
+  - Create test cases for Python bindings using `pytest`.
+  - Test the integration of C++ and Python code and ensure seamless function
+    call transitions.
+
+Week 5 (12/4):
+- Interactive GUI Development
+  - Design the GUI layout and functionalities.
+  - Start the implementation of GUI using `PyQt` in Python.
+  - Integrate the GUI with the core library and ensure real-time visualization
+    of OBB and meshes.
+  - Conduct initial GUI user tests and gather feedback.
+
+Week 6 (12/11):
+- Testing & Debugging
+  - Expand and finalize test cases for all components.
+  - Create test cases using `Google Test` for C++ and `pytest` for Python.
+  - Identify bugs or inefficiencies in the code and refine them.
+  - Optimize the performance of the extraction algorithm and GUI interactions.
+  - Update documentation with the recent changes.
+
+Week 7 (12/18):
+- System Documentation & Build Workflow
+  - Finalize documentation using Markdown.
+  - Set up an automatic build system using GNU make, CMake, and Docker.
+  - Ensure smooth build processes and fix any arising issues.
+  - Prepare tutorials or user guides for the toolkit.
+
+Week 8 (12/25):
+- Final Review & Presentation
+  - Review the entire project to ensure all requirements are met.
+  - Gather feedback from beta test.
+  - Make final adjustments based on feedback.
+  - Prepare a presentation, focusing on key features, benefits, and potential
+    use cases of the OrientMesh Toolkit.
 
 ## References
 1. [Oriented Bounding Boxes in VEX](https://www.andynicholas.com/post/oriented-bounding-boxes-in-vex)
