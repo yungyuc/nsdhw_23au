@@ -92,4 +92,6 @@ Follow the format to add your project in lexicographical order:
 10. `Sheng08 <https://github.com/Sheng08>`__ for
     `Project subject <Sheng08/README.md>`__:
     https://github.com/Sheng08/OrientMesh-Toolkit
-    
+11. `visitorckw <https://github.com/visitorckw>`__ for
+   `Project subject <visitorckw/README.md>`__:
+   https://github.com/visitorckw/runtime-profile-guided-optimization-sorting-library
