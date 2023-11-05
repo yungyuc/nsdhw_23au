@@ -13,8 +13,8 @@ def test_matrix_oop():
     for i in range(mat3.nrow):
         for j in range(mat3.ncol):
             assert(arr[i*mat3.nrow+j] == mat3[i, j])
-    #mat4 = mat1 + mat3
-    #assert(mat4 == mat3)
+    mat4 = mat1 + mat3
+    assert(mat4 == mat3)
 
 def test_mul():
     mat1 = _matrix.Matrix(1000, 1000)
