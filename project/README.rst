@@ -68,6 +68,18 @@ Follow the format to add your project in lexicographical order:
 2. `CodeStone1125 <https://github.com/CodeStone1125>`__ for
    `Project subject <CodeStone1125/README.md>`__:
    https://github.com/CodeStone1125/QuadraCompress
-3. `yxuan0329 <https://github.com/yxuan0329>`__ for
+3. `Yu-Rou-Weng <https://github.com/Yu-Rou-Weng>`__ for
+   `Project subject <Yu-Rou-Weng/proposal.md>`__:
+   https://github.com/Yu-Rou-Weng/Mesh-Data-Converter
+4. `ThreeMonth03 <https://github.com/ThreeMonth03>`__ for
+   `Project subject <ThreeMonth03/README.md>`__:
+   https://github.com/ThreeMonth03/Conjugate-Gradient-Method-library
+5. `yui0303 <https://github.com/yui0303/Matrix-Diagonalization>`__ for
+   `Project subject <https://github.com/yui0303/nsdhw_23au/blob/yui0303-proposal-submission/project/yui0303/README.md>`__:
+   https://github.com/yui0303/Matrix-Diagonalization
+6. `leeshengcian <https://github.com/leeshengcian>`__ for
+   `Project subject <leeshengcian/README.rst>`__:
+   https://github.com/leeshengcian/Polygon-Clipping
+7. `yxuan0329 <https://github.com/yxuan0329>`__ for
    `R-Tree Spatial Search Engine <yxuan0329/README.rst>`__:
    https://github.com/yxuan0329/R-tree-Search-Engine
