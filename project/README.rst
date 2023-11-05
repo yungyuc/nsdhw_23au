@@ -68,5 +68,5 @@ Follow the format to add your project in lexicographical order:
 
 2. `liamlin5566 <https://github.com/liamlin5566>`__ for
    `Kernel K-means on Image <liamlin5566/README.md>`__:
-   https://github.com/liamlin5566/project_name
+   https://github.com/liamlin5566/Image-Kernel-K-means
 
