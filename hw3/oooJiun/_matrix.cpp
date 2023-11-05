@@ -1,9 +1,7 @@
 #include <iostream>
-#include <chrono>
 #include <mkl.h>
 #include <pybind11/pybind11.h>
 using namespace std;
-using namespace chrono;
 namespace py = pybind11;
 
 class Matrix {
@@ -30,8 +28,8 @@ public:
         m_data = matrix.m_data;
         return *this;
     }
-    double& operator()(size_t row, size_t col) {return m_data[row * m_ncol + col];}
     double operator()(size_t row, size_t col) const {return m_data[row * m_ncol + col];}
+    double& operator()(size_t row, size_t col) {return m_data[row * m_ncol + col];}
     double* get_data() const {return m_data;}
     size_t nrow() const {return m_nrow;}
     size_t ncol() const {return m_ncol;}
@@ -65,7 +63,7 @@ void generateValue(Matrix& mat) {
 }
 
 Matrix multiply_naive(Matrix const & mat1, Matrix const & mat2) {
-    assert(mat1.ncol() == mat2.nrow());
+    if (mat1.ncol() != mat2.nrow()) throw out_of_range("matrices cannot be multiplied");
     size_t n = mat1.nrow();
     size_t m = mat1.ncol();
     size_t p = mat2.ncol();
@@ -84,7 +82,7 @@ Matrix multiply_naive(Matrix const & mat1, Matrix const & mat2) {
 }
 
 Matrix multiply_tile(Matrix& mat1, Matrix& mat2, size_t tile_size) {
-    assert(mat1.ncol() == mat2.nrow());
+    if (mat1.ncol() != mat2.nrow()) throw out_of_range("matrices cannot be multiplied");
     size_t n = mat1.nrow();
     size_t m = mat1.ncol();
     size_t p = mat2.ncol();
@@ -98,10 +96,10 @@ Matrix multiply_tile(Matrix& mat1, Matrix& mat2, size_t tile_size) {
     for (size_t i = 0; i < n; i += tile_size) {
         for (size_t j = 0; j < p; j += tile_size) {
             for (size_t k = 0; k < m; k += tile_size) {
-                for (size_t ii = i; ii < std::min(i + tile_size, n); ii++) {
-                    for (size_t jj = j; jj < std::min(j + tile_size, p); jj++) {
+                for (size_t ii = i; ii < min(i + tile_size, n); ii++) {
+                    for (size_t jj = j; jj < min(j + tile_size, p); jj++) {
                         val = 0.0;
-                        for (size_t kk = k; kk < std::min(k + tile_size, m); kk++) {
+                        for (size_t kk = k; kk < min(k + tile_size, m); kk++) {
                             val += mat1(ii, kk) * mat2(kk, jj);
                         }
                         tile_mat(ii, jj) += val;
@@ -114,7 +112,7 @@ Matrix multiply_tile(Matrix& mat1, Matrix& mat2, size_t tile_size) {
 }
 
 Matrix multiply_mkl(const Matrix& mat1, const Matrix& mat2) {
-    assert(mat1.ncol() == mat2.nrow());
+    if (mat1.ncol() != mat2.nrow()) throw out_of_range("matrices cannot be multiplied");
     Matrix MKL_mat(mat1.nrow(), mat2.ncol());
     cblas_dgemm(
         CblasRowMajor, 
@@ -135,17 +133,18 @@ Matrix multiply_mkl(const Matrix& mat1, const Matrix& mat2) {
 }
 
 PYBIND11_MODULE(_matrix, m) {
-    py::class_<Matrix>(m, "Matrix")
-        .def(py::init<size_t, size_t>())
-        .def(py::init<const Matrix &>())
-        .def("assign", &Matrix::operator=)
-        .def_property_readonly("nrow", [](const Matrix &mat){ return mat.nrow(); })
-        .def_property_readonly("ncol", [](const Matrix &mat){ return mat.ncol(); })
-        .def("__eq__", [](const Matrix &mat, const Matrix &other) { return mat == other; })
-        .def("__getitem__", [](const Matrix &m, std::pair<size_t, size_t> idx) {return m(idx.first, idx.second);})
-        .def("__setitem__", [](Matrix &m, std::pair<size_t, size_t> idx, double value) {m(idx.first, idx.second) = value;});
+    m.doc() = "Matrix multiply";
     m.def("multiply_naive", &multiply_naive);
     m.def("multiply_tile", &multiply_tile);
     m.def("multiply_mkl", &multiply_mkl);
     m.def("generateValue", &generateValue);
+    py::class_<Matrix>(m, "Matrix")
+        .def(py::init<size_t, size_t>())
+        .def(py::init<const Matrix &>())
+        .def_property_readonly("nrow", [](const Matrix &mat){ return mat.nrow();})
+        .def_property_readonly("ncol", [](const Matrix &mat){ return mat.ncol();})
+        .def("assign", &Matrix::operator=)
+        .def("__eq__", [](const Matrix &mat, const Matrix &other) { return mat == other;})
+        .def("__getitem__", [](const Matrix &m, pair<size_t, size_t> idx) {return m(idx.first, idx.second);})
+        .def("__setitem__", [](Matrix &m, pair<size_t, size_t> idx, double value) {m(idx.first, idx.second) = value;});
 }
