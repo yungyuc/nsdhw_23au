@@ -89,3 +89,7 @@ Follow the format to add your project in lexicographical order:
 9. `Mibudin <https://github.com/Mibudin>`__ for
    `WFCpp <Mibudin/README.md>`__:
    https://github.com/Mibudin/wfcpp
+10. `Sheng08 <https://github.com/Sheng08>`__ for
+    `Project subject <Sheng08/README.md>`__:
+    https://github.com/Sheng08/OrientMesh-Toolkit
+    
