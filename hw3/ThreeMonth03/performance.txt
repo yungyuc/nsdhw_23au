@@ -1,8 +1,20 @@
-naive_multiplex  for epoch  0  :  4.8782474 s
-tile_multiplex  for epoch  0  :  1.73927635 s
-mkl_multiplex  for epoch  0  :  0.1329381989999998 s
-Average time for naive_multiplex with matrix size 1024 * 1024 :  4.8782474 s
-Average time for tile_multiplex with matrix size 1024 * 1024 :  1.73927635 s
-Average time for mkl_multiplex with matrix size 1024 * 1024 :  0.1329381989999998 s
-Tile is  2.8047569323874266  times faster than naive.
-Mkl is  36.69560319528631  times faster than naive.
+naive_multiplex  for epoch  0  :  4.840291561 s
+naive_multiplex  for epoch  1  :  4.7776230239999995 s
+naive_multiplex  for epoch  2  :  4.446709989 s
+naive_multiplex  for epoch  3  :  4.501689182 s
+naive_multiplex  for epoch  4  :  4.484022357000001 s
+tile_multiplex  for epoch  0  :  1.7375094430000004 s
+tile_multiplex  for epoch  1  :  1.737090526000003 s
+tile_multiplex  for epoch  2  :  1.7371794729999976 s
+tile_multiplex  for epoch  3  :  1.7368250879999998 s
+tile_multiplex  for epoch  4  :  1.739554463000001 s
+mkl_multiplex  for epoch  0  :  0.08813969000000554 s
+mkl_multiplex  for epoch  1  :  0.0810134050000002 s
+mkl_multiplex  for epoch  2  :  0.07978288999999705 s
+mkl_multiplex  for epoch  3  :  0.07663983500000171 s
+mkl_multiplex  for epoch  4  :  0.08228416400000071 s
+Average time for naive_multiplex with matrix size 1024 * 1024 :  4.6100672226 s
+Average time for tile_multiplex with matrix size 1024 * 1024 :  1.7376317986000003 s
+Average time for mkl_multiplex with matrix size 1024 * 1024 :  0.08157199680000105 s
+Tile is  2.6530748495246828  times faster than naive.
+Mkl is  56.51531657246302  times faster than naive.
