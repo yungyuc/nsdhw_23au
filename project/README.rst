@@ -95,3 +95,6 @@ Follow the format to add your project in lexicographical order:
 11. `visitorckw <https://github.com/visitorckw>`__ for
    `Project subject <visitorckw/README.md>`__:
    https://github.com/visitorckw/runtime-profile-guided-optimization-sorting-library
+12. `yuanhenglee <https://github.com/yuanhenglee>`__ for
+    `BasiCPP Pitch: A C++ implementation for AMT(Automatic Music Transcription) <yuanhenglee/README.rst>`__:
+    https://github.com/yuanhenglee/basicpp-pitch
