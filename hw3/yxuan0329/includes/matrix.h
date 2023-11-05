@@ -15,7 +15,8 @@ public:
     Matrix(size_t, size_t, vector<double> const);
     Matrix(size_t, size_t);
 
-    double& operator() (size_t, size_t) const;
+    double operator() (size_t, size_t) const;
+    double& operator() (size_t, size_t);
     bool operator==(const Matrix&) const;
     bool operator!=(const Matrix&) const;
 
@@ -29,7 +30,7 @@ public:
 private:
     size_t m_row;
     size_t m_col;
-    double *m_buffer = nullptr;
+    double *m_buffer;
 };
 
 #endif

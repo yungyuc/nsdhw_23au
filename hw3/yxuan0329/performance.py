@@ -4,7 +4,7 @@ import timeit
 def benchmark():
     setup = '''
 import _matrix
-size = 10
+size = 1000
 mat1 = _matrix.Matrix(size, size)
 mat2 = _matrix.Matrix(size, size)
 
@@ -21,17 +21,17 @@ for i in range(size):
     repeat_times = 5
 
     with open('performance.txt', 'w') as f:
-        f.write("multiply_naive (repeat=5), \n")
+        f.write(f"Start multiply_naive (repeat={repeat_times}), take min = ")
         naiveTime = min(naive.repeat(repeat=repeat_times, number=1))
-        f.write(f"min = {naiveTime} seconds\n\n")
+        f.write(f"{naiveTime} seconds\n")
 
-        f.write("multiply_tile (repeat=5), tile size=16, \n")
+        f.write(f"Start multiply_tile (repeat={repeat_times}), take min = ")
         tileTime_16 = min(tile_16.repeat(repeat=repeat_times, number=1))
-        f.write(f"min = {tileTime_16} seconds\n\n")
+        f.write(f"{tileTime_16} seconds\n")
         
-        f.write("multiply_mkl (repeat=5), \n")
+        f.write(f"Start multiply_mkl (repeat={repeat_times}), take min = ")
         mklTime = min(mkl.repeat(repeat=repeat_times, number=1))
-        f.write(f"min = {mklTime} seconds\n\n")
+        f.write(f"{mklTime} seconds\n")
 
         f.write(f"\nTile size=16 speed-up over naive: {tileTime_16 / naiveTime}x\n")
         f.write(f"MKL speed-up over naive: {mklTime / naiveTime}x\n")

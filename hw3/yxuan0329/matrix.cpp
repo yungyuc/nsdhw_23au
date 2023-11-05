@@ -39,7 +39,7 @@ Matrix::Matrix(size_t row, size_t col) {
     this->m_row = row;
     this->m_col = col;
     size_t nelement = row * col;
-    this->m_buffer = new double[nelement];
+    this->m_buffer = new double[nelement] {0};
 }
 
 Matrix::~Matrix() {
@@ -47,7 +47,11 @@ Matrix::~Matrix() {
     // delete[] this->m_buffer; // will cause double-free()
 }
 
-double& Matrix::operator() (size_t row, size_t col) const {
+double Matrix::operator() (size_t row, size_t col) const {
+    return this->m_buffer[this->m_col * row + col];
+}
+
+double& Matrix::operator() (size_t row, size_t col) {
     return this->m_buffer[this->m_col * row + col];
 }
 
@@ -73,9 +77,11 @@ bool Matrix::operator==(const Matrix& mat2) const {
     for (int i=0; i<row; i++) {
         for (int j=0; j<col; j++) {
             size_t id = this->m_col * i + j;
+            // cout << i <<" " << j << " " << this->m_buffer[id] - mat2(i, j) << " " << this->m_buffer[id] << " " << mat2(i, j) << endl;
             if (this->m_buffer[id] != mat2(i, j)) {
                 return false;
             }
+            
         }
     }
     return true;
@@ -116,32 +122,33 @@ Matrix multiply_naive(const Matrix& mat1, const Matrix& mat2) {
 }
 
 // multiply tile 
-void fillIn(Matrix& new_mat, Matrix mat1, Matrix mat2, size_t row_size, size_t col_size, size_t k_size) {
-    for (size_t i=0; i<row_size; i++){
-        for (size_t j=0; j<col_size; j++) {
-            double k_sum = 0;
-            for (size_t k=0; k<k_size; k++) {
-                k_sum += mat1(i, k) * mat2(k, j);
-            }
-            new_mat(i, j) += k_sum;
-        }
-    }
-}
-
 Matrix multiply_tile(const Matrix& mat1, const Matrix& mat2, size_t tile_size) {
-    if (mat1.n_col() != mat2.n_row()) {
+    size_t R = mat1.n_row(), C = mat2.n_col(), K = mat1.n_col();
+    if (K != mat2.n_row()) {
         throw invalid_argument("Invalid shape size, mat1 col != mat2 row.");
     }
 
-    Matrix new_mat(mat1.n_row(), mat2.n_col());
+    Matrix new_mat(R, C);
+    for (size_t row_offset=0; row_offset < R; row_offset += tile_size) {
+        size_t row_size = min(R, row_offset+tile_size);
+        
+        for (size_t col_offset=0; col_offset < C; col_offset += tile_size) {
+            size_t col_size = min(C, col_offset+tile_size);
+            
+            for (size_t k_offset=0; k_offset < K; k_offset += tile_size) {
 
-    for (size_t row_offset=0; row_offset < mat1.n_row(); row_offset += tile_size) {
-        size_t row_size = min(mat1.n_row(), row_offset+tile_size);
-        for (size_t col_offset=0; col_offset < mat2.n_col(); col_offset += tile_size) {
-            size_t col_size = min(mat2.n_col(), col_offset+tile_size);
-            for (size_t k=0; k < mat1.n_col(); k += tile_size) {
-                size_t k_size = min(mat1.n_col(), k+tile_size);
-                fillIn(new_mat, mat1, mat2, row_size, col_size, k_size);
+                // store k in new_mat(i, j)
+                size_t k_size = min(K, k_offset+tile_size);
+
+                for (size_t i=row_offset; i<row_size; i++){
+                    for (size_t j=col_offset; j<col_size; j++) {
+                        double k_sum = 0;
+                        for (size_t k=k_offset; k<k_size; k++) {
+                            k_sum += mat1(i, k) * mat2(k, j);
+                        }
+                        new_mat(i, j) += k_sum;
+                    }
+                } // finish storing k in new_mat(i, j)
             }
         }
     }
@@ -184,11 +191,11 @@ PYBIND11_MODULE(_matrix, m) {
   m.def("multiply_tile", &multiply_tile);
   m.def("multiply_mkl", &multiply_mkl);
   py::class_<Matrix>(m, "Matrix")
+    .def(py::init<>())
     .def(py::init<size_t, size_t>())
     .def_property_readonly("nrow", [](Matrix& m){ return m.n_row(); })
     .def_property_readonly("ncol", [](Matrix& m){ return m.n_col(); })
-    .def(py::self == py::self) 
-    .def(py::self != py::self) 
+    .def("__eq__", &Matrix::operator==) 
     .def("__getitem__", [](Matrix& m, std::pair<size_t, size_t> idx) { return m(idx.first, idx.second); })
     .def("__setitem__", [](Matrix& m, std::pair<size_t, size_t> idx, double val) { m(idx.first, idx.second) = val; });
 }

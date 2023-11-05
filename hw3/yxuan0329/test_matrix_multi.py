@@ -19,35 +19,36 @@ def test_matrix_value():
     assert mat1[0, 0] == mat1[0, 0]
 
 def test_matrix_equal():
+    size = 20
     mat1 = _matrix.Matrix(1, 1)
     mat2 = _matrix.Matrix(1, 1)
     mat3 = _matrix.Matrix(1, 1)
-    mat4 = _matrix.Matrix(3, 2)
-    mat5 = _matrix.Matrix(3, 2)
+    mat4 = _matrix.Matrix(size, size)
+    mat5 = _matrix.Matrix(size, size)
 
     mat1[0, 0] = 1
     mat2[0, 0] = 2
     mat3[0, 0] = 1
 
-    for i in range(3):
-        for j in range(2):
-            mat4[i, j] = 2.0
-            mat5[i, j] = 2.0
+    for i in range(size):
+        for j in range(size):
+            mat4[i, j] = i*j+2
+            mat5[i, j] = j*5
 
     assert mat1 != mat2
     assert mat1 == mat3
     assert mat1 != mat4
-    assert mat4 == mat5 
+    assert mat4 != mat5 
 
 def test_matrix_multi():
-    size = 10
+    size = 100
     mat1 = _matrix.Matrix(size, size)
     mat2 = _matrix.Matrix(size, size)
 
     for i in range (size):
         for j in range (size):
             mat1[i, j] = i*i + j + 2.0
-            mat2[i, j] = j*j + 2*i + 0.1
+            mat2[i, j] = j*j + 2*i + 1.0
     
     new_naive = _matrix.multiply_naive(mat1, mat2)
     new_tile = _matrix.multiply_tile(mat1, mat2, 16)
