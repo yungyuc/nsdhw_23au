@@ -98,3 +98,6 @@ Follow the format to add your project in lexicographical order:
 12. `yuanhenglee <https://github.com/yuanhenglee>`__ for
     `BasiCPP Pitch: A C++ implementation for AMT(Automatic Music Transcription) <yuanhenglee/README.rst>`__:
     https://github.com/yuanhenglee/basicpp-pitch
+13. `ShangHungWan <https://github.com/ShangHungWan>`__ for
+   `rtreelib <ShangHungWan/README.md>`__:
+   https://github.com/ShangHungWan/rtreelib
