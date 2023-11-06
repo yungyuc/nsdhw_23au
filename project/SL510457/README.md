@@ -2,9 +2,13 @@
 This proposal outlines the workflow and plans for the NYCU NSD term project in Autumn 2023.
 
 ## Basic Information
-OptiRoute focuses on solving the Traveling Salesman Problem (TSP), a fundamental challenge in optimization and computer science. At its core, TSP aims to find the most efficient route that visits a set of destinations and returns to the starting point.
+<!-- OptiRoute focuses on solving the Traveling Salesman Problem (TSP), a fundamental challenge in optimization and computer science. At its core, TSP aims to find the most efficient route that visits a set of destinations and returns to the starting point. -->
 
-In this project, we aim to develop a user-friendly system that allows users to input latitude and longitude coordinates for multiple destinations and, in turn, generates the optimal travel route, addressing various real-world applications, such as logistics, tour planning, and resource optimization.
+<!-- In this project, we aim to develop a user-friendly system that allows users to input latitude and longitude coordinates for multiple destinations and, in turn, generates the optimal travel route, addressing various real-world applications, such as logistics, tour planning, and resource optimization. -->
+OptiRoute deals with the Traveling Salesman Problem (TSP) for multiple global destinations.
+
+We put efforts to make it user-friendly. After the users provide the coordinates, the system will generate efficient travel routes. We hope that it can be utilized for logistics,
+tour planning, and resource optimization.
 
 GitHub Link : [ https://github.com/SL510457/OptiRoute-Intelligent-Travel-Route-Planner ]
 
@@ -24,7 +28,7 @@ The Haversine Formula determines the great-circle distance between two points on
 ## Problem to Solve
 Optimizing travel routes for multiple destinations is a common challenge in various fields. The problem involves finding the shortest route, which becomes increasingly complex as the number of destinations increases. Existing solutions are often lacking in user-friendliness.
 
-This project aims to create a user-friendly system that allows users to input destination coordinates. We'll then use the `Haversine formula` and the `Christofides Algorithm` to find the most efficient travel route. This project bridges the gap between theory and practical application, providing an accessible solution for optimized travel planning.
+This project aims to create a user-friendly system that allows users to input destination latitude and longitude coordinates. We'll then use the `Haversine formula` and the `Christofides Algorithm` to find the most efficient travel route. This project bridges the gap between theory and practical application, providing an accessible solution for optimized travel planning.
 
 ![](/project/SL510457/image/Chris.gif)
 
@@ -68,7 +72,7 @@ Planning phase (8 weeks from 10/30 to mm/dd):
 | 5 | 11/27 | - Testing the correctness of the algorithm and plot work|
 | 6 | 12/4 | - Implement CMake file <br> - Make slides and prepare for presentation|
 | 7 | 12/11 | - Testing if the system build works <br> - Write the Documentation <br> - Make slides and prepare for presentation|
-| 8 | 12/18.. | - Finish writing Documentation <br> - Make slides and prepare for presentation|
+| 8 | 12/18 | - Finish writing Documentation <br> - Make slides and prepare for presentation|
 
 
 
