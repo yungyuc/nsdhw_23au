@@ -129,17 +129,17 @@ About interfaces, please refer to [Interfaces](#interfaces).
 
 ## Schedule
 
-| Week           | Start Date | End Date | Description                                                                       |
-| -------------- | ---------- | -------- | --------------------------------------------------------------------------------- |
-| Planning phase | 10/16      | 10/29    | Keep editing and rectifying the proposal.                                         |
-| Week 1         | 10/30      | 11/05    | Read the paper and survey other references to understand R-tree well.             |
-| Week 2         | 11/06      | 11/12    | Implement `RTree::insert` and `RTRect`.                                           |
-| Week 3         | 11/13      | 11/19    | Implement `RTree::nearest` and `RTree::intersection`.                             |
-| Week 4         | 11/20      | 11/26    | Implement `RTree::delete` and write unit tests that have about 50% code coverage. |
-| Week 5         | 11/27      | 12/03    | Write unit tests that achieve 100% coverage. (ideally)                            |
-| Week 6         | 12/04      | 12/10    | Wrap the library as Python APIs.                                                  |
-| Week 7         | 12/11      | 12/17    | Write unit tests for Python APIs.                                                 |
-| Week 8         | 12/18      | 12/25    | Prepare the presentation and slides.                                              |
+| Week           | Start Date | End Date | Description                                                                      |
+| -------------- | ---------- | -------- | -------------------------------------------------------------------------------- |
+| Planning phase | 10/16      | 10/29    | Keep editing and rectifying the proposal.                                        |
+| Week 1         | 10/30      | 11/05    | Read the paper and survey other references to understand R-tree well.            |
+| Week 2         | 11/06      | 11/12    | Implement `RTree::insert` and `RTRect`; write unit tests for them.               |
+| Week 3         | 11/13      | 11/19    | Implement `RTree::nearest` and `RTree::intersection`; write unit tests for them. |
+| Week 4         | 11/20      | 11/26    | Implement `RTree::delete`; write unit tests for it.                              |
+| Week 5         | 11/27      | 12/03    | Write feature tests for all components.                                          |
+| Week 6         | 12/04      | 12/10    | Wrap the library as Python APIs.                                                 |
+| Week 7         | 12/11      | 12/17    | Write unit tests and feature tests for Python APIs.                              |
+| Week 8         | 12/18      | 12/25    | Prepare the presentation and slides.                                             |
 
 ## References
 
