@@ -5,17 +5,20 @@
 ## Basic Information
 
 The nuScenes dataset, developed by [Motional](https://motional.com), is a large-scale public dataset for autonomous driving research.
-It comprises 1,000 driving scenes in Boston and Singapore, showcasing diverse and challenging scenarios. The dataset includes 1.4 million camera images, 390,000 LIDAR sweeps, 1.4 million RADAR sweeps, and 1.4 million object bounding boxes. Annotations cover 23 object classes and object-level attributes.
+It comprises 1,000 driving scenes in Boston and Singapore, showcasing diverse and challenging scenarios.
+The dataset includes 1.4 million camera images, 390,000 LIDAR sweeps, 1.4 million RADAR sweeps, and 1.4 million object bounding boxes. Annotations cover 23 object classes and object-level attributes.
 The dataset aims to support research in computer vision and autonomous driving, emphasizing the entire sensor suite of autonomous vehicles, making it unique compared to other datasets.
 A supplementary dataset, nuScenes-lidarseg, offers lidar semantic segmentation. The dataset's purpose is to facilitate the development of safe autonomous driving technology worldwide.
 
 ## Problem to Solve
 
-The Python SDK, while versatile, can be computationally intensive and resource-demanding, especially when handling large-scale datasets. This can result in slower data loading, manipulation, and processing times, which can impede research and development efforts.
+The Python SDK, while versatile, can be computationally intensive and resource-demanding, especially when handling large-scale datasets.
+This can result in slower data loading, manipulation, and processing times, which can impede research and development efforts.
 
 ## Prospective Users
 
-The C++ SDK for the nuScenes dataset targets a diverse audience, including researchers, algorithm developers, autonomous vehicle manufacturers, robotics engineers, real-time and embedded systems developers, the open-source community, educational institutions, and commercial solutions providers. This SDK serves as a high-performance and efficient tool to support their work in the fields of autonomous driving, computer vision, and machine learning.
+The C++ SDK for the nuScenes dataset targets a diverse audience, including researchers, algorithm developers, autonomous vehicle manufacturers, robotics engineers, real-time and embedded systems developers, the open-source community, educational institutions, and commercial solutions providers.
+This SDK serves as a high-performance and efficient tool to support their work in the fields of autonomous driving, computer vision, and machine learning.
 
 ## System Architecture
 
