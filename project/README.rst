@@ -101,3 +101,6 @@ Follow the format to add your project in lexicographical order:
 13. `ShangHungWan <https://github.com/ShangHungWan>`__ for
    `rtreelib <ShangHungWan/README.md>`__:
    https://github.com/ShangHungWan/rtreelib
+14. `Alkalid <https://github.com/Alkalid>`__ for
+   `Project subject <Alkalid/README.md>`__:
+   https://github.com/Alkalid/ULTRA-LOW-BIT
