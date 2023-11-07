@@ -6,7 +6,12 @@ years, they have been extensively applied on edge devices. However, the
 computational demands of deep learning models are often too great for such 
 devices to handle. To address this, many applications use a method called 
 quantization, which reduces model parameters to 8 bits (integer) or even fewer, 
-such as one bit. One of the biggest advantages of one-bit quantization is that 
+such as one bit. 
+For example, in today's popular models like transformers, most weight and 
+activation ranges between -1 to 1, and the softmax output in the model is 
+between 0 to 1. The numerical range between -1 and 1 is not large, and it 
+has only little impact on the accuracy of the model after quantization.
+In addition, one of the biggest advantages of one-bit quantization is that 
 binary multiplication can be simplified to an XNOR operation, which is more 
 efficient in SIMD computations.
 
