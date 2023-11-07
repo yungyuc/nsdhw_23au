@@ -98,6 +98,9 @@ Follow the format to add your project in lexicographical order:
 12. `yuanhenglee <https://github.com/yuanhenglee>`__ for
     `BasiCPP Pitch: A C++ implementation for AMT(Automatic Music Transcription) <yuanhenglee/README.rst>`__:
     https://github.com/yuanhenglee/basicpp-pitch
-13. `Alkalid <https://github.com/Alkalid>`__ for
+13. `ShangHungWan <https://github.com/ShangHungWan>`__ for
+   `rtreelib <ShangHungWan/README.md>`__:
+   https://github.com/ShangHungWan/rtreelib
+14. `Alkalid <https://github.com/Alkalid>`__ for
    `Project subject <Alkalid/README.md>`__:
    https://github.com/Alkalid/ULTRA-LOW-BIT
