@@ -37,8 +37,11 @@ The problem involves finding the shortest route,
 which becomes increasingly complex as the number of destinations increases. 
 Existing solutions are often lacking in user-friendliness.
 
-This project aims to create a user-friendly system that allows users to input destination latitude and longitude coordinates. 
-We'll then use the `Haversine formula` and the approximation algorithm `Christofides Algorithm` for the TSP to find the most efficient travel route. 
+This project aims to create a user-friendly system that allows users 
+to input destination latitude and longitude coordinates. 
+We'll then use the `Haversine formula` and 
+the approximation algorithm `Christofides Algorithm` for the TSP 
+to find the most efficient travel route. 
 This project bridges the gap between theory and practical application, 
 providing an accessible solution for optimized travel planning.
 
