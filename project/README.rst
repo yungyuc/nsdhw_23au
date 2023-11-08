@@ -80,27 +80,30 @@ Follow the format to add your project in lexicographical order:
 6. `leeshengcian <https://github.com/leeshengcian>`__ for
    `Project subject <leeshengcian/README.rst>`__:
    https://github.com/leeshengcian/Polygon-Clipping
-7. `yxuan0329 <https://github.com/yxuan0329>`__ for
+7. `SL510457 <https://github.com/SL510457>`__ for
+   `Project subject <SL510457/README.md>`__:
+   https://github.com/SL510457/OptiRoute-Intelligent-Travel-Route-Planner
+8. `yxuan0329 <https://github.com/yxuan0329>`__ for
    `R-Tree Spatial Search Engine <yxuan0329/README.rst>`__:
    https://github.com/yxuan0329/R-tree-Search-Engine
-8. `adcf3016 <https://github.com/adcf3016>`__ for
+9. `adcf3016 <https://github.com/adcf3016>`__ for
    `Project subject <adcf3016/README.md>`__:
    https://github.com/adcf3016/kdtree
-9. `Mibudin <https://github.com/Mibudin>`__ for
+10. `Mibudin <https://github.com/Mibudin>`__ for
    `WFCpp <Mibudin/README.md>`__:
    https://github.com/Mibudin/wfcpp
-10. `Sheng08 <https://github.com/Sheng08>`__ for
+11. `Sheng08 <https://github.com/Sheng08>`__ for
     `Project subject <Sheng08/README.md>`__:
     https://github.com/Sheng08/OrientMesh-Toolkit
-11. `visitorckw <https://github.com/visitorckw>`__ for
+12. `visitorckw <https://github.com/visitorckw>`__ for
    `Project subject <visitorckw/README.md>`__:
    https://github.com/visitorckw/runtime-profile-guided-optimization-sorting-library
-12. `yuanhenglee <https://github.com/yuanhenglee>`__ for
+13. `yuanhenglee <https://github.com/yuanhenglee>`__ for
     `BasiCPP Pitch: A C++ implementation for AMT(Automatic Music Transcription) <yuanhenglee/README.rst>`__:
     https://github.com/yuanhenglee/basicpp-pitch
-13. `ShangHungWan <https://github.com/ShangHungWan>`__ for
+14. `ShangHungWan <https://github.com/ShangHungWan>`__ for
    `rtreelib <ShangHungWan/README.md>`__:
    https://github.com/ShangHungWan/rtreelib
-14. `Alkalid <https://github.com/Alkalid>`__ for
+15. `Alkalid <https://github.com/Alkalid>`__ for
    `Project subject <Alkalid/README.md>`__:
    https://github.com/Alkalid/ULTRA-LOW-BIT
