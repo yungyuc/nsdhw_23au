@@ -107,3 +107,6 @@ Follow the format to add your project in lexicographical order:
 15. `Alkalid <https://github.com/Alkalid>`__ for
    `Project subject <Alkalid/README.md>`__:
    https://github.com/Alkalid/ULTRA-LOW-BIT
+16. `liamlin5566 <https://github.com/liamlin5566>`__ for
+    `Kernel K-means on Image <liamlin5566/README.md>`__:
+    https://github.com/liamlin5566/Image-Kernel-K-means
