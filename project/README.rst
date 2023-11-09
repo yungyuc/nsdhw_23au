@@ -110,3 +110,6 @@ Follow the format to add your project in lexicographical order:
 16. `liamlin5566 <https://github.com/liamlin5566>`__ for
     `Kernel K-means on Image <liamlin5566/README.md>`__:
     https://github.com/liamlin5566/Image-Kernel-K-means
+17. `Yvonne-ul6u45p <https://github.com/Yvonne-ul6u45p>`__ for
+    `Contiguous Array adding Multi-Dimensional Index Calculation <Yvonne-ul6u45p/README.md>`__:
+    https://github.com/Yvonne-ul6u45p/ContiguousArray-MultiDim-Index-Calculation
