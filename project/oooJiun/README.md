@@ -68,8 +68,8 @@ int main() {
 
 * Week 1 (10/30): Learn the algorithm for boolean operations on polygons
 * Week 2 (11/06): Design data structures and algorithms
-* Week 3 (11/13): Implement the boolean operations on polygons algorithm in C++
-* Week 4 (11/20): Refine the algorithm
+* Week 3 (11/13): Implement the boolean operations AND, OR on polygons algorithm in C++
+* Week 4 (11/20): Implement the boolean operations XOR, NOT on polygons algorithm in C++ and refine the algorithm
 * Week 5 (11/27): Develop UI in python
 * Week 6 (12/04): Design testing and CI
 * Week 7 (12/11): Checking and refine the UI
