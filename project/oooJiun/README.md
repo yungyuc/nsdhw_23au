@@ -29,24 +29,30 @@ Users can design custom maps for games, visualize geographic data, and develop t
 ## API Description
 
 The system can be scripted using both C++ and Python.
-Example Script (Python):
-```python
-from map_generator import MapGenerator
+Example Script (c++):
 
-# Create a MapGenerator instance
-generator = MapGenerator()
+```cpp
+#include <iostream>
+#include "map_generator.hpp"
 
-# Define polygons, terrain parameters, and map parameters
-polygons = [...]
-terrain_params = {...}
-map_params = {...}
+int main() {
+    // Create a MapGenerator instance
+    MapGenerator generator;
 
-# Generate the map
-generated_map = generator.generate_map(polygons, terrain_params, map_params)
+    // Define polygons, terrain parameters, and map parameters
+    std::vector<Polygon> polygons = {...};
+    TerrainParameters terrain_params = {...};
+    MapParameters map_params = {...};
 
-# Display or export the map
-generated_map.display()
-generated_map.export('output_map.png')
+    // Generate the map
+    Map generated_map = generator.generateMap(polygons, terrain_params, map_params);
+
+    // Display or export the map
+    generated_map.display();
+    generated_map.exportMap("output_map.png");
+
+    return 0;
+}
 ```
 
 
