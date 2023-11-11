@@ -113,3 +113,6 @@ Follow the format to add your project in lexicographical order:
 17. `Yvonne-ul6u45p <https://github.com/Yvonne-ul6u45p>`__ for
     `Contiguous Array adding Multi-Dimensional Index Calculation <Yvonne-ul6u45p/README.md>`__:
     https://github.com/Yvonne-ul6u45p/ContiguousArray-MultiDim-Index-Calculation
+18. `tsaiet <https://github.com/tsaiet>`__ for
+    `Optimizing Traffic Flow with Ford-Fulkerson <tsaiet/README.rst>`__:
+    https://github.com/tsaiet/Optimizing-Traffic-Flow-with-Ford-Fulkerson
