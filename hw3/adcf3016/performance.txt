@@ -1,0 +1,13 @@
+Start multiply_naive (repeat=5), take min = 0.9163380120007787 seconds
+Start multiply_tile tile size=16 (repeat=5), take min = 0.49516991500058793 seconds
+Start multiply_tile tile size=32 (repeat=5), take min = 0.3879517709974607 seconds
+Start multiply_tile tile size=64 (repeat=5), take min = 0.3764221199999156 seconds
+Start multiply_tile tile size=128 (repeat=5), take min = 0.5239285700008622 seconds
+Start multiply_mkl (repeat=5), take min = 0.04039019300034852 seconds
+
+
+tile size=16 speed-up over naive: 1.85055 x
+tile size=32 speed-up over naive: 2.36199 x
+tile size=64 speed-up over naive: 2.43434 x
+tile size=128 speed-up over naive: 1.74898 x
+MKL speed-up over naive: 22.6871 x
