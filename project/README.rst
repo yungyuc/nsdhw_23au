@@ -116,3 +116,6 @@ Follow the format to add your project in lexicographical order:
 18. `tsaiet <https://github.com/tsaiet>`__ for
     `Optimizing Traffic Flow with Ford-Fulkerson <tsaiet/README.rst>`__:
     https://github.com/tsaiet/Optimizing-Traffic-Flow-with-Ford-Fulkerson
+19. `oooJiun <https://github.com/oooJiun>`__ for
+    `PolyMap: Polygon-Based 2D Map Generator <oooJiun/README.md>`__:
+    https://github.com/oooJiun/PolyMap
