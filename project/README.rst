@@ -119,3 +119,6 @@ Follow the format to add your project in lexicographical order:
 19. `oooJiun <https://github.com/oooJiun>`__ for
     `PolyMap: Polygon-Based 2D Map Generator <oooJiun/README.md>`__:
     https://github.com/oooJiun/PolyMap
+20. `lolainta <https://github.com/lolainta>`__ for
+    `NuScenes DevKit <lolainta/README.md>`__:
+    https://github.com/lolainta/Nuscenes-devkit-cpp
