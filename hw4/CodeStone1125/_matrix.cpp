@@ -1,7 +1,6 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/operators.h>
-// https://dboyliao.medium.com/pybind11-%E5%85%A5%E9%96%80%E7%8E%A9%E6%A8%82%E6%89%8B%E8%A8%98-9da22f6193f2
 #include <stdexcept>
 #include <vector>
 #include <atomic>
@@ -27,6 +26,54 @@ public:
     {
         _data.resize(nrow * ncol);
     }
+    // Matrix & operator=(std::vector<double> const & vec)
+    // {
+    //     if (size() != vec.size())
+    //     {
+    //         throw std::out_of_range("number of elements mismatch");
+    //     }
+
+    //     size_t k = 0;
+    //     for (size_t i=0; i<m_nrow; ++i)
+    //     {
+    //         for (size_t j=0; j<m_ncol; ++j)
+    //         {
+    //             (*this)(i,j) = vec[k];
+    //             ++k;
+    //         }
+    //     }
+
+    //     return *this;
+    // }
+
+    // Matrix(Matrix && other)
+    //   : m_nrow(other.m_nrow), m_ncol(other.m_ncol)
+    // {
+    //     reset_buffer(0, 0);
+    //     std::swap(m_nrow, other.m_nrow);
+    //     std::swap(m_ncol, other.m_ncol);
+    //     std::swap(m_buffer, other.m_buffer);
+    // }
+
+    // double *val_addr() const {
+    //     return &(this->m_buffer[0]);
+    // }
+
+    
+    // Matrix & operator=(Matrix && other)
+    // {
+    //     if (this == &other) { return *this; }
+    //     reset_buffer(0, 0);
+    //     std::swap(m_nrow, other.m_nrow);
+    //     std::swap(m_ncol, other.m_ncol);
+    //     std::swap(m_buffer, other.m_buffer);
+    //     return *this;
+    // }
+
+    // ~Matrix()
+    // {
+    //     reset_buffer(0, 0);
+    // }
 
     size_t nrow() const { return numRows; }
     size_t ncol() const { return numCols; }
@@ -40,6 +87,18 @@ public:
     {
         return _data[row * numCols + col];
     }
+    // size_t nrow() const { return m_nrow; }
+    // size_t ncol() const { return m_ncol; }
+
+    // size_t size() const { return m_nrow * m_ncol; }
+
+    // double buffer(size_t i) const {
+    //     if (i < m_nrow * m_ncol) {
+    //         return m_buffer[i];
+    //     } else {
+    //         return 0.0;
+    //     }
+    // }
 
     // compare
     bool operator==(const Matrix &other) const
@@ -48,6 +107,23 @@ public:
     }
 
     vector<double, MyAllocator<double>> _data;
+
+    // std::vector<double> buffer_vector() const
+    // {
+    //     std::vector<double> buffer;
+    //     buffer.reserve(m_nrow * m_ncol);
+
+    //     for (size_t i = 0; i < m_nrow; ++i) {
+    //         for (size_t j = 0; j < m_ncol; ++j) {
+    //             buffer.push_back(m_buffer[index(i, j)]);
+    //         }
+    //     }
+
+    //     return buffer;
+    // }
+
+
+
 
 };
 
