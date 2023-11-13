@@ -1,7 +1,6 @@
 
 #include <iostream>
 #include <fstream>
-
 #include <pybind11/pybind11.h> 
 #include <pybind11/operators.h>
 #include <pybind11/stl.h>
@@ -11,14 +10,28 @@
 #include <stdexcept>
 #include <cblas.h>
 #include <cmath>
+#include "item.hpp"
 
-//modify C/C++包含路徑
-// #include <mkl.h>
+using namespace std;
+
+static MyAllocator<double> Myalloc;
+
+size_t bytes() {
+	return Myalloc.counter.bytes();
+}
+
+size_t allocated() {
+	return Myalloc.counter.allocated(); 
+}
+
+size_t deallocated() {
+	return Myalloc.counter.deallocated();
+}
 
 class Matrix {
 
 public:
-
+    std::vector<double, MyAllocator<double>> _buffer;
     // 單一構造函數處理不同情況
     Matrix(size_t nrow, size_t ncol, std::vector<double> const & vec = {})
         : m_nrow(nrow), m_ncol(ncol)
@@ -193,8 +206,6 @@ public:
     }
 
 
-private:
-
     size_t index(size_t row, size_t col) const
     {
         return row + col * m_nrow;
@@ -213,6 +224,7 @@ private:
     size_t m_nrow = 0;
     size_t m_ncol = 0;
     double * m_buffer = nullptr;
+    
 
 };
 
