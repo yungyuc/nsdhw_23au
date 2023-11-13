@@ -2,13 +2,14 @@
 #include <cstddef>
 #include <vector>
 
+#include "CustomAllocator.hpp"
 #include "multiply.hpp"
 
 class Matrix {
  private:
   size_t rows;
   size_t cols;
-  std::vector<double> data;
+  std::vector<double, CustomAllocator<double>> data;
 
  public:
   Matrix() = delete;

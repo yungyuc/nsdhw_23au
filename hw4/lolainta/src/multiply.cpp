@@ -1,6 +1,3 @@
-
-#include "multiply.hpp"
-
 #ifdef UBUNTU
 #include <mkl/mkl.h>
 #include <mkl/mkl_lapack.h>
@@ -14,6 +11,8 @@
 #include <stdexcept>
 
 #include "Matrix.hpp"
+#include "multiply.hpp"
+
 Matrix multiply_naive(const Matrix& A, const Matrix& B) {
   if (A.get_cols() != B.get_rows()) {
     throw std::invalid_argument("Matrix dimensions do not match");

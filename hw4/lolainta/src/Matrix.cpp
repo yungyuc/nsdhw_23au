@@ -1,7 +1,5 @@
 #include "Matrix.hpp"
 
-#include <cstring>
-#include <iostream>
 Matrix::Matrix(size_t rows, size_t cols) : rows(rows), cols(cols) {
   data.assign(rows * cols, 0);
 }

@@ -10,7 +10,7 @@ endif
 CXX := g++
 CXXFLAGS := -std=gnu++17 -Ofast -Wall -fPIC -D$(SYSFLAG)
 
-LDFLAGS := -shared
+LDFLAGS := -shared -fPIC
 ifeq (${OS},arch)
 	LDFLAGS += -L/opt/intel/oneapi/mkl/latest/lib/intel64 -lmkl_rt
 else ifeq (${OS},ubuntu)

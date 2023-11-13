@@ -1,7 +1,9 @@
 #include <pybind11/pybind11.h>
 
+#include "CustomAllocator.hpp"
 #include "Matrix.hpp"
 #include "multiply.hpp"
+
 namespace py = pybind11;
 
 void bind_Matrix(py::module &m) {
@@ -32,4 +34,7 @@ PYBIND11_MODULE(_matrix, m) {
   m.doc() = "pybind11 _matix package";
   bind_Matrix(m);
   bind_multiply(m);
+  m.def("bytes", &CustomAllocator<double>::bytes);
+  m.def("allocated", &CustomAllocator<double>::allocated);
+  m.def("deallocated", &CustomAllocator<double>::deallocated);
 }
