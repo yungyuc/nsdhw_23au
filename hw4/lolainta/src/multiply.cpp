@@ -13,7 +13,7 @@
 #include "Matrix.hpp"
 #include "multiply.hpp"
 
-Matrix multiply_naive(const Matrix& A, const Matrix& B) {
+Matrix MatrixMultiply::multiply_naive(const Matrix& A, const Matrix& B) {
   if (A.get_cols() != B.get_rows()) {
     throw std::invalid_argument("Matrix dimensions do not match");
   }
@@ -28,7 +28,8 @@ Matrix multiply_naive(const Matrix& A, const Matrix& B) {
   return C;
 }
 
-Matrix multiply_tile(const Matrix& A, const Matrix& B, size_t tsize) {
+Matrix MatrixMultiply::multiply_tile(const Matrix& A, const Matrix& B,
+                                     size_t tsize) {
   if (A.get_cols() != B.get_rows()) {
     throw std::invalid_argument("Matrix dimensions do not match");
   }
@@ -50,7 +51,7 @@ Matrix multiply_tile(const Matrix& A, const Matrix& B, size_t tsize) {
   return C;
 }
 
-Matrix multiply_mkl(const Matrix& A, const Matrix& B) {
+Matrix MatrixMultiply::multiply_mkl(const Matrix& A, const Matrix& B) {
   if (A.get_cols() != B.get_rows()) {
     throw std::invalid_argument("Matrix dimensions do not match");
   }

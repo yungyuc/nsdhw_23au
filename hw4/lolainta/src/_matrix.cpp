@@ -25,16 +25,20 @@ void bind_Matrix(py::module &m) {
 }
 
 void bind_multiply(py::module &m) {
-  m.def("multiply_naive", &multiply_naive);
-  m.def("multiply_tile", &multiply_tile);
-  m.def("multiply_mkl", &multiply_mkl);
+  m.def("multiply_naive", &MatrixMultiply::multiply_naive);
+  m.def("multiply_tile", &MatrixMultiply::multiply_tile);
+  m.def("multiply_mkl", &MatrixMultiply::multiply_mkl);
+}
+
+void bind_CustomAllocator(py::module &m) {
+  m.def("bytes", &CustomAllocator<double>::bytes);
+  m.def("allocated", &CustomAllocator<double>::allocated);
+  m.def("deallocated", &CustomAllocator<double>::deallocated);
 }
 
 PYBIND11_MODULE(_matrix, m) {
   m.doc() = "pybind11 _matix package";
   bind_Matrix(m);
   bind_multiply(m);
-  m.def("bytes", &CustomAllocator<double>::bytes);
-  m.def("allocated", &CustomAllocator<double>::allocated);
-  m.def("deallocated", &CustomAllocator<double>::deallocated);
+  bind_CustomAllocator(m);
 }

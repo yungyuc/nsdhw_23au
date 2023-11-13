@@ -11,17 +11,17 @@ template <class T>
 size_t CustomAllocator<T>::deallocated_ = 0;
 
 template <class T>
-size_t CustomAllocator<T>::bytes() {
+size_t CustomAllocator<T>::bytes() noexcept {
   return allocated_ - deallocated_;
 }
 
 template <class T>
-size_t CustomAllocator<T>::allocated() {
+size_t CustomAllocator<T>::allocated() noexcept {
   return allocated_;
 }
 
 template <class T>
-size_t CustomAllocator<T>::deallocated() {
+size_t CustomAllocator<T>::deallocated() noexcept {
   return deallocated_;
 }
 
@@ -31,15 +31,15 @@ T *CustomAllocator<T>::allocate(std::size_t n) {
     throw std::bad_alloc();
   }
   if (auto p = static_cast<T *>(std::malloc(n * sizeof(T)))) {
-    allocated_ += sizeof(T);
+    allocated_ += sizeof(T) * n;
     return p;
   }
   throw std::bad_alloc();
 }
 
 template <class T>
-void CustomAllocator<T>::deallocate(T *p, std::size_t) {
-  deallocated_ += sizeof(T);
+void CustomAllocator<T>::deallocate(T *p, std::size_t n) {
+  deallocated_ += sizeof(T) * n;
   std::free(p);
 }
 

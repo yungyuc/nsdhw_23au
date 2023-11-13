@@ -8,11 +8,11 @@ class CustomAllocator {
   CustomAllocator() noexcept = default;
   template <class U>
   CustomAllocator(const CustomAllocator<U>&) noexcept;
-  T* allocate(std::size_t n);
-  void deallocate(T* p, std::size_t);
-  static size_t bytes();
-  static size_t allocated();
-  static size_t deallocated();
+  T* allocate(std::size_t);
+  void deallocate(T*, std::size_t);
+  static size_t bytes() noexcept;
+  static size_t allocated() noexcept;
+  static size_t deallocated() noexcept;
 
  private:
   static size_t allocated_;
