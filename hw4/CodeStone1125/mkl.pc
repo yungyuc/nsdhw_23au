@@ -1,7 +1,7 @@
 prefix=/home/williechu1125/intel/compilers_and_libraries_2019.1.144/linux/mkl
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib/intel64_lin
-includedir= /usr/include/mkl/ 
+includedir=${prefix}/include
 
 Name: MKL
 Description: Intel Math Kernel Library
