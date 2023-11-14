@@ -1,6 +1,6 @@
-prefix=/home/williechu1125/intel/compilers_and_libraries_2019.1.144/linux/mkl
+prefix=/usr
 exec_prefix=${prefix}
-libdir=${exec_prefix}/lib/intel64_lin
+libdir=${exec_prefix}/lib
 includedir=${prefix}/include
 
 Name: MKL

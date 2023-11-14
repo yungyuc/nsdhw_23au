@@ -84,7 +84,6 @@ public:
     size_t bytes() const { return m_impl->allocated - m_impl->deallocated; }
     size_t allocated() const { return m_impl->allocated; }
     size_t deallocated() const { return m_impl->deallocated; }
-    /* This is for debugging. */
     size_t refcount() const { return m_impl->refcount; }
 
 private:
@@ -95,7 +94,6 @@ private:
     {
         if (nullptr == m_impl)
         {
-            // Do nothing.
         }
         else if (1 == m_impl->refcount)
         {
