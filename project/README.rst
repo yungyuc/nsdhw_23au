@@ -118,8 +118,8 @@ Polygon Boolean
    `PolyMap: Polygon-Based 2D Map Generator <oooJiun/README.md>`__:
    https://github.com/oooJiun/PolyMap
 
-Image Processing
-----------------
+Image and Signal Processing
+---------------------------
 
 1. `Mibudin <https://github.com/Mibudin>`__ for
    `WFCpp <Mibudin/README.md>`__:
@@ -127,6 +127,10 @@ Image Processing
 2. `liamlin5566 <https://github.com/liamlin5566>`__ for
    `Kernel K-means on Image <liamlin5566/README.md>`__:
    https://github.com/liamlin5566/Image-Kernel-K-means
+3. `yuanhenglee <https://github.com/yuanhenglee>`__ for
+   `BasiCPP Pitch: A C++ implementation for AMT(Automatic Music Transcription)
+   <yuanhenglee/README.md>`__:
+   https://github.com/yuanhenglee/basicpp-pitch
 
 Other
 -----
@@ -137,9 +141,6 @@ Other
 2. `visitorckw <https://github.com/visitorckw>`__ for
    `Runtime Profile-Guided Optimization Sorting Library <visitorckw/README.md>`__:
    https://github.com/visitorckw/runtime-profile-guided-optimization-sorting-library
-3. `yuanhenglee <https://github.com/yuanhenglee>`__ for
-   `BasiCPP Pitch: A C++ implementation for AMT(Automatic Music Transcription) <yuanhenglee/README.md>`__:
-   https://github.com/yuanhenglee/basicpp-pitch
 
 Project List by Account Name
 ++++++++++++++++++++++++++++
@@ -203,7 +204,8 @@ Follow the format to add your project in lexicographical order:
     `Runtime Profile-Guided Optimization Sorting Library <visitorckw/README.md>`__:
     https://github.com/visitorckw/runtime-profile-guided-optimization-sorting-library
 17. `yuanhenglee <https://github.com/yuanhenglee>`__ for
-    `BasiCPP Pitch: A C++ implementation for AMT(Automatic Music Transcription) <yuanhenglee/README.md>`__:
+    `BasiCPP Pitch: A C++ implementation for AMT(Automatic Music Transcription)
+    <yuanhenglee/README.md>`__:
     https://github.com/yuanhenglee/basicpp-pitch
 18. `yui0303 <https://github.com/yui0303/Matrix-Diagonalization>`__ for
     `Diagonalization of a Square Matrix <yui0303/README.md>`__:
