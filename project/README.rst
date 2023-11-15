@@ -49,6 +49,98 @@ Presentation
 .. NOTE: If there is difficulty in preparing a computer for presentation, please
 .. discuss with the instructor two weeks before the presentation.
 
+Projects by Topical Groups
+++++++++++++++++++++++++++
+
+Array Processing
+----------------
+
+1. `Alkalid <https://github.com/Alkalid>`__ for
+   `Low bit quantification <Alkalid/README.md>`__:
+   https://github.com/Alkalid/ULTRA-LOW-BIT
+2. `Yvonne-ul6u45p <https://github.com/Yvonne-ul6u45p>`__ for
+   `Contiguous Array adding Multi-Dimensional Index Calculation <Yvonne-ul6u45p/README.md>`__:
+   https://github.com/Yvonne-ul6u45p/ContiguousArray-MultiDim-Index-Calculation
+
+System Solution
+---------------
+
+1. `ThreeMonth03 <https://github.com/ThreeMonth03>`__ for
+   `Conjugate Gradient Method <ThreeMonth03/README.md>`__:
+   https://github.com/ThreeMonth03/Conjugate-Gradient-Method-library
+2. `yui0303 <https://github.com/yui0303/Matrix-Diagonalization>`__ for
+   `Diagonalization of a Square Matrix <yui0303/README.md>`__:
+   https://github.com/yui0303/Matrix-Diagonalization
+
+Optimization
+------------
+
+1. `SL510457 <https://github.com/SL510457>`__ for
+   `OptiRoute: Intelligent Travel Route Planner <SL510457/README.md>`__:
+   https://github.com/SL510457/OptiRoute-Intelligent-Travel-Route-Planner
+2. `tsaiet <https://github.com/tsaiet>`__ for
+   `Optimizing Traffic Flow with Ford-Fulkerson <tsaiet/README.rst>`__:
+   https://github.com/tsaiet/Optimizing-Traffic-Flow-with-Ford-Fulkerson
+
+Spatial Search
+--------------
+
+1. `CodeStone1125 <https://github.com/CodeStone1125>`__ for
+   `Quad-tree-based image compressor <CodeStone1125/README.md>`__:
+   https://github.com/CodeStone1125/QuadraCompress
+2. `ShangHungWan <https://github.com/ShangHungWan>`__ for
+   `rtreelib <ShangHungWan/README.md>`__:
+   https://github.com/ShangHungWan/rtreelib
+3. `adcf3016 <https://github.com/adcf3016>`__ for
+   `k-d tree <adcf3016/README.md>`__:
+   https://github.com/adcf3016/kdtree
+4. `yxuan0329 <https://github.com/yxuan0329>`__ for
+   `R-Tree Spatial Search Engine <yxuan0329/proposal.rst>`__:
+   https://github.com/yxuan0329/R-tree-Search-Engine
+
+Mesh
+----
+
+1. `Sheng08 <https://github.com/Sheng08>`__ for
+   `Triangular surface mesh <Sheng08/README.md>`__:
+   https://github.com/Sheng08/OrientMesh-Toolkit
+2. `Yu-Rou-Weng <https://github.com/Yu-Rou-Weng>`__ for
+   `Mesh Data Converter: Plot3D to SU2 <Yu-Rou-Weng/proposal.md>`__:
+   https://github.com/Yu-Rou-Weng/Mesh-Data-Converter
+
+Polygon Boolean
+---------------
+
+1. `leeshengcian <https://github.com/leeshengcian>`__ for
+   `Polygon clipping <leeshengcian/README.rst>`__:
+   https://github.com/leeshengcian/Polygon-Clipping
+2. `oooJiun <https://github.com/oooJiun>`__ for
+   `PolyMap: Polygon-Based 2D Map Generator <oooJiun/README.md>`__:
+   https://github.com/oooJiun/PolyMap
+
+Image Processing
+----------------
+
+1. `Mibudin <https://github.com/Mibudin>`__ for
+   `WFCpp <Mibudin/README.md>`__:
+   https://github.com/Mibudin/wfcpp
+2. `liamlin5566 <https://github.com/liamlin5566>`__ for
+   `Kernel K-means on Image <liamlin5566/README.md>`__:
+   https://github.com/liamlin5566/Image-Kernel-K-means
+
+Other
+-----
+
+1. `lolainta <https://github.com/lolainta>`__ for
+   `NuScenes DevKit <lolainta/README.md>`__:
+   https://github.com/lolainta/Nuscenes-devkit-cpp
+2. `visitorckw <https://github.com/visitorckw>`__ for
+   `Runtime Profile-Guided Optimization Sorting Library <visitorckw/README.md>`__:
+   https://github.com/visitorckw/runtime-profile-guided-optimization-sorting-library
+3. `yuanhenglee <https://github.com/yuanhenglee>`__ for
+   `BasiCPP Pitch: A C++ implementation for AMT(Automatic Music Transcription) <yuanhenglee/README.md>`__:
+   https://github.com/yuanhenglee/basicpp-pitch
+
 Project List by Account Name
 ++++++++++++++++++++++++++++
 
