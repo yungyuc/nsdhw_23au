@@ -10,7 +10,6 @@ class CustomAllocator{
 public:
     using value_type = T;
     CustomAllocator() = default;
-    
     T* allocate(size_t n) {
         if (n > numeric_limits<size_t>::max()/sizeof(T)) throw bad_alloc();
         m_allocated += n*sizeof(T);
@@ -20,7 +19,6 @@ public:
     }
     void deallocate(T *ptr, size_t n) {
         m_deallocated += n*sizeof(T);
-        m_byte -= n*sizeof(T);
         free(ptr);
     }
     static size_t allocated() {return m_allocated;}
@@ -48,10 +46,6 @@ public:
                     return false;
         return true;
     }
-    // Matrix& operator= (const Matrix& matrix) {
-    //     m_data = matrix.m_data;
-    //     return *this;
-    // }
     double operator() (size_t row, size_t col) const {return m_data[row * m_ncol + col];}
     double& operator() (size_t row, size_t col) {return m_data[row * m_ncol + col];}
     double* get_data() {return m_data.data();}
