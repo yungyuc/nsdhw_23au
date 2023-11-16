@@ -54,7 +54,7 @@ public:
     }
     double operator() (size_t row, size_t col) const {return m_data[row * m_ncol + col];}
     double& operator() (size_t row, size_t col) {return m_data[row * m_ncol + col];}
-    // double* get_data() const {return m_data;}
+    double* get_data() const {return m_data.data();}
     size_t nrow() const {return m_nrow;}
     size_t ncol() const {return m_ncol;}
 
