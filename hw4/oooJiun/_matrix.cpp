@@ -1,4 +1,5 @@
 #include <iostream>
+#include<bits/stdc++.h>
 #include <mkl.h>
 #include <pybind11/pybind11.h>
 using namespace std;
@@ -22,8 +23,8 @@ public:
         m_byte -= n*sizeof(T);
         free(ptr);
     }
-    static size_t allocated() return m_allocated;
-    static size_t deallocated() return m_deallocated;
+    static size_t allocated() {return m_allocated;}
+    static size_t deallocated() {return m_deallocated;}
     static size_t bytes() {
         m_byte = m_allocated-m_deallocated;
         return m_byte;
@@ -38,15 +39,8 @@ template <class T> size_t CustomAllocator<T>::m_byte = 0;
 
 class Matrix {
 public:
-    Matrix(): m_rows(0), m_cols(0), m_data(vector<double, CustomAllocator<double>>(0)) {}
+    Matrix(): m_nrow(0), m_ncol(0), m_data(vector<double, CustomAllocator<double>>(0)) {}
     Matrix(size_t nrow, size_t ncol): m_nrow(nrow), m_ncol(ncol), m_data(vector<double, CustomAllocator<double>>(nrow*ncol)) {}
-    // ~Matrix() {delete[] m_data;}
-    // Matrix(const Matrix &matrix) {
-    //     m_nrow = matrix.m_nrow;
-    //     m_ncol = matrix.m_ncol;
-    //     m_data = new double[m_nrow * m_ncol](); 
-    //     memcpy(m_data, matrix.m_data, m_nrow * m_ncol*sizeof(double));
-    // }
     bool operator == (Matrix const &matrix) const {
         for (size_t i = 0; i < m_nrow; i++) 
             for (size_t j = 0; j < m_ncol; j++)
@@ -60,7 +54,7 @@ public:
     }
     double operator() (size_t row, size_t col) const {return m_data[row * m_ncol + col];}
     double& operator() (size_t row, size_t col) {return m_data[row * m_ncol + col];}
-    double* get_data() const {return m_data;}
+    // double* get_data() const {return m_data;}
     size_t nrow() const {return m_nrow;}
     size_t ncol() const {return m_ncol;}
 
@@ -168,9 +162,9 @@ PYBIND11_MODULE(_matrix, m) {
     m.def("multiply_tile", &multiply_tile);
     m.def("multiply_mkl", &multiply_mkl);
     m.def("generateValue", &generateValue);
-    m.def("bytes", &CustomAllocator<double>::bytes);
     m.def("allocated", &CustomAllocator<double>::allocated);
     m.def("deallocated", &CustomAllocator<double>::deallocated);
+    m.def("bytes", &CustomAllocator<double>::bytes);
     py::class_<Matrix>(m, "Matrix")
         .def(py::init<size_t, size_t>())
         .def(py::init<const Matrix &>())
