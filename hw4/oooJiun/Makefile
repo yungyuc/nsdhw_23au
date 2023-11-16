@@ -10,13 +10,13 @@ MKL_LIBS = $(patsubst %, $(MKL_LIB_DIR)/%, $(MKL_LIB_SO)) \
 SRC = _matrix.cpp
 TARGET = $(patsubst %.cpp, %.so, $(SRC))
 
-.PHONY: all test clean
+.PHONY: all clean
 
 all: $(TARGET)
 
-test: $(TARGET)
-	python3 -m pytest -v
-	python3 performance.py
+# test: $(TARGET)
+# 	python3 -m pytest -v
+# 	python3 performance.py
 
 clean:
 	rm -rf *.o *.out *.so __pycache__/ .pytest_cache/

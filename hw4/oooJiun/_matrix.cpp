@@ -48,10 +48,10 @@ public:
                     return false;
         return true;
     }
-    Matrix& operator= (const Matrix& matrix) {
-        m_data = matrix.m_data;
-        return *this;
-    }
+    // Matrix& operator= (const Matrix& matrix) {
+    //     m_data = matrix.m_data;
+    //     return *this;
+    // }
     double operator() (size_t row, size_t col) const {return m_data[row * m_ncol + col];}
     double& operator() (size_t row, size_t col) {return m_data[row * m_ncol + col];}
     double* get_data() {return m_data.data();}
