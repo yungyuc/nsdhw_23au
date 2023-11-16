@@ -167,10 +167,10 @@ PYBIND11_MODULE(_matrix, m) {
     m.def("deallocated", &CustomAllocator<double>::deallocated);
     m.def("bytes", &CustomAllocator<double>::bytes);
     py::class_<Matrix>(m, "Matrix")
+        .def(py::init<>())
         .def(py::init<size_t, size_t>())
-        .def(py::init<const Matrix &>())
-        .def_property_readonly("nrow", [](const Matrix &mat){ return mat.nrow();})
-        .def_property_readonly("ncol", [](const Matrix &mat){ return mat.ncol();})
+        .def_property_readonly("nrow", [](const Matrix &mat) {return mat.nrow();})
+        .def_property_readonly("ncol", [](const Matrix &mat) {return mat.ncol();})
         .def("assign", &Matrix::operator=)
         .def("__eq__", [](const Matrix &mat, const Matrix &other) { return mat == other;})
         .def("__getitem__", [](const Matrix &m, pair<size_t, size_t> idx) {return m(idx.first, idx.second);})
