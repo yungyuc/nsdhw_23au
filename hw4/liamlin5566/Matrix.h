@@ -2,7 +2,8 @@
 #include <vector>
 #include <string>
 #include <iostream>
-
+#include <stdexcept>
+#include <limits>
 
 #ifndef MATRIX_H
 #define MATRIX_H
