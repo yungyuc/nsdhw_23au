@@ -214,7 +214,7 @@ public:
     }
 };
 
-/* bool operator==(Matrix const &mat1, Matrix const &mat2)
+bool operator==(Matrix const &mat1, Matrix const &mat2)
 {
     if (mat1.ncol() != mat2.ncol() || mat1.nrow() != mat2.ncol())
         return false;
@@ -228,4 +228,4 @@ public:
         }
     }
     return true;
-} */
+}
