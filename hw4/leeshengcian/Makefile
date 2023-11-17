@@ -1,17 +1,15 @@
 CXX = g++
-
-SRC = _matrix.cc
+SRC = _matrix.cpp
 EXE = _matrix$(shell python3-config --extension-suffix)
-FLAGS = -O3 -Wall -shared -fPIC
-PYBD11 = -I /usr/include/python3 -I /usr/include/pybind11 `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
 
-BLAS = -I /usr/include/mkl/ -L /usr/lib/x86_64-linux-gnu/mkl/ -lblas
+FLAGS = -O3 -Wall -shared -fPIC -std=c++17
+PYBD11 = -I /usr/include/python3 -I /usr/include/pybind11 `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
+BLAS = -I /usr/include/mkl/ -L /usr/lib/x86_64-linux-gnu -lblas
+
+.PHONY: clean
 
 all: $(SRC)
-	$(CXX) $(FLAGS) $(shell python3 -m pybind11 --includes) $(PYBD11) $(BLAS) $(SRC) -o $(EXE)
-
-run: $(SRC)
-	$(CXX) $(FLAGS) $(shell python3 -m pybind11 --includes) $(PYBD11) $(BLAS) $(SRC) -o $(EXE)
+	$(CXX) $(FLAGS) $(shell python3 -m pybind11 --includes) $(SRC) $(PYBD11) $(BLAS) -o $(EXE)	
 
 test: $(SRC)
 	$(CXX) $(FLAGS) $(PYBD11) $(SRC) -o $(EXE) $(BLAS)
