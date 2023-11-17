@@ -6,7 +6,7 @@
 #include <bits/stdc++.h>
 #include <cblas.h>
 
-#include '_matrix.h'
+#include "_matrix.h"
 
 Matrix multiply_naive(Matrix &mat1, Matrix &mat2)
 {
