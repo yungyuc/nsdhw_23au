@@ -3,12 +3,10 @@
 #include <mkl.h>
 #include <pybind11/pybind11.h>
 
-using namespace std;
 namespace py = pybind11;
 
-
-
-struct ByteCounterImpl {
+struct ByteCounterImpl
+{
 
     size_t allocated = 0;
     size_t deallocated = 0;
@@ -16,24 +14,23 @@ struct ByteCounterImpl {
 
 }; 
 
-
-
-class ByteCounter {
+class ByteCounter
+{
 
 public:
 
     ByteCounter()
-      : m_impl(new ByteCounterImpl) {
-        incref(); 
-        }
+      : m_impl(new ByteCounterImpl)
+    { incref(); }
 
     ByteCounter(ByteCounter const & other)
-      : m_impl(other.m_impl) {
-        incref(); 
-        }
+      : m_impl(other.m_impl)
+    { incref(); }
 
-    ByteCounter & operator=(ByteCounter const & other) {
-        if (&other != this) {
+    ByteCounter & operator=(ByteCounter const & other)
+    {
+        if (&other != this)
+        {
             decref();
             m_impl = other.m_impl;
             incref();
@@ -43,12 +40,13 @@ public:
     }
 
     ByteCounter(ByteCounter && other)
-      : m_impl(other.m_impl) {
-        incref(); 
-        }
+      : m_impl(other.m_impl)
+    { incref(); }
 
-    ByteCounter & operator=(ByteCounter && other) {
-        if (&other != this) {
+    ByteCounter & operator=(ByteCounter && other)
+    {
+        if (&other != this)
+        {
             decref();
             m_impl = other.m_impl;
             incref();
@@ -57,49 +55,46 @@ public:
         return *this;
     }
 
-    ~ByteCounter() {
-        decref(); 
+    ~ByteCounter() { decref(); }
+
+    void swap(ByteCounter & other)
+    {
+        std::swap(m_impl, other.m_impl);
     }
 
-    void swap(ByteCounter & other) {
-        swap(m_impl, other.m_impl);
-    }
-
-    void increase(size_t amount) {
+    void increase(std::size_t amount)
+    {
         m_impl->allocated += amount;
     }
 
-    void decrease(size_t amount) {
+    void decrease(std::size_t amount)
+    {
         m_impl->deallocated += amount;
     }
 
-    size_t bytes() const { 
-        return m_impl->allocated - m_impl->deallocated; 
-        }
-
-    size_t allocated() const { 
-        return m_impl->allocated; 
-        }
-    size_t deallocated() const { 
-        return m_impl->deallocated; 
-        }
-    size_t refcount() const { 
-        return m_impl->refcount; 
-        }
+    std::size_t bytes() const { return m_impl->allocated - m_impl->deallocated; }
+    std::size_t allocated() const { return m_impl->allocated; }
+    std::size_t deallocated() const { return m_impl->deallocated; }
+    /* This is for debugging. */
+    std::size_t refcount() const { return m_impl->refcount; }
 
 private:
 
-    void incref() { 
-        ++m_impl->refcount; 
-    }
+    void incref() { ++m_impl->refcount; }
 
-    void decref() {
-        if (nullptr == m_impl) {}
-        else if (1 == m_impl->refcount) {
+    void decref()
+    {
+        if (nullptr == m_impl)
+        {
+            // Do nothing.
+        }
+        else if (1 == m_impl->refcount)
+        {
             delete m_impl;
             m_impl = nullptr;
         }
-        else {
+        else
+        {
             --m_impl->refcount;
         }
     }
@@ -108,63 +103,58 @@ private:
 
 };
 
+
 ByteCounter counter;
 
-
 template <class T>
-struct MyAllocator {
+struct MyAllocator
+{
 
     using value_type = T;
 
     MyAllocator() = default;
 
-    T * allocate(size_t n) {
-        if (n > numeric_limits<size_t>::max() / sizeof(T)) {
-            throw bad_alloc();
+    T * allocate(std::size_t n)
+    {
+        if (n > std::numeric_limits<std::size_t>::max() / sizeof(T))
+        {
+            throw std::bad_alloc();
         }
-        const size_t bytes = n*sizeof(T);
-        T * p = static_cast<T *>(malloc(bytes));
-        if (p) {
+        const std::size_t bytes = n*sizeof(T);
+        T * p = static_cast<T *>(std::malloc(bytes));
+        if (p)
+        {
             counter.increase(bytes);
             return p;
         }
-        else {
-            throw bad_alloc();
+        else
+        {
+            throw std::bad_alloc();
         }
     }
 
-    void deallocate(T* p, size_t n) noexcept {
-        free(p);
+    void deallocate(T* p, std::size_t n) noexcept
+    {
+        std::free(p);
 
-        const size_t bytes = n*sizeof(T);
+        const std::size_t bytes = n*sizeof(T);
         counter.decrease(bytes);
     }
 };
 
-class Matrix {
+class Matrix 
+{
 public:
-    Matrix(size_t nrow, size_t ncol) : m_nrow{ nrow }, m_ncol{ ncol } {
-        m_buffer = vector<double, MyAllocator<double>>(nrow * ncol);
+    Matrix(size_t nrow, size_t ncol) : m_nrow{ nrow }, m_ncol{ ncol }
+    {
+        m_buffer = std::vector<double, MyAllocator<double>>(nrow * ncol);
     }
-    size_t const &nrow() const { 
-        return m_nrow; 
-    }
-
-    size_t const &ncol() const { 
-        return m_ncol; 
-    }
-    vector<double, MyAllocator<double>> const &buffer() const { 
-        return m_buffer; 
-    }
-    vector<double, MyAllocator<double>> &buffer() { 
-        return m_buffer;
-    }
-    double operator() (size_t row, size_t col) const { 
-        return m_buffer[row * m_ncol + col]; 
-    }
-    double &operator() (size_t row, size_t col) { 
-        return m_buffer[row * m_ncol + col]; 
-    }
+    size_t const &nrow() const { return m_nrow; } // getter
+    size_t const &ncol() const { return m_ncol; } // getter
+    std::vector<double, MyAllocator<double>> const &buffer() const { return m_buffer; } // getter
+    std::vector<double, MyAllocator<double>> &buffer() { return m_buffer; } // setter
+    double operator() (size_t row, size_t col) const { return m_buffer[row * m_ncol + col]; }
+    double &operator() (size_t row, size_t col) { return m_buffer[row * m_ncol + col]; }
     bool operator== (const Matrix &m2) const {
         if (m_nrow != m2.nrow() || m_ncol != m2.ncol())
             return false;
@@ -174,31 +164,32 @@ public:
         }
         return true;
     };
-    bool operator!= (const Matrix &m2) const { 
-        return !(m2 == (*this)); 
-    }
-
+    bool operator!= (const Matrix &m2) const { return !(m2 == (*this)); }
 private:
     size_t m_nrow;
     size_t m_ncol;
-    vector<double, MyAllocator<double>> m_buffer;
+    std::vector<double, MyAllocator<double>> m_buffer;
     MyAllocator<size_t> alloc;
 };
 
-
-Matrix multiply_naive(Matrix const &mat1, Matrix const &mat2) {
-
+void validate_multiplication(Matrix const & mat1, Matrix const & mat2) {
     if (mat1.ncol() != mat2.nrow()) {
-        throw out_of_range(
+        throw std::out_of_range(
             "the number of first matrix column "
             "differs from that of second matrix row");
     }
+}
 
-    
+
+size_t bytes() { return counter.bytes(); }
+size_t allocated() { return counter.allocated(); }
+size_t deallocated() { return counter.deallocated(); }
+
+Matrix multiply_naive(Matrix &mat1, Matrix &mat2) {
+    validate_multiplication(mat1, mat2);
     Matrix ret(mat1.nrow(), mat2.ncol());
-
-    for (size_t i=0; i<ret.nrow(); ++i) {
-        for (size_t k=0; k<ret.ncol(); ++k) {
+    for (size_t i=0; i<mat1.nrow(); ++i) {
+        for (size_t k=0; k<mat2.ncol(); ++k) {
             double v = 0;
             for (size_t j=0; j<mat1.ncol(); ++j) {
                 v += mat1(i,j) * mat2(j,k);
@@ -206,88 +197,79 @@ Matrix multiply_naive(Matrix const &mat1, Matrix const &mat2) {
             ret(i,k) = v;
         }
     }
-
     return ret;
-
 }
 
-Matrix multiply_tile(Matrix const &mat1, Matrix const &mat2, int const blockSize) {
-    if (mat1.ncol() != mat2.nrow())
-    {
-        throw out_of_range(
-            "the number of first matrix column "
-            "differs from that of second matrix row!");
-    }
+Matrix multiply_mkl(const Matrix &m1, const Matrix &m2) {
+    validate_multiplication(m1, m2);
+    Matrix rslt(m1.nrow(), m2.ncol());
+    cblas_dgemm(
+        CblasRowMajor,
+        CblasNoTrans,
+        CblasNoTrans,
+        m1.nrow(),
+        m2.ncol(),
+        m1.ncol(),
+        1.0,
+        m1.buffer().data(),
+        m1.ncol(),
+        m2.buffer().data(),
+        m2.ncol(),
+        0.0,
+        rslt.buffer().data(),
+        rslt.ncol()
+    );
+    return rslt;
+};
 
-    int n = mat1.nrow();
-    int m = mat1.ncol();
-    int p = mat2.ncol();
-
-    Matrix ret(n, p);
-
-    for (int i = 0; i < n; i += blockSize) {
-        for (int j = 0; j < p; j += blockSize) {
-            for (int k = 0; k < m; k += blockSize) {
-                for (int ii = i; ii < min(i + blockSize, n); ++ii) {
-                    for (int jj = j; jj < min(j + blockSize, p); ++jj) {
-                        for (int kk = k; kk < min(k + blockSize, m); ++kk) {
-                            ret(ii, jj) += mat1(ii, kk) * mat2(kk, jj);
+Matrix multiply_tile(Matrix const &A, Matrix const &B, size_t T) {
+    validate_multiplication(A, B);
+    size_t M = A.nrow();
+    size_t N = B.ncol();
+    size_t K = A.ncol();
+    Matrix C(A.nrow(), B.ncol());
+    for (size_t m = 0; m < M; m += T) {
+        for (size_t n = 0; n < N; n += T) {
+            for (size_t k = 0; k < K; k += T) {
+                const size_t minMt = std::min(m + T, M);
+                const size_t minNt = std::min(n + T, N);
+                const size_t minKt = std::min(k + T, K);
+                for (size_t mt = m; mt < minMt; mt++) {
+                    for (size_t nt = n; nt < minNt; nt++) {
+                        for (size_t kt = k; kt < minKt; kt++) {
+                            C(mt, nt) += A(mt, kt) * B(kt, nt);
                         }
                     }
                 }
             }
         }
     }
-
-    return ret;
-
+    return C;
 }
 
-
-Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2) {
-
-    if (mat1.ncol() != mat2.nrow())
-    {
-        throw out_of_range(
-            "the number of first matrix column "
-            "differs from that of second matrix row");
-    }
-
-    mkl_set_num_threads(1);
-    Matrix ret(mat1.nrow(), mat2.ncol());
-
-    cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, mat1.nrow(),  mat2.ncol(), mat1.ncol(), 1.0 , mat1.data(),
-     mat1.ncol(), mat2.data(), mat2.ncol(), 0.0, ret.data(), ret.ncol());
-
-    return ret;
-}
-
-
-
-PYBIND11_MODULE(_matrix, m){
-
-    m.doc() = "matrix-matrix multiplication";
-    m.def("multiply_naive", &multiply_naive, "naive");
-    m.def("multiply_tile", &multiply_tile, "tile");
-    m.def("multiply_mkl", &multiply_mkl, "mkl");
-    m.def("bytes", &bytes);
-    m.def("allocated", &allocated);
-    m.def("deallocated", &deallocated);
-
+PYBIND11_MODULE(_matrix, m)
+{
+    m.doc() = "pybind11 example plugin"; 
     py::class_<Matrix>(m, "Matrix")
-        .def(py::init<int, int>())
-        .def_property_readonly("nrow", [](const Matrix &mat) { return mat.nrow(); })
-        .def_property_readonly("ncol", [](const Matrix &mat) { return mat.ncol(); })
-        .def("__eq__", [](const Matrix &a, const Matrix &b) { 
-            return a == b; })
-        .def("__setitem__", [](Matrix &self, pair<int, int> idx, double val) {
-            self(idx.first, idx.second) = val;
+        .def(py::init<size_t, size_t>())
+        .def_property_readonly("nrow", &Matrix::nrow)
+        .def_property_readonly("ncol", &Matrix::ncol)
+        .def("__getitem__", [](const Matrix & mat, std::pair<size_t, size_t> pos) {
+            return mat(pos.first, pos.second);
         })
-        .def("__ne__", [](const Matrix &a, const Matrix &b) {
-            return a != b;
+        .def("__setitem__", [](Matrix & mat, std::pair<size_t, size_t> pos, float value) {
+            mat(pos.first, pos.second) = value;
+        })
+        .def("__eq__", [](const Matrix & m1, const Matrix & m2) {
+            return m1 == m2;
+        })
+        .def("__ne__", [](const Matrix & m1, const Matrix & m2) {
+            return m1 != m2;
         });
-        .def("__getitem__", [](const Matrix &self, pair<int, int> idx) {
-            return self(idx.first, idx.second);
-        });
-
+    m.def("multiply_naive", &multiply_naive)
+        .def("multiply_mkl", &multiply_mkl)
+        .def("multiply_tile", &multiply_tile)
+        .def("bytes", &bytes)
+        .def("allocated", &allocated)
+        .def("deallocated", &deallocated);
 }
