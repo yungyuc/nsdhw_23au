@@ -65,8 +65,3 @@ Follow the format to add your project in lexicographical order:
 1. `github_account_name <https://github.com/github_account_name>`__ for
    `Project subject <github_account_name/README.rst>`__:
    https://github.com/github_account_name/project_name
-
-
-5. `ThreeMonth03 <https://github.com/ThreeMonth03>`__ for
-   `Project subject <ThreeMonth03/README.md>`__:
-   https://github.com/ThreeMonth03/Conjugate-Gradient-Method-library
