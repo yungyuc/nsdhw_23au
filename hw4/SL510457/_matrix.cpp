@@ -239,7 +239,11 @@ Matrix multiply_mkl(const Matrix &mat1, const Matrix &mat2) {
 
 
 Matrix multiply_tile(Matrix const &mat1, Matrix const &mat2, size_t T) {
-    validate_multiplication(mat1, mat2);
+    if (mat1.ncol() != mat2.nrow()) {
+        throw std::out_of_range(
+            "the number of first matrix column "
+            "differs from that of second matrix row");
+    }
     size_t M = mat1.nrow();
     size_t N = mat2.ncol();
     size_t K = mat1.ncol();
