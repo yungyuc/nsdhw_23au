@@ -103,17 +103,17 @@ Matrix multiply_mkl(const Matrix& mat1, const Matrix& mat2)
     return ret;
 }
 
-static inline std::size_t bytes()
+std::size_t bytes()
 {
     return Matrix::buffer_type::allocator_type::bytes();
 }
 
-static inline std::size_t allocated()
+std::size_t allocated()
 {
     return Matrix::buffer_type::allocator_type::allocated();
 }
 
-static inline std::size_t deallocated()
+std::size_t deallocated()
 {
     return Matrix::buffer_type::allocator_type::deallocated();
 }
