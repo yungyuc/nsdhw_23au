@@ -266,6 +266,9 @@ PYBIND11_MODULE(_matrix, m)
     m.def("multiply_naive", &multiply_naive);
     m.def("multiply_mkl", &multiply_mkl);
     m.def("multiply_tile", &multiply_tile);
+    m.def("bytes", &bytes);
+    m.def("allocated", &allocated);
+    m.def("deallocated", &deallocated);
     pybind11::class_<Matrix>(m, "Matrix")
         .def(pybind11::init<size_t, size_t>())
         .def("__setitem__",
@@ -280,8 +283,5 @@ PYBIND11_MODULE(_matrix, m)
              })
         .def_property("nrow", &Matrix::nrow, nullptr)
         .def_property("ncol", &Matrix::ncol, nullptr)
-        .def("__eq__", &operator==)
-        .def("bytes", &bytes)
-        .def("allocated", &allocated)
-        .def("deallocated", &deallocated);
+        .def("__eq__", &operator==);
 }
