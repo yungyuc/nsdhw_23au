@@ -22,6 +22,9 @@ class Allocator{
         Allocator<T> &operator=(const Allocator<U> &other) noexcept;
 
         template <class U>
+        bool operator==(const Allocator<U> &other) const noexcept;
+
+        template <class U>
         struct rebind {
             typedef Allocator<U> other;
         };

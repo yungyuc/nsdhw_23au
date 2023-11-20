@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall -O3 -fPIC 
-PYBINDFLAGS = `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
+PYBINDFLAGS = `python -m pybind11 --includes` `python3-config --includes --ldflags`
 LFLAGS = -lblas
 
 BUILD_DIR = bin

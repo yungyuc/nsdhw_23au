@@ -34,6 +34,12 @@ Allocator<T> &Allocator<T>::operator=(const Allocator<U> &other) noexcept {
 }
 
 template <class T>
+template <class U>
+bool Allocator<T>::operator==(const Allocator<U> &other) const noexcept {
+    return (allocated_ == other.allocated() && deallocated_ == other.deallocated());
+}
+
+template <class T>
 T *Allocator<T>::allocate(std::size_t n) {
     if ( auto p = static_cast<T *>( malloc(n * sizeof(T)) ) ) {
         allocated_ += n * sizeof(T);
