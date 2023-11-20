@@ -13,10 +13,24 @@ template <class T>
 int Allocator<T>::deallocated_ = 0;
 
 template <class T>
+Allocator<T>::Allocator(const Allocator &other) noexcept {
+    allocated_ = other.allocated();
+    deallocated_ = other.deallocated();
+}
+
+template <class T>
 template <class U>
 Allocator<T>::Allocator(const Allocator<U> &other) noexcept {
     allocated_ = other.allocated();
     deallocated_ = other.deallocated();
+}
+
+template <class T>
+template <class U>
+Allocator<T> &Allocator<T>::operator=(const Allocator<U> &other) noexcept {
+    allocated_ = other.allocated();
+    deallocated_ = other.deallocated();
+    return *this;
 }
 
 template <class T>

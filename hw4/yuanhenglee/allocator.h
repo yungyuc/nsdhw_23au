@@ -11,10 +11,20 @@ class Allocator{
 
         Allocator() noexcept = default;
 
+        Allocator(const Allocator &other) noexcept;
+
         template <class U>
         Allocator(const Allocator<U> &other) noexcept;
 
         ~Allocator() noexcept = default;
+
+        template <class U>
+        Allocator<T> &operator=(const Allocator<U> &other) noexcept;
+
+        template <class U>
+        struct rebind {
+            typedef Allocator<U> other;
+        };
 
         T *allocate(std::size_t n);
 
