@@ -17,7 +17,7 @@ else ifeq (${OS},ubuntu)
 	LDFLAGS += -lblas
 endif
 
-INCLUDES := -Iextern/pybind11/include $(shell python3-config --includes) -Iinclude
+INCLUDES := -Iextern/pybind11/include $(shell python3-config --includes) -Iinclude -I/usr/lib64/python3.11/site-packages/numpy/core/include
 ifeq (${OS},arch)
 	INCLUDES += -I/opt/intel/mkl/include
 endif

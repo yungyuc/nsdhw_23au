@@ -35,7 +35,7 @@
 #include <atomic>
 #include <iostream>
 
-#include "matrix.hpp"
+#include "Matrix.hpp"
 
 #ifdef __GNUG__
 #define PYTHON_WRAPPER_VISIBILITY __attribute__((visibility("hidden")))
@@ -173,8 +173,8 @@ class PYTHON_WRAPPER_VISIBILITY WrapMatrix
     (*this)
         // The Python constructor will be counted!
         .def_tagged(py::init<size_t, size_t>())
-        .def_property_readonly("nrow", &Matrix::nrow)
-        .def_property_readonly("ncol", &Matrix::ncol)
+        .def_property_readonly("nrow", &Matrix::get_rows)
+        .def_property_readonly("ncol", &Matrix::get_cols)
         .def("__eq__", [](Matrix const &self,
                           Matrix const &other) { return self == other; })
         .def("__getitem__",
@@ -186,9 +186,9 @@ class PYTHON_WRAPPER_VISIBILITY WrapMatrix
                return self(std::get<0>(idx), std::get<1>(idx)) = value;
              });
 
-    mod.def("multiply_mkl", &multiply_mkl);
-    mod.def("multiply_naive", &multiply_naive);
-    mod.def("multiply_tile", &multiply_tile);
+    mod.def("multiply_mkl", &MatrixMultiply::multiply_mkl);
+    mod.def("multiply_naive", &MatrixMultiply::multiply_naive);
+    mod.def("multiply_tile", &MatrixMultiply::multiply_tile);
   }
 
 }; /* end class WrapMatrix */
