@@ -23,6 +23,6 @@ test: main
 
 clean:
 	rm -rf *.so __pycache__ .pytest*
-	cd ~/桌面/repo/nsdhw_23au/hw5
+	cd ../
 	rm -rf __pycache__ .pytest_cache
 
