@@ -15,7 +15,7 @@ SRC = ../mod.cpp
 .PHONY: all clean
 
 all: $(SRC)
-	$(CC) $(CFLAGS) $(NPFLAGS) $(MKLFLAGS) $(PYFLAGS) -o $(TARGET) 
+	$(CC) $(SRC) $(CFLAGS) $(NPFLAGS) $(MKLFLAGS) $(PYFLAGS) -o $(TARGET) 
 
 clean: 
 	rm -rf *.o *.out *.so __pycache__/ .pytest_cache/
