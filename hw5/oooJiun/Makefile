@@ -1,21 +1,38 @@
-CC= g++
-CFLAGS = -O3 -Wall -m64 -shared -std=c++17 -fPIC -
-PYFLAGS = -I /usr/include/python3 -I /usr/include/pybind11 `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
-NPFLAGS = -I`python3 -c 'import numpy;print(numpy.get_include())'`
-MKLDIR = -I/usr/include/mkl
-MKLFLAGS = -I $(MKLDIR) -L /usr/lib/ -I/usr/include/openblas/openblas/ -lblas
-MKL_LIB_DIR = /usr/lib/x86_64-linux-gnu
-MKL_LIB_SO = libmkl_def.so libmkl_avx2.so libmkl_core.so libmkl_intel_lp64.so libmkl_sequential.so
-MKL_LIBS = $(patsubst %, $(MKL_LIB_DIR)/%, $(MKL_LIB_SO)) \
-			-lpthread -lm -ldl -lblas -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5
-TARGET = _matrix$(shell python3-config --extension-suffix)
+# CC= g++
+# CFLAGS = -O3 -Wall -m64 -shared -std=c++17 -fPIC -
+# PYFLAGS = -I /usr/include/python3 -I /usr/include/pybind11 `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
+# NPFLAGS = -I`python3 -c 'import numpy;print(numpy.get_include())'`
+# MKLDIR = -I/usr/include/mkl
+# MKLFLAGS = -I $(MKLDIR) -L /usr/lib/ -I/usr/include/openblas/openblas/ -lblas
+# MKL_LIB_DIR = /usr/lib/x86_64-linux-gnu
+# MKL_LIB_SO = libmkl_def.so libmkl_avx2.so libmkl_core.so libmkl_intel_lp64.so libmkl_sequential.so
+# MKL_LIBS = $(patsubst %, $(MKL_LIB_DIR)/%, $(MKL_LIB_SO)) \
+# 			-lpthread -lm -ldl -lblas -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5
+# TARGET = _matrix$(shell python3-config --extension-suffix)
 
+# SRC = ../mod.cpp
+
+# .PHONY: all clean
+
+# all: $(SRC)
+# 	$(CC) $(SRC) $(CFLAGS) $(NPFLAGS) $(MKLFLAGS) $(PYFLAGS) -o $(TARGET) ${MKL_LIBS}
+
+# clean: 
+# 	rm -rf *.o *.out *.so __pycache__/ .pytest_cache/
+
+CXX = g++
 SRC = ../mod.cpp
+EXE = _matrix$(shell python3-config --extension-suffix)
+
+FLAGS = -O3 -Wall -shared -fPIC -std=c++17 -I./
+PYBD11 = -I /usr/include/python3 -I /usr/include/pybind11 `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
+NUMPY = -I`python3 -c 'import numpy;print(numpy.get_include())'`
+BLAS = -I /usr/include/mkl/ -L /usr/lib/ -I/usr/include/openblas/openblas/ -lblas
 
 .PHONY: all clean
 
 all: $(SRC)
-	$(CC) $(SRC) $(CFLAGS) $(NPFLAGS) $(MKLFLAGS) $(PYFLAGS) -o $(TARGET) ${MKL_LIBS}
+$(CXX) $(SRC) $(FLAGS) $(PYBD11) $(BLAS) $(NUMPY) -o $(EXE) 
 
 clean: 
 	rm -rf *.o *.out *.so __pycache__/ .pytest_cache/
