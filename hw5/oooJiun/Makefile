@@ -1,4 +1,4 @@
-CC= g++
+CC= clangg++
 CFLAGS = -O3 -Wall -m64 -shared -std=c++17 -fPIC -
 PYFLAGS = -I /usr/include/python3 -I /usr/include/pybind11 `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
 NPFLAGS = -I`python3 -c 'import numpy;print(numpy.get_include())'`
