@@ -1,20 +1,19 @@
-CXX=clang++
-CXXFLAGS=-std=c++17 -O3  -m64 -shared -fPIC -I ./ -I /usr/include/mkl
+CXX = g++
+SRC = ../mod.cpp
+EXE = _matrix$(shell python3-config --extension-suffix)
 
+FLAGS = -O3 -Wall -shared -fPIC -std=c++17 -I./
+PYBD11 = -I /usr/include/python3 -I /usr/include/pybind11 `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
+NUMPY = -I`python3 -c 'import numpy;print(numpy.get_include())'`
+BLAS = -I /usr/include/mkl/ -L /usr/lib/ -I/usr/include/openblas/openblas/ -lblas
 
-PYBIND=$(shell python3 -m pybind11 --includes)
-PYCONFIG=$(shell python3-config --extension-suffix)
-NP_INC=$(shell python3 -c "import numpy; print(numpy.get_include())")
+.PHONY: clean
 
-MKL_LIB_DIR=/usr/lib/x86_64-linux-gnu
-MKL_LIBS=${MKL_LIB_DIR}/libmkl_def.so \
-		${MKL_LIB_DIR}/libmkl_avx2.so \
-		${MKL_LIB_DIR}/libmkl_core.so \
-		${MKL_LIB_DIR}/libmkl_intel_lp64.so \
-		${MKL_LIB_DIR}/libmkl_sequential.so
+all: $(SRC)
+	$(CXX) $(SRC) $(FLAGS) $(PYBD11) $(BLAS) $(NUMPY) -o $(EXE) 
 
-all:
-	${CXX} $(CXXFLAGS)  $(PYBIND) ../mod.cpp -o _matrix$(PYCONFIG) -I$(NP_INC) -I /usr/include/python3.8 $(MKL_LIBS)
+test: all
+	python3 -m pytest test_matrix.py
 
 clean:
-	rm -rf *.so __pycache__ ../.pytest_cache .pytest_cache ../.vscode performance.txt
+	rm -rf *.so .pytest_cache __pycache__
