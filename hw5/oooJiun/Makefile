@@ -32,7 +32,7 @@ BLAS = -I /usr/include/mkl/ -L /usr/lib/ -I/usr/include/openblas/openblas/ -lbla
 .PHONY: all clean
 
 all: $(SRC)
-$(CXX) $(SRC) $(FLAGS) $(PYBD11) $(BLAS) $(NUMPY) -o $(EXE) 
+	$(CXX) $(SRC) $(FLAGS) $(PYBD11) $(BLAS) $(NUMPY) -o $(EXE) 
 
 clean: 
 	rm -rf *.o *.out *.so __pycache__/ .pytest_cache/
