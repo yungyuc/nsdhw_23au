@@ -51,7 +51,12 @@ Matrix multiply_naive(Matrix const & mat1, Matrix const & mat2) {
 Matrix multiply_tile(const Matrix &mat1, const Matrix &mat2,  size_t tile_size) {
     if (mat1.ncol() != mat2.nrow()){throw out_of_range("wrong dimensions!!!");}
     Matrix ret(mat1.nrow(), mat2.ncol());
-    for (size_t i = 0; i < mat1.nrow(); i += tile_size){for (size_t j = 0; j < mat2.ncol(); j += tile_size)for (size_t k = 0; k < mat1.ncol(); k += tile_size){for(size_t l = i; l < min((i + tile_size), mat1.nrow()); l++)for(size_t m = j; m < min((j + tile_size), mat2.ncol()); m++){for(size_t n = k; n < min((k + tile_size), mat1.ncol()); n++){ret(l, m) += mat1(l, n) * mat2(n, m);}
+    for (size_t i = 0; i < mat1.nrow(); i += tile_size){
+        for (size_t j = 0; j < mat2.ncol(); j += tile_size)
+            for (size_t k = 0; k < mat1.ncol(); k += tile_size){
+                for(size_t l = i; l < min((i + tile_size), mat1.nrow()); l++)
+                    for(size_t m = j; m < min((j + tile_size), mat2.ncol()); m++){
+                        for(size_t n = k; n < min((k + tile_size), mat1.ncol()); n++){ret(l, m) += mat1(l, n) * mat2(n, m);}
     }}}
     return ret;
 }
