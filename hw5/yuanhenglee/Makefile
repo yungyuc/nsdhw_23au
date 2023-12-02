@@ -22,4 +22,4 @@ test: $(TARGET)
 	python -m pytest -v
 
 clean:
-	rm -rf __pycache__ *.so .pytest_cache
+	rm -rf __pycache__ .pytest_cache $(MOD) $(TARGET)
