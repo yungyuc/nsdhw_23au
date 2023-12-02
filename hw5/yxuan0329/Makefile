@@ -1,12 +1,15 @@
 CXX = g++
-CFLAGS = -std=c++17 -O3 -Wall -shared -fPIC `python3-config --includes`
-CIMPORTPATH = includes/
+CFLAGS = -std=c++17 -O3 -Wall -shared -fPIC `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
 LDFLAGS = -lblas
+SRC = mod.cpp
+TARGET = _matrix.so
 
-all: _matrix.so
+NUMPY = $(shell python3 -c "import numpy; print(numpy.get_include())")
 
-_matrix.so: matrix.cpp
-		$(CXX) $^ $(CFLAGS) -I/usr/include/mk -I $(CIMPORTPATH) -o $@ ${LDFLAGS}
+all: $(TARGET)
+
+$(TARGET): $(SRC)
+		$(CXX) $(CFLAGS) $< -I/usr/include/mk -I$(NUMPY) -o $@ ${LDFLAGS}
 
 clean:
 	rm -f *.so
