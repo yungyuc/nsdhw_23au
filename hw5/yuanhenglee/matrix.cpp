@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <algorithm>
 #include <mkl.h>
+#include <cassert>
 #include <vector>
 
 
@@ -20,10 +21,12 @@ Matrix::~Matrix() {
 }
 
 double Matrix::operator()(int i, int j) const {
+    assert(i < nrow_ && j < ncol_);
     return data_[i * ncol_ + j];
 }
 
 double &Matrix::operator()(int i, int j) {
+    assert(i < nrow_ && j < ncol_);
     return data_[i * ncol_ + j];
 }
 
@@ -91,6 +94,7 @@ Matrix multiply_tile(const Matrix &mat1, const Matrix &mat2, int tile_size = 32)
                     for (int k0 = k; k0 < k_end; k0++) {
                         for (int j0 = j; j0 < j_end; j0++) {
                             result.data()[i0 * K + j0] += mat1.data()[i0 * M + k0] * mat2.data()[k0 * K + j0];
+                            // result(i0, j0) += mat1(i0, k0) * mat2(k0, j0);
                         }
                     }
                 }
