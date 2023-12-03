@@ -213,3 +213,131 @@ Follow the format to add your project in lexicographical order:
 19. `yxuan0329 <https://github.com/yxuan0329>`__ for
     `R-Tree Spatial Search Engine <yxuan0329/proposal.rst>`__:
     https://github.com/yxuan0329/R-tree-Search-Engine
+
+Time Table Session A
+++++++++++++++++++++
+
+.. note::
+
+  The meeting room for this session (A) is EC114, the same room we use for
+  lectures.
+
+.. list-table:: 7:00-9:30 (EC114)
+  :header-rows: 1
+
+  * - ID
+    - Time
+    - Presenter
+    - Project
+  * - A1
+    - 07:00 - 07:15
+    - `Alkalid <https://github.com/Alkalid>`__
+    - `Low bit quantification <Alkalid/README.md>`__:
+      `repo <https://github.com/Alkalid/ULTRA-LOW-BIT>`__
+  * - A2
+    - 07:15 - 07:30
+    - `Yvonne-ul6u45p <https://github.com/Yvonne-ul6u45p>`__
+    - `Contiguous Array <Yvonne-ul6u45p/README.md>`__:
+      `repo <https://github.com/Yvonne-ul6u45p/ContiguousArray-MultiDim-Index-Calculation>`__
+  * - A3
+    - 07:30 - 07:45
+    - `ThreeMonth03 <https://github.com/ThreeMonth03>`__
+    - `Conjugate Gradient Method <ThreeMonth03/README.md>`__:
+      `repo <https://github.com/ThreeMonth03/Conjugate-Gradient-Method-library>`__
+  * - A4
+    - 07:45 - 08:00
+    - `yui0303 <https://github.com/yui0303/Matrix-Diagonalization>`__
+    - `Diagonalization of a Square Matrix <yui0303/README.md>`__:
+      `repo <https://github.com/yui0303/Matrix-Diagonalization>`__
+  * - A5
+    - 08:00 - 08:15
+    - `SL510457 <https://github.com/SL510457>`__
+    - `OptiRoute: Intelligent Travel Route Planner <SL510457/README.md>`__:
+      `repo <https://github.com/SL510457/OptiRoute-Intelligent-Travel-Route-Planner>`__
+  * - A6
+    - 08:15 - 08:30
+    - `tsaiet <https://github.com/tsaiet>`__
+    - `Optimizing Traffic Flow with Ford-Fulkerson <tsaiet/README.rst>`__:
+      `repo <https://github.com/tsaiet/Optimizing-Traffic-Flow-with-Ford-Fulkerson>`__
+  * - A7
+    - 08:30 - 08:45
+    - `CodeStone1125 <https://github.com/CodeStone1125>`__
+    - `Quad-tree-based image compressor <CodeStone1125/README.md>`__:
+      `repo <https://github.com/CodeStone1125/QuadraCompress>`__
+  * - A8
+    - 08:45 - 09:00
+    - `ShangHungWan <https://github.com/ShangHungWan>`__
+    - `rtreelib <ShangHungWan/README.md>`__:
+      `repo <https://github.com/ShangHungWan/rtreelib>`__
+  * - A9
+    - 09:00 - 09:15
+    - `adcf3016 <https://github.com/adcf3016>`__
+    - `k-d tree <adcf3016/README.md>`__:
+      `repo <https://github.com/adcf3016/kdtree>`__
+  * - A10
+    - 09:15 - 09:30
+    - `yxuan0329 <https://github.com/yxuan0329>`__
+    - `R-Tree Spatial Search Engine <yxuan0329/proposal.rst>`__:
+      `repo <https://github.com/yxuan0329/R-tree-Search-Engine>`__
+
+Time Table Session B
+++++++++++++++++++++
+
+.. note::
+
+  The meeting room for this session (B) is EC329.  Please note it is **not**
+  the room we use for lectures.
+
+.. list-table:: 10:00-11:45 (EC329)
+  :header-rows: 1
+
+  * - ID
+    - Time
+    - Presenter
+    - Project
+  * - B1
+    - 10:00 - 10:15
+    - `Sheng08 <https://github.com/Sheng08>`__
+    - `Triangular surface mesh <Sheng08/README.md>`__:
+      `repo <https://github.com/Sheng08/OrientMesh-Toolkit>`__
+  * - B2
+    - 10:15 - 10:30
+    - `Yu-Rou-Weng <https://github.com/Yu-Rou-Weng>`__
+    - `Mesh Data Converter: Plot3D to SU2 <Yu-Rou-Weng/proposal.md>`__:
+      `repo <https://github.com/Yu-Rou-Weng/Mesh-Data-Converter>`__
+  * - B3
+    - 10:30 - 10:45
+    - `leeshengcian <https://github.com/leeshengcian>`__
+    - `Polygon clipping <leeshengcian/README.rst>`__:
+      `repo <https://github.com/leeshengcian/Polygon-Clipping>`__
+  * - B4
+    - 10:45 - 11:00
+    - `oooJiun <https://github.com/oooJiun>`__
+    - `PolyMap: Polygon-Based 2D Map Generator <oooJiun/README.md>`__:
+      `repo <https://github.com/oooJiun/PolyMap>`__
+  * - B5
+    - 11:00 - 11:15
+    - `Mibudin <https://github.com/Mibudin>`__
+    - `WFCpp <Mibudin/README.md>`__:
+      `repo <https://github.com/Mibudin/wfcpp>`__
+  * - B6
+    - 11:15 - 11:30
+    - `liamlin5566 <https://github.com/liamlin5566>`__
+    - `Kernel K-means on Image <liamlin5566/README.md>`__:
+      `repo <https://github.com/liamlin5566/Image-Kernel-K-means>`__
+  * - B7
+    - 11:30 - 11:45
+    - `yuanhenglee <https://github.com/yuanhenglee>`__
+    - `BasiCPP Pitch <yuanhenglee/README.md>`__:
+      `repo <https://github.com/yuanhenglee/basicpp-pitch>`__
+  * - B8
+    - 11:45 - 12:00
+    - `lolainta <https://github.com/lolainta>`__
+    - `NuScenes DevKit <lolainta/README.md>`__:
+      `repo <https://github.com/lolainta/Nuscenes-devkit-cpp>`__
+  * - B9
+    - 12:00 - 12:15
+    - `visitorckw <https://github.com/visitorckw>`__
+    - `Runtime Profile-Guided Optimization Sorting Library <visitorckw/README.md>`__:
+      `repo
+      <https://github.com/visitorckw/runtime-profile-guided-optimization-sorting-library>`__
