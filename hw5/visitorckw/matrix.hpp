@@ -1,10 +1,9 @@
 #pragma once
 
-#include <pybind11/stl.h>
-#include <pybind11/pybind11.h>
-#include <pybind11/operators.h>
 #include <mkl.h>
 #include <cstdlib>
+#include <algorithm>
+#include <new>
 
 class Matrix {
     public:
