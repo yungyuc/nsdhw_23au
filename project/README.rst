@@ -288,7 +288,7 @@ Time Table Session B
   The meeting room for this session (B) is EC329.  Please note it is **not**
   the room we use for lectures.
 
-.. list-table:: 10:00-11:45 (EC329)
+.. list-table:: 10:00-12:15 (EC329)
   :header-rows: 1
 
   * - ID
