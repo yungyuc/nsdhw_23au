@@ -241,9 +241,9 @@ Time Table Session A
       `repo <https://github.com/Yvonne-ul6u45p/ContiguousArray-MultiDim-Index-Calculation>`__
   * - A3
     - 07:30 - 07:45
-    - `ThreeMonth03 <https://github.com/ThreeMonth03>`__
-    - `Conjugate Gradient Method <ThreeMonth03/README.md>`__:
-      `repo <https://github.com/ThreeMonth03/Conjugate-Gradient-Method-library>`__
+    - `lolainta <https://github.com/lolainta>`__
+    - `NuScenes DevKit <lolainta/README.md>`__:
+      `repo <https://github.com/lolainta/Nuscenes-devkit-cpp>`__
   * - A4
     - 07:45 - 08:00
     - `yui0303 <https://github.com/yui0303/Matrix-Diagonalization>`__
@@ -332,9 +332,9 @@ Time Table Session B
       `repo <https://github.com/yuanhenglee/basicpp-pitch>`__
   * - B8
     - 11:45 - 12:00
-    - `lolainta <https://github.com/lolainta>`__
-    - `NuScenes DevKit <lolainta/README.md>`__:
-      `repo <https://github.com/lolainta/Nuscenes-devkit-cpp>`__
+    - `ThreeMonth03 <https://github.com/ThreeMonth03>`__
+    - `Conjugate Gradient Method <ThreeMonth03/README.md>`__:
+      `repo <https://github.com/ThreeMonth03/Conjugate-Gradient-Method-library>`__
   * - B9
     - 12:00 - 12:15
     - `visitorckw <https://github.com/visitorckw>`__
