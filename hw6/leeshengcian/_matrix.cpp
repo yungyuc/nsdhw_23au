@@ -281,7 +281,7 @@ Matrix multiple_tile(Matrix const &mat1, Matrix const &mat2, size_t tileSize)
 Matrix multiply_mkl(Matrix const &mat1, Matrix const &mat2)
 {
     validate_multiplication(mat1, mat2);
-    mkl_set_num_threads(2);
+    // mkl_set_num_threads(2);
     Matrix result(mat1.nrow(), mat2.ncol());
 
     cblas_dgemm(
