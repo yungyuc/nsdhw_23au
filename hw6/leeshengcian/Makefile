@@ -1,20 +1,13 @@
 CXX = g++
-SRC = ../mod.cpp
-EXE = _matrix$(shell python3-config --extension-suffix)
+FLAG = -std=c++17 -O3 -Wall -shared -fPIC `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
+MKL_INCLUDE = /usr/include/mkl
+MKL_LIB = /usr/lib/x86_64-linux-gnu/mkl
+NUMPY = $(shell python3 -c "import numpy; print(numpy.get_include())")
 
-FLAGS = -O3 -Wall -shared -fPIC -std=c++17 -I./
-PYBD11 = -I /usr/include/python3 -I /usr/include/pybind11 `python3 -m pybind11 --includes` `python3-config --includes --ldflags`
-NUMPY = -I`python3 -c 'import numpy;print(numpy.get_include())'`
-BLAS = -I /usr/include/mkl/ -L /usr/lib/ -I/usr/include/openblas/openblas/ -lblas
+_matrix: _matrix.cpp
+	$(CXX) $(FLAG) $< -o $@.so -L$(MKL_LIB) -I$(MKL_INCLUDE) -I$(NUMPY) -lblas
 
 .PHONY: clean
 
-# SRC must put before BLAS #
-all: $(SRC)
-	$(CXX) $(SRC) $(FLAGS) $(PYBD11) $(BLAS) $(NUMPY) -o $(EXE) 
-
-test: all
-	python3 -m pytest test_matrix.py
-
-clean:
+clean: 
 	rm -rf *.so .pytest_cache __pycache__
