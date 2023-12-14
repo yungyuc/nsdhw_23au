@@ -1,6 +1,8 @@
 #include <iostream>
 #include <mkl.h>
 #include <pybind11/pybind11.h>
+#include <pybind11/numpy.h>
+#include <cstring> 
 using namespace std;
 namespace py = pybind11;
 
@@ -33,18 +35,9 @@ public:
     double* get_data() const {return m_data;}
     size_t nrow() const {return m_nrow;}
     size_t ncol() const {return m_ncol;}
-    py::array_t<double> get_array() const {
-        py::buffer_info buf_info(
-            m_data,            
-            sizeof(double), 
-            py::format_descriptor<double>::format,
-            2,
-            { m_nrow, m_ncol }, 
-            { sizeof(double) * m_ncol, sizeof(double) }
-        );
-        return py::array_t<double>(buf_info);
-    }
-
+    py::array_t<double> get_array() const{
+        size_t _size = 8;
+        return py::array_t<double>({m_nrow, m_ncol}, {_size* m_ncol, _size}, m_data, py::cast(*this));}
 private:
     size_t m_nrow;
     size_t m_ncol;
@@ -152,10 +145,11 @@ PYBIND11_MODULE(_matrix, m) {
     py::class_<Matrix>(m, "Matrix")
         .def(py::init<size_t, size_t>())
         .def(py::init<const Matrix &>())
-        .def_property_readonly("nrow", [](const Matrix &mat){ return mat.nrow();})
-        .def_property_readonly("ncol", [](const Matrix &mat){ return mat.ncol();})
+        .def_property_readonly("nrow", [](const Matrix &mat){return mat.nrow();})
+        .def_property_readonly("ncol", [](const Matrix &mat){return mat.ncol();})
+        .def_property_readonly("array", [](const Matrix &mat){return mat.get_array();})
         .def("assign", &Matrix::operator=)
-        .def("__eq__", [](const Matrix &mat, const Matrix &other) { return mat == other;})
+        .def("__eq__", [](const Matrix &mat, const Matrix &other) {return mat == other;})
         .def("__getitem__", [](const Matrix &m, pair<size_t, size_t> idx) {return m(idx.first, idx.second);})
         .def("__setitem__", [](Matrix &m, pair<size_t, size_t> idx, double value) {m(idx.first, idx.second) = value;});
 }
