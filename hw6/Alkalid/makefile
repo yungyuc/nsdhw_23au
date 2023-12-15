@@ -7,7 +7,7 @@ MKL_INCLUDE = -I/usr/include/mkl
 MKL_LIBRARY = -L/usr/lib/x86_64-linux-gnu/ -lblas
 
 PYTHON_CONFIG = $(shell python3-config --extension-suffix)
-PYTHON_INCLUDE = -I/usr/include/python3.8
+PYTHON_INCLUDE = $(shell python3-config --includes)
 PYBIND_INCLUDE = $(shell python3 -m pybind11 --includes)
 
 
