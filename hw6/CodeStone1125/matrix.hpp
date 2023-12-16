@@ -1,6 +1,8 @@
 #include <stdexcept>
 #include <vector>
 #include <mkl.h>
+#include <pybind11/pybind11.h>
+#include <pybind11/numpy.h>
 
 using namespace std;
 
@@ -29,7 +31,14 @@ public:
                 size_t index = i * m_ncol + j;
                 if (m_buffer[index] != other.m_buffer[index]) return false;}}
         return true;
-    }  
+    }
+
+    pybind11::array_t<double> my_array() {
+        size_t shape[2] = {nrow(), ncol()};
+        size_t strides[2] = {sizeof(double) * ncol(), sizeof(double)};
+        
+        return pybind11::array_t<double>(shape, strides, m_buffer, pybind11::cast(this));
+    }
 };
 
 // Matrix multiply_naive
@@ -71,4 +80,24 @@ Matrix multiply_mkl(Matrix const & mat1, Matrix const & mat2){
         cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, m, n, k, 1.0, mat1.m_buffer, k, mat2.m_buffer, n, 0.0, ret.m_buffer, n);
         return ret;
     }
+}
+
+namespace py = pybind11;
+
+PYBIND11_MODULE(my_module, m) {
+    py::class_<Matrix>(m, "Matrix")
+        .def(py::init<size_t, size_t>())
+        .def("reset_buffer", &Matrix::reset_buffer)
+        .def("__call__", [](const Matrix &mat, size_t row, size_t col) { return mat(row, col); })
+        .def("__setitem__", [](Matrix &mat, py::tuple index, double val) {
+            mat(index[0].cast<size_t>(), index[1].cast<size_t>()) = val;
+        })
+        .def("__getitem__", [](const Matrix &mat, py::tuple index) {
+            return mat(index[0].cast<size_t>(), index[1].cast<size_t>());
+        })
+        .def("my_array", &Matrix::my_array);
+
+    m.def("multiply_naive", &multiply_naive);
+    m.def("multiply_tile", &multiply_tile);
+    m.def("multiply_mkl", &multiply_mkl);
 }
