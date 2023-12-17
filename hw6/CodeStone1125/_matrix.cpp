@@ -3,6 +3,7 @@
 #include <mkl.h>
 #include <pybind11/pybind11.h>
 #include <pybind11/numpy.h>
+#include <iostream>
 
 using namespace std;
 
@@ -36,8 +37,8 @@ public:
     pybind11::array_t<double> my_array() {
         size_t shape[2] = {nrow(), ncol()};
         size_t strides[2] = {sizeof(double) * ncol(), sizeof(double)};
-        
         return pybind11::array_t<double>(shape, strides, m_buffer, pybind11::cast(this));
+
     }
 };
 
@@ -84,18 +85,21 @@ Matrix multiply_mkl(Matrix const & mat1, Matrix const & mat2){
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(my_module, m) {
+PYBIND11_MODULE(_matrix, m) {
     py::class_<Matrix>(m, "Matrix")
         .def(py::init<size_t, size_t>())
         .def("reset_buffer", &Matrix::reset_buffer)
         .def("__call__", [](const Matrix &mat, size_t row, size_t col) { return mat(row, col); })
+        .def_property("array",  &Matrix::my_array, nullptr)
+        .def("__eq__", &Matrix::operator==)
         .def("__setitem__", [](Matrix &mat, py::tuple index, double val) {
             mat(index[0].cast<size_t>(), index[1].cast<size_t>()) = val;
         })
         .def("__getitem__", [](const Matrix &mat, py::tuple index) {
             return mat(index[0].cast<size_t>(), index[1].cast<size_t>());
         })
-        .def("my_array", &Matrix::my_array);
+        .def_property_readonly("nrow", &Matrix::nrow)
+        .def_property_readonly("ncol", &Matrix::ncol);
 
     m.def("multiply_naive", &multiply_naive);
     m.def("multiply_tile", &multiply_tile);

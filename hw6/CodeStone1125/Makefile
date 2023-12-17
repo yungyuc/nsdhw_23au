@@ -1,28 +1,25 @@
-CXX=g++
-CXXFLAGS=-O3 -Wall -Wextra -shared -std=c++14 -fPIC -Wno-unused-function
+CXX = g++
+EXE = _matrix$(shell python3-config --extension-suffix)
+SRC = _matrix.cpp
 
-PYBIND_INCLUDE=$(shell python3 -m pybind11 --includes)
-PYINCLUDE=$(shell python3-config --includes)
-TARGET=_matrix$(shell python3-config --extension-suffix)
-NUMPYINCLUDE=$(shell python3 -c 'import numpy; print(numpy.get_include())')
+FLAGS = -O3 -Wall -shared -fPIC -std=c++17
+PYBIND11_INCLUDES = $(shell python3 -m pybind11 --includes)
+PYTHON_INCLUDES = -I /usr/include/python3.10
+PYBIND11_LIB = -lpython3.10
 
-MKL_INC=-I/usr/include/mkl
-MKL_LIB=-L/usr/lib/x86_64-linux-gnu -lblas
-IBLAS=-lblas
-PYFLAGS=$(shell python3-config --ldflags)
+MKL_INCLUDE = -I /usr/include/mkl/
+MKL_LIB = -L /usr/lib/x86_64-linux-gnu -lblas
 
-.PHONY: main test clean
+.PHONY: all test clean
 
-make: 
-	$(CXX) $(CXXFLAGS) $(MKL_INC) $(PYINCLUDE) -I$(NUMPYINCLUDE) -I./ $(PYBIND_INCLUDE) ../mod.cpp -o $(TARGET) $(PYFLAGS) $(IBLAS)
+all: $(EXE)
 
-test: main
-	$(CXX) $(CXXFLAGS) $(MKL_INC) $(PYINCLUDE) -I$(NUMPYINCLUDE) -I./ $(PYBIND_INCLUDE) ../mod.cpp -o $(TARGET) $(PYFLAGS) $(IBLAS)
+test: $(EXE)
+	$(CXX) $(FLAGS) $(PYBIND11_INCLUDES) $(PYTHON_INCLUDES) $(MKL_INCLUDE) $< $(PYBIND11_LIB) $(MKL_LIB) -o $@
 	../validate.py
 
+$(EXE): $(SRC)
+	$(CXX) $(FLAGS) $(PYBIND11_INCLUDES) $(PYTHON_INCLUDES) $(MKL_INCLUDE) $< $(PYBIND11_LIB) $(MKL_LIB) -o $@
 
 clean:
-	rm -rf *.so __pycache__ .pytest*
-	cd ../
-	rm -rf __pycache__ .pytest_cache
-
+	rm -rf *.o *.so .pytest_cache __pycache_ test
