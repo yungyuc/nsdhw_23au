@@ -1,22 +1,19 @@
 CXX = g++
-CFLAGS = -O3 -Wall -shared -std=c++17 -fPIC 
-COMPILE_SOURCE = matrix.cpp
-OBJECT = -o _matrix
+CXXFLAGS = -O3 -m64 -Wall --shared -std=c++17 -fPIC \
+		   `python3 -m pybind11 --includes` `python3-config --includes` \
+		   -I/usr/include/mkl
+LIBS = -L/usr/lib/x86_64-linux-gnu/mkl -lblas
+TARGET = _matrix
+TEST_FILE = test_matrix
+DEFINE = -D PYBIND
 
-MKL_INCLUDE = -I/usr/include/mkl
-MKL_LIBRARY = -L/usr/lib/x86_64-linux-gnu/ -lblas
+all: %.so
 
-PYTHON_CONFIG = $(shell python3-config --extension-suffix)
-PYTHON_INCLUDE = $(shell python3-config --includes)
-PYBIND_INCLUDE = $(shell python3 -m pybind11 --includes)
+%.so: $(TARGET).cpp
+	$(CXX) $(CXXFLAGS) $(DEFINE) $^ -o $(TARGET)`python3-config --extension-suffix` $(LIBS)
 
+test: %.so $(TEST_FILE).py
+	python3 -m pytest -v
 
-
-
-all: matrix.cpp
-	$(CXX) $(CFLAGS) $(PYBIND_INCLUDE) $(COMPILE_SOURCE) $(OBJECT)$(PYTHON_CONFIG) $(PYTHON_INCLUDE) $(MKL_LIBRARY) $(MKL_INCLUDE)
-
-
-.PHONY: clean
 clean:
-	rm -rf *.so
+	rm -rf *.so __pycache__ .pytest* $(TARGET) performance.txt
