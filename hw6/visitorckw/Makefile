@@ -10,7 +10,7 @@ $(LIBS): matrix.cpp
 	$(CXX) $(CXXFLAGS) -I$(MKL_INCLUDE_DIR) $^ -o $@ $(LDFLAGS)
 
 test: $(LIBS)
-	python3 -m pytest -v
+	python3 -m pytest -rxv
 
 clean:
 	rm -rf *.o *.so .pytest_cache __pycache__

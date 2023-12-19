@@ -38,10 +38,6 @@ class Matrix {
 	{
 		return col_num;
 	}
-    // py::array_t<double> array() const
-    // {
-    //     return py::array_t<double>({row_num, col_num}, buffer);
-    // }
 	double *buffer = NULL;
 	size_t row_num = 0;
 	size_t col_num = 0;
@@ -137,13 +133,13 @@ PYBIND11_MODULE(_matrix, m)
 		     })
 		.def_property("nrow", &Matrix::nrow, nullptr)
 		.def_property("ncol", &Matrix::ncol, nullptr)
-        .def("array", [](Matrix& mat) -> py::array_t<double> {
+        .def_property("array", [](Matrix& mat) -> py::array_t<double> {
                 return py::array_t<double>(
                     { mat.nrow(), mat.ncol() },
                     { sizeof(double) * mat.ncol(), sizeof(double) },
                     mat.buffer,
                     py::cast(mat)       
                 );
-            })
+            }, nullptr)
 		.def("__eq__", &operator==);
 }
